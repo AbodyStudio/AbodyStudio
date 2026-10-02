@@ -6,8 +6,8 @@ Every dimension of the plan set is derived from this file, so a change here
 """
 import math
 
-VERSION = "1.3.0"
-INDICE = "D"
+VERSION = "1.3.1"
+INDICE = "E"
 DATE = "02/10/2026"
 
 AUTHOR = {
@@ -285,7 +285,16 @@ def quantities():
     steps_profile = STEP["tread"] * sum(STEP["rise"] * k for k in range(1, STEP["n_tread"] + 1))
     q["steps_vol"] = steps_profile * STEP["width"]
     q["water_area"] = L * W
-    q["water_vol"] = L * W * avg_depth - q["steps_vol"]
+    # exact volume: longitudinal water section by trapezoids x pool width, minus the entry steps
+    names = ["Fosse (grand fond)", "Pente forte", "Pente douce", "Zone enfants"]
+    sl = []
+    for i, ((x1, z1), (x2, z2)) in enumerate(zip(PROFILE, PROFILE[1:])):
+        d1, d2 = LV["water"] - z1, LV["water"] - z2
+        sl.append(dict(name=names[i] if i < len(names) else f"Tranche {i + 1}", x1=x1, x2=x2, d1=d1, d2=d2,
+                       L=x2 - x1, dm=(d1 + d2) / 2, v=(x2 - x1) * (d1 + d2) / 2 * W))
+    q["slices"] = sl
+    q["gross_vol"] = sum(t["v"] for t in sl)
+    q["water_vol"] = q["gross_vol"] - q["steps_vol"]
     q["avg_water_depth"] = avg_depth
 
     # earthworks
@@ -398,6 +407,12 @@ Q = quantities()
 # Estimate (DQE) - unit prices in MAD HT, indicative 2026 Tanger region,
 # editable in the page. Quantities come from Q.
 # --------------------------------------------------------------------------
+
+
+def hu(x, d=3):
+    """Arrondi commercial (au demi supérieur), sans artefact binaire."""
+    from decimal import Decimal, ROUND_HALF_UP
+    return str(Decimal(repr(round(x, 9))).quantize(Decimal(1).scaleb(-d), ROUND_HALF_UP))
 
 
 def r1(x):

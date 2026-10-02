@@ -1,0 +1,13 @@
+Gharsa Foquiya - Piscine et jardins - dossier d'exécution
+Version 1.3.1 (indice E) - 02/10/2026
+Conception : AbodyStudio Limited - https://abodystudio.com/ - Support@abodystudio.com - WhatsApp +212 663 033 383
+Exécution : ABOUDI BTP Group - SARL au capital de 100 000 MAD - RC 168595 Tanger - ICE 003823697000094
+            Bd Moulay Ismail, Résidence Volubilis, Bloc C, 1er étage, N° 53 - Tanger-Médina - Tél. +212 717 783 570 / +212 663 033 383 - contact@aboudibtp.com / aboudibtpgroup@gmail.com
+
+index.html        Dossier complet : site, plans, descriptif, phasage, devis, planning, lexique
+plans-svg/        Planches PL-01 à PL-06 (format A3, imprimer à 100 %)
+img/              Photos du site et image de synthèse
+                  + cover.png (couverture) et image1.png, image2.png, image3.png... (galerie) :
+                  déposez-les dans img/, ils s'affichent automatiquement à l'ouverture de index.html
+
+Ouvrir index.html dans un navigateur (connexion internet pour les polices).

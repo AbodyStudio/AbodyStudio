@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.join(ROOT, "src"))
 
 import sheets  # noqa: E402
 from lettres import en_lettres  # noqa: E402
-from model import (CONTRACTOR, AUTHOR, DATE, INDICE, LV, POOL_L, POOL_W, PROJECT, Q, SHEETS, VERSION,  # noqa: E402
+from model import (hu, CONTRACTOR, AUTHOR, DATE, INDICE, LV, POOL_L, POOL_W, PROJECT, Q, SHEETS, VERSION,  # noqa: E402
                    FLOOR_DEEP, FLOOR_SHALLOW, PARCEL_AREA, HOUSE, POOL, TECH, DECK, FRONT_GARDEN,
                    SLOPE_PCT, SLOPE_GENTLE, SLOPE_STEEP, WATER_SHALLOW, WATER_BREAK, WATER_DEEP, PUMP_FLOW, FILTER_D,
                    CHLORINATOR, dqe, u_drive, u_nw, STAIR, NW_GARDEN_EDGE, edge_lengths)
@@ -109,6 +109,15 @@ def decfr(t):
     return re.sub(r"(\d)\.(\d)", r"\1,\2", t)
 
 
+def hm(hours):
+    """Durée en heures et minutes : 4.2 -> « 4 h 12 min »."""
+    h = int(hours)
+    m = int(round((hours - h) * 60))
+    if m == 60:
+        h, m = h + 1, 0
+    return f"{h}{NB}h{NB}{m:02d}{NB}min"
+
+
 def money(x):
     return f"{x:,.0f}".replace(",", NB)
 
@@ -126,9 +135,9 @@ def facts():
     rows = [
         ("Bassin (plan d'eau)", f"{nf(POOL_L)} × {nf(POOL_W)} m - 50 m²"),
         ("Profondeur d'eau", f"{nf(WATER_SHALLOW)} m (zone enfants) → {nf(WATER_DEEP)} m"),
-        ("Volume d'eau", f"≈ {q['water_vol']:.0f} m³"),
-        ("Filtration", f"{PUMP_FLOW} m³/h - recyclage ≈ {nf(q['water_vol'] / PUMP_FLOW, 1)}{NB}h"),
-        ("Structure", f"Béton armé B25, {nf(q['c_total'], 1)} m³ - acier ≈ {money(round(q['steel'], -1))} kg"),
+        ("Volume d'eau", f"{nf(q['water_vol'], 1)} m³ (calcul par tranches)"),
+        ("Filtration", f"{PUMP_FLOW} m³/h - recyclage en {hm(q['water_vol'] / PUMP_FLOW)}"),
+        ("Structure", f"Béton armé B25, {nf(q['c_total'], 1)} m³ - acier {money(round(q['steel']))} kg"),
         ("Terrain", f"{money(PROJECT['surface'])} m² - Lambert Nord Maroc"),
     ]
     return "".join(f"<div><dt>{esc(a)}</dt><dd>{esc(b)}</dd></div>" for a, b in rows)
@@ -184,7 +193,7 @@ SPECS = [
 ]
 
 HYD = [
-    ("Pompe", f"{PUMP_FLOW} m³/h à 10 mCE, vitesse variable, 230 V (bassin de {Q['water_vol']:.0f} m³ recyclé en ≈ {nf(Q['water_vol'] / PUMP_FLOW, 1)} h)"),
+    ("Pompe", f"{PUMP_FLOW} m³/h à 10 mCE, vitesse variable, 230 V (bassin de {nf(Q['water_vol'], 1)} m³ recyclé en {hm(Q['water_vol'] / PUMP_FLOW)})"),
     ("Filtre à sable", f"Ø {FILTER_D * 1000:.0f} mm, vanne 6 voies - vitesse de filtration {Q['filter_rate']:.0f} m/h (≤ 50)"),
     ("Aspiration", "2 skimmers + 2 bondes de fond (1 ligne) + prise balai : 4 lignes Ø50 indépendantes jusqu'à la nourrice, chacune avec sa vanne"),
     ("Refoulement", "Boucle Ø63, piquages Ø50 vers 4 buses orientées vers les skimmers"),
@@ -263,9 +272,25 @@ VERIFY = [
     "Niveaux : sol fini de la villa ±0,00, terrain naturel au droit du bassin (supposé −0,80) et pente vers le verger. Un relevé topographique fixe tout cela en une seule visite.",
     "Sol : creuser un sondage de 2,50 m à l'emplacement du grand fond, après une journée de pluie. Si l'eau entre dans le sondage, le drain et le clapet deviennent indispensables et le BET peut épaissir le radier.",
     "Emplacement du TGBT de la villa et puissance disponible pour la pompe et une éventuelle pompe à chaleur.",
-    f"Eau de remplissage (≈ {Q['water_vol']:.0f} m³, deux fois) : camions-citernes ou puits.",
+    f"Eau de remplissage ({nf(Q['water_vol'], 1)} m³, deux fois) : camions-citernes ou puits.",
     "Autorisation : se renseigner auprès de la Commune Sahel Chamali et de l'Agence urbaine de Tanger avant le terrassement.",
 ]
+
+
+def vol_rows():
+    q = Q
+    out = []
+    for t in reversed(q["slices"]):
+        depth = nf(t["d1"]) + " m" if abs(t["d1"] - t["d2"]) < 1e-6 else f"{nf(t['d2'])} → {nf(t['d1'])} m"
+        out.append(f"<tr><th>{esc(t['name'])}</th><td class='num'>{nf(t['L'])} m</td><td class='num'>{depth}</td>"
+                   f"<td class='num'>{nf(t['dm'], 3)} m</td><td class='num'>{nf(t['L'])} × {nf(t['dm'], 3)} × {nf(POOL_W)}</td>"
+                   f"<td class='num'>{hu(t['v']).replace('.', ',')} m³</td></tr>")
+    out.append(f"<tr><th>Volume brut</th><td class='num'>{nf(POOL_L)} m</td><td class='num'>{nf(WATER_SHALLOW)} → {nf(WATER_DEEP)} m</td>"
+               f"<td class='num'>{nf(q['gross_vol'] / (POOL_L * POOL_W), 3)} m</td><td></td><td class='num'>{hu(q['gross_vol']).replace('.', ',')} m³</td></tr>")
+    out.append(f"<tr><th>Déduction : escalier d'entrée</th><td></td><td></td><td></td><td class='num'>2 marches × 2,00 m</td>"
+               f"<td class='num'>−{hu(q['steps_vol']).replace('.', ',')} m³</td></tr>")
+    out.append(f"<tr class='vol-tot'><th>Volume d'eau</th><td></td><td></td><td></td><td></td><td class='num'>{hu(q['water_vol']).replace('.', ',')} m³</td></tr>")
+    return "".join(out)
 
 
 def dqe_html():
@@ -477,6 +502,9 @@ ol.seq li::before{{content:counter(s,decimal-leading-zero);font:500 13px/1.6 var
 .sign{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}}
 .sign > div{{border:1px dashed var(--rule);padding:14px 16px;min-height:120px;font-size:13.5px}}
 .mute{{color:var(--ink-2)}}
+.vol{{display:grid;gap:8px;min-width:0}} .vol h3 .ic{{color:var(--accent)}}
+.vol .vol-tot th,.vol .vol-tot td{{font-weight:700;background:var(--head)}}
+.small{{font-size:13px;max-width:90ch}}
 .totals{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1px solid var(--rule);background:var(--panel);margin:0}}
 .totals div{{padding:12px 14px;border-right:1px solid var(--rule)}}
 .totals dt{{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}}
@@ -518,7 +546,7 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
   <li><a href="#plans">Plans</a></li>
   {nav_sheets}
   <li><a href="#spec">Descriptif technique</a></li>
-  <li><a href="#hyd">Filtration et électricité</a></li>
+  <li><a href="#hyd">Volume, filtration et électricité</a></li>
   <li><a href="#seq">Phasage des travaux</a></li>
   <li><a href="#dqe">Devis estimatif</a></li>
   <li><a href="#planning">Planning</a></li>
@@ -548,7 +576,10 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
   <div class="specs">{specs}</div>
 </section>
 <section class="blk" id="hyd">
-  <h2><span class="sn">05</span>Filtration et électricité</h2>
+  <h2><span class="sn">05</span>Volume d'eau, filtration et électricité</h2>
+  <div class="vol"><h3>{ic("water")}Volume d'eau - calcul par tranches</h3>
+  <div class="tbl"><table><thead><tr><th>Tranche</th><th class="num">Longueur</th><th class="num">Profondeur d'eau</th><th class="num">Profondeur moyenne</th><th class="num">Calcul (× largeur 5,00 m)</th><th class="num">Volume</th></tr></thead><tbody>{vol_rows()}</tbody></table></div>
+  <p class="mute small">{fr("Profondeurs mesurées sous le plan d'eau (−0,85), au sol fini. Méthode : section longitudinale découpée en trapèzes, multipliée par la largeur du bassin, moins le volume de l'escalier d'entrée. Ce volume sert au dimensionnement de la filtration, au remplissage et au dosage des produits.")}</p></div>
   <div class="two">
     <div><h3>{ic("faucet-drip")}Hydraulique (lot 4)</h3><div class="tbl"><table><tbody>{hyd}</tbody></table></div></div>
     <div><h3>{ic("bolt")}Électricité (lot 5)</h3><div class="tbl"><table><tbody>{ele}</tbody></table></div></div>

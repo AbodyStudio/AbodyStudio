@@ -559,7 +559,7 @@ def pl02():
     s.level(x, y, f"{LV['deck_low']:+.2f}", "l")
     lab(HOUSE["u0"] + 0.3, DECK[0] + 0.45, "PLAGE SOLARIUM 2.50 (transats)", "t lab b", 0, "start")
     lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 - 0.6, "PISCINE 10.00 × 5.00", "t lab b red-t")
-    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 + 0.4, f"prof. {WATER_SHALLOW:.2f} → {WATER_DEEP:.2f} - V ≈ {Q['water_vol']:.0f} m³", "t lab red-t")
+    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 + 0.4, f"prof. {WATER_SHALLOW:.2f} → {WATER_DEEP:.2f} - V = {Q['water_vol']:.1f} m³", "t lab red-t")
     lab(POOL["u1"] - 0.75, POOL["v0"] + 1.0, "Escalier", "t lab", -90)
     lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v0"] - 0.45, "Local technique", "t lab red-t")
     lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v1"] + 0.15, "2.40 × 2.00", "t lab red-t")
@@ -746,7 +746,7 @@ def pl03():
     # labels
     x_, y_ = P(5.75, 2.0)
     s.t(x_, y_, "BASSIN 10.00 × 5.00 - plan d'eau 50 m²", "t lab b red-t")
-    s.t(x_, y_ - 5, f"Volume ≈ {Q['water_vol']:.0f} m³ - mosaïque pâte de verre 25 × 25", "t lab red-t")
+    s.t(x_, y_ - 5, f"Volume {Q['water_vol']:.1f} m³ - mosaïque pâte de verre 25 × 25", "t lab red-t")
     x_, y_ = P(-WALK - 0.1, POOL_W + WALK + 0.15)
     s.t(x_, y_, "Margelles 50 × 50 pierre reconstituée", "t lab", "start")
     x_, y_ = P(POOL_L + 0.5, -WALK - 1.45)
@@ -932,6 +932,13 @@ def pl04():
     s.t(Xb((pv0 + pv1) / 2), Zb(LV["water"] - 0.8), "PISCINE", "t lab b red-t")
     s.t(Xb(pv1 + 3.0), Zb(LV["tn"] + 3.4), "Verger", "t lab", "middle")
     s.t(Xb((v0 + vmax) / 2), 136, "COUPE B-B  (transversale villa - jardin - piscine)  1/100", "t ct", "middle")
+    rows = [(t["name"], f"{t['L']:.2f}", f"{t['d1']:.2f} → {t['d2']:.2f}" if abs(t["d1"] - t["d2"]) > 1e-6 else f"{t['d1']:.2f}",
+             f"{t['dm']:.3f}", hu(t["v"])) for t in reversed(Q["slices"])]
+    rows += [("Volume brut", f"{POOL_L:.2f}", "", "", hu(Q["gross_vol"])),
+             ("Déduction escalier", "", "", "", "-" + hu(Q["steps_vol"])),
+             ("VOLUME D'EAU", "", "", "", hu(Q["water_vol"]))]
+    s.t(20, 241, f"VOLUME D'EAU - CALCUL PAR TRANCHES (largeur {POOL_W:.2f} m, profondeurs sous plan d'eau)", "t cl", "start")
+    table(s, 20, 243, ("Tranche", "L (m)", "Prof. (m)", "Moy. (m)", "V (m³)"), rows, (36, 15, 26, 17, 18), rh=4.2)
     s.t(20, 285, "* profondeur de la villa supposée - à relever. Niveaux du terrain naturel à confirmer par relevé.", "t cs mute", "start")
     frame(s, "PL-04")
     s.title = "PL-04 Coupes"
@@ -1098,9 +1105,9 @@ def pl05():
         "Enrobage 4 cm face eau, 5 cm face terre. Recouvrements 50 Ø.",
         "Radier coulé en une fois, joint hydrogonflant avant voiles.",
         "Cure humide 7 jours minimum. Enduits après 21 à 28 jours.",
-        f"Voile en console, pleine eau sans remblai : Mser ≈ {Q['m_ser']:.1f} kN.m/m,",
-        f"σs HA12 e=15 ≈ {Q['sigma_s']:.0f} MPa : fissuration très préjudiciable OK.",
-        f"Poids coque ≈ {Q['shell_weight']:.0f} kN : bassin vide soulevé si nappe",
+        f"Voile en console, pleine eau sans remblai : Mser = {Q['m_ser']:.1f} kN.m/m,",
+        f"σs HA12 e=15 = {Q['sigma_s']:.0f} MPa : fissuration très préjudiciable OK.",
+        f"Poids coque = {Q['shell_weight']:.0f} kN : bassin vide soulevé si nappe",
         f"> {Q['float_head']:.2f} m au-dessus du radier → drain, clapet, ne pas vider l'hiver.",
         "Principe BAEL 91 mod. 99 / RPS 2000 (2011) - à valider par un BET agréé.",
     ]
@@ -1271,7 +1278,7 @@ def pl06():
     s.dim(A(0.2, 0.2), A(2.2, 0.2), 0, "2.00 int.")
     s.level(*A(1.88, 1.02), "sol -1.45", "l")
     s.t(ox + 48, oy + 13, "Pompe en charge : axe -1.25 sous le plan d'eau -0.85", "t cs")
-    s.t(ox + 48, oy + 17.5, "Dalle de couverture +0.50 - TN ≈ -0.85", "t cs mute")
+    s.t(ox + 48, oy + 17.5, "Dalle de couverture +0.50 - TN -0.85 (à relever)", "t cs mute")
     rep = [f"1  Filtre à sable Ø{FILTER_D * 1000:.0f}, vanne 6 voies", f"2  Pompe {PUMP_FLOW} m³/h + préfiltre", "3  Nourrice aspiration, 4 vannes",
            "4  Refoulement Ø63 vers bassin", "5  Électrolyseur au sel (option)", "6  Coffret électrique piscine",
            "7  Transformateur 12 V 300 VA", "8  Siphon de sol → puits perdu", "9  Grilles de ventilation (2)",
