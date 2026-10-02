@@ -6,8 +6,8 @@ Every dimension of the plan set is derived from this file, so a change here
 """
 import math
 
-VERSION = "1.1.0"
-INDICE = "B"
+VERSION = "1.2.0"
+INDICE = "C"
 DATE = "02/10/2026"
 
 AUTHOR = {
@@ -16,6 +16,19 @@ AUTHOR = {
     "url": "https://abodystudio.com/",
     "email": "Support@abodystudio.com",
     "whatsapp": "+212 663 033 383",
+}
+
+CONTRACTOR = {
+    "name": "ABOUDI BTP Group",
+    "form": "SARL au capital de 100 000 MAD",
+    "address": "Bd Moulay Ismail, Résidence Volubilis, Bloc C, 1er étage, N° 53 - Tanger-Médina",
+    "tribunal": "Tanger",
+    "rc": "168595",
+    "ice": "003823697000094",
+    "activity": "Construction tous corps d'état (TCE), bâtiment et travaux publics (BTP)",
+    "manager": "Mohamed EL MRABET",
+    "phones": "+212 717 783 570 / +212 663 033 383",
+    "emails": "contact@aboudibtp.com / aboudibtpgroup@gmail.com",
 }
 
 PROJECT = {
@@ -199,10 +212,12 @@ LV = dict(
     roof=3.20,
     parapet=3.80,
 )
-WATER_SHALLOW = 1.20
-WATER_DEEP = 1.60
-FLOOR_SHALLOW = LV["water"] - WATER_SHALLOW     # -2.05
-FLOOR_DEEP = LV["water"] - WATER_DEEP           # -2.45
+WATER_SHALLOW = 0.55     # owner's request: children's zone
+WATER_BREAK = 1.20       # slope break (ligne de rupture de pente)
+WATER_DEEP = 1.80
+FLOOR_SHALLOW = LV["water"] - WATER_SHALLOW     # -1.40
+FLOOR_BREAK = LV["water"] - WATER_BREAK         # -2.05
+FLOOR_DEEP = LV["water"] - WATER_DEEP           # -2.65
 FINISH = 0.03            # render + membrane + mosaic
 SLAB = 0.20
 BLIND = 0.08
@@ -211,30 +226,34 @@ WALL = 0.20
 COVER = 0.04
 
 # floor profile along the pool, x from the NW (deep) wall
-DEEP_FLAT = 1.50
-SLOPE_END = 7.50         # shallow flat from 7.50 to 10.00
+DEEP_FLAT = 1.20         # deep flat 0.00 - 1.20 (main drains)
+BREAK_X = 3.00           # steep slope 1.20 - 3.00 (1:3), gentle slope 3.00 - 7.50 (1:7)
+SLOPE_END = 7.50         # shallow flat 7.50 - 10.00 at 0.55
+PROFILE = [(0.0, FLOOR_DEEP), (DEEP_FLAT, FLOOR_DEEP), (BREAK_X, FLOOR_BREAK), (SLOPE_END, FLOOR_SHALLOW), (POOL_LEN, FLOOR_SHALLOW)]
 
-STEP = dict(x0=8.60, width=2.00, n_tread=4, tread=0.35, rise=0.27)
+STEP = dict(x0=POOL_LEN - 2 * 0.35, width=2.00, n_tread=2, tread=0.35, rise=(LV["coping"] - FLOOR_SHALLOW) / 3)
+PUMP_FLOW = 12           # m3/h at 10 mCE
+FILTER_D = 0.60          # m
+CHLORINATOR = 60         # m3 class
+LIGHT_DEPTH = 0.45       # light axis below water level
 
 # fittings, pool-local coordinates: x from NW wall (0..10), y from SW wall (0..5)
 FITTINGS = {
     "skimmers": [(0.0, 1.25), (0.0, 3.75)],
-    "drains": [(0.75, 2.00), (0.75, 3.00)],
+    "drains": [(0.60, 2.00), (0.60, 3.00)],
     "returns": [(10.0, 3.50), (8.25, 5.0), (5.00, 5.0), (1.75, 5.0)],
     "vacuum": [(0.0, 2.50)],
-    "lights": [(2.25, 0.0), (5.00, 0.0), (7.75, 0.0)],
+    "lights": [(1.75, 0.0), (4.25, 0.0), (6.50, 0.0)],
     "ladder": [(0.80, 0.0)],
 }
 
 
 def floor_depth(x):
     """Finished floor level (m, relative to +-0.00) at distance x from NW wall."""
-    if x <= DEEP_FLAT:
-        return FLOOR_DEEP
-    if x >= SLOPE_END:
-        return FLOOR_SHALLOW
-    t = (x - DEEP_FLAT) / (SLOPE_END - DEEP_FLAT)
-    return FLOOR_DEEP + t * (FLOOR_SHALLOW - FLOOR_DEEP)
+    for (x1, z1), (x2, z2) in zip(PROFILE, PROFILE[1:]):
+        if x1 <= x <= x2:
+            return z1 + (x - x1) / (x2 - x1) * (z2 - z1)
+    return FLOOR_SHALLOW if x > PROFILE[-1][0] else FLOOR_DEEP
 
 
 def avg_floor():
@@ -242,7 +261,9 @@ def avg_floor():
     return sum(floor_depth(POOL_L * (i + 0.5) / n) for i in range(n)) / n
 
 
-SLOPE_PCT = (FLOOR_SHALLOW - FLOOR_DEEP) / (SLOPE_END - DEEP_FLAT) * 100
+SLOPE_GENTLE = (FLOOR_SHALLOW - FLOOR_BREAK) / (SLOPE_END - BREAK_X) * 100
+SLOPE_STEEP = (FLOOR_BREAK - FLOOR_DEEP) / (BREAK_X - DEEP_FLAT) * 100
+SLOPE_PCT = SLOPE_GENTLE
 
 # --------------------------------------------------------------------------
 # Quantities
@@ -366,8 +387,8 @@ def quantities():
     # hydraulics
     q["turnover_h"] = 4.5
     q["flow"] = q["water_vol"] / q["turnover_h"]
-    q["filter_d"] = 0.75
-    q["filter_rate"] = 15 / (math.pi * q["filter_d"] ** 2 / 4)
+    q["filter_d"] = FILTER_D
+    q["filter_rate"] = PUMP_FLOW / (math.pi * FILTER_D ** 2 / 4)
     return q
 
 
@@ -413,7 +434,7 @@ def dqe():
             ("3.03", "Étanchéité ciment flexible bi-composant 2 couches + bandes d'angle et colliers", "Flexible cementitious membrane, 2 coats + tapes", "m²", r1(q["surf_in"]), 120),
             ("3.04", "Mosaïque pâte de verre 25 × 25 mm, colle C2TE S1, joint époxy", "Glass mosaic 25 mm, C2TE S1 adhesive, epoxy grout", "m²", r1(q["mosaic"]), 300),
             ("3.05", "Margelles 50 × 50 pierre reconstituée, nez arrondi, antidérapantes", "Coping 50 × 50 cast stone, bullnose, non-slip", "ml", r1(q["coping_ml"]), 380),
-            ("3.06", "Marquage des profondeurs et « Plongeon interdit »", "Depth markers and no-diving signs", "Ft", 1, 500),
+            ("3.06", "Marquage des profondeurs 0.55 / 1.20 / 1.80, ligne contrastée de rupture de pente et « Plongeon interdit »", "Depth markers, slope-break line, no-diving signs", "Ft", 1, 700),
         ]),
         ("4", "Hydraulique et filtration", "Hydraulics and filtration", [
             ("4.01", "Skimmer grande meurtrière à sceller (béton), volet + panier", "Wide-mouth skimmer for concrete", "U", 2, 1100),
@@ -422,10 +443,10 @@ def dqe():
             ("4.04", "Prise balai", "Vacuum point", "U", 1, 180),
             ("4.05", "Canalisations PVC pression PN16 Ø50 / Ø63 collées, raccords compris", "PVC PN16 pipework Ø50/Ø63", "ml", 70, 55),
             ("4.06", "Nourrices aspiration / refoulement + vannes à boisseau sphérique", "Suction / return manifolds + ball valves", "Ft", 1, 2500),
-            ("4.07", "Pompe de filtration 15 m³/h à 10 mCE, vitesse variable, 230 V", "Variable-speed pump 15 m³/h at 10 m head", "U", 1, 9500),
-            ("4.08", "Filtre à sable Ø750 + vanne 6 voies + manomètre + charge filtrante", "Sand filter Ø750 + 6-way valve + media", "U", 1, 7500),
+            ("4.07", f"Pompe de filtration {PUMP_FLOW} m³/h à 10 mCE, vitesse variable, 230 V", "Variable-speed pump", "U", 1, 8500),
+            ("4.08", f"Filtre à sable Ø{FILTER_D * 1000:.0f} + vanne 6 voies + manomètre + charge filtrante", "Sand filter + 6-way valve + media", "U", 1, 6000),
             ("4.09", "Essai de mise en pression des canalisations 24 h", "24 h pipe pressure test", "Ft", 1, 400),
-            ("4.10", "Échelle inox 316L 3 marches", "Stainless 316L ladder, 3 steps", "U", 1, 2800),
+            ("4.10", "Échelle inox 316L 4 marches (grand fond 1.80 m)", "Stainless 316L ladder, 4 steps", "U", 1, 3200),
             ("4.11", "Kit d'entretien (épuisette, balai aspirateur, manche, tuyau, trousse d'analyse)", "Maintenance kit", "Ft", 1, 1500),
         ]),
         ("5", "Électricité", "Electrical", [
@@ -456,11 +477,11 @@ def dqe():
         ]),
     ]
     options = ("O", "Options (non comprises dans le total)", "Options (not in the total)", [
-        ("O.1", "Électrolyseur au sel 80 m³ + régulation pH", "Salt chlorinator 80 m³ + pH control", "U", 1, 15000),
-        ("O.2", "Pompe à chaleur 12 kW (saison prolongée)", "12 kW heat pump", "U", 1, 28000),
-        ("O.3", "Clôture de sécurité amovible h 1.20 m + portillon auto-fermant", "Removable safety fence 1.20 m + self-closing gate", "ml", 36, 400),
-        ("O.4", "Couverture de sécurité à barres", "Safety bar cover", "U", 1, 12000),
-        ("O.5", "Panneaux photovoltaïques 2 kWc pour la filtration", "2 kWp solar PV for the pump", "Ft", 1, 22000),
+        ("OPT.1", f"Électrolyseur au sel {CHLORINATOR} m³ + régulation pH", "Salt chlorinator + pH control", "U", 1, 13500),
+        ("OPT.2", "Pompe à chaleur 12 kW (saison prolongée)", "12 kW heat pump", "U", 1, 28000),
+        ("OPT.3", "Clôture de sécurité amovible h 1.20 m + portillon auto-fermant", "Removable safety fence 1.20 m + self-closing gate", "ml", 36, 400),
+        ("OPT.4", "Couverture de sécurité à barres", "Safety bar cover", "U", 1, 12000),
+        ("OPT.5", "Panneaux photovoltaïques 2 kWc pour la filtration", "2 kWp solar PV for the pump", "Ft", 1, 22000),
     ])
     return lots, options
 

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="PL-06 Réseaux et local technique"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="p6-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><g clip-path="url(#p6-clip)">
+<polygon points="142.50,16.00 22.50,16.00 22.50,22.00 142.50,22.00" class="k w3 fhx"/>
+<polygon points="142.50,42.00 22.50,42.00 22.50,67.00 142.50,67.00" class="k w1 ftl"/>
+<polygon points="137.50,67.00 27.50,67.00 27.50,127.00 137.50,127.00" class="k w1 fs"/>
+<polygon points="132.50,72.00 32.50,72.00 32.50,122.00 132.50,122.00" class="red w3 fw"/>
+<polygon points="192.00,87.00 168.00,87.00 168.00,107.00 192.00,107.00" class="red w3 fcc"/>
+<polygon points="190.00,89.00 170.00,89.00 170.00,105.00 190.00,105.00" class="k w1 fs"/>
+<circle cx="176.00" cy="200.00" r="6.00" class="red w2 fst"/>
+<polygon points="36.50,22.00 22.50,22.00 22.50,42.00 36.50,42.00" class="k w1 fs"/>
+<line x1="36.50" y1="30.00" x2="22.50" y2="30.00" class="k w1"/>
+<line x1="36.50" y1="33.00" x2="22.50" y2="33.00" class="k w1"/>
+<line x1="36.50" y1="36.00" x2="22.50" y2="36.00" class="k w1"/>
+<line x1="36.50" y1="39.00" x2="22.50" y2="39.00" class="k w1"/>
+<line x1="36.50" y1="42.00" x2="22.50" y2="42.00" class="k w1"/>
+</g>
+<text x="29.50" y="27.29" class="t tiny2" text-anchor="middle">Esc. piscine</text>
+<polyline points="132.50,84.50 162.50,84.50 162.50,91.50 170.00,91.50" class="pipe-s w3"/>
+<line x1="126.50" y1="92.00" x2="126.50" y2="102.00" class="pipe-s w3"/>
+<polyline points="126.50,97.00 159.30,97.00 159.30,94.50 170.00,94.50" class="pipe-s w3"/>
+<polyline points="132.50,97.00 156.10,97.00 156.10,97.50 170.00,97.50" class="pipe-s w3"/>
+<polyline points="132.50,109.50 152.90,109.50 152.90,100.50 170.00,100.50" class="pipe-s w3"/>
+<polyline points="170.00,103.50 145.10,103.50 145.10,125.60 28.90,125.60 28.90,107.00" class="pipe-r w3"/>
+<line x1="28.90" y1="107.00" x2="32.50" y2="107.00" class="pipe-r w2"/>
+<line x1="50.00" y1="125.60" x2="50.00" y2="122.00" class="pipe-r w2"/>
+<line x1="82.50" y1="125.60" x2="82.50" y2="122.00" class="pipe-r w2"/>
+<line x1="115.00" y1="125.60" x2="115.00" y2="122.00" class="pipe-r w2"/>
+<polyline points="187.00,107.00 187.00,200.00 182.00,200.00" class="pipe-e w3"/>
+<polygon points="137.80,66.70 27.20,66.70 27.20,127.30 137.80,127.30" class="pipe-d w2"/>
+<polyline points="137.80,127.30 137.80,191.00 171.50,195.50" class="pipe-d w2"/>
+<line x1="142.50" y1="42.80" x2="22.50" y2="42.80" class="k w4"/>
+<polyline points="142.50,42.80 152.00,42.80 152.00,184.00 171.00,197.00" class="pipe-d w2"/>
+<polyline points="138.00,22.00 138.00,29.00 156.50,29.00 156.50,90.00 168.00,90.00" class="elec w3"/>
+<polyline points="135.50,22.00 135.50,26.50 159.00,26.50 159.00,87.00 163.00,87.00" class="water-l w2"/>
+<polyline points="168.00,88.50 139.00,88.50 139.00,68.40 67.50,68.40" class="elec w2"/>
+<line x1="115.00" y1="68.40" x2="115.00" y2="72.00" class="elec w2"/>
+<path d="M117.00 72.00 A 2.00 2.00 0 0 0 113.00 72.00" class="k w1 flt"/>
+<line x1="90.00" y1="68.40" x2="90.00" y2="72.00" class="elec w2"/>
+<path d="M92.00 72.00 A 2.00 2.00 0 0 0 88.00 72.00" class="k w1 flt"/>
+<line x1="67.50" y1="68.40" x2="67.50" y2="72.00" class="elec w2"/>
+<path d="M69.50 72.00 A 2.00 2.00 0 0 0 65.50 72.00" class="k w1 flt"/>
+<circle cx="132.50" cy="84.50" r="0.90" class="k w1 fk"/>
+<text x="130.90" y="87.68" class="t tiny2 b" text-anchor="end">SK1</text>
+<circle cx="126.50" cy="97.00" r="0.90" class="k w1 fk"/>
+<text x="124.90" y="100.18" class="t tiny2 b" text-anchor="end">BF</text>
+<circle cx="132.50" cy="97.00" r="0.90" class="k w1 fk"/>
+<text x="130.90" y="100.18" class="t tiny2 b" text-anchor="end">PB</text>
+<circle cx="132.50" cy="109.50" r="0.90" class="k w1 fk"/>
+<text x="130.90" y="112.68" class="t tiny2 b" text-anchor="end">SK2</text>
+<circle cx="32.50" cy="107.00" r="0.90" class="k w1 fred"/>
+<text x="31.10" y="110.18" class="t tiny2 b" text-anchor="end">R1</text>
+<circle cx="50.00" cy="122.00" r="0.90" class="k w1 fred"/>
+<text x="48.60" y="120.58" class="t tiny2 b" text-anchor="end">R2</text>
+<circle cx="82.50" cy="122.00" r="0.90" class="k w1 fred"/>
+<text x="81.10" y="120.58" class="t tiny2 b" text-anchor="end">R3</text>
+<circle cx="115.00" cy="122.00" r="0.90" class="k w1 fred"/>
+<text x="113.60" y="120.58" class="t tiny2 b" text-anchor="end">R4</text>
+<text x="82.50" y="99.10" class="t lab b red-t" text-anchor="middle">BASSIN 10.00 × 5.00</text>
+<text x="180.00" y="83.60" class="t lab red-t" text-anchor="middle">Local technique</text>
+<text x="167.00" y="203.60" class="t lab red-t" text-anchor="end">Puits perdu Ø1.20, prof. 2.50</text>
+<text x="82.50" y="19.90" class="t lab b" text-anchor="middle">VILLA EXISTANTE (TGBT)</text>
+<text x="25.50" y="47.28" class="t tiny2" text-anchor="start">Caniveau à grille</text>
+<text x="151.28" y="154.00" class="t tiny2" text-anchor="end" transform="rotate(-90.00 151.28 154.00)">EP caniveau Ø110</text>
+<text x="191.28" y="166.00" class="t tiny2" text-anchor="end" transform="rotate(-90.00 191.28 166.00)">Vidange / contre-lavage Ø50</text>
+<text x="142.09" y="158.00" class="t tiny2" text-anchor="end" transform="rotate(-90.00 142.09 158.00)">Drain périph. Ø100</text>
+<text x="160.28" y="46.00" class="t tiny2" text-anchor="end" transform="rotate(-90.00 160.28 46.00)">Câble 3G6 sous TPC Ø63</text>
+<text x="82.50" y="132.88" class="t tiny2" text-anchor="middle">Refoulement Ø63 en boucle (Ø50 vers buses)</text>
+<text x="97.50" y="64.68" class="t tiny2" text-anchor="middle">Câbles projecteurs 12 V sous gaine</text>
+<rect x="28.00" y="141.00" width="84.00" height="38.20" class="k w1 fs"/>
+<text x="30.00" y="145.40" class="t cl" text-anchor="start">LÉGENDE DES RÉSEAUX</text>
+<line x1="30.00" y1="150.20" x2="42.00" y2="150.20" class="pipe-s w3"/>
+<text x="45.00" y="151.30" class="t cs" text-anchor="start">Aspiration Ø50 PVC PN16 (4 lignes)</text>
+<line x1="30.00" y1="155.40" x2="42.00" y2="155.40" class="pipe-r w3"/>
+<text x="45.00" y="156.50" class="t cs" text-anchor="start">Refoulement Ø63 / Ø50</text>
+<line x1="30.00" y1="160.60" x2="42.00" y2="160.60" class="pipe-e w3"/>
+<text x="45.00" y="161.70" class="t cs" text-anchor="start">Vidange, contre-lavage</text>
+<line x1="30.00" y1="165.80" x2="42.00" y2="165.80" class="pipe-d w2"/>
+<text x="45.00" y="166.90" class="t cs" text-anchor="start">Drains et eaux pluviales</text>
+<line x1="30.00" y1="171.00" x2="42.00" y2="171.00" class="elec w3"/>
+<text x="45.00" y="172.10" class="t cs" text-anchor="start">Électricité sous gaine TPC</text>
+<line x1="30.00" y1="176.20" x2="42.00" y2="176.20" class="water-l w2"/>
+<text x="45.00" y="177.30" class="t cs" text-anchor="start">Arrivée d'eau PEHD Ø25</text>
+<text x="118.00" y="14.20" class="t ct" text-anchor="middle">TRACÉ DES RÉSEAUX  1/100</text>
+<text x="262.00" y="26.00" class="t ct" text-anchor="middle">LOCAL TECHNIQUE - PLAN  1/25</text>
+<rect x="214.00" y="68.00" width="96.00" height="80.00" class="k w3 fcc"/>
+<rect x="222.00" y="76.00" width="80.00" height="64.00" class="k w2 fs"/>
+<rect x="264.00" y="68.00" width="32.00" height="8.00" class="k w1 fs"/>
+<path d="M264.00 68.00 A 32.00 32.00 0 0 1 296.00 36.00" class="k w1 dash"/>
+<line x1="264.00" y1="68.00" x2="264.00" y2="36.00" class="k w1"/>
+<line x1="260.00" y1="68.00" x2="300.00" y2="68.00" class="k w1"/>
+<line x1="260.00" y1="56.00" x2="300.00" y2="56.00" class="k w1"/>
+<line x1="260.00" y1="44.00" x2="300.00" y2="44.00" class="k w1"/>
+<line x1="260.00" y1="32.00" x2="300.00" y2="32.00" class="k w1"/>
+<line x1="260.00" y1="68.00" x2="260.00" y2="32.00" class="k w2"/>
+<line x1="300.00" y1="68.00" x2="300.00" y2="32.00" class="k w2"/>
+<circle cx="242.80" cy="119.20" r="12.00" class="k w2 fs"/>
+<circle cx="242.80" cy="119.20" r="4.80" class="k w1"/>
+<rect x="266.00" y="124.00" width="24.00" height="12.00" class="k w2 fs"/>
+<circle cx="270.80" cy="130.00" r="4.00" class="k w1"/>
+<rect x="295.60" y="88.00" width="4.00" height="44.00" class="k w2 fpv"/>
+<circle cx="297.60" cy="126.00" r="1.20" class="pipe-s w2 fs"/>
+<line x1="302.00" y1="126.00" x2="310.00" y2="126.00" class="pipe-s w3"/>
+<circle cx="297.60" cy="116.00" r="1.20" class="pipe-s w2 fs"/>
+<line x1="302.00" y1="116.00" x2="310.00" y2="116.00" class="pipe-s w3"/>
+<circle cx="297.60" cy="106.00" r="1.20" class="pipe-s w2 fs"/>
+<line x1="302.00" y1="106.00" x2="310.00" y2="106.00" class="pipe-s w3"/>
+<circle cx="297.60" cy="96.00" r="1.20" class="pipe-s w2 fs"/>
+<line x1="302.00" y1="96.00" x2="310.00" y2="96.00" class="pipe-s w3"/>
+<line x1="310.00" y1="83.20" x2="266.00" y2="83.20" class="pipe-r w3"/>
+<rect x="274.00" y="80.00" width="12.00" height="6.40" class="k w1 dash fs"/>
+<line x1="242.80" y1="104.40" x2="242.80" y2="83.20" class="pipe-r w3"/>
+<line x1="242.80" y1="83.20" x2="266.00" y2="83.20" class="pipe-r w3"/>
+<line x1="278.00" y1="124.00" x2="295.60" y2="116.00" class="pipe-s w2"/>
+<line x1="266.00" y1="130.00" x2="257.60" y2="122.00" class="pipe-s w2"/>
+<rect x="222.00" y="79.20" width="6.40" height="22.00" class="k w2 fpv"/>
+<rect x="233.20" y="76.00" width="12.00" height="4.80" class="k w1 fpv"/>
+<circle cx="254.00" cy="96.00" r="2.80" class="k w1 fk"/>
+<line x1="234.00" y1="76.00" x2="234.00" y2="68.00" class="pipe-e w3"/>
+<rect x="282.00" y="140.00" width="10.00" height="8.00" class="k w1 fgr"/>
+<rect x="214.00" y="120.00" width="8.00" height="10.00" class="k w1 fgr"/>
+<line x1="310.00" y1="135.20" x2="302.00" y2="135.20" class="elec w2"/>
+<circle cx="246.00" cy="116.00" r="2.00" class="k w1 fs"/>
+<text x="246.00" y="117.00" class="t tiny2 b" text-anchor="middle">1</text>
+<circle cx="281.20" cy="126.80" r="2.00" class="k w1 fs"/>
+<text x="281.20" y="127.80" class="t tiny2 b" text-anchor="middle">2</text>
+<circle cx="300.80" cy="132.80" r="2.00" class="k w1 fs"/>
+<text x="300.80" y="133.80" class="t tiny2 b" text-anchor="middle">3</text>
+<circle cx="259.20" cy="80.00" r="2.00" class="k w1 fs"/>
+<text x="259.20" y="81.00" class="t tiny2 b" text-anchor="middle">4</text>
+<circle cx="283.20" cy="73.60" r="2.00" class="k w1 fs"/>
+<text x="283.20" y="74.60" class="t tiny2 b" text-anchor="middle">5</text>
+<circle cx="228.40" cy="86.80" r="2.00" class="k w1 fs"/>
+<text x="228.40" y="87.80" class="t tiny2 b" text-anchor="middle">6</text>
+<circle cx="242.40" cy="66.80" r="2.00" class="k w1 fs"/>
+<text x="242.40" y="67.80" class="t tiny2 b" text-anchor="middle">7</text>
+<circle cx="257.20" cy="92.80" r="2.00" class="k w1 fs"/>
+<text x="257.20" y="93.80" class="t tiny2 b" text-anchor="middle">8</text>
+<circle cx="290.00" cy="140.80" r="2.00" class="k w1 fs"/>
+<text x="290.00" y="141.80" class="t tiny2 b" text-anchor="middle">9</text>
+<circle cx="283.20" cy="46.80" r="2.00" class="k w1 fs"/>
+<text x="283.20" y="47.80" class="t tiny2 b" text-anchor="middle">10</text>
+<line x1="214.00" y1="148.80" x2="214.00" y2="154.20" class="k w1"/>
+<line x1="310.00" y1="148.80" x2="310.00" y2="154.20" class="k w1"/>
+<line x1="212.80" y1="153.00" x2="311.20" y2="153.00" class="k w1"/>
+<line x1="213.10" y1="153.90" x2="214.90" y2="152.10" class="k w3"/>
+<line x1="309.10" y1="153.90" x2="310.90" y2="152.10" class="k w3"/>
+<text x="262.00" y="152.10" class="t dimt" text-anchor="middle" style="font-size:2.9px">2.40</text>
+<line x1="213.20" y1="148.00" x2="207.80" y2="148.00" class="k w1"/>
+<line x1="213.20" y1="68.00" x2="207.80" y2="68.00" class="k w1"/>
+<line x1="209.00" y1="149.20" x2="209.00" y2="66.80" class="k w1"/>
+<line x1="209.90" y1="148.90" x2="208.10" y2="147.10" class="k w3"/>
+<line x1="209.90" y1="68.90" x2="208.10" y2="67.10" class="k w3"/>
+<text x="209.90" y="108.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 209.90 108.00)" style="font-size:2.9px">2.00</text>
+<line x1="222.00" y1="139.20" x2="222.00" y2="138.80" class="k w1"/>
+<line x1="302.00" y1="139.20" x2="302.00" y2="138.80" class="k w1"/>
+<line x1="220.80" y1="140.00" x2="303.20" y2="140.00" class="k w1"/>
+<line x1="221.10" y1="140.90" x2="222.90" y2="139.10" class="k w3"/>
+<line x1="301.10" y1="140.90" x2="302.90" y2="139.10" class="k w3"/>
+<text x="262.00" y="139.10" class="t dimt" text-anchor="middle" style="font-size:2.9px">2.00 int.</text>
+<circle cx="289.20" cy="107.20" r="1.30" class="k w1 fs"/>
+<line x1="287.90" y1="107.20" x2="290.50" y2="107.20" class="k w1"/>
+<line x1="289.20" y1="105.90" x2="289.20" y2="108.50" class="k w1"/>
+<text x="287.00" y="108.30" class="t lvl" text-anchor="end">sol -1.45</text>
+<text x="262.00" y="161.00" class="t cs" text-anchor="middle">Pompe en charge : axe -1.25 sous le plan d'eau -0.85</text>
+<text x="262.00" y="165.50" class="t cs mute" text-anchor="middle">Dalle de couverture +0.50 - TN ≈ -0.85</text>
+<text x="224.00" y="173.00" class="t tiny2" text-anchor="start">1  Filtre à sable Ø600, vanne 6 voies</text>
+<text x="224.00" y="177.20" class="t tiny2" text-anchor="start">2  Pompe 12 m³/h + préfiltre</text>
+<text x="224.00" y="181.40" class="t tiny2" text-anchor="start">3  Nourrice aspiration, 4 vannes</text>
+<text x="224.00" y="185.60" class="t tiny2" text-anchor="start">4  Refoulement Ø63 vers bassin</text>
+<text x="224.00" y="189.80" class="t tiny2" text-anchor="start">5  Électrolyseur au sel (option)</text>
+<text x="224.00" y="194.00" class="t tiny2" text-anchor="start">6  Coffret électrique piscine</text>
+<text x="224.00" y="198.20" class="t tiny2" text-anchor="start">7  Transformateur 12 V 300 VA</text>
+<text x="224.00" y="202.40" class="t tiny2" text-anchor="start">8  Siphon de sol → puits perdu</text>
+<text x="224.00" y="206.60" class="t tiny2" text-anchor="start">9  Grilles de ventilation (2)</text>
+<text x="224.00" y="210.80" class="t tiny2" text-anchor="start">10 Porte métallique 0.80 + 3 marches</text>
+<text x="20.00" y="226.00" class="t cl" text-anchor="start">SYNOPTIQUE HYDRAULIQUE (sans échelle)</text>
+<rect x="20.00" y="232.00" width="20.00" height="6.00" class="k w1 fs"/>
+<text x="30.00" y="236.20" class="t tiny2 b" text-anchor="middle">SK1</text>
+<line x1="40.00" y1="235.00" x2="52.00" y2="235.00" class="pipe-s w3"/>
+<circle cx="50.00" cy="235.00" r="1.30" class="k w1 fs"/>
+<line x1="49.10" y1="234.10" x2="50.90" y2="235.90" class="k w1"/>
+<rect x="20.00" y="240.50" width="20.00" height="6.00" class="k w1 fs"/>
+<text x="30.00" y="244.70" class="t tiny2 b" text-anchor="middle">SK2</text>
+<line x1="40.00" y1="243.50" x2="52.00" y2="243.50" class="pipe-s w3"/>
+<circle cx="50.00" cy="243.50" r="1.30" class="k w1 fs"/>
+<line x1="49.10" y1="242.60" x2="50.90" y2="244.40" class="k w1"/>
+<rect x="20.00" y="249.00" width="20.00" height="6.00" class="k w1 fs"/>
+<text x="30.00" y="253.20" class="t tiny2 b" text-anchor="middle">BF1 + BF2</text>
+<line x1="40.00" y1="252.00" x2="52.00" y2="252.00" class="pipe-s w3"/>
+<circle cx="50.00" cy="252.00" r="1.30" class="k w1 fs"/>
+<line x1="49.10" y1="251.10" x2="50.90" y2="252.90" class="k w1"/>
+<rect x="20.00" y="257.50" width="20.00" height="6.00" class="k w1 fs"/>
+<text x="30.00" y="261.70" class="t tiny2 b" text-anchor="middle">PB</text>
+<line x1="40.00" y1="260.50" x2="52.00" y2="260.50" class="pipe-s w3"/>
+<circle cx="50.00" cy="260.50" r="1.30" class="k w1 fs"/>
+<line x1="49.10" y1="259.60" x2="50.90" y2="261.40" class="k w1"/>
+<line x1="52.00" y1="235.00" x2="52.00" y2="260.50" class="pipe-s w4"/>
+<line x1="52.00" y1="248.00" x2="60.00" y2="248.00" class="pipe-s w3 arrow"/>
+<rect x="60.00" y="242.00" width="22.00" height="12.00" class="k w2 fs"/>
+<text x="71.00" y="247.00" class="t tiny2 b" text-anchor="middle">Préfiltre +</text>
+<text x="71.00" y="251.20" class="t tiny2" text-anchor="middle">pompe 12 m³/h</text>
+<line x1="82.00" y1="248.00" x2="88.00" y2="248.00" class="pipe-r w3 arrow"/>
+<rect x="88.00" y="242.00" width="22.00" height="12.00" class="k w2 fs"/>
+<text x="99.00" y="247.00" class="t tiny2 b" text-anchor="middle">Filtre Ø600</text>
+<text x="99.00" y="251.20" class="t tiny2" text-anchor="middle">vanne 6 voies</text>
+<line x1="110.00" y1="248.00" x2="116.00" y2="248.00" class="pipe-r w3 arrow"/>
+<rect x="116.00" y="242.00" width="22.00" height="12.00" class="k w2 fs dash"/>
+<text x="127.00" y="247.00" class="t tiny2 b" text-anchor="middle">Électrolyseur</text>
+<text x="127.00" y="251.20" class="t tiny2" text-anchor="middle">(option)</text>
+<line x1="138.00" y1="248.00" x2="144.00" y2="248.00" class="pipe-r w3 arrow"/>
+<rect x="144.00" y="242.00" width="22.00" height="12.00" class="k w2 fs"/>
+<text x="155.00" y="247.00" class="t tiny2 b" text-anchor="middle">Buses</text>
+<text x="155.00" y="251.20" class="t tiny2" text-anchor="middle">R1 à R4</text>
+<line x1="99.00" y1="254.00" x2="99.00" y2="268.00" class="pipe-e w3 arrow"/>
+<text x="101.00" y="265.00" class="t tiny2" text-anchor="start">égout → puits perdu</text>
+<text x="20.00" y="280.00" class="t tiny2" text-anchor="start">Chaque ligne d'aspiration a sa vanne. Essai de pression 24 h avant remblai.</text>
+<text x="176.00" y="226.00" class="t cl" text-anchor="start">SCHÉMA UNIFILAIRE (sans échelle)</text>
+<rect x="176.00" y="230.00" width="22.00" height="9.00" class="k w2 fs"/>
+<text x="187.00" y="235.80" class="t tiny2 b" text-anchor="middle">TGBT villa</text>
+<line x1="198.00" y1="234.50" x2="206.00" y2="234.50" class="elec w3"/>
+<text x="202.00" y="232.30" class="t tiny" text-anchor="middle">3G6</text>
+<rect x="206.00" y="230.00" width="18.00" height="9.00" class="k w2 fs"/>
+<text x="215.00" y="233.60" class="t tiny2" text-anchor="middle">Inter. gén.</text>
+<text x="215.00" y="237.60" class="t tiny2 b" text-anchor="middle">40 A</text>
+<line x1="224.00" y1="234.50" x2="230.00" y2="234.50" class="elec w3"/>
+<rect x="230.00" y="230.00" width="22.00" height="9.00" class="k w2 fs"/>
+<text x="241.00" y="233.60" class="t tiny2" text-anchor="middle">DDR 30 mA</text>
+<text x="241.00" y="237.60" class="t tiny2 b" text-anchor="middle">type A 40 A</text>
+<line x1="252.00" y1="234.50" x2="258.00" y2="234.50" class="elec w3"/>
+<line x1="258.00" y1="234.50" x2="258.00" y2="246.00" class="elec w3"/>
+<line x1="186.00" y1="246.00" x2="306.00" y2="246.00" class="k w4"/>
+<line x1="194.00" y1="246.00" x2="194.00" y2="251.00" class="elec w2"/>
+<rect x="189.00" y="251.00" width="10.00" height="6.00" class="k w2 fs"/>
+<text x="194.00" y="255.20" class="t tiny2 b" text-anchor="middle">16 A</text>
+<line x1="194.00" y1="257.00" x2="194.00" y2="263.00" class="elec w2"/>
+<text x="194.00" y="267.00" class="t tiny2 b" text-anchor="middle">Pompe</text>
+<text x="194.00" y="271.00" class="t tiny2 mute" text-anchor="middle">contacteur + horloge</text>
+<line x1="224.00" y1="246.00" x2="224.00" y2="251.00" class="elec w2"/>
+<rect x="219.00" y="251.00" width="10.00" height="6.00" class="k w2 fs"/>
+<text x="224.00" y="255.20" class="t tiny2 b" text-anchor="middle">10 A</text>
+<line x1="224.00" y1="257.00" x2="224.00" y2="263.00" class="elec w2"/>
+<text x="224.00" y="267.00" class="t tiny2 b" text-anchor="middle">Transfo 12 V</text>
+<text x="224.00" y="271.00" class="t tiny2 mute" text-anchor="middle">→ P1, P2, P3</text>
+<line x1="254.00" y1="246.00" x2="254.00" y2="251.00" class="elec w2"/>
+<rect x="249.00" y="251.00" width="10.00" height="6.00" class="k w2 fs"/>
+<text x="254.00" y="255.20" class="t tiny2 b" text-anchor="middle">10 A</text>
+<line x1="254.00" y1="257.00" x2="254.00" y2="263.00" class="elec w2"/>
+<text x="254.00" y="267.00" class="t tiny2 b" text-anchor="middle">Électrolyseur</text>
+<text x="254.00" y="271.00" class="t tiny2 mute" text-anchor="middle">(option)</text>
+<line x1="284.00" y1="246.00" x2="284.00" y2="251.00" class="elec w2"/>
+<rect x="279.00" y="251.00" width="10.00" height="6.00" class="k w2 fs"/>
+<text x="284.00" y="255.20" class="t tiny2 b" text-anchor="middle">16 A</text>
+<line x1="284.00" y1="257.00" x2="284.00" y2="263.00" class="elec w2"/>
+<text x="284.00" y="267.00" class="t tiny2 b" text-anchor="middle">Prise 2P+T</text>
+<text x="284.00" y="271.00" class="t tiny2 mute" text-anchor="middle">local technique</text>
+<text x="176.00" y="277.00" class="t tiny2" text-anchor="start">Parafoudre en tête. Liaison équipotentielle : ferraillage, échelle, niches</text>
+<text x="176.00" y="281.00" class="t tiny2" text-anchor="start">et pièces métalliques reliées au piquet de terre. Local hors volumes 0, 1, 2.</text>
+<g transform="rotate(135.40 363.00 197.00)"><circle cx="363.0" cy="197" r="9" class="k w1"/><polygon points="363.0,186 365.6,200 363.0,198 360.4,200" class="k w1 fk"/><text x="363.0" y="184.8" class="t cb" text-anchor="middle">N</text></g>
+<text x="363.00" y="214.50" class="t cs mute" text-anchor="middle">Nord (Lambert)</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Villa existante (RDC)</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="246.00" class="t ct" text-anchor="middle">RÉSEAUX, LOCAL TECHNIQUE ET</text>
+<text x="363.00" y="252.50" class="t ct" text-anchor="middle">ÉLECTRICITÉ</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Tracé des canalisations, local, synoptique, unifilaire</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">PL-06</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/100 - 1/25</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">C - v1.2.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 02/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>

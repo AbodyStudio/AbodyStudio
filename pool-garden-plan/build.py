@@ -4,6 +4,7 @@ Author: AbodyStudio Limited - https://abodystudio.com/
 Usage : python3 build.py   (incrémenter VERSION dans src/model.py à chaque mise à jour)
 """
 import html
+import re
 import unicodedata
 import json
 import os
@@ -15,9 +16,11 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 
 import sheets  # noqa: E402
-from model import (AUTHOR, DATE, INDICE, LV, POOL_L, POOL_W, PROJECT, Q, SHEETS, VERSION,  # noqa: E402
+from lettres import en_lettres  # noqa: E402
+from model import (CONTRACTOR, AUTHOR, DATE, INDICE, LV, POOL_L, POOL_W, PROJECT, Q, SHEETS, VERSION,  # noqa: E402
                    FLOOR_DEEP, FLOOR_SHALLOW, PARCEL_AREA, HOUSE, POOL, TECH, DECK, FRONT_GARDEN,
-                   SLOPE_PCT, dqe, u_drive, u_nw, STAIR, NW_GARDEN_EDGE, edge_lengths)
+                   SLOPE_PCT, SLOPE_GENTLE, SLOPE_STEEP, WATER_SHALLOW, WATER_BREAK, WATER_DEEP, PUMP_FLOW, FILTER_D,
+                   CHLORINATOR, dqe, u_drive, u_nw, STAIR, NW_GARDEN_EDGE, edge_lengths)
 
 FA_DIR = os.environ.get("FA_DIR", "/tmp/fa/package/svgs")
 ICONS = {
@@ -101,6 +104,11 @@ def nf(x, d=2):
     return f"{x:.{d}f}".replace(".", ",")
 
 
+def decfr(t):
+    """Virgule décimale française dans un libellé (1.25 → 1,25)."""
+    return re.sub(r"(\d)\.(\d)", r"\1,\2", t)
+
+
 def money(x):
     return f"{x:,.0f}".replace(",", NB)
 
@@ -117,9 +125,9 @@ def facts():
     q = Q
     rows = [
         ("Bassin (plan d'eau)", f"{nf(POOL_L)} × {nf(POOL_W)} m - 50 m²"),
-        ("Profondeur d'eau", f"1,20 m → 1,60 m (pente {nf(SLOPE_PCT, 1)} %)"),
+        ("Profondeur d'eau", f"{nf(WATER_SHALLOW)} m (zone enfants) → {nf(WATER_DEEP)} m"),
         ("Volume d'eau", f"≈ {q['water_vol']:.0f} m³"),
-        ("Filtration", f"{q['flow']:.0f} m³/h - recyclage 4{NB}h{NB}30"),
+        ("Filtration", f"{PUMP_FLOW} m³/h - recyclage ≈ {nf(q['water_vol'] / PUMP_FLOW, 1)}{NB}h"),
         ("Structure", f"Béton armé B25, {nf(q['c_total'], 1)} m³ - acier ≈ {money(round(q['steel'], -1))} kg"),
         ("Terrain", f"{money(PROJECT['surface'])} m² - Lambert Nord Maroc"),
     ]
@@ -162,7 +170,7 @@ SPECS = [
         "Gobetis, puis enduit hydrofuge en deux couches (15 à 20 mm), gorges de 5 × 5 cm à tous les angles rentrants.",
         "Deux couches de ciment flexible bi-composant, avec bandes d'armature aux angles et colliers d'étanchéité sur chaque pièce à sceller.",
         "Essai d'étanchéité : remplir le bassin 7 jours et relever le niveau chaque matin. Un seau d'eau posé sur les marches permet de distinguer l'évaporation d'une fuite.",
-        "Mosaïque pâte de verre 25 × 25 mm, colle C2TE S1 et joint époxy. Frise plus foncée à la ligne d'eau, marquage des profondeurs 1,20 et 1,60.",
+        "Mosaïque pâte de verre 25 × 25 mm, colle C2TE S1 et joint époxy. Frise plus foncée à la ligne d'eau, ligne de carrelage contrastée à la rupture de pente (1,20 m) et marquage des profondeurs 0,55 / 1,20 / 1,80.",
         "Margelles 50 × 50 en pierre reconstituée, nez arrondi, débord de 3 cm, posées au mortier. Joint souple entre margelles et plage.",
     ]),
     ("seedling", "Lot 6 - Jardins autour du bassin", [
@@ -176,14 +184,14 @@ SPECS = [
 ]
 
 HYD = [
-    ("Pompe", "15 m³/h à 10 mCE, vitesse variable, 230 V"),
-    ("Filtre à sable", f"Ø 750 mm, vanne 6 voies - vitesse de filtration {Q['filter_rate']:.0f} m/h (≤ 50)"),
+    ("Pompe", f"{PUMP_FLOW} m³/h à 10 mCE, vitesse variable, 230 V (bassin de {Q['water_vol']:.0f} m³ recyclé en ≈ {nf(Q['water_vol'] / PUMP_FLOW, 1)} h)"),
+    ("Filtre à sable", f"Ø {FILTER_D * 1000:.0f} mm, vanne 6 voies - vitesse de filtration {Q['filter_rate']:.0f} m/h (≤ 50)"),
     ("Aspiration", "2 skimmers + 2 bondes de fond (1 ligne) + prise balai : 4 lignes Ø50 indépendantes jusqu'à la nourrice, chacune avec sa vanne"),
     ("Refoulement", "Boucle Ø63, piquages Ø50 vers 4 buses orientées vers les skimmers"),
     ("Canalisations", "PVC pression PN16 collé. Essai de pression 24 h avant remblai, aucune chute de pression admise"),
     ("Local technique", f"2,40 × 2,00 m hors œuvre, semi-enterré. Pompe sous le plan d'eau ({nf(LV['water'])}) : aspiration en charge. Siphon de sol et ventilation"),
     ("Contre-lavage", "Vers le puits perdu (Ø 1,20 × 2,50 m) dans le verger. Avec un électrolyseur au sel, ne jamais envoyer cette eau vers les agrumes"),
-    ("Traitement", "Chlore au démarrage ; électrolyseur au sel 80 m³ + régulation du pH en option"),
+    ("Traitement", f"Chlore au démarrage ; électrolyseur au sel {CHLORINATOR} m³ + régulation du pH en option"),
 ]
 ELEC = [
     ("Alimentation", "Depuis le TGBT de la villa : câble U1000 R2V 3G6 mm² sous gaine TPC rouge Ø63 à 60 cm de profondeur, grillage avertisseur au-dessus"),
@@ -255,7 +263,7 @@ VERIFY = [
     "Niveaux : sol fini de la villa ±0,00, terrain naturel au droit du bassin (supposé −0,80) et pente vers le verger. Un relevé topographique fixe tout cela en une seule visite.",
     "Sol : creuser un sondage de 2,50 m à l'emplacement du grand fond, après une journée de pluie. Si l'eau entre dans le sondage, le drain et le clapet deviennent indispensables et le BET peut épaissir le radier.",
     "Emplacement du TGBT de la villa et puissance disponible pour la pompe et une éventuelle pompe à chaleur.",
-    "Eau de remplissage (≈ 67 m³, deux fois) : camions-citernes ou puits.",
+    f"Eau de remplissage (≈ {Q['water_vol']:.0f} m³, deux fois) : camions-citernes ou puits.",
     "Autorisation : se renseigner auprès de la Commune Sahel Chamali et de l'Agence urbaine de Tanger avant le terrassement.",
 ]
 
@@ -269,7 +277,7 @@ def dqe_html():
                    f'<span class="lot-n">{"Options" if code == "O" else "Lot " + code}</span> {esc(lot_fr)}</th></tr>')
         for n, dfr, _den, unit, qty, pu in items:
             out.append(
-                f'<tr data-q="{qty}"><td class="mono">{n}</td><td>{esc(dfr)}</td>'
+                f'<tr data-q="{qty}"><td class="mono">{n}</td><td>{esc(decfr(dfr))}</td>'
                 f'<td class="c">{unit}</td><td class="num">{esc(nf(qty, 1) if qty % 1 else money(qty))}</td>'
                 f'<td class="num"><input id="pu-{n}" class="pu" type="number" min="0" step="10" value="{pu}" aria-label="Prix unitaire {n}"></td>'
                 f'<td class="num amt">{money(qty * pu)}</td></tr>')
@@ -312,7 +320,7 @@ def page(sheet_objs):
     specs = "".join(f'<section class="spec"><h3>{ic(i)}{esc(t)}</h3><ul>' + "".join(f"<li>{esc(x)}</li>" for x in items) + "</ul></section>" for i, t, items in SPECS)
     hyd = "".join(f"<tr><th>{esc(a)}</th><td>{esc(b)}</td></tr>" for a, b in HYD)
     ele = "".join(f"<tr><th>{esc(a)}</th><td>{esc(b)}</td></tr>" for a, b in ELEC)
-    seq = "".join(f"<li><b>{esc(a)}.</b> {fr(b)}</li>" for a, b in SEQ)
+    seq = "".join(f"<li><div><b>{esc(a)}.</b> {fr(b)}</div></li>" for a, b in SEQ)
     gl = "".join(f'<tr><td>{esc(a)}</td><td class="ar" lang="ar" dir="rtl">{c}</td></tr>' for a, c in GLOSS)
     ver = "".join(f"<li>{esc(v)}</li>" for v in VERIFY)
     nav_sheets = "".join(f'<li class="sub"><a href="#{n.lower()}"><span class="mono">{n}</span> {esc(t)}</a></li>' for n, t, sub, sc in SHEETS)
@@ -321,27 +329,16 @@ def page(sheet_objs):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Archivo+Narrow:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Cairo:wght@400;600&display=swap">
 <style>
-/* Mise en page : un dossier relié - sommaire à gauche, une colonne de lecture, planches en pleine largeur. */
+/* Mise en page : un dossier relié sur fond blanc - sommaire à gauche, une colonne de lecture, planches en pleine largeur. Thème clair unique, voulu. */
 :root{{
-  --paper:#eef2f3; --sheet:#ffffff; --ink:#14212b; --ink-2:#5b6b76; --rule:#cfd8dd; --head:#e8eef2;
+  color-scheme:light;
+  --paper:#ffffff; --sheet:#ffffff; --panel:#f7f9fa; --ink:#14212b; --ink-2:#56656f; --rule:#dde4e8; --head:#f2f5f7;
   --new:#c8372d; --parcel:#c8372d; --water:#1683a8; --water-f:#cdebf5; --light-f:#fff2b8; --paved-f:#eceff1;
   --chick-f:#f6efe2; --tree-f:#e3efd9; --green:#4f7f35; --hatch:#7d8b95; --demo:#d9a400; --demo-ink:#8a6a00;
   --p-s:#1683a8; --p-r:#1b8a5a; --p-e:#8a5a2b; --p-el:#7b3fb0;
   --accent:#c8372d; --chip:#ffffff;
   --f-disp:"Archivo","Arial",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace; --f-ar:"Cairo",sans-serif;
 }}
-@media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{
-  --paper:#0a131a; --sheet:#0f1e29; --ink:#dbe6ee; --ink-2:#93a7b4; --rule:#26394a; --head:#16293a;
-  --new:#ff7a6b; --parcel:#ff7a6b; --water:#5cc8e8; --water-f:#123a4e; --light-f:#4a4220; --paved-f:#172836;
-  --chick-f:#2a2418; --tree-f:#1a2e1c; --green:#8dbb63; --hatch:#5f7685; --demo:#f2c94c; --demo-ink:#f2c94c;
-  --p-s:#5cc8e8; --p-r:#5fd39a; --p-e:#d7a26a; --p-el:#c59bf0;
-  --accent:#ff7a6b; --chip:#132430; color-scheme:dark}}}}
-:root[data-theme="dark"]{{
-  --paper:#0a131a; --sheet:#0f1e29; --ink:#dbe6ee; --ink-2:#93a7b4; --rule:#26394a; --head:#16293a;
-  --new:#ff7a6b; --parcel:#ff7a6b; --water:#5cc8e8; --water-f:#123a4e; --light-f:#4a4220; --paved-f:#172836;
-  --chick-f:#2a2418; --tree-f:#1a2e1c; --green:#8dbb63; --hatch:#5f7685; --demo:#f2c94c; --demo-ink:#f2c94c;
-  --p-s:#5cc8e8; --p-r:#5fd39a; --p-e:#d7a26a; --p-el:#c59bf0;
-  --accent:#ff7a6b; --chip:#132430; color-scheme:dark}}
 *{{box-sizing:border-box}}
 body{{background:var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);margin:0}}
 .wrap{{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:28px 64px}}
@@ -358,7 +355,7 @@ p{{margin:0}} a{{color:inherit}}
 header.top{{display:grid;gap:18px;padding-bottom:22px;border-bottom:2px solid var(--ink)}}
 .meta{{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 12.5px/1.4 var(--f-mono);color:var(--ink-2)}}
 .meta b{{color:var(--ink);font-weight:500}}
-.facts{{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;margin:0;border:1px solid var(--rule);background:var(--sheet)}}
+.facts{{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;margin:0;border:1px solid var(--rule);background:var(--panel)}}
 .facts div{{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}}
 .facts dt{{font:600 11px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}}
 .facts dd{{margin:4px 0 0;font:600 15px/1.35 var(--f-disp)}}
@@ -381,7 +378,7 @@ th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vert
 thead th{{font:600 11.5px/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--head)}}
 tbody th{{font-weight:600}}
 td.num,th.num{{text-align:right;white-space:nowrap}} td.c,th.c{{text-align:center}}
-.note{{border-left:3px solid var(--accent);padding:10px 14px;background:var(--sheet);font-size:14px;display:flex;gap:10px;align-items:flex-start}}
+.note{{border-left:3px solid var(--accent);padding:10px 14px;background:#fdf3f2;font-size:14px;display:flex;gap:10px;align-items:flex-start}}
 .note .ic{{color:var(--accent);margin-top:4px}}
 .plan{{margin:0;background:var(--sheet);border:1px solid var(--rule);min-width:0}}
 .plan figcaption{{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--rule)}}
@@ -395,22 +392,35 @@ button{{font:inherit;color:inherit}}
 .zoom,.reset{{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--rule);background:var(--chip);padding:6px 10px;cursor:pointer;font-size:13px;white-space:nowrap}}
 .zoom:hover,.zoom:focus-visible,.reset:hover,.reset:focus-visible{{border-color:var(--ink);outline:none}}
 .specs{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}}
-.spec{{background:var(--sheet);border:1px solid var(--rule);padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0}}
+.spec{{background:var(--panel);border:1px solid var(--rule);padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0}}
 .spec h3 .ic{{color:var(--accent)}}
 .spec ul{{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:14px}}
 .two{{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}}
 .two > div{{min-width:0;display:grid;gap:8px;align-content:start}}
 ol.seq{{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:0;border-top:1px solid var(--rule)}}
-ol.seq li{{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:14.5px}}
+ol.seq li{{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:14.5px}}
+ol.seq li > div{{max-width:78ch}}
 ol.seq li::before{{content:counter(s,decimal-leading-zero);font:500 13px/1.6 var(--f-mono);color:var(--accent)}}
 .dqe td{{font-size:13.5px}}
 .dqe .lot-h th{{background:var(--head);font:700 14px/1.3 var(--f-disp)}}
 .lot-n{{font:600 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-right:6px}}
 .dqe .sub td{{font-weight:600;text-align:right;background:var(--sheet)}}
 .dqe .opt td,.dqe .opt th{{color:var(--ink-2)}}
-.pu{{width:92px;text-align:right;font:500 13px var(--f-mono);padding:4px 6px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}}
+.pu{{width:92px;text-align:right;font:500 13px var(--f-mono);padding:4px 6px;border:1px solid var(--rule);background:var(--panel);color:var(--ink)}}
 .pu:focus-visible{{outline:2px solid var(--accent);outline-offset:1px}}
-.totals{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1px solid var(--rule);background:var(--sheet);margin:0}}
+.dq-head{{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}}
+.dq-co{{border:1px solid var(--rule);background:var(--panel);padding:14px 16px;font-size:13.5px;line-height:1.5;min-width:0}}
+.dq-l{{font:600 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}}
+.dq-n{{font:800 17px/1.3 var(--f-disp);margin-bottom:4px}}
+.dqe .grand td{{font:700 14px/1.3 var(--f-disp);text-align:right;background:var(--head);border-bottom:1px solid var(--rule)}}
+.dqe .grand td.num{{font-family:var(--f-mono)}}
+.dqe .grand .g-ttc td{{color:#fff;background:var(--ink);font-size:15.5px}}
+.arrete{{font-size:15px;border:1px solid var(--rule);background:var(--panel);padding:12px 16px}}
+.arrete b{{font-weight:600}}
+.sign{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}}
+.sign > div{{border:1px dashed var(--rule);padding:14px 16px;min-height:120px;font-size:13.5px}}
+.mute{{color:var(--ink-2)}}
+.totals{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1px solid var(--rule);background:var(--panel);margin:0}}
 .totals div{{padding:12px 14px;border-right:1px solid var(--rule)}}
 .totals dt{{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}}
 .totals dd{{margin:2px 0 0;font:800 22px/1.2 var(--f-disp);font-variant-numeric:tabular-nums}}
@@ -439,7 +449,7 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
   <p class="eyebrow">{ic("compass-drafting")} Dossier d'exécution - indice {INDICE} - v{VERSION}</p>
   <h1>Piscine et jardins, terrain Gharsa Foquiya</h1>
   <p class="lead">{fr("Bassin en béton armé de 10 × 5 m, implanté à 5,00 m devant la villa existante et centré sur sa façade de 12 m, avec l'aménagement des jardins autour. Plans établis selon l'usage marocain : cartouche, cotes en mètres, niveaux rapportés au ±0,00 du sol fini du rez-de-chaussée.")}</p>
-  <p class="meta"><span>{PROJECT['lieu']}, {PROJECT['commune']}, {PROJECT['province']}</span><span>Date <b>{DATE}</b></span><span>Conception <b>{AUTHOR['name']}</b></span></p>
+  <p class="meta"><span>{PROJECT['lieu']}, {PROJECT['commune']}, {PROJECT['province']}</span><span>Date <b>{DATE}</b></span><span>Conception <b>{AUTHOR['name']}</b></span><span>Exécution <b>{CONTRACTOR['name']}</b></span></p>
   <dl class="facts">{facts()}</dl>
 </header>
 <div class="grid">
@@ -490,10 +500,25 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
 </section>
 <section class="blk" id="dqe">
   <h2><span class="sn">07</span>Devis quantitatif et estimatif</h2>
-  <p class="lead">{fr("Les quantités sont tirées des plans. Les prix unitaires sont indicatifs pour la région de Tanger en 2026, en dirhams hors taxes. Saisissez les prix de votre entrepreneur dans les cases : les totaux se mettent à jour. Vos modifications restent dans ce navigateur.")}</p>
+  <p class="lead">{fr("Devis établi pour l'exécution des travaux par ABOUDI BTP Group. Les quantités sont tirées des plans ; les prix unitaires sont indicatifs (région de Tanger, 2026, en dirhams hors taxes) et restent modifiables dans les cases : les totaux, la TVA et le montant en lettres se mettent à jour. Vos modifications restent dans ce navigateur.")}</p>
   <dl class="totals"><div><dt>Total HT</dt><dd id="t-ht">{money(total)}</dd></div><div><dt>TVA 20{NB}%</dt><dd id="t-tva">{money(total * .2)}</dd></div><div class="ttc"><dt>Total TTC (DH)</dt><dd id="t-ttc">{money(total * 1.2)}</dd></div></dl>
   <div class="row"><span class="meta">Les options figurent à la fin et ne sont pas comptées dans les totaux.</span><button type="button" class="reset" id="reset">{ic("rotate-left")}Rétablir les prix</button></div>
-  <div class="tbl"><table class="dqe"><thead><tr><th>N°</th><th>Désignation des ouvrages</th><th class="c">U</th><th class="num">Qté</th><th class="num">P.U. HT</th><th class="num">Montant HT</th></tr></thead>{dqe_html()}</table></div>
+  <div class="dq-head">
+    <div class="dq-co"><p class="dq-l">Entreprise</p><p class="dq-n">{CONTRACTOR['name']}</p>
+      <p>{esc(CONTRACTOR['form'])}</p><p>{esc(CONTRACTOR['address'])}</p>
+      <p>RC {CONTRACTOR['rc']} ({CONTRACTOR['tribunal']}) - ICE {CONTRACTOR['ice']}</p>
+      <p>{esc(CONTRACTOR['activity'])}</p><p>Tél. {CONTRACTOR['phones']}</p><p>{CONTRACTOR['emails']}</p></div>
+    <div class="dq-co"><p class="dq-l">Maître d'ouvrage</p><p class="dq-n">Le propriétaire</p>
+      <p>{esc(PROJECT['title_fr'])}</p><p>{PROJECT['lieu']}, terrain dit {esc("« " + PROJECT['terrain'] + " »")}</p><p>{PROJECT['commune']}, {PROJECT['province']}</p>
+      <p>Réf. dossier : GF-PISC-v{VERSION} - {DATE}</p><p>Conception : {AUTHOR['name']}</p></div>
+  </div>
+  <div class="tbl"><table class="dqe"><thead><tr><th>N°</th><th>Désignation des ouvrages</th><th class="c">U</th><th class="num">Qté</th><th class="num">P.U. HT</th><th class="num">Montant HT</th></tr></thead>{dqe_html()}
+  <tbody class="grand"><tr><td colspan="5">TOTAL GÉNÉRAL HT</td><td class="num" id="g-ht">{money(total)}</td></tr>
+  <tr><td colspan="5">TVA 20{NB}%</td><td class="num" id="g-tva">{money(total * .2)}</td></tr>
+  <tr class="g-ttc"><td colspan="5">TOTAL GÉNÉRAL TTC (DH)</td><td class="num" id="g-ttc">{money(total * 1.2)}</td></tr></tbody></table></div>
+  <p class="arrete">Arrêté le présent devis à la somme de : <b id="g-words">{en_lettres(round(total * 1.2)).capitalize()} dirhams</b> toutes taxes comprises.</p>
+  <div class="sign"><div><p class="dq-l">L'entreprise</p><p>{CONTRACTOR['name']} - le gérant, {CONTRACTOR['manager']}</p><p class="mute">cachet et signature</p></div>
+    <div><p class="dq-l">Le maître d'ouvrage</p><p>Bon pour accord</p><p class="mute">date et signature</p></div></div>
 </section>
 <section class="blk" id="planning">
   <h2><span class="sn">08</span>Planning prévisionnel</h2>
@@ -505,7 +530,8 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
   <div class="two">
     <div class="spec"><h3>{ic("shield-halved")}Sécurité</h3><ul>
       <li>{fr("Des enfants vivent sur place : posez la clôture de 1,20 m avec portillon à fermeture automatique (indiquée sur le PL-02) ou une couverture à barres, et une alarme sur les portes de la villa qui donnent sur le bassin.")}</li>
-      <li>{fr("Deux bondes de fond anti-vortex, margelles et plage antidérapantes, marquage des profondeurs et « Plongeon interdit ».")}</li>
+      <li>{fr("Zone enfants à 0,55 m sur 2,50 m, puis pente douce (14 %) jusqu'à 1,20 m. Au-delà, la fosse descend à 1,80 m : ligne de carrelage contrastée et ligne de flotteurs amovible à la rupture de pente.")}</li>
+      <li>{fr("Deux bondes de fond anti-vortex, margelles et plage antidérapantes, marquage des profondeurs et « Plongeon interdit » (1,80 m ne suffit pas pour plonger).")}</li>
       <li>{fr("Ne videz jamais le bassin entre novembre et avril : avec une nappe haute, la coque vide peut se soulever (voir PL-05).")}</li>
       <li>{fr("Gardez les poules clôturées à au moins 8 m de l'eau, et les produits chimiques dans un coffre fermé à clé dans le local technique.")}</li>
     </ul></div>
@@ -528,12 +554,36 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
 </section>
 </main>
 </div>
-<footer><span><b>{AUTHOR['name']}</b></span><span>{ic("globe")}<a href="{AUTHOR['url']}">{AUTHOR['web']}</a></span><span>{ic("envelope")}{AUTHOR['email']}</span><span>{ic("whatsapp")}WhatsApp {AUTHOR['whatsapp']}</span><span class="mono">v{VERSION} - indice {INDICE} - {DATE}</span></footer>
+<footer><span>Conception <b>{AUTHOR['name']}</b></span><span>{ic("globe")}<a href="{AUTHOR['url']}">{AUTHOR['web']}</a></span><span>{ic("envelope")}{AUTHOR['email']}</span><span>{ic("whatsapp")}WhatsApp {AUTHOR['whatsapp']}</span><span>Exécution <b>{CONTRACTOR['name']}</b> - RC {CONTRACTOR['rc']} {CONTRACTOR['tribunal']} - ICE {CONTRACTOR['ice']}</span><span class="mono">v{VERSION} - indice {INDICE} - {DATE}</span></footer>
 </div>
 <script>
 (function(){{
   var fmt=function(n){{return Math.round(n).toLocaleString('fr-FR').replace(/[\\u202f\\u00a0\\s]/g,'\\u00a0');}};
   var KEY='gf-pool-dqe-v{VERSION}';
+  var U=['zéro','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf'];
+  var T={{2:'vingt',3:'trente',4:'quarante',5:'cinquante',6:'soixante'}};
+  function b100(n,f){{
+    if(n<20) return U[n];
+    var t=Math.floor(n/10), u=n%10;
+    if(T[t]) return u===0?T[t]:T[t]+(u===1?' et un':'-'+U[u]);
+    if(t===7) return 'soixante'+(u===1?' et onze':'-'+U[10+u]);
+    if(t===8) return u===0?'quatre-vingt'+(f?'s':''):'quatre-vingt-'+U[u];
+    return 'quatre-vingt-'+U[10+u];
+  }}
+  function b1000(n,f){{
+    var c=Math.floor(n/100), r=n%100, o=[];
+    if(c) o.push(c===1?'cent':U[c]+' cent'+(r===0&&f?'s':''));
+    if(r) o.push(b100(r,f));
+    return o.join(' ');
+  }}
+  function lettres(n){{
+    if(n===0) return 'zéro';
+    var m=Math.floor(n/1e6), rest=n%1e6, k=Math.floor(rest/1000), r=rest%1000, o=[];
+    if(m) o.push(b1000(m,true)+(m>1?' millions':' million'));
+    if(k) o.push(k===1?'mille':b1000(k,false)+' mille');
+    if(r) o.push(b1000(r,true));
+    return o.join(' ');
+  }}
   var inputs=[].slice.call(document.querySelectorAll('.pu'));
   var saved={{}};
   try{{saved=JSON.parse(localStorage.getItem(KEY)||'{{}}');}}catch(e){{saved={{}};}}
@@ -552,6 +602,11 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
     document.getElementById('t-ht').textContent=fmt(ht);
     document.getElementById('t-tva').textContent=fmt(ht*.2);
     document.getElementById('t-ttc').textContent=fmt(ht*1.2);
+    document.getElementById('g-ht').textContent=fmt(ht);
+    document.getElementById('g-tva').textContent=fmt(ht*.2);
+    document.getElementById('g-ttc').textContent=fmt(ht*1.2);
+    var w=lettres(Math.round(ht*1.2));
+    document.getElementById('g-words').textContent=w.charAt(0).toUpperCase()+w.slice(1)+' dirhams';
   }}
   function save(){{var o={{}}; inputs.forEach(function(i){{if(i.value!==i.dataset.def) o[i.id]=i.value;}}); try{{localStorage.setItem(KEY,JSON.stringify(o));}}catch(e){{}}}}
   inputs.forEach(function(i){{i.addEventListener('input',function(){{calc();save();}});}});
@@ -600,6 +655,8 @@ def main():
     readme = f"""Gharsa Foquiya - Piscine et jardins - dossier d'exécution
 Version {VERSION} (indice {INDICE}) - {DATE}
 Conception : {AUTHOR['name']} - {AUTHOR['url']} - {AUTHOR['email']} - WhatsApp {AUTHOR['whatsapp']}
+Exécution : {CONTRACTOR['name']} - {CONTRACTOR['form']} - RC {CONTRACTOR['rc']} {CONTRACTOR['tribunal']} - ICE {CONTRACTOR['ice']}
+            {CONTRACTOR['address']} - Tél. {CONTRACTOR['phones']} - {CONTRACTOR['emails']}
 
 index.html        Dossier complet : site, plans, descriptif, phasage, devis, planning, lexique
 plans-svg/        Planches PL-01 à PL-{len(SHEETS):02d} (format A3, imprimer à 100 %)

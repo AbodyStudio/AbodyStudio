@@ -185,9 +185,14 @@ def frame(s, num, title=None, title_en=None, scale=None):
     s.t(x0 + 3, y + 101, AUTHOR["web"] + " - " + AUTHOR["email"], "t cs", "start")
     s.t(x0 + 3, y + 105.5, "WhatsApp " + AUTHOR["whatsapp"], "t cs", "start")
     s.line((x0, y + 110), (x1, y + 110), "k w2")
-    s.t(x0 + 3, y + 116, "VISA BET / ARCHITECTE", "t cl", "start")
-    s.rect(x0 + 3, y + 119, x1 - x0 - 6, 26, "k w1 dash")
-    s.t(cx, y + 134, "cachet et signature", "t cs mute")
+    s.t(x0 + 3, y + 116, "ENTREPRISE (EXÉCUTION)", "t cl", "start")
+    s.t(x0 + 3, y + 122.5, CONTRACTOR["name"], "t cb", "start", size=3.8)
+    s.t(x0 + 3, y + 128, f"SARL - RC {CONTRACTOR['rc']} {CONTRACTOR['tribunal']} - ICE {CONTRACTOR['ice']}", "t cs", "start")
+    s.t(x0 + 3, y + 132.5, "Tél. " + CONTRACTOR["phones"], "t cs", "start")
+    s.line((x0, y + 136), (x1, y + 136), "k w2")
+    s.t(x0 + 3, y + 141.5, "VISA BET / ARCHITECTE", "t cl", "start")
+    s.rect(x0 + 3, y + 144, x1 - x0 - 6, 18, "k w1 dash")
+    s.t(cx, y + 154.5, "cachet et signature", "t cs mute")
     yb = H - 64
     s.line((x0, yb), (x1, yb), "k w3")
     s.t(x0 + 3, yb + 6, "PLAN", "t cl", "start")
@@ -224,10 +229,10 @@ def north(s, x, y, ang, r=9):
 
 
 def band_north(s, ang, note=None):
-    north(s, (BAND + W - 9) / 2, 192, ang, 10)
-    s.t((BAND + W - 9) / 2, 212, "Nord (Lambert)", "t cs mute")
+    north(s, (BAND + W - 9) / 2, 197, ang, 9)
+    s.t((BAND + W - 9) / 2, 214.5, "Nord (Lambert)", "t cs mute")
     if note:
-        s.t((BAND + W - 9) / 2, 217, note, "t cs mute")
+        s.t((BAND + W - 9) / 2, 219, note, "t cs mute")
 
 
 def tree(s, x, y, r, c="k w1 tree"):
@@ -506,7 +511,7 @@ def pl02():
     for i in range(STEP["n_tread"]):
         uu = POOL["u1"] - STEP["tread"] * (i + 1)
         s.line(P(uu, POOL["v0"]), P(uu, POOL["v0"] + STEP["width"]), "k w1")
-    s.line(P(POOL["u1"] - STEP["tread"] * 4, POOL["v0"] + STEP["width"]), P(POOL["u1"], POOL["v0"] + STEP["width"]), "k w1")
+    s.line(P(POOL["u1"] - STEP["tread"] * STEP["n_tread"], POOL["v0"] + STEP["width"]), P(POOL["u1"], POOL["v0"] + STEP["width"]), "k w1")
     # tech room
     s.pl([P(*p) for p in rect_uv(TECH["u0"], TECH["v0"], TECH["u1"], TECH["v1"])], "red w3 fcc", True)
     s.pl([P(*p) for p in rect_uv(TECH["u0"] + TECH_WALL, TECH["v0"] + TECH_WALL, TECH["u1"] - TECH_WALL, TECH["v1"] - TECH_WALL)], "k w1 fs", True)
@@ -554,7 +559,7 @@ def pl02():
     s.level(x, y, f"{LV['deck_low']:+.2f}", "l")
     lab(HOUSE["u0"] + 0.3, DECK[0] + 0.45, "PLAGE SOLARIUM 2.50 (transats)", "t lab b", 0, "start")
     lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 - 0.6, "PISCINE 10.00 × 5.00", "t lab b red-t")
-    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 + 0.4, "prof. 1.20 → 1.60 - V ≈ 67 m³", "t lab red-t")
+    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 + 0.4, f"prof. {WATER_SHALLOW:.2f} → {WATER_DEEP:.2f} - V ≈ {Q['water_vol']:.0f} m³", "t lab red-t")
     lab(POOL["u1"] - 0.75, POOL["v0"] + 1.0, "Escalier", "t lab", -90)
     lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v0"] - 0.45, "Local technique", "t lab red-t")
     lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v1"] + 0.15, "2.40 × 2.00", "t lab red-t")
@@ -607,8 +612,8 @@ def pl02():
             s.t(pp[0], pp[1] + 1.1, nm, "t cb")
     s.flip()
     band_north(s, 180 - U_ANG, f"gisement façade : {BEARING_U * 400 / 360:.2f} gr")
-    s.t((BAND + W - 9) / 2, 222, "* profondeur de la villa supposée", "t tiny2 mute")
-    s.t((BAND + W - 9) / 2, 225.6, "10.00 m - à relever sur place", "t tiny2 mute")
+    s.t((BAND + W - 9) / 2, 224, "* profondeur de la villa supposée", "t tiny2 mute")
+    s.t((BAND + W - 9) / 2, 227.6, "10.00 m - à relever sur place", "t tiny2 mute")
     frame(s, "PL-02")
     s.title = "PL-02 Plan d'aménagement"
     return s
@@ -650,6 +655,11 @@ def pl03():
     # depth zones
     for x in (DEEP_FLAT, SLOPE_END):
         s.line(P(x, 0), P(x, POOL_W), "k w1 dash")
+    s.line(P(BREAK_X, 0), P(BREAK_X, POOL_W), "k w3 dash")
+    x_, y_ = P(BREAK_X + 0.12, 2.5)
+    s.t(x_, y_, f"rupture de pente - prof. {WATER_BREAK:.2f}", "t tiny2 b", "middle", -90)
+    x_, y_ = P((SLOPE_END + POOL_L) / 2 - 0.35, 3.55)
+    s.t(x_, y_, f"ZONE ENFANTS - prof. {WATER_SHALLOW:.2f}", "t lab b")
     # steps
     x0 = STEP["x0"]
     for i in range(STEP["n_tread"] + 1):
@@ -661,10 +671,11 @@ def pl03():
         x_, y_ = P(xx, STEP["width"] / 2)
         s.t(x_, y_ + 1, f"{LV['coping'] - STEP['rise'] * (i + 1):+.2f}", "t lvl", "middle", -90)
     # slope arrow
-    a1, b1 = P(SLOPE_END - 0.3, 3.6), P(DEEP_FLAT + 0.3, 3.6)
-    s.line(a1, b1, "k w2 arrow")
-    s.t((a1[0] + b1[0]) / 2, a1[1] - 1.8, f"pente {SLOPE_PCT:.1f} %", "t lab")
-    for x, txt in [(0.75 - 0.3, f"fond {FLOOR_DEEP:+.2f}"), ((DEEP_FLAT + SLOPE_END) / 2, ""), (SLOPE_END + 0.5, f"fond {FLOOR_SHALLOW:+.2f}")]:
+    for xa_, xb_, pc in ((SLOPE_END - 0.3, BREAK_X + 0.4, SLOPE_GENTLE), (BREAK_X - 0.25, DEEP_FLAT + 0.2, SLOPE_STEEP)):
+        a1, b1 = P(xa_, 3.6), P(xb_, 3.6)
+        s.line(a1, b1, "k w2 arrow")
+        s.t((a1[0] + b1[0]) / 2, a1[1] - 1.8, f"pente {pc:.0f} %", "t lab")
+    for x, txt in [(0.15, f"fond {FLOOR_DEEP:+.2f}"), (BREAK_X + 0.35, f"fond {FLOOR_BREAK:+.2f}"), (SLOPE_END + 0.35, f"fond {FLOOR_SHALLOW:+.2f}")]:
         if txt:
             x_, y_ = P(x, 4.4)
             s.level(x_, y_, txt)
@@ -709,7 +720,7 @@ def pl03():
     s.dim(P(POOL_L + WALK, -WALK), P(POOL_L + WALK, POOL_W + WALK), -17, "6.00")
     # depth zones
     yb = -WALK
-    chain = [0, DEEP_FLAT, SLOPE_END, STEP["x0"], POOL_L]
+    chain = [0, DEEP_FLAT, BREAK_X, SLOPE_END, STEP["x0"], POOL_L]
     for a_, b_ in zip(chain, chain[1:]):
         s.dim(P(a_, yb), P(b_, yb), -14, f"{b_ - a_:.2f}")
     # fittings positions along NE wall (returns) and SW wall (lights, ladder)
@@ -733,7 +744,7 @@ def pl03():
             s.circ(pp[0], pp[1], 2.4, "k w2 fs")
             s.t(pp[0], pp[1] + 1.1, nm, "t cb")
     # labels
-    x_, y_ = P(POOL_L / 2 - 0.4, 2.0)
+    x_, y_ = P(5.75, 2.0)
     s.t(x_, y_, "BASSIN 10.00 × 5.00 - plan d'eau 50 m²", "t lab b red-t")
     s.t(x_, y_ - 5, f"Volume ≈ {Q['water_vol']:.0f} m³ - mosaïque pâte de verre 25 × 25", "t lab red-t")
     x_, y_ = P(-WALK - 0.1, POOL_W + WALK + 0.15)
@@ -749,16 +760,16 @@ def pl03():
           ("BF1-BF2", "Bondes de fond anti-vortex reliées, écart 1.00 m"),
           ("R1-R4", "Buses de refoulement, axe à -0.35 sous le plan d'eau"),
           ("PB", "Prise balai, -0.30 sous le plan d'eau"),
-          ("P1-P3", "Projecteurs LED 12 V 30 W, axe à -0.60 sous le plan d'eau"),
-          ("ECH", "Échelle inox 316L 3 marches"),
-          ("", f"Plan d'eau {LV['water']:+.2f} - margelles {LV['coping']:+.2f} - eau 1.20 → 1.60 m")]
+          ("P1-P3", f"Projecteurs LED 12 V 30 W, axe à -{LIGHT_DEPTH:.2f} sous le plan d'eau"),
+          ("ECH", "Échelle inox 316L 4 marches (grand fond)"),
+          ("", f"Plan d'eau {LV['water']:+.2f} - margelles {LV['coping']:+.2f} - eau {WATER_SHALLOW:.2f} → {WATER_DEEP:.2f} m")]
     s.t(32, 222, "ÉQUIPEMENTS DU BASSIN", "t cl", "start")
     table(s, 32, 224, ("Repère", "Désignation"), lg, (24, 118), rh=5.0)
     notes = ["Pièces à sceller posées avant coulage des voiles,",
              "colliers d'étanchéité prévus pour la membrane.",
              "Buses orientées vers les skimmers.",
-             "Marquage des profondeurs 1.20 / 1.60 et « Plongeon",
-             "interdit » sur margelles.",
+             f"Ligne de carrelage contrastée à la rupture de pente ({WATER_BREAK:.2f}).",
+             f"Marquage {WATER_SHALLOW:.2f} / {WATER_BREAK:.2f} / {WATER_DEEP:.2f} et « Plongeon interdit ».",
              "Bondes de fond : clapet de décompression dans le puisard."]
     s.t(184, 222, "NOTES", "t cl", "start")
     for i, n in enumerate(notes):
@@ -794,7 +805,7 @@ def pl04():
     for xa, xb in ((exc_l, -WALL - fin), (POOL_L + WALL + fin, exc_r)):
         s.rect(X(xa), Z(LV["tn"]), (xb - xa) * k, (LV["tn"] - (zb_deep if xa < 0 else zb_sh)) * k, "k w1 fgr")
     # layers under slab, following the floor profile
-    prof = [(x, floor_depth(x)) for x in (0, DEEP_FLAT, SLOPE_END, POOL_L)]
+    prof = list(PROFILE)
     xl, xr = -WALL - fin, POOL_L + WALL + fin
     def band(off_top, off_bot, cls):
         top = [(xl, prof[0][1] - off_top)] + [(x, z - off_top) for x, z in prof] + [(xr, prof[-1][1] - off_top)]
@@ -838,13 +849,15 @@ def pl04():
     s.line((X(-1.2), Z(LV["tn"])), (X(POOL_L + 1.2), Z(LV["tn"])), "k w2")
     # levels
     for z, txt, xx in [(LV["coping"], f"{LV['coping']:+.2f} margelle", POOL_L + 0.6), (LV["water"], f"{LV['water']:+.2f} eau", POOL_L - 1.6),
-                       (FLOOR_SHALLOW, f"{FLOOR_SHALLOW:+.2f}", POOL_L - 1.9), (FLOOR_DEEP, f"{FLOOR_DEEP:+.2f}", 0.5),
+                       (FLOOR_SHALLOW, f"{FLOOR_SHALLOW:+.2f}", POOL_L - 1.5), (FLOOR_DEEP, f"{FLOOR_DEEP:+.2f}", 0.5),
+                       (FLOOR_BREAK, f"{FLOOR_BREAK:+.2f} rupture", BREAK_X + 0.15),
                        (zb_deep, f"{zb_deep:+.2f} fond de fouille", 1.0)]:
         s.level(X(xx), Z(z), txt, section=True)
     # depth dims
-    s.dim((X(0.3), Z(LV["water"])), (X(0.3), Z(FLOOR_DEEP)), 0, "1.60")
-    s.dim((X(POOL_L - 2.2), Z(LV["water"])), (X(POOL_L - 2.2), Z(FLOOR_SHALLOW)), 0, "1.20")
-    chain = [0, DEEP_FLAT, SLOPE_END, POOL_L]
+    s.dim((X(0.3), Z(LV["water"])), (X(0.3), Z(FLOOR_DEEP)), 0, f"{WATER_DEEP:.2f}")
+    s.dim((X(BREAK_X), Z(LV["water"])), (X(BREAK_X), Z(FLOOR_BREAK)), 0, f"{WATER_BREAK:.2f}")
+    s.dim((X(POOL_L - 2.1), Z(LV["water"])), (X(POOL_L - 2.1), Z(FLOOR_SHALLOW)), 0, f"{WATER_SHALLOW:.2f}")
+    chain = [x for x, z in PROFILE]
     zz = Z(zb_deep - 0.35) + 5
     for a_, b_ in zip(chain, chain[1:]):
         s.dim((X(a_), zz), (X(b_), zz), 0, f"{b_ - a_:.2f}")
@@ -933,7 +946,7 @@ def pl05():
     s = S("p5")
     k = 50  # 1/20
     X = lambda d: 40 + (d + 0.75) * k          # d: horizontal from inner face of rough wall (+ outward)
-    Z = lambda z: 22 + (-0.55 - z) * k
+    Z = lambda z: 18 + (-0.55 - z) * k
     fin = FINISH
     zf = FLOOR_DEEP - fin            # rough floor
     zs = zf - SLAB
@@ -1031,10 +1044,10 @@ def pl05():
     # ---- D2 : escalier d'accès piscine (coupe suivant la descente) 1/25
     k2 = 40
     ps = POOL_STAIR
-    gx0, gz0 = 30, 196
+    gx0, gz0 = 30, 200
     Xs = lambda d: gx0 + d * k2                 # d from the facade, towards the pool
     Zs = lambda z: gz0 + (0.05 - z) * k2
-    s.t(Xs(1.4), 159, "DÉTAIL D2 - ESCALIER D'ACCÈS PISCINE (côté gauche)  1/25", "t ct")
+    s.t(Xs(1.4), 163, "DÉTAIL D2 - ESCALIER D'ACCÈS PISCINE (côté gauche)  1/25", "t ct")
     s.rect(Xs(-0.30), Zs(0.0), 0.30 * k2, 0.95 * k2, "k w2 fhx")
     prof = [(0.0, 0.0), (ps["landing"], 0.0)]
     z = 0.0
@@ -1226,7 +1239,7 @@ def pl06():
     s.line(A(2.15, 2.0), A(2.15, 2.9), "k w2")
     # equipment
     c_ = A(0.72, 0.72)
-    s.circ(c_[0], c_[1], 0.375 * k, "k w2 fs")
+    s.circ(c_[0], c_[1], FILTER_D / 2 * k, "k w2 fs")
     s.circ(c_[0], c_[1], 0.12 * k, "k w1")
     s.rect(*A(1.30, 0.60), 0.60 * k, 0.30 * k, "k w2 fs")
     s.circ(*A(1.42, 0.45), 0.10 * k, "k w1")
@@ -1259,7 +1272,7 @@ def pl06():
     s.level(*A(1.88, 1.02), "sol -1.45", "l")
     s.t(ox + 48, oy + 13, "Pompe en charge : axe -1.25 sous le plan d'eau -0.85", "t cs")
     s.t(ox + 48, oy + 17.5, "Dalle de couverture +0.50 - TN ≈ -0.85", "t cs mute")
-    rep = ["1  Filtre à sable Ø750, vanne 6 voies", "2  Pompe 15 m³/h + préfiltre", "3  Nourrice aspiration, 4 vannes",
+    rep = [f"1  Filtre à sable Ø{FILTER_D * 1000:.0f}, vanne 6 voies", f"2  Pompe {PUMP_FLOW} m³/h + préfiltre", "3  Nourrice aspiration, 4 vannes",
            "4  Refoulement Ø63 vers bassin", "5  Électrolyseur au sel (option)", "6  Coffret électrique piscine",
            "7  Transformateur 12 V 300 VA", "8  Siphon de sol → puits perdu", "9  Grilles de ventilation (2)",
            "10 Porte métallique 0.80 + 3 marches"]
@@ -1278,7 +1291,7 @@ def pl06():
         s.line((49.1, yy + 2.1), (50.9, yy + 3.9), "k w1")
     s.line((52, y0 + 3), (52, y0 + 28.5), "pipe-s w4")
     s.line((52, y0 + 16), (60, y0 + 16), "pipe-s w3 arrow")
-    boxes = [(60, "Préfiltre +", "pompe 15 m³/h"), (88, "Filtre Ø750", "vanne 6 voies"), (116, "Électrolyseur", "(option)"), (144, "Buses", "R1 à R4")]
+    boxes = [(60, "Préfiltre +", f"pompe {PUMP_FLOW} m³/h"), (88, f"Filtre Ø{FILTER_D * 1000:.0f}", "vanne 6 voies"), (116, "Électrolyseur", "(option)"), (144, "Buses", "R1 à R4")]
     for i, (bx, l1, l2) in enumerate(boxes):
         s.rect(bx, y0 + 10, 22, 12, "k w2 fs" + (" dash" if i == 2 else ""))
         s.t(bx + 11, y0 + 15, l1, "t tiny2 b")
