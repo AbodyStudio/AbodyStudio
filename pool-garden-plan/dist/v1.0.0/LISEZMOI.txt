@@ -1,0 +1,7 @@
+Gharsa Foquiya - Pool & Garden plan set
+Version 1.0.0 (indice A) - 02/10/2026
+Author: AbodyStudio Limited - https://abodystudio.com/ - Support@abodystudio.com - WhatsApp +212 663 033 383
+
+index.html        Full plan set: site, drawings, specification, sequence, estimate, schedule, glossary
+plans-svg/        Drawing sheets PL-01 to PL-05 (A3, print at 100 %)
+img/              Site photos and concept render
