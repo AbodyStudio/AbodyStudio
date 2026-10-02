@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="PL-04 Coupes"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="p4-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><rect x="30.00" y="45.00" width="248.00" height="54.20" class="k w1 fea"/>
+<rect x="258.60" y="45.00" width="10.00" height="47.20" class="k w1 fgr"/>
+<rect x="39.40" y="45.00" width="10.00" height="22.20" class="k w1 fgr"/>
+<polygon points="258.60,88.20 254.00,88.20 230.00,88.20 194.00,76.20 104.00,63.20 54.00,63.20 49.40,63.20 47.40,67.20 54.00,67.20 104.00,67.20 194.00,80.20 230.00,92.20 254.00,92.20 260.60,92.20" class="k w1 fst"/>
+<polygon points="258.60,86.60 254.00,86.60 230.00,86.60 194.00,74.60 104.00,61.60 54.00,61.60 49.40,61.60 47.40,63.20 54.00,63.20 104.00,63.20 194.00,76.20 230.00,88.20 254.00,88.20 260.60,88.20" class="k w1 fs"/>
+<polygon points="258.60,82.60 254.00,82.60 230.00,82.60 194.00,70.60 104.00,57.60 54.00,57.60 49.40,57.60 49.40,61.60 54.00,61.60 104.00,61.60 194.00,74.60 230.00,86.60 254.00,86.60 258.60,86.60" class="k w3 fcc"/>
+<rect x="254.60" y="44.40" width="4.00" height="38.20" class="k w3 fcc"/>
+<rect x="49.40" y="44.40" width="4.00" height="13.20" class="k w3 fcc"/>
+<rect x="253.40" y="43.00" width="10.60" height="1.40" class="k w2 fs"/>
+<rect x="44.00" y="43.00" width="10.60" height="1.40" class="k w2 fs"/>
+<rect x="268.00" y="43.20" width="14.60" height="2.40" class="k w1 fs"/>
+<rect x="30.00" y="43.20" width="14.00" height="2.40" class="k w1 fs"/>
+<polygon points="254.00,46.00 254.00,82.00 230.00,82.00 194.00,70.00 104.00,57.00 54.00,57.00 54.00,46.00" class="k w1 fw"/>
+<polygon points="54.00,47.67 61.00,47.67 61.00,52.33 68.00,52.33 68.00,57.00 54.00,57.00" class="k w3 fcc"/>
+<rect x="253.60" y="44.40" width="5.40" height="3.20" class="k w2 fs"/>
+<text x="259.00" y="43.60" class="t lab b" text-anchor="start">SK</text>
+<rect x="239.00" y="82.00" width="6.00" height="3.60" class="k w1 dash fs"/>
+<text x="237.00" y="84.40" class="t lab b" text-anchor="end">BF</text>
+<line x1="258.60" y1="84.40" x2="278.00" y2="84.40" class="k w2 pipe"/>
+<text x="277.00" y="83.00" class="t tiny2" text-anchor="end">vers local tech.</text>
+<line x1="278.00" y1="45.00" x2="30.00" y2="45.00" class="k w2"/>
+<polygon points="43.40,40.80 40.60,40.80 42.00,43.00" class="k w1 fk"/>
+<line x1="45.00" y1="43.00" x2="39.00" y2="43.00" class="k w1"/>
+<text x="39.80" y="40.40" class="t lvl" text-anchor="end">-0.70 margelle</text>
+<polygon points="87.40,43.80 84.60,43.80 86.00,46.00" class="k w1 fk"/>
+<line x1="89.00" y1="46.00" x2="83.00" y2="46.00" class="k w1"/>
+<text x="83.80" y="43.40" class="t lvl" text-anchor="end">-0.85 eau</text>
+<polygon points="85.40,54.80 82.60,54.80 84.00,57.00" class="k w1 fk"/>
+<line x1="87.00" y1="57.00" x2="81.00" y2="57.00" class="k w1"/>
+<text x="81.80" y="54.40" class="t lvl" text-anchor="end">-1.40</text>
+<polygon points="245.40,79.80 242.60,79.80 244.00,82.00" class="k w1 fk"/>
+<line x1="247.00" y1="82.00" x2="241.00" y2="82.00" class="k w1"/>
+<text x="241.80" y="79.40" class="t lvl" text-anchor="end">-2.65</text>
+<polygon points="192.40,67.80 189.60,67.80 191.00,70.00" class="k w1 fk"/>
+<line x1="194.00" y1="70.00" x2="188.00" y2="70.00" class="k w1"/>
+<text x="188.80" y="67.40" class="t lvl" text-anchor="end">-2.05 rupture</text>
+<polygon points="235.40,90.00 232.60,90.00 234.00,92.20" class="k w1 fk"/>
+<line x1="237.00" y1="92.20" x2="231.00" y2="92.20" class="k w1"/>
+<text x="231.80" y="89.60" class="t lvl" text-anchor="end">-3.16 fond de fouille</text>
+<line x1="247.20" y1="46.00" x2="246.80" y2="46.00" class="k w1"/>
+<line x1="247.20" y1="82.00" x2="246.80" y2="82.00" class="k w1"/>
+<line x1="248.00" y1="44.80" x2="248.00" y2="83.20" class="k w1"/>
+<line x1="248.90" y1="45.10" x2="247.10" y2="46.90" class="k w3"/>
+<line x1="248.90" y1="81.10" x2="247.10" y2="82.90" class="k w3"/>
+<text x="245.07" y="64.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 245.07 64.00)" style="font-size:2.9px">1.80</text>
+<line x1="193.20" y1="46.00" x2="192.80" y2="46.00" class="k w1"/>
+<line x1="193.20" y1="70.00" x2="192.80" y2="70.00" class="k w1"/>
+<line x1="194.00" y1="44.80" x2="194.00" y2="71.20" class="k w1"/>
+<line x1="194.90" y1="45.10" x2="193.10" y2="46.90" class="k w3"/>
+<line x1="194.90" y1="69.10" x2="193.10" y2="70.90" class="k w3"/>
+<text x="191.07" y="58.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 191.07 58.00)" style="font-size:2.9px">1.20</text>
+<line x1="95.20" y1="46.00" x2="94.80" y2="46.00" class="k w1"/>
+<line x1="95.20" y1="57.00" x2="94.80" y2="57.00" class="k w1"/>
+<line x1="96.00" y1="44.80" x2="96.00" y2="58.20" class="k w1"/>
+<line x1="96.90" y1="45.10" x2="95.10" y2="46.90" class="k w3"/>
+<line x1="96.90" y1="56.10" x2="95.10" y2="57.90" class="k w3"/>
+<text x="93.07" y="51.50" class="t dimt" text-anchor="middle" transform="rotate(90.00 93.07 51.50)" style="font-size:2.9px">0.55</text>
+<line x1="254.00" y1="103.40" x2="254.00" y2="103.00" class="k w1"/>
+<line x1="230.00" y1="103.40" x2="230.00" y2="103.00" class="k w1"/>
+<line x1="255.20" y1="104.20" x2="228.80" y2="104.20" class="k w1"/>
+<line x1="254.90" y1="105.10" x2="253.10" y2="103.30" class="k w3"/>
+<line x1="230.90" y1="105.10" x2="229.10" y2="103.30" class="k w3"/>
+<text x="242.00" y="103.30" class="t dimt" text-anchor="middle" style="font-size:2.9px">1.20</text>
+<line x1="230.00" y1="103.40" x2="230.00" y2="103.00" class="k w1"/>
+<line x1="194.00" y1="103.40" x2="194.00" y2="103.00" class="k w1"/>
+<line x1="231.20" y1="104.20" x2="192.80" y2="104.20" class="k w1"/>
+<line x1="230.90" y1="105.10" x2="229.10" y2="103.30" class="k w3"/>
+<line x1="194.90" y1="105.10" x2="193.10" y2="103.30" class="k w3"/>
+<text x="212.00" y="103.30" class="t dimt" text-anchor="middle" style="font-size:2.9px">1.80</text>
+<line x1="194.00" y1="103.40" x2="194.00" y2="103.00" class="k w1"/>
+<line x1="104.00" y1="103.40" x2="104.00" y2="103.00" class="k w1"/>
+<line x1="195.20" y1="104.20" x2="102.80" y2="104.20" class="k w1"/>
+<line x1="194.90" y1="105.10" x2="193.10" y2="103.30" class="k w3"/>
+<line x1="104.90" y1="105.10" x2="103.10" y2="103.30" class="k w3"/>
+<text x="149.00" y="103.30" class="t dimt" text-anchor="middle" style="font-size:2.9px">4.50</text>
+<line x1="104.00" y1="103.40" x2="104.00" y2="103.00" class="k w1"/>
+<line x1="54.00" y1="103.40" x2="54.00" y2="103.00" class="k w1"/>
+<line x1="105.20" y1="104.20" x2="52.80" y2="104.20" class="k w1"/>
+<line x1="104.90" y1="105.10" x2="103.10" y2="103.30" class="k w3"/>
+<line x1="54.90" y1="105.10" x2="53.10" y2="103.30" class="k w3"/>
+<text x="79.00" y="103.30" class="t dimt" text-anchor="middle" style="font-size:2.9px">2.50</text>
+<text x="239.00" y="111.20" class="t tiny2 b" text-anchor="middle">GRAND FOND (côté local technique)</text>
+<text x="79.00" y="111.20" class="t tiny2 b" text-anchor="middle">PETIT BAIN (côté allée)</text>
+<text x="154.00" y="16.00" class="t ct" text-anchor="middle">COUPE A-A  (longitudinale, vue vers la villa)  1/50</text>
+<rect x="30.00" y="194.00" width="258.00" height="32.60" class="k w1 fea"/>
+<rect x="48.00" y="191.00" width="100.00" height="2.00" class="k w2 fcc"/>
+<rect x="48.00" y="159.00" width="100.00" height="2.00" class="k w2 fcc"/>
+<rect x="48.00" y="159.00" width="2.00" height="38.00" class="k w2 fhx"/>
+<rect x="146.00" y="159.00" width="2.00" height="38.00" class="k w2 fhx"/>
+<rect x="48.00" y="153.00" width="1.50" height="6.00" class="k w1 fs"/>
+<rect x="146.50" y="153.00" width="1.50" height="6.00" class="k w1 fs"/>
+<line x1="49.00" y1="153.00" x2="49.00" y2="148.00" class="red w2"/>
+<line x1="147.00" y1="153.00" x2="147.00" y2="148.00" class="red w2"/>
+<rect x="48.00" y="191.00" width="100.00" height="6.00" class="k w1 fhx"/>
+<text x="98.00" y="175.00" class="t lab b" text-anchor="middle">VILLA EXISTANTE</text>
+<text x="98.00" y="179.50" class="t lab" text-anchor="middle">(non modifiée)</text>
+<text x="145.00" y="146.00" class="t lab red-t" text-anchor="end">attentes R+1</text>
+<line x1="30.00" y1="194.50" x2="48.00" y2="194.50" class="k w2"/>
+<polyline points="148.00,194.00 166.00,198.60 168.00,198.60" class="k w2"/>
+<polygon points="148.00,194.00 166.00,198.60 166.00,202.00 148.00,202.00" class="k w1 fgz"/>
+<rect x="166.00" y="198.60" width="2.00" height="2.50" class="k w2 fk"/>
+<polygon points="168.00,198.50 193.00,198.10 193.00,199.30 168.00,199.70" class="k w1 fs"/>
+<rect x="190.70" y="199.00" width="64.60" height="20.80" class="k w1 fgr"/>
+<rect x="190.70" y="219.80" width="64.60" height="2.80" class="k w1 fst"/>
+<rect x="195.70" y="217.80" width="54.60" height="2.00" class="k w2 fcc"/>
+<rect x="195.70" y="198.70" width="2.00" height="19.10" class="k w2 fcc"/>
+<rect x="248.30" y="198.70" width="2.00" height="19.10" class="k w2 fcc"/>
+<rect x="198.00" y="199.50" width="50.00" height="18.00" class="k w1 fw"/>
+<rect x="193.00" y="198.00" width="5.30" height="0.70" class="k w1 fs"/>
+<rect x="247.70" y="198.00" width="5.30" height="0.70" class="k w1 fs"/>
+<rect x="216.50" y="217.50" width="3.00" height="1.50" class="k w1 fs"/>
+<rect x="226.50" y="217.50" width="3.00" height="1.50" class="k w1 fs"/>
+<path d="M198.20 205.50 a 1.4 1.4 0 0 1 0 2.8" class="k w1 flt"/>
+<line x1="253.00" y1="199.00" x2="288.00" y2="200.50" class="k w2"/>
+<circle cx="278.00" cy="180.00" r="9.00" class="k w1 tree"/>
+<circle cx="278.00" cy="180.00" r="0.35" class="k w1 fk"/>
+<line x1="278.00" y1="199.80" x2="278.00" y2="189.00" class="k w2"/>
+<circle cx="192.70" cy="219.30" r="0.60" class="k w1 fs"/>
+<circle cx="253.30" cy="219.30" r="0.60" class="k w1 fs"/>
+<line x1="148.00" y1="233.80" x2="148.00" y2="233.40" class="k w1"/>
+<line x1="168.00" y1="233.80" x2="168.00" y2="233.40" class="k w1"/>
+<line x1="146.80" y1="234.60" x2="169.20" y2="234.60" class="k w1"/>
+<line x1="147.10" y1="235.50" x2="148.90" y2="233.70" class="k w3"/>
+<line x1="167.10" y1="235.50" x2="168.90" y2="233.70" class="k w3"/>
+<text x="158.00" y="233.70" class="t dimt" text-anchor="middle" style="font-size:2.9px">2.00</text>
+<line x1="168.00" y1="233.80" x2="168.00" y2="233.40" class="k w1"/>
+<line x1="193.00" y1="233.80" x2="193.00" y2="233.40" class="k w1"/>
+<line x1="166.80" y1="234.60" x2="194.20" y2="234.60" class="k w1"/>
+<line x1="167.10" y1="235.50" x2="168.90" y2="233.70" class="k w3"/>
+<line x1="192.10" y1="235.50" x2="193.90" y2="233.70" class="k w3"/>
+<text x="180.50" y="233.70" class="t dimt" text-anchor="middle" style="font-size:2.9px">2.50</text>
+<line x1="193.00" y1="233.80" x2="193.00" y2="233.40" class="k w1"/>
+<line x1="198.00" y1="233.80" x2="198.00" y2="233.40" class="k w1"/>
+<line x1="191.80" y1="234.60" x2="199.20" y2="234.60" class="k w1"/>
+<line x1="192.10" y1="235.50" x2="193.90" y2="233.70" class="k w3"/>
+<line x1="197.10" y1="235.50" x2="198.90" y2="233.70" class="k w3"/>
+<text x="195.50" y="233.70" class="t dimt" text-anchor="middle" style="font-size:2.9px">0.50</text>
+<line x1="198.00" y1="233.80" x2="198.00" y2="233.40" class="k w1"/>
+<line x1="248.00" y1="233.80" x2="248.00" y2="233.40" class="k w1"/>
+<line x1="196.80" y1="234.60" x2="249.20" y2="234.60" class="k w1"/>
+<line x1="197.10" y1="235.50" x2="198.90" y2="233.70" class="k w3"/>
+<line x1="247.10" y1="235.50" x2="248.90" y2="233.70" class="k w3"/>
+<text x="223.00" y="233.70" class="t dimt" text-anchor="middle" style="font-size:2.9px">5.00</text>
+<line x1="248.00" y1="233.80" x2="248.00" y2="233.40" class="k w1"/>
+<line x1="253.00" y1="233.80" x2="253.00" y2="233.40" class="k w1"/>
+<line x1="246.80" y1="234.60" x2="254.20" y2="234.60" class="k w1"/>
+<line x1="247.10" y1="235.50" x2="248.90" y2="233.70" class="k w3"/>
+<line x1="252.10" y1="235.50" x2="253.90" y2="233.70" class="k w3"/>
+<text x="250.50" y="233.70" class="t dimt" text-anchor="middle" style="font-size:2.9px">0.50</text>
+<line x1="48.00" y1="233.80" x2="48.00" y2="233.40" class="k w1"/>
+<line x1="148.00" y1="233.80" x2="148.00" y2="233.40" class="k w1"/>
+<line x1="46.80" y1="234.60" x2="149.20" y2="234.60" class="k w1"/>
+<line x1="47.10" y1="235.50" x2="48.90" y2="233.70" class="k w3"/>
+<line x1="147.10" y1="235.50" x2="148.90" y2="233.70" class="k w3"/>
+<text x="98.00" y="233.70" class="t dimt" text-anchor="middle" style="font-size:2.9px">10.00*</text>
+<polygon points="150.60,188.80 153.40,188.80 152.00,191.00" class="k w1 fk"/>
+<line x1="149.00" y1="191.00" x2="155.00" y2="191.00" class="k w1"/>
+<text x="154.20" y="188.40" class="t lvl" text-anchor="start">±0.00 RDC</text>
+<polygon points="150.60,156.80 153.40,156.80 152.00,159.00" class="k w1 fk"/>
+<line x1="149.00" y1="159.00" x2="155.00" y2="159.00" class="k w1"/>
+<text x="154.20" y="156.40" class="t lvl" text-anchor="start">+3.20</text>
+<polygon points="172.60,196.30 175.40,196.30 174.00,198.50" class="k w1 fk"/>
+<line x1="171.00" y1="198.50" x2="177.00" y2="198.50" class="k w1"/>
+<text x="176.20" y="195.90" class="t lvl" text-anchor="start">-0.75</text>
+<polygon points="192.10,195.80 194.90,195.80 193.50,198.00" class="k w1 fk"/>
+<line x1="190.50" y1="198.00" x2="196.50" y2="198.00" class="k w1"/>
+<text x="195.70" y="195.40" class="t lvl" text-anchor="start">-0.70</text>
+<polygon points="210.60,197.30 213.40,197.30 212.00,199.50" class="k w1 fk"/>
+<line x1="209.00" y1="199.50" x2="215.00" y2="199.50" class="k w1"/>
+<text x="214.20" y="196.90" class="t lvl" text-anchor="start">-0.85</text>
+<polygon points="228.60,215.30 231.40,215.30 230.00,217.50" class="k w1 fk"/>
+<line x1="227.00" y1="217.50" x2="233.00" y2="217.50" class="k w1"/>
+<text x="232.20" y="214.90" class="t lvl" text-anchor="start">-2.65</text>
+<polygon points="259.60,196.80 262.40,196.80 261.00,199.00" class="k w1 fk"/>
+<line x1="258.00" y1="199.00" x2="264.00" y2="199.00" class="k w1"/>
+<text x="263.20" y="196.40" class="t lvl" text-anchor="start">-0.80 TN</text>
+<text x="158.00" y="206.50" class="t lab" text-anchor="middle">Jardinière</text>
+<text x="180.50" y="192.50" class="t lab" text-anchor="middle">Plage 1.5 %</text>
+<text x="180.00" y="204.60" class="t lab" text-anchor="middle">Caniveau</text>
+<text x="223.00" y="207.50" class="t lab b red-t" text-anchor="middle">PISCINE</text>
+<text x="278.00" y="165.00" class="t lab" text-anchor="middle">Verger</text>
+<text x="159.00" y="136.00" class="t ct" text-anchor="middle">COUPE B-B  (transversale villa - jardin - piscine)  1/100</text>
+<text x="20.00" y="285.00" class="t cs mute" text-anchor="start">* profondeur de la villa supposée - à relever. Niveaux du terrain naturel à confirmer par relevé.</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Villa existante (RDC)</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">COUPES A-A ET B-B</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Coupe longitudinale et coupe villa - jardin - piscine</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">PL-04</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/50 - 1/100</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">D - v1.3.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 02/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>

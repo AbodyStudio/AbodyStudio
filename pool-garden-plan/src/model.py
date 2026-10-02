@@ -6,8 +6,8 @@ Every dimension of the plan set is derived from this file, so a change here
 """
 import math
 
-VERSION = "1.2.0"
-INDICE = "C"
+VERSION = "1.3.0"
+INDICE = "D"
 DATE = "02/10/2026"
 
 AUTHOR = {

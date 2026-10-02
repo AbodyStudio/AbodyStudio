@@ -24,7 +24,7 @@ from model import (CONTRACTOR, AUTHOR, DATE, INDICE, LV, POOL_L, POOL_W, PROJECT
 
 FA_DIR = os.environ.get("FA_DIR", "/tmp/fa/package/svgs")
 ICONS = {
-    "solid": ["person-swimming", "ruler-combined", "map-location-dot", "camera", "compass-drafting", "layer-group",
+    "solid": ["images", "image", "xmark", "chevron-left", "chevron-right", "person-swimming", "ruler-combined", "map-location-dot", "camera", "compass-drafting", "layer-group",
               "list-check", "calculator", "calendar-days", "shield-halved", "language", "triangle-exclamation",
               "expand", "compress", "faucet-drip", "bolt", "helmet-safety", "envelope", "globe", "seedling",
               "circle-check", "rotate-left", "house", "water", "trowel-bricks"],
@@ -297,6 +297,36 @@ def gantt_html():
     return f'<div class="g-head"><span></span><span class="g-weeks">{head}</span></div>' + "".join(rows)
 
 
+GALLERY_SLOTS = 6     # placeholders shown until images are found
+
+
+def cover_html():
+    return f'''<figure class="cover" id="cover">
+  <img id="cover-img" alt="Piscine et jardins, terrain Gharsa Foquiya" hidden>
+  <div class="cover-ph" id="cover-ph">{ic("image")}<span class="mono">img/cover.png</span>
+    <small>{fr("Image de couverture : déposez cover.png dans le dossier img (paysage, 2400 × 1000 px conseillé).")}</small></div>
+</figure>'''
+
+
+def gallery_html():
+    slots = "".join(
+        f'<figure class="g-tile g-ph">{ic("image")}<span class="mono">img/image{i}.png</span></figure>'
+        for i in range(1, GALLERY_SLOTS + 1))
+    return f'''<div class="gal" id="gal">
+  <div class="gal-head"><h3>{ic("images")}Proposition et autres vues</h3>
+  <p class="gal-note">{fr("Deuxième proposition et autres points de vue des images de synthèse. Touchez une image pour l'agrandir.")}</p></div>
+  <div class="gal-grid" id="gal-grid">{slots}</div>
+  <p class="gal-hint mono" id="gal-hint">{fr("Déposez image1.png, image2.png, image3.png… dans le dossier img : elles s'affichent ici automatiquement, dans l'ordre.")}</p>
+</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Vue en plein écran">
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+  <button type="button" class="lb-b lb-prev" id="lb-prev" aria-label="Vue précédente">{ic("chevron-left")}</button>
+  <button type="button" class="lb-b lb-next" id="lb-next" aria-label="Vue suivante">{ic("chevron-right")}</button>
+  <button type="button" class="lb-b lb-x" id="lb-x" aria-label="Fermer">{ic("xmark")}</button>
+</div>'''
+
+
 def sheet_figs(sheet_objs):
     out = []
     for (num, title, sub, sc), obj in zip(SHEETS, sheet_objs):
@@ -372,6 +402,33 @@ section.blk{{display:grid;gap:18px;min-width:0;scroll-margin-top:16px}}
 .ph img{{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}}
 .ph figcaption{{padding:10px 12px;font-size:13.5px;color:var(--ink-2);display:grid;gap:2px}}
 .ph figcaption b{{color:var(--ink);font-family:var(--f-disp)}}
+[hidden]{{display:none!important}}
+.cover{{margin:0;width:100%;background:var(--panel);border-bottom:1px solid var(--rule)}}
+.cover img{{display:block;width:100%;height:auto;aspect-ratio:12/5;object-fit:cover}}
+.cover-ph{{aspect-ratio:12/5;display:grid;place-content:center;justify-items:center;gap:8px;text-align:center;padding:16px;
+  color:var(--ink-2);border:2px dashed var(--rule);margin:12px;background:repeating-linear-gradient(135deg,transparent 0 14px,#eef2f4 14px 15px)}}
+.cover-ph .ic{{width:34px;height:34px;color:#b8c3ca}}
+.cover-ph .mono{{font-size:15px;color:var(--ink)}} .cover-ph small{{font-size:13px;max-width:52ch}}
+@media (max-width:560px){{.cover img,.cover-ph{{aspect-ratio:4/3}}}}
+.gal{{display:grid;gap:12px;margin-top:10px;min-width:0}}
+.gal-head{{display:grid;gap:4px}} .gal-head h3 .ic{{color:var(--accent)}}
+.gal-note{{font-size:14px;color:var(--ink-2);max-width:72ch}}
+.gal-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}}
+.g-tile{{margin:0;border:1px solid var(--rule);background:var(--sheet);min-width:0;display:grid}}
+.g-tile button{{display:block;padding:0;border:0;background:none;cursor:zoom-in;width:100%}}
+.g-tile img{{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}}
+.g-tile figcaption{{padding:8px 11px;font-size:13px;color:var(--ink-2)}}
+.g-tile figcaption b{{color:var(--ink);font-family:var(--f-disp)}}
+.g-ph{{aspect-ratio:3/2;place-content:center;justify-items:center;gap:6px;border:2px dashed var(--rule);background:var(--panel);color:var(--ink-2);font-size:13px}}
+.g-ph .ic{{width:26px;height:26px;color:#b8c3ca}}
+.gal-hint{{font-size:12px;color:var(--ink-2)}}
+.g-tile button:focus-visible,.lb-b:focus-visible{{outline:2px solid var(--accent);outline-offset:2px}}
+.lb{{position:fixed;inset:0;z-index:50;background:rgba(10,14,18,.94);display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 56px) 16px calc(env(safe-area-inset-bottom,0px) + 56px)}}
+.lb img{{max-width:100%;max-height:100%;object-fit:contain}}
+.lb p{{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);margin:0;text-align:center;color:#e8edf0;font-size:14px}}
+.lb-b{{position:absolute;display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:18px}}
+.lb-prev{{left:12px;top:50%;transform:translateY(-50%)}} .lb-next{{right:12px;top:50%;transform:translateY(-50%)}}
+.lb-x{{right:12px;top:calc(env(safe-area-inset-top,0px) + 12px)}}
 .tbl{{overflow-x:auto;border:1px solid var(--rule);background:var(--sheet)}}
 table{{border-collapse:collapse;width:100%;font-size:14px}}
 th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}}
@@ -444,6 +501,7 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
 {SVG_CSS}
 </style>
 {icon_sprite()}
+{cover_html()}
 <div class="wrap">
 <header class="top">
   <p class="eyebrow">{ic("compass-drafting")} Dossier d'exécution - indice {INDICE} - v{VERSION}</p>
@@ -455,6 +513,7 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
 <div class="grid">
 <nav class="idx" aria-label="Sommaire"><ol>
   <li><a href="#site">Site et existant</a></li>
+  <li class="sub"><a href="#gal">Proposition et autres vues</a></li>
   <li><a href="#fit">Vos cotes sur le plan topographique</a></li>
   <li><a href="#plans">Plans</a></li>
   {nav_sheets}
@@ -472,6 +531,7 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
   <h2><span class="sn">01</span>Site et existant</h2>
   <p class="lead">{fr(f"Le terrain fait {money(PROJECT['surface'])} m² (plan topographique de Sahraoui Topo ; {money(round(PARCEL_AREA))} m² recalculés à partir des 11 bornes). Il mesure environ 29 m côté NE et 40 à 49 m de profondeur depuis le chemin public de 6 m au SO. La villa est proche du chemin ; le bassin se place sur sa face NE, côté verger et vue dégagée.")}</p>
   <div class="photos">{ph}</div>
+  {gallery_html()}
 </section>
 <section class="blk" id="fit">
   <h2><span class="sn">02</span>Vos cotes sur le plan topographique</h2>
@@ -612,6 +672,56 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
   inputs.forEach(function(i){{i.addEventListener('input',function(){{calc();save();}});}});
   document.getElementById('reset').addEventListener('click',function(){{inputs.forEach(function(i){{i.value=i.dataset.def;}}); try{{localStorage.removeItem(KEY);}}catch(e){{}} calc();}});
   calc();
+  // ---- cover + gallery: images dropped into img/ show up automatically
+  var EXT=['png','jpg','jpeg','webp'];
+  function probe(base,cb){{
+    var k=0;
+    (function next(){{
+      if(k>=EXT.length) return cb(null);
+      var url='img/'+base+'.'+EXT[k++], im=new Image();
+      im.onload=function(){{cb(url);}}; im.onerror=next; im.src=url;
+    }})();
+  }}
+  probe('cover',function(url){{
+    if(!url) return;
+    var ci=document.getElementById('cover-img');
+    ci.src=url; ci.hidden=false; document.getElementById('cover-ph').hidden=true;
+  }});
+  var found=[], miss=0;
+  (function scan(i){{
+    if(i>60||miss>=2) return render();
+    probe('image'+i,function(url){{
+      if(url){{found.push(url); miss=0;}} else miss++;
+      scan(i+1);
+    }});
+  }})(1);
+  var lb=document.getElementById('lb'), lbi=document.getElementById('lb-img'), lbc=document.getElementById('lb-cap'), cur=0, lastFocus=null;
+  function render(){{
+    if(!found.length) return;
+    var grid=document.getElementById('gal-grid'); grid.innerHTML='';
+    found.forEach(function(url,i){{
+      var f=document.createElement('figure'); f.className='g-tile';
+      var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Agrandir la vue '+(i+1));
+      var im=document.createElement('img'); im.src=url; im.alt='Vue '+(i+1); im.loading='lazy';
+      b.appendChild(im); f.appendChild(b);
+      var c=document.createElement('figcaption'); c.innerHTML='<b>Vue '+(i+1)+'</b>'; f.appendChild(c);
+      b.addEventListener('click',function(){{openLb(i);}});
+      grid.appendChild(f);
+    }});
+    document.getElementById('gal-hint').textContent='Pour ajouter une vue, déposez image'+(found.length+1)+'.png dans le dossier img.';
+  }}
+  function showLb(){{lbi.src=found[cur]; lbi.alt='Vue '+(cur+1); lbc.textContent='Vue '+(cur+1)+'  ('+(cur+1)+' / '+found.length+')';}}
+  function openLb(i){{cur=i; lastFocus=document.activeElement; lb.hidden=false; showLb(); document.getElementById('lb-x').focus();}}
+  function closeLb(){{lb.hidden=true; if(lastFocus) lastFocus.focus();}}
+  function step(d){{cur=(cur+d+found.length)%found.length; showLb();}}
+  document.getElementById('lb-x').addEventListener('click',closeLb);
+  document.getElementById('lb-prev').addEventListener('click',function(){{step(-1);}});
+  document.getElementById('lb-next').addEventListener('click',function(){{step(1);}});
+  lb.addEventListener('click',function(e){{if(e.target===lb) closeLb();}});
+  document.addEventListener('keydown',function(e){{
+    if(lb.hidden) return;
+    if(e.key==='Escape') closeLb(); else if(e.key==='ArrowLeft') step(-1); else if(e.key==='ArrowRight') step(1);
+  }});
   document.querySelectorAll('.zoom').forEach(function(b){{
     b.addEventListener('click',function(){{
       var f=b.closest('.plan'), on=f.classList.toggle('big');
@@ -643,6 +753,10 @@ def main():
                  f'<meta name="author" content="{AUTHOR["name"]}"></head><body>\n' + body + "\n</body></html>\n")
     for f in os.listdir(os.path.join(ROOT, "assets", "photos")):
         shutil.copy(os.path.join(ROOT, "assets", "photos", f), os.path.join(dist, "img", f))
+    gdir = os.path.join(ROOT, "assets", "gallery")
+    for f in sorted(os.listdir(gdir)) if os.path.isdir(gdir) else []:
+        if f.lower().rsplit(".", 1)[-1] in ("png", "jpg", "jpeg", "webp"):
+            shutil.copy(os.path.join(gdir, f), os.path.join(dist, "img", f))
     for (num, fr, en, sc), o in zip(SHEETS, objs):
         svg = o.svg(o.title, standalone=True).replace("<style>", "<style>" + LIGHT_SVG_VARS)
         fonts = ('<style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700'
@@ -661,6 +775,8 @@ Exécution : {CONTRACTOR['name']} - {CONTRACTOR['form']} - RC {CONTRACTOR['rc']}
 index.html        Dossier complet : site, plans, descriptif, phasage, devis, planning, lexique
 plans-svg/        Planches PL-01 à PL-{len(SHEETS):02d} (format A3, imprimer à 100 %)
 img/              Photos du site et image de synthèse
+                  + cover.png (couverture) et image1.png, image2.png, image3.png... (galerie) :
+                  déposez-les dans img/, ils s'affichent automatiquement à l'ouverture de index.html
 
 Ouvrir index.html dans un navigateur (connexion internet pour les polices).
 """
