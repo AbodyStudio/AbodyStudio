@@ -6,8 +6,8 @@ Every dimension of the plan set is derived from this file, so a change here
 """
 import math
 
-VERSION = "1.0.0"
-INDICE = "A"
+VERSION = "1.1.0"
+INDICE = "B"
 DATE = "02/10/2026"
 
 AUTHOR = {
@@ -179,7 +179,9 @@ NW_GARDEN_EDGE = POOL["u0"] - SIDE_GARDEN_NW
 CHICKEN_V = (FRONT_GARDEN[0] + 0.60, POOL["v1"] + 6.60)
 SHOWER = dict(u=HOUSE["u1"] + 0.90, v=DECK[0] + 1.25, s=1.20)
 FENCE_OFFSET = 1.00                   # optional safety fence, outside the walkway
-STEPS_DOOR = dict(uc=_hu0 + 4.80, w=1.60, n=5, tread=0.30)  # house door -> deck
+# access stair on the left (SE) end of the facade, from the villa (+-0.00) down to the deck (-0.75),
+# its landing joins the foot of the existing roof stair
+POOL_STAIR = dict(u0=_hu1 - 1.40, u1=_hu1, landing=0.80, n=5, rise=0.15, tread=0.30)
 
 POOL_L = POOL_LEN
 POOL_W = POOL_WID
@@ -333,20 +335,20 @@ def quantities():
     bar(2, "Radier - nappe inf., sens transv., e=15", 10, nt, lt, "U")
     bar(3, "Radier - nappe sup., sens long, e=15", 10, nl, ll, "U")
     bar(4, "Radier - nappe sup., sens transv., e=15", 10, nt, lt, "U")
-    bar(5, "Chaises de calage, 4 u/m2", 8, int(Le * We * 4), 0.60, "Z")
+    bar(5, "Chaises de calage, 4 u/m²", 8, int(Le * We * 4), 0.60, "Z")
     n_in = int(2 * (Lr + Wr) / 0.15)
     n_out = int(2 * (Le + We) / 0.15)
     lv = 0.45 + (h_long + SLAB - 0.09) + 0.15
-    bar(6, "Voiles - verticales en L ancrees au radier, face eau, e=15", 12, n_in, lv, "L")
-    bar(7, "Voiles - verticales en L ancrees au radier, face terre, e=15", 12, n_out, lv, "L")
+    bar(6, "Voiles - verticales en L ancrées au radier, face eau, e=15", 12, n_in, lv, "L")
+    bar(7, "Voiles - verticales en L ancrées au radier, face terre, e=15", 12, n_out, lv, "L")
     rows = (h_long - 0.25) / 0.20
     perim_c = 2 * (Lc + Wc)
-    bar(8, "Voiles - horizontales 2 faces, e=20 (recouvr. 50 diam.)", 10, int(round(2 * rows)), perim_c * 1.10, "-")
-    bar(9, "Equerres d'angle 2 faces, e=20", 10, int(4 * 2 * round(h_long / 0.20)), 1.20, "L")
-    bar(10, "Chainage - filants 4 HA12", 12, 4, perim_c + 1.20 + 4 * 0.60, "-")
-    bar(11, "Chainage - cadres 12x17, e=15", 6, int(perim_c / 0.15), 0.72, "O")
+    bar(8, "Voiles - horizontales 2 faces, e=20 (recouvrement 50 Ø)", 10, int(round(2 * rows)), perim_c * 1.10, "-")
+    bar(9, "Équerres d'angle 2 faces, e=20", 10, int(4 * 2 * round(h_long / 0.20)), 1.20, "L")
+    bar(10, "Chaînage - filants 4 HA12", 12, 4, perim_c + 1.20 + 4 * 0.60, "-")
+    bar(11, "Chaînage - cadres 12×17, e=15", 6, int(perim_c / 0.15), 0.72, "O")
     bar(12, "Escalier - nappe suivant profil, e=20", 10, 2 * 11, 2.80, "S")
-    bar(13, "Renforts autour des pieces a sceller", 12, 10 * 4, 1.00, "-")
+    bar(13, "Renforts autour des pièces à sceller", 12, 10 * 4, 1.00, "-")
     q["rebar"] = rb
     q["steel"] = sum(r["kg"] for r in rb)
 
@@ -437,7 +439,7 @@ def dqe():
         ("6", "Aménagements extérieurs", "Garden and external works", [
             ("6.01", "Plage solarium : forme BA ép. 10 cm (treillis soudé) + grès cérame antidérapant R11 60 × 60", "Lounger deck: 10 cm RC base + R11 porcelain 60 × 60", "m²", r1(q["deck"]), 320),
             ("6.02", "Caniveau à grille en pied de jardin, raccordé au puits perdu", "Slot drain along the planted strip", "ml", r1(q["channel"]), 280),
-            ("6.03", "Escalier d'accès villa → plage (5 contremarches de 15 cm)", "Steps from the house to the deck", "Ft", 1, 4000),
+            ("6.03", "Escalier d'accès à la piscine côté gauche (SE) : palier ±0.00 + 5 marches 15 × 30, l = 1.40 m, BA revêtu antidérapant, main courante", "Access stair to the pool, left side", "Ft", 1, 5500),
             ("6.04", "Bordures de jardin en béton", "Concrete garden edging", "ml", 60, 60),
             ("6.05", "Terre végétale d'apport + engazonnement (semis)", "Topsoil + seeded lawn", "m²", 157, 35),
             ("6.06", "Massifs plantés (lavande, romarin, agapanthe, gaura) 3 u/m²", "Planted beds, 3 plants/m²", "m²", 25, 110),
@@ -464,11 +466,12 @@ def dqe():
 
 
 SHEETS = [
-    ("PL-01", "Plan de masse", "Site plan on the survey", "1/250"),
-    ("PL-02", "Plan d'aménagement des abords", "Garden and pool layout", "1/100"),
-    ("PL-03", "Plan du bassin - implantation des équipements", "Pool plan and fittings", "1/50"),
-    ("PL-04", "Coupes A-A et B-B", "Sections A-A and B-B", "1/50 - 1/100"),
-    ("PL-05", "Détails béton armé et nomenclature des aciers", "RC details and bar schedule", "1/20"),
+    ("PL-01", "Plan de masse", "Implantation sur le plan topographique", "1/250"),
+    ("PL-02", "Plan d'aménagement des abords", "Piscine, plage, jardins, allée et poulailler", "1/100"),
+    ("PL-03", "Plan du bassin - implantation des équipements", "Cotation du bassin et des pièces à sceller", "1/50"),
+    ("PL-04", "Coupes A-A et B-B", "Coupe longitudinale et coupe villa - jardin - piscine", "1/50 - 1/100"),
+    ("PL-05", "Détails béton armé et nomenclature des aciers", "Paroi, radier, chaînage, margelle", "1/20"),
+    ("PL-06", "Réseaux, local technique et électricité", "Tracé des canalisations, local, synoptique, unifilaire", "1/100 - 1/25"),
 ]
 
 if __name__ == "__main__":

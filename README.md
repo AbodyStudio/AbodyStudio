@@ -7,7 +7,7 @@ Author: AbodyStudio Limited - https://abodystudio.com/ - Support@abodystudio.com
 Plan set for the pool and garden at Douar Ghanem (Gharsa Foquiya), Tanger-Assilah.
 
 - `pool-garden-plan/src/model.py` - survey data, owner's dimensions, levels, quantities, estimate. Bump `VERSION` for every update.
-- `pool-garden-plan/src/sheets.py` - A3 drawing sheets PL-01 to PL-05 (SVG, Moroccan plan conventions).
+- `pool-garden-plan/src/sheets.py` - A3 drawing sheets PL-01 to PL-06 (SVG, Moroccan plan conventions).
 - `pool-garden-plan/build.py` - builds `dist/vX.Y.Z/` (HTML page, SVG sheets, photos) and `releases/*.zip`.
 
 Build: `pip install pillow && python3 pool-garden-plan/build.py` (Font Awesome SVGs expected in `$FA_DIR`, default `/tmp/fa/package/svgs`).
@@ -15,3 +15,4 @@ Build: `pip install pillow && python3 pool-garden-plan/build.py` (Font Awesome S
 | Version | Date | Notes |
 |---|---|---|
 | 1.0.0 | 02/10/2026 | First issue (indice A): 5 sheets, specification, sequence, estimate, schedule, FR/EN/AR glossary |
+| 1.1.0 | 02/10/2026 | Indice B: full French version; access stair to the pool on the left (driveway) side of the villa, at the foot of the roof stair (PL-02, detail D2 on PL-05, estimate 6.03); PL-02/03/06 drawn as seen from the pool towards the villa; new PL-06 (pipe routing, equipment room 1/25, hydraulic synoptic, single-line diagram); accent and typography fixes |

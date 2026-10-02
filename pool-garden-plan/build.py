@@ -1,7 +1,7 @@
-"""Build the pool & garden plan set: HTML page, standalone SVG sheets, zip.
+"""Construit le dossier piscine et jardins : page HTML, planches SVG, archive zip.
 
 Author: AbodyStudio Limited - https://abodystudio.com/
-Usage: python3 build.py   (bump VERSION in src/model.py for every update)
+Usage : python3 build.py   (incrémenter VERSION dans src/model.py à chaque mise à jour)
 """
 import html
 import unicodedata
@@ -38,6 +38,9 @@ SVG_CSS = """
 .dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
 .parcel{stroke:var(--parcel)}
 .pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
 .arrow{marker-end:url(#ar)}
 .fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
 .fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
@@ -57,7 +60,8 @@ SVG_CSS = """
 
 LIGHT_SVG_VARS = (":root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;"
                   "--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;"
-                  "--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00}")
+                  "--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;"
+                  "--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}")
 
 
 def icon_sprite():
@@ -79,176 +83,197 @@ def ic(n, cls="ic"):
     return f'<svg class="{cls}" aria-hidden="true"><use href="#i-{n}"/></svg>'
 
 
+NB = " "     # espace insécable
+NNB = " "    # espace fine insécable
+
+
+def fr(t):
+    """Typographie française : espaces insécables avant : ; ! ? et dans les guillemets."""
+    t = str(t)
+    for a, b in ((" :", NB + ":"), (" ;", NNB + ";"), (" !", NNB + "!"), (" ?", NNB + "?"),
+                 ("« ", "«" + NB), (" »", NB + "»"), (" %", NB + "%"), (" m²", NB + "m²"), (" m³", NB + "m³")):
+        t = t.replace(a, b)
+    return t
+
+
+def nf(x, d=2):
+    """Nombre au format français (virgule décimale)."""
+    return f"{x:.{d}f}".replace(".", ",")
+
+
 def money(x):
-    return f"{x:,.0f}".replace(",", " ")
+    return f"{x:,.0f}".replace(",", NB)
 
 
-def esc(s):
-    return html.escape(str(s), quote=False)
+def esc(t):
+    return fr(html.escape(str(t), quote=False))
 
 
 # ---------------------------------------------------------------------------
-# Content
+# Contenu (français)
 # ---------------------------------------------------------------------------
 
 def facts():
     q = Q
     rows = [
-        ("Pool (water)", f"{POOL_L:.2f} × {POOL_W:.2f} m - 50 m²"),
-        ("Water depth", f"1.20 m → 1.60 m (slope {SLOPE_PCT:.1f} %)"),
-        ("Water volume", f"≈ {q['water_vol']:.0f} m³"),
-        ("Filtration", f"{q['flow']:.0f} m³/h - turnover {q['turnover_h']} h"),
-        ("Structure", f"RC B25, {q['c_total']:.1f} m³ - steel ≈ {q['steel']:.0f} kg"),
-        ("Parcel", f"{PROJECT['surface']} m² - Lambert Nord Maroc"),
+        ("Bassin (plan d'eau)", f"{nf(POOL_L)} × {nf(POOL_W)} m - 50 m²"),
+        ("Profondeur d'eau", f"1,20 m → 1,60 m (pente {nf(SLOPE_PCT, 1)} %)"),
+        ("Volume d'eau", f"≈ {q['water_vol']:.0f} m³"),
+        ("Filtration", f"{q['flow']:.0f} m³/h - recyclage 4{NB}h{NB}30"),
+        ("Structure", f"Béton armé B25, {nf(q['c_total'], 1)} m³ - acier ≈ {money(round(q['steel'], -1))} kg"),
+        ("Terrain", f"{money(PROJECT['surface'])} m² - Lambert Nord Maroc"),
     ]
-    return "".join(f"<div><dt>{a}</dt><dd>{b}</dd></div>" for a, b in rows)
+    return "".join(f"<div><dt>{esc(a)}</dt><dd>{esc(b)}</dd></div>" for a, b in rows)
 
 
 def fit_rows():
-    q = Q
     sb = u_drive(STAIR["v0"]) - STAIR["u1"]
     sf = u_drive(HOUSE["v1"]) - STAIR["u1"]
+    ch = NW_GARDEN_EDGE - u_nw(POOL["v0"])
     rows = [
-        ("Facade → pool", "2.00 garden + 2.50 loungers + 0.50 walkway", f"{POOL['v0'] - HOUSE['v1']:.2f} m", "As given"),
-        ("Pool vs facade", "10 m pool facing the 12 m facade", "1.00 m set-in each end", "As given"),
-        ("Pool width", "5 m", "5.00 m", "As given"),
-        ("Behind the house", "3 m garden", f"≥ 3.00 m to the road boundary", "As given"),
-        ("Driveway side", "1–1.5 m garden + 3 m road", f"{sb:.2f} → {sf:.2f} m strip + 3.00 m driveway", "Strip tapers: the SE fence is not parallel to the house"),
-        ("Other side of the pool", "8 m garden + chickens", f"8.00 m garden + {NW_GARDEN_EDGE - u_nw(POOL['v0']):.2f} m chicken run", "Chicken run takes the remaining width"),
-        ("Beyond the pool", "-", f"{52.55 - POOL['v1']:.2f} m to the NE boundary", "Existing orchard kept"),
+        ("Façade → bassin", "2 m de jardin + 2,5 m de transats + 0,5 m de margelle", f"{nf(POOL['v0'] - HOUSE['v1'])} m", "Respecté"),
+        ("Bassin / façade", "bassin de 10 m face à la façade de 12 m", "retrait de 1,00 m de chaque côté", "Respecté"),
+        ("Largeur du bassin", "5 m", "5,00 m", "Respecté"),
+        ("Arrière de la villa", "jardin de 3 m", "≥ 3,00 m jusqu'à la limite côté chemin", "Respecté"),
+        ("Côté allée", "jardin de 1 à 1,5 m + route de 3 m", f"bande de {nf(sb)} à {nf(sf)} m + allée de 3,00 m", "La bande s'élargit vers l'avant : la clôture SE n'est pas parallèle à la villa"),
+        ("Autre côté du bassin", "jardin de 8 m + poules", f"jardin de 8,00 m + parc à poules de {nf(ch)} m", "Le parc à poules prend la largeur restante"),
+        ("Escalier vers la piscine", "escalier sur le côté gauche de la villa", "palier ±0,00 + 5 marches, largeur 1,40 m", "Ajouté en v1.1.0, au pied de l'escalier du toit-terrasse"),
+        ("Au-delà du bassin", "-", f"{nf(52.55 - POOL['v1'])} m jusqu'à la limite NE", "Verger existant conservé"),
     ]
-    return "".join(f"<tr><th>{a}</th><td>{b}</td><td class='num'>{c}</td><td>{d}</td></tr>" for a, b, c, d in rows)
+    return "".join(f"<tr><th>{esc(a)}</th><td>{esc(b)}</td><td class='num'>{esc(c)}</td><td>{esc(d)}</td></tr>" for a, b, c, d in rows)
 
 
 SPECS = [
-    ("trowel-bricks", "Lot 1 - Earthworks", [
-        "Strip 20 cm of topsoil and stockpile it for the new beds and lawn.",
-        f"Excavate {Q['exc_base']:.0f} m² at the base, {Q['exc_depth_avg']:.2f} m average depth ({Q['exc_depth_max']:.2f} m at the deep end), with 1:2 batters. The red clay must not stand vertical above 1.30 m.",
-        "Keep the excavation dry: a sump in the deep corner and a small pump on site from October to April.",
-        "Compact the formation, then lay the 20 cm stone hérisson and 8 cm of blinding concrete.",
-        "Backfill only after the water test, with the pool full. Use a 40 cm band of 15/25 gravel against the walls, then selected site material compacted in 20 cm layers.",
+    ("trowel-bricks", "Lot 1 - Terrassements", [
+        "Décaper 20 cm de terre végétale et la stocker pour les massifs et la pelouse.",
+        f"Fouille de {Q['exc_base']:.0f} m² en fond, profondeur moyenne {nf(Q['exc_depth_avg'])} m ({nf(Q['exc_depth_max'])} m au grand fond), talus à 1/2. L'argile rouge ne doit jamais rester verticale au-delà de 1,30 m.",
+        "Garder la fouille sèche : un puisard dans l'angle du grand fond et une pompe d'épuisement sur le chantier d'octobre à avril.",
+        "Compacter le fond de forme, puis poser le hérisson de pierres de 20 cm et le béton de propreté de 8 cm.",
+        "Remblayer seulement après l'essai d'étanchéité, bassin plein : bande de 40 cm de gravier 15/25 contre les voiles, puis matériaux sélectionnés du site compactés par couches de 20 cm.",
     ]),
-    ("helmet-safety", "Lot 2 - Reinforced concrete", [
-        "B25 concrete at 350 kg/m³ of CPJ 45, water/cement ratio ≤ 0.50, with a waterproofing admixture. Vibrate with a poker. No added water on site.",
-        "Pour the floor slab (20 cm, two layers of HA10 at 15 cm) in one go, with the L-shaped HA12 wall bars and both main drains already in place.",
-        "Fix a swelling waterstop on the slab before the walls. Walls are 20 cm with HA12 at 15 vertical and HA10 at 20 horizontal, both faces, and a 20 × 25 ring beam.",
-        "Set all fittings (skimmers, returns, vacuum point, light niches) in the formwork before pouring. Never core-drill afterwards.",
-        "Cure wet for 7 days minimum (hessian and watering, twice a day in sun or wind). Wait 21–28 days before rendering.",
+    ("helmet-safety", "Lot 2 - Béton armé", [
+        "Béton B25 dosé à 350 kg/m³ de CPJ 45, E/C ≤ 0,50, avec hydrofuge de masse. Vibration à l'aiguille. Aucun ajout d'eau sur le chantier.",
+        "Couler le radier (20 cm, 2 nappes HA10 e=15) en une seule fois, avec les aciers en L des voiles et les deux bondes de fond déjà en place.",
+        "Coller le joint hydrogonflant sur le radier avant les voiles. Voiles de 20 cm : HA12 e=15 verticaux et HA10 e=20 horizontaux sur les deux faces, chaînage 20 × 25.",
+        "Placer toutes les pièces à sceller (skimmers, buses, prise balai, niches des projecteurs) dans le coffrage avant le coulage. Aucun carottage après coup.",
+        "Cure humide de 7 jours minimum (toile de jute arrosée deux fois par jour au soleil ou au vent). Attendre 21 à 28 jours avant les enduits.",
     ]),
-    ("water", "Lot 3 - Waterproofing and finishes", [
-        "Spatterdash, then a two-coat waterproof render (15–20 mm), with 5 × 5 cm fillets at every internal corner.",
-        "Apply two coats of flexible two-component cementitious membrane, with reinforcing tape at the corners and sealing collars on every fitting.",
-        "Water test: fill the pool for 7 days and log the level each morning. Keep a bucket of water on the steps to separate evaporation from leaks.",
-        "Lay 25 × 25 mm glass mosaic with C2TE S1 adhesive and epoxy grout. Use a darker band at the waterline and mark the depths 1.20 / 1.60.",
-        "Coping: 50 × 50 cast stone with a bullnose edge and a 3 cm overhang, laid on mortar. Leave a joint between the coping and the deck.",
+    ("water", "Lot 3 - Étanchéité et revêtements", [
+        "Gobetis, puis enduit hydrofuge en deux couches (15 à 20 mm), gorges de 5 × 5 cm à tous les angles rentrants.",
+        "Deux couches de ciment flexible bi-composant, avec bandes d'armature aux angles et colliers d'étanchéité sur chaque pièce à sceller.",
+        "Essai d'étanchéité : remplir le bassin 7 jours et relever le niveau chaque matin. Un seau d'eau posé sur les marches permet de distinguer l'évaporation d'une fuite.",
+        "Mosaïque pâte de verre 25 × 25 mm, colle C2TE S1 et joint époxy. Frise plus foncée à la ligne d'eau, marquage des profondeurs 1,20 et 1,60.",
+        "Margelles 50 × 50 en pierre reconstituée, nez arrondi, débord de 3 cm, posées au mortier. Joint souple entre margelles et plage.",
     ]),
-    ("seedling", "Lot 6 - Garden around the pool", [
-        "Planted strip (2.00 m) against the facade, with 5 steps of 15 cm from the house door down to the deck. Lavender, rosemary, agapanthus and gaura on drip irrigation.",
-        "Slot drain at the foot of the strip, so rain from the house side never runs into the pool. Route the roof downpipes to the soakaway, not to the deck.",
-        "Sun-lounger deck (2.50 m), R11 anti-slip porcelain 60 × 60 on a 10 cm RC base, falling 1.5 % away from the pool.",
-        "SE side garden with an outdoor shower near the steps, and a cypress hedge plus bollard lights along the driveway, as in the render.",
-        "NW side: 8.00 m lawn with the equipment room, then the fenced chicken run (1.50 m mesh) along the boundary.",
+    ("seedling", "Lot 6 - Jardins autour du bassin", [
+        "Escalier d'accès à la piscine sur le côté gauche de la villa (côté allée) : palier à ±0,00 relié au pied de l'escalier du toit-terrasse, puis 5 marches de 15 × 30 cm, largeur 1,40 m, jusqu'à la plage à −0,75, avec main courante. Il arrive face aux marches du bassin.",
+        "Jardinière de 2,00 m sur le reste de la façade : lavande, romarin, agapanthe et gaura en goutte-à-goutte.",
+        "Caniveau à grille au pied de la jardinière : l'eau de pluie venant de la villa ne doit jamais couler vers le bassin. Raccorder les descentes d'eaux pluviales du toit au puits perdu, jamais sur la plage.",
+        "Plage solarium de 2,50 m en grès cérame antidérapant R11 60 × 60 sur forme en béton armé de 10 cm, pente de 1,5 % vers le caniveau.",
+        "Jardin latéral SE avec douche extérieure près de l'escalier du bassin, haie de cyprès et bornes lumineuses le long de l'allée, comme sur l'image de synthèse.",
+        "Côté NO : pelouse de 8,00 m avec le local technique, puis le parc à poules grillagé (h 1,50 m) le long de la limite.",
     ]),
 ]
 
 HYD = [
-    ("Pump", "15 m³/h at 10 m head, variable speed, 230 V"),
-    ("Sand filter", f"Ø 750 mm, 6-way valve - filtration rate {Q['filter_rate']:.0f} m/h (≤ 50)"),
-    ("Suction", "2 skimmers + 2 main drains (1 line) + vacuum point → 4 separate Ø50 lines to the manifold, each with a valve"),
-    ("Return", "Ø63 main → Ø50 branches → 4 return inlets aimed towards the skimmers"),
-    ("Pipes", "PVC pressure PN16, glued. Pressure test 24 h before backfill, no drop allowed"),
-    ("Equipment room", f"2.40 × 2.00 m outside, semi-buried. Pump below water level ({LV['water']:+.2f}) for flooded suction. Floor drain and ventilation"),
-    ("Backwash / overflow", "To the soakaway (Ø1.20 × 2.50 m) in the orchard. If you choose a salt system, never send backwash to the citrus trees"),
-    ("Treatment", "Chlorine to start; salt chlorinator 80 m³ + pH control as an option"),
+    ("Pompe", "15 m³/h à 10 mCE, vitesse variable, 230 V"),
+    ("Filtre à sable", f"Ø 750 mm, vanne 6 voies - vitesse de filtration {Q['filter_rate']:.0f} m/h (≤ 50)"),
+    ("Aspiration", "2 skimmers + 2 bondes de fond (1 ligne) + prise balai : 4 lignes Ø50 indépendantes jusqu'à la nourrice, chacune avec sa vanne"),
+    ("Refoulement", "Boucle Ø63, piquages Ø50 vers 4 buses orientées vers les skimmers"),
+    ("Canalisations", "PVC pression PN16 collé. Essai de pression 24 h avant remblai, aucune chute de pression admise"),
+    ("Local technique", f"2,40 × 2,00 m hors œuvre, semi-enterré. Pompe sous le plan d'eau ({nf(LV['water'])}) : aspiration en charge. Siphon de sol et ventilation"),
+    ("Contre-lavage", "Vers le puits perdu (Ø 1,20 × 2,50 m) dans le verger. Avec un électrolyseur au sel, ne jamais envoyer cette eau vers les agrumes"),
+    ("Traitement", "Chlore au démarrage ; électrolyseur au sel 80 m³ + régulation du pH en option"),
 ]
 ELEC = [
-    ("Supply", "From the house main panel: U1000 R2V 3G6 mm² cable in red TPC Ø63 duct, 60 cm deep, warning mesh above"),
-    ("Pool panel", "Main switch, 30 mA type A RCD, breakers for pump (16 A), lights (10 A), chlorinator and socket, contactor, timer, surge arrester"),
-    ("Lights", "3 × LED 12 V 30 W, fed by a 300 VA safety transformer inside the equipment room"),
-    ("Safety zones", "Equipment room and transformer 3.55 m from the water (outside zones 0, 1 and 2 of IEC 60364-7-702)"),
-    ("Bonding", "Pool reinforcement, ladder and metal parts bonded together and to the earth rod"),
+    ("Alimentation", "Depuis le TGBT de la villa : câble U1000 R2V 3G6 mm² sous gaine TPC rouge Ø63 à 60 cm de profondeur, grillage avertisseur au-dessus"),
+    ("Coffret piscine", "Interrupteur général, DDR 30 mA type A, disjoncteurs pompe (16 A), éclairage (10 A), électrolyseur et prise, contacteur, horloge, parafoudre"),
+    ("Éclairage", "3 projecteurs LED 12 V 30 W, alimentés par un transformateur de sécurité 300 VA placé dans le local technique"),
+    ("Volumes de sécurité", "Local et transformateur à 3,55 m de l'eau, hors volumes 0, 1 et 2 (NF C 15-100 / CEI 60364-7-702)"),
+    ("Liaison équipotentielle", "Ferraillage du bassin, échelle et pièces métalliques reliés entre eux et au piquet de terre"),
 ]
 
 SEQ = [
-    ("Prepare", "Topographer surveys the existing house corners and levels, and stakes out the pool from the facade. Check with the Commune Sahel Chamali whether a permit is needed. Let the Intex chlorine fade for 3–4 days, then empty it into the orchard."),
-    ("Excavate", "Strip topsoil, excavate with batters, dig the sump. Inspect the formation; soft pockets are dug out and filled with stone."),
-    ("Base", "Hérisson, blinding, perimeter drain bedding."),
-    ("Slab", "Rebar, main drains, L-bars for the walls. <b>Hold point:</b> inspect the rebar before pouring. Pour, vibrate, cure."),
-    ("Walls", "Waterstop, wall rebar, fittings, formwork, pour walls and ring beam. Build the equipment room shell at the same time."),
-    ("Pipework", "Lay all lines to the equipment room. <b>Hold point:</b> 24 h pressure test before anything is covered."),
-    ("Cure", "21–28 days of curing. Meanwhile: electrical duct, soakaway, garden steps."),
-    ("Waterproof", "Render, fillets, flexible membrane. <b>Hold point:</b> 7-day water test, then backfill while the pool is full."),
-    ("Finish", "Drain the test water to the orchard. Lay the mosaic and epoxy grout, coping, deck, slot drain."),
-    ("Equip", "Pump, filter, panel, lights, ladder. Electrician checks the RCD trip and the bonding."),
-    ("Garden", "Planted strip, lawn, hedge, lights, chicken-run fence, safety fence or cover."),
-    ("Fill and start", "Fill by water tanker, start filtration, balance the water, owner handover."),
+    ("Préparation", "Le topographe relève les angles de la villa et les niveaux, puis implante le bassin à partir de la façade. Se renseigner auprès de la Commune Sahel Chamali sur l'autorisation nécessaire. Laisser le chlore de la piscine Intex se dissiper 3 à 4 jours, puis la vider dans le verger."),
+    ("Terrassement", "Décapage, fouille talutée, puisard. Contrôle du fond de forme : les poches molles sont purgées et remplacées par de la pierre."),
+    ("Fondation", "Hérisson, béton de propreté, lit de pose du drain périphérique."),
+    ("Radier", "Ferraillage, bondes de fond, aciers en L des voiles. <b>Point d'arrêt :</b> réception du ferraillage avant coulage. Coulage, vibration, cure."),
+    ("Voiles", "Joint hydrogonflant, ferraillage, pièces à sceller, coffrage, coulage des voiles et du chaînage. Gros œuvre du local technique en parallèle."),
+    ("Canalisations", "Pose de toutes les lignes jusqu'au local technique. <b>Point d'arrêt :</b> essai de pression 24 h avant de recouvrir."),
+    ("Cure", "21 à 28 jours. Pendant ce temps : gaine électrique, puits perdu, escalier d'accès à la piscine côté gauche."),
+    ("Étanchéité", "Enduit, gorges, membrane flexible. <b>Point d'arrêt :</b> essai d'étanchéité de 7 jours, puis remblai bassin plein."),
+    ("Finitions", "Vider l'eau d'essai dans le verger. Mosaïque et joint époxy, margelles, plage, caniveau."),
+    ("Équipements", "Pompe, filtre, coffret, projecteurs, échelle. L'électricien contrôle le déclenchement du DDR et la liaison équipotentielle."),
+    ("Jardins", "Jardinière, pelouse, haie, éclairage, clôture du poulailler, clôture ou couverture de sécurité."),
+    ("Mise en eau", "Remplissage par camion-citerne, mise en route de la filtration, équilibrage de l'eau, remise des clés au propriétaire."),
 ]
 
 GANTT = [
-    ("Preparation and set-out", 1, 1), ("Remove the Intex pool", 1, 1), ("Excavation and base", 2, 1.5),
-    ("Floor slab", 3, 1), ("Walls and ring beam", 4, 1.5), ("Equipment room", 4, 2), ("Pipework and pressure test", 5, 1.5),
-    ("Concrete curing", 5, 3.5), ("Render and membrane", 9, 1), ("Water test and backfill", 10, 1),
-    ("Mosaic and coping", 11, 2), ("Deck, slot drain, steps", 12, 1.5), ("Electrical and equipment", 11, 2.5),
-    ("Garden, lawn, fences", 13, 2), ("Fill and start-up", 14, 1),
+    ("Préparation et implantation", 1, 1), ("Dépose de la piscine Intex", 1, 1), ("Terrassement et fondation", 2, 1.5),
+    ("Radier", 3, 1), ("Voiles et chaînage", 4, 1.5), ("Local technique", 4, 2), ("Canalisations et essai de pression", 5, 1.5),
+    ("Cure du béton", 5, 3.5), ("Enduit et membrane", 9, 1), ("Essai d'étanchéité et remblai", 10, 1),
+    ("Mosaïque et margelles", 11, 2), ("Plage, caniveau, escalier d'accès", 12, 1.5), ("Électricité et équipements", 11, 2.5),
+    ("Jardins, pelouse, clôtures", 13, 2), ("Mise en eau et mise en service", 14, 1),
 ]
 
 GLOSS = [
-    ("Piscine / bassin", "Swimming pool", "مسبح / حوض السباحة"),
-    ("Radier", "Floor slab", "بلاطة القاعدة"),
-    ("Voile", "Concrete wall", "جدار خرساني مسلح"),
-    ("Chaînage", "Ring beam", "حزام خرساني"),
-    ("Béton armé", "Reinforced concrete", "خرسانة مسلحة"),
-    ("Béton de propreté", "Blinding concrete", "خرسانة النظافة"),
-    ("Hérisson", "Stone sub-base", "طبقة الحجر المرصوص"),
-    ("Fer HA / acier", "Rebar", "حديد التسليح"),
-    ("Enrobage", "Concrete cover", "الغطاء الخرساني"),
-    ("Joint hydrogonflant", "Swelling waterstop", "شريط منع التسرب"),
-    ("Enduit hydrofuge", "Waterproof render", "تلبيس مقاوم للماء"),
-    ("Étanchéité", "Waterproofing", "العزل المائي"),
-    ("Mosaïque pâte de verre", "Glass mosaic", "فسيفساء زجاجية"),
-    ("Margelle", "Coping", "حافة المسبح"),
-    ("Plage", "Pool deck", "الممشى حول المسبح"),
-    ("Skimmer", "Skimmer", "كاشطة سطحية (سكيمر)"),
-    ("Bonde de fond", "Main drain", "مصرف القاع"),
-    ("Buse de refoulement", "Return inlet", "فوهة الإرجاع"),
-    ("Prise balai", "Vacuum point", "مأخذ المكنسة"),
-    ("Projecteur", "Underwater light", "كشاف إنارة تحت الماء"),
-    ("Local technique", "Equipment room", "الغرفة التقنية"),
-    ("Filtre à sable", "Sand filter", "فلتر رملي"),
-    ("Disjoncteur différentiel 30 mA", "30 mA RCD", "قاطع تفاضلي 30 ميلي أمبير"),
-    ("Liaison équipotentielle", "Equipotential bonding", "ربط تساوي الجهد"),
-    ("Drain périphérique", "Perimeter drain", "مصرف محيطي"),
-    ("Puits perdu", "Soakaway", "بئر التصريف"),
-    ("Caniveau", "Slot drain", "قناة تصريف"),
-    ("Remblai", "Backfill", "الردم"),
-    ("Terrain naturel (TN)", "Natural ground", "سطح الأرض الطبيعي"),
-    ("Poulailler", "Chicken coop", "خمّ الدجاج"),
+    ("Piscine / bassin", "مسبح / حوض السباحة"),
+    ("Radier", "بلاطة القاعدة"),
+    ("Voile", "جدار خرساني مسلح"),
+    ("Chaînage", "حزام خرساني"),
+    ("Béton armé", "خرسانة مسلحة"),
+    ("Béton de propreté", "خرسانة النظافة"),
+    ("Hérisson", "طبقة الحجر المرصوص"),
+    ("Fer HA / acier", "حديد التسليح"),
+    ("Enrobage", "الغطاء الخرساني"),
+    ("Joint hydrogonflant", "شريط منع التسرب"),
+    ("Enduit hydrofuge", "تلبيس مقاوم للماء"),
+    ("Étanchéité", "العزل المائي"),
+    ("Mosaïque pâte de verre", "فسيفساء زجاجية"),
+    ("Margelle", "حافة المسبح"),
+    ("Plage", "الممشى حول المسبح"),
+    ("Skimmer", "كاشطة سطحية (سكيمر)"),
+    ("Bonde de fond", "مصرف القاع"),
+    ("Buse de refoulement", "فوهة الإرجاع"),
+    ("Prise balai", "مأخذ المكنسة"),
+    ("Projecteur", "كشاف إنارة تحت الماء"),
+    ("Local technique", "الغرفة التقنية"),
+    ("Filtre à sable", "فلتر رملي"),
+    ("Nourrice (collecteur)", "مجمّع الأنابيب"),
+    ("Disjoncteur différentiel 30 mA", "قاطع تفاضلي 30 ميلي أمبير"),
+    ("Liaison équipotentielle", "ربط تساوي الجهد"),
+    ("Drain périphérique", "مصرف محيطي"),
+    ("Puits perdu", "بئر التصريف"),
+    ("Caniveau", "قناة تصريف"),
+    ("Remblai", "الردم"),
+    ("Terrain naturel (TN)", "سطح الأرض الطبيعي"),
+    ("Poulailler", "خمّ الدجاج"),
 ]
 
 VERIFY = [
-    "House depth (assumed 10.00 m), position of the roof stair, and the exact door position. The deck steps are set on the door.",
-    "Ground levels: house floor ±0.00, natural ground at the pool (assumed −0.80), and the fall towards the orchard. A topographer's level survey fixes all of these in one visit.",
-    "Soil: dig one trial pit 2.5 m deep where the deep end goes, after a rainy day. Water in the pit means the drain and relief valve are essential, and the BET may thicken the slab.",
-    "Where the house electrical panel is, and whether its supply can take the pump plus an optional heat pump.",
-    "Water source for filling (≈ 67 m³ twice): tanker trips or the well.",
-    "Permit: check with the Commune Sahel Chamali / Agence Urbaine de Tanger before excavation.",
+    "Profondeur de la villa (supposée 10,00 m), position exacte de l'escalier du toit-terrasse et de la porte d'entrée : l'escalier d'accès à la piscine se cale sur le pied de l'escalier du toit.",
+    "Niveaux : sol fini de la villa ±0,00, terrain naturel au droit du bassin (supposé −0,80) et pente vers le verger. Un relevé topographique fixe tout cela en une seule visite.",
+    "Sol : creuser un sondage de 2,50 m à l'emplacement du grand fond, après une journée de pluie. Si l'eau entre dans le sondage, le drain et le clapet deviennent indispensables et le BET peut épaissir le radier.",
+    "Emplacement du TGBT de la villa et puissance disponible pour la pompe et une éventuelle pompe à chaleur.",
+    "Eau de remplissage (≈ 67 m³, deux fois) : camions-citernes ou puits.",
+    "Autorisation : se renseigner auprès de la Commune Sahel Chamali et de l'Agence urbaine de Tanger avant le terrassement.",
 ]
 
 
 def dqe_html():
     lots, opt = dqe()
     out = []
-    for code, fr, en, items in lots + [opt]:
+    for code, lot_fr, _en, items in lots + [opt]:
         cls = " opt" if code == "O" else ""
         out.append(f'<tbody class="lot{cls}" data-lot="{code}"><tr class="lot-h"><th colspan="6">'
-                   f'<span class="lot-n">{"Options" if code == "O" else "Lot " + code}</span> {esc(fr)} <span class="en">{esc(en)}</span></th></tr>')
-        for n, dfr, den, unit, qty, pu in items:
+                   f'<span class="lot-n">{"Options" if code == "O" else "Lot " + code}</span> {esc(lot_fr)}</th></tr>')
+        for n, dfr, _den, unit, qty, pu in items:
             out.append(
-                f'<tr data-q="{qty}"><td class="mono">{n}</td><td>{esc(dfr)}<span class="en">{esc(den)}</span></td>'
-                f'<td class="c">{unit}</td><td class="num">{qty:g}</td>'
+                f'<tr data-q="{qty}"><td class="mono">{n}</td><td>{esc(dfr)}</td>'
+                f'<td class="c">{unit}</td><td class="num">{esc(nf(qty, 1) if qty % 1 else money(qty))}</td>'
                 f'<td class="num"><input id="pu-{n}" class="pu" type="number" min="0" step="10" value="{pu}" aria-label="Prix unitaire {n}"></td>'
                 f'<td class="num amt">{money(qty * pu)}</td></tr>')
-        out.append(f'<tr class="sub"><td colspan="5">{"Total options (not included)" if code == "O" else "Sous-total lot " + code}</td><td class="num sub-v">0</td></tr></tbody>')
+        out.append(f'<tr class="sub"><td colspan="5">{"Total des options (non compris)" if code == "O" else "Sous-total lot " + code}</td><td class="num sub-v">0</td></tr></tbody>')
     return "".join(out)
 
 
@@ -266,10 +291,10 @@ def gantt_html():
 
 def sheet_figs(sheet_objs):
     out = []
-    for (num, fr, en, sc), obj in zip(SHEETS, sheet_objs):
+    for (num, title, sub, sc), obj in zip(SHEETS, sheet_objs):
         out.append(f'''<figure class="plan" id="{num.lower()}">
-<figcaption><span class="pl-n mono">{num}</span><span class="pl-t">{esc(fr)}<small>{esc(en)} - {sc}</small></span>
-<button type="button" class="zoom" aria-pressed="false" aria-label="Enlarge {num}">{ic("expand")}<span>Enlarge</span></button></figcaption>
+<figcaption><span class="pl-n mono">{num}</span><span class="pl-t">{esc(title)}<small>{esc(sub)} - éch. {sc}</small></span>
+<button type="button" class="zoom" aria-pressed="false" aria-label="Agrandir {num}">{ic("expand")}<span>Agrandir</span></button></figcaption>
 <div class="plan-scroll">{obj.svg(obj.title)}</div></figure>''')
     return "".join(out)
 
@@ -278,29 +303,30 @@ def page(sheet_objs):
     lots, opt = dqe()
     total = sum(i[4] * i[5] for _, _, _, items in lots for i in items)
     photos = [
-        ("site-aerial-from-roof.webp", "Today, from the roof", "Intex pool on a levelled pad. Orchard and chicken area to the NW, gravel driveway along the black SE fence, open orchard beyond."),
-        ("site-from-driveway.webp", "Today, from the driveway", "Existing villa with the roof stair on the driveway side and the old filter box. The new equipment room goes on the NW side."),
-        ("site-terrace-and-pool.webp", "Front of the villa", "Raised front platform and stone wall, rebar starters for a future upper floor. The planted strip and deck steps replace this zone."),
-        ("concept-render.webp", "Target ambience (render)", "Beige coping and deck, loungers facing the pool, lit driveway with cypress hedge. The plan follows your dimensions, not the render's proportions."),
+        ("site-aerial-from-roof.webp", "Aujourd'hui, vue du toit-terrasse", "Piscine Intex sur une plateforme nivelée. Verger et poulailler côté NO, allée en gravier le long de la clôture noire côté SE, verger ouvert au-delà."),
+        ("site-from-driveway.webp", "Aujourd'hui, vue de l'allée", "Villa existante avec l'escalier extérieur côté allée et l'ancien coffret de filtration. Le nouveau local technique se place côté NO."),
+        ("site-terrace-and-pool.webp", "Façade de la villa", "Plateforme surélevée et mur en moellons, attentes de poteaux pour un futur étage. La jardinière et l'escalier vers la plage remplacent cette zone."),
+        ("concept-render.webp", "Ambiance visée (image de synthèse)", "Margelles et plage beiges, transats face au bassin, allée éclairée bordée de cyprès. Le plan suit vos cotes, pas les proportions de l'image."),
     ]
     ph = "".join(f'<figure class="ph"><img src="img/{f}" alt="{esc(t)}" loading="lazy" width="1400" height="1050"><figcaption><b>{esc(t)}</b>{esc(d)}</figcaption></figure>' for f, t, d in photos)
     specs = "".join(f'<section class="spec"><h3>{ic(i)}{esc(t)}</h3><ul>' + "".join(f"<li>{esc(x)}</li>" for x in items) + "</ul></section>" for i, t, items in SPECS)
-    hyd = "".join(f"<tr><th>{a}</th><td>{esc(b)}</td></tr>" for a, b in HYD)
-    ele = "".join(f"<tr><th>{a}</th><td>{esc(b)}</td></tr>" for a, b in ELEC)
-    seq = "".join(f"<li><b>{a}.</b> {b}</li>" for a, b in SEQ)
-    gl = "".join(f'<tr><td>{esc(a)}</td><td>{esc(b)}</td><td class="ar" lang="ar" dir="rtl">{c}</td></tr>' for a, b, c in GLOSS)
+    hyd = "".join(f"<tr><th>{esc(a)}</th><td>{esc(b)}</td></tr>" for a, b in HYD)
+    ele = "".join(f"<tr><th>{esc(a)}</th><td>{esc(b)}</td></tr>" for a, b in ELEC)
+    seq = "".join(f"<li><b>{esc(a)}.</b> {fr(b)}</li>" for a, b in SEQ)
+    gl = "".join(f'<tr><td>{esc(a)}</td><td class="ar" lang="ar" dir="rtl">{c}</td></tr>' for a, c in GLOSS)
     ver = "".join(f"<li>{esc(v)}</li>" for v in VERIFY)
-    idx = "".join(f'<li><a href="#{n.lower()}"><span class="mono">{n}</span> {esc(fr)}</a></li>' for n, fr, en, sc in SHEETS)
-    return f"""<title>Gharsa Foquiya Pool &amp; Garden</title>
-<meta name="description" content="Plan set for the pool and garden at Douar Ghanem, Tanger-Assilah - AbodyStudio Limited, v{VERSION}">
+    nav_sheets = "".join(f'<li class="sub"><a href="#{n.lower()}"><span class="mono">{n}</span> {esc(t)}</a></li>' for n, t, sub, sc in SHEETS)
+    return f"""<title>Piscine et jardins Gharsa Foquiya</title>
+<meta name="description" content="Dossier d'exécution de la piscine et des jardins, Douar Ghanem, Tanger-Assilah - AbodyStudio Limited, v{VERSION}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Archivo+Narrow:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Cairo:wght@400;600&display=swap">
 <style>
-/* Layout: a bound plan set - sheet index on the left, the dossier in one reading column, drawings full width. */
+/* Mise en page : un dossier relié - sommaire à gauche, une colonne de lecture, planches en pleine largeur. */
 :root{{
   --paper:#eef2f3; --sheet:#ffffff; --ink:#14212b; --ink-2:#5b6b76; --rule:#cfd8dd; --head:#e8eef2;
   --new:#c8372d; --parcel:#c8372d; --water:#1683a8; --water-f:#cdebf5; --light-f:#fff2b8; --paved-f:#eceff1;
   --chick-f:#f6efe2; --tree-f:#e3efd9; --green:#4f7f35; --hatch:#7d8b95; --demo:#d9a400; --demo-ink:#8a6a00;
+  --p-s:#1683a8; --p-r:#1b8a5a; --p-e:#8a5a2b; --p-el:#7b3fb0;
   --accent:#c8372d; --chip:#ffffff;
   --f-disp:"Archivo","Arial",sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace; --f-ar:"Cairo",sans-serif;
 }}
@@ -308,11 +334,13 @@ def page(sheet_objs):
   --paper:#0a131a; --sheet:#0f1e29; --ink:#dbe6ee; --ink-2:#93a7b4; --rule:#26394a; --head:#16293a;
   --new:#ff7a6b; --parcel:#ff7a6b; --water:#5cc8e8; --water-f:#123a4e; --light-f:#4a4220; --paved-f:#172836;
   --chick-f:#2a2418; --tree-f:#1a2e1c; --green:#8dbb63; --hatch:#5f7685; --demo:#f2c94c; --demo-ink:#f2c94c;
+  --p-s:#5cc8e8; --p-r:#5fd39a; --p-e:#d7a26a; --p-el:#c59bf0;
   --accent:#ff7a6b; --chip:#132430; color-scheme:dark}}}}
 :root[data-theme="dark"]{{
   --paper:#0a131a; --sheet:#0f1e29; --ink:#dbe6ee; --ink-2:#93a7b4; --rule:#26394a; --head:#16293a;
   --new:#ff7a6b; --parcel:#ff7a6b; --water:#5cc8e8; --water-f:#123a4e; --light-f:#4a4220; --paved-f:#172836;
   --chick-f:#2a2418; --tree-f:#1a2e1c; --green:#8dbb63; --hatch:#5f7685; --demo:#f2c94c; --demo-ink:#f2c94c;
+  --p-s:#5cc8e8; --p-r:#5fd39a; --p-e:#d7a26a; --p-el:#c59bf0;
   --accent:#ff7a6b; --chip:#132430; color-scheme:dark}}
 *{{box-sizing:border-box}}
 body{{background:var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);margin:0}}
@@ -325,7 +353,7 @@ h2 .sn{{font-family:var(--f-mono);font-size:.55em;color:var(--accent);font-weigh
 h3{{font-size:17px;font-weight:700;display:flex;gap:.5em;align-items:center}}
 p{{margin:0}} a{{color:inherit}}
 .ic{{width:1em;height:1em;fill:currentColor;flex:none}}
-.lead{{max-width:68ch;color:var(--ink-2);font-size:16.5px}}
+.lead{{max-width:70ch;color:var(--ink-2);font-size:16.5px}}
 .eyebrow{{font:600 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:flex;gap:.6em;align-items:center}}
 header.top{{display:grid;gap:18px;padding-bottom:22px;border-bottom:2px solid var(--ink)}}
 .meta{{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 12.5px/1.4 var(--f-mono);color:var(--ink-2)}}
@@ -334,7 +362,7 @@ header.top{{display:grid;gap:18px;padding-bottom:22px;border-bottom:2px solid va
 .facts div{{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}}
 .facts dt{{font:600 11px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}}
 .facts dd{{margin:4px 0 0;font:600 15px/1.35 var(--f-disp)}}
-.grid{{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;margin-top:34px}}
+.grid{{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;margin-top:34px}}
 nav.idx{{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;font-size:13.5px}}
 nav.idx ol{{list-style:none;margin:0;padding:0;display:grid;gap:2px}}
 nav.idx a{{display:block;padding:5px 8px;text-decoration:none;border-left:2px solid transparent;color:var(--ink-2)}}
@@ -343,8 +371,7 @@ nav.idx .sub{{padding-left:12px;font-size:12.5px}}
 main{{display:grid;gap:56px;min-width:0}}
 section.blk{{display:grid;gap:18px;min-width:0;scroll-margin-top:16px}}
 .photos{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
-@media (max-width:560px){{.photos{{grid-template-columns:1fr}}}}
-.ph{{margin:0;background:var(--sheet);border:1px solid var(--rule);display:grid;min-width:0}}
+.ph{{margin:0;background:var(--sheet);border:1px solid var(--rule);display:grid;align-content:start;min-width:0}}
 .ph img{{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}}
 .ph figcaption{{padding:10px 12px;font-size:13.5px;color:var(--ink-2);display:grid;gap:2px}}
 .ph figcaption b{{color:var(--ink);font-family:var(--f-disp)}}
@@ -352,8 +379,8 @@ section.blk{{display:grid;gap:18px;min-width:0;scroll-margin-top:16px}}
 table{{border-collapse:collapse;width:100%;font-size:14px}}
 th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}}
 thead th{{font:600 11.5px/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--head)}}
-tbody th{{font-weight:600;white-space:nowrap}}
-td.num,th.num{{text-align:right;white-space:nowrap}} td.c{{text-align:center}}
+tbody th{{font-weight:600}}
+td.num,th.num{{text-align:right;white-space:nowrap}} td.c,th.c{{text-align:center}}
 .note{{border-left:3px solid var(--accent);padding:10px 14px;background:var(--sheet);font-size:14px;display:flex;gap:10px;align-items:flex-start}}
 .note .ic{{color:var(--accent);margin-top:4px}}
 .plan{{margin:0;background:var(--sheet);border:1px solid var(--rule);min-width:0}}
@@ -365,146 +392,147 @@ td.num,th.num{{text-align:right;white-space:nowrap}} td.c{{text-align:center}}
 .plan-scroll .sheet{{min-width:760px}}
 .plan.big .plan-scroll .sheet{{min-width:1900px}}
 button{{font:inherit;color:inherit}}
-.zoom{{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--rule);background:var(--chip);padding:6px 10px;cursor:pointer;font-size:13px}}
-.zoom:hover,.zoom:focus-visible{{border-color:var(--ink);outline:none}}
+.zoom,.reset{{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--rule);background:var(--chip);padding:6px 10px;cursor:pointer;font-size:13px;white-space:nowrap}}
+.zoom:hover,.zoom:focus-visible,.reset:hover,.reset:focus-visible{{border-color:var(--ink);outline:none}}
 .specs{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}}
-.spec{{background:var(--sheet);border:1px solid var(--rule);padding:16px 18px;display:grid;gap:10px;min-width:0}}
+.spec{{background:var(--sheet);border:1px solid var(--rule);padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0}}
 .spec h3 .ic{{color:var(--accent)}}
 .spec ul{{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:14px}}
 .two{{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}}
-.two h3{{margin-bottom:8px}}
+.two > div{{min-width:0;display:grid;gap:8px;align-content:start}}
 ol.seq{{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:0;border-top:1px solid var(--rule)}}
 ol.seq li{{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:14.5px}}
 ol.seq li::before{{content:counter(s,decimal-leading-zero);font:500 13px/1.6 var(--f-mono);color:var(--accent)}}
-.dqe td{{font-size:13.5px}} .dqe .en{{display:block;color:var(--ink-2);font-size:12px}}
-.dqe .lot-h th{{background:var(--head);font:700 14px/1.3 var(--f-disp);white-space:normal}}
-.dqe .lot-h .en{{display:inline;font:400 12.5px var(--f-body)}}
+.dqe td{{font-size:13.5px}}
+.dqe .lot-h th{{background:var(--head);font:700 14px/1.3 var(--f-disp)}}
 .lot-n{{font:600 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-right:6px}}
 .dqe .sub td{{font-weight:600;text-align:right;background:var(--sheet)}}
 .dqe .opt td,.dqe .opt th{{color:var(--ink-2)}}
 .pu{{width:92px;text-align:right;font:500 13px var(--f-mono);padding:4px 6px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}}
 .pu:focus-visible{{outline:2px solid var(--accent);outline-offset:1px}}
-.totals{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1px solid var(--rule);background:var(--sheet)}}
+.totals{{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1px solid var(--rule);background:var(--sheet);margin:0}}
 .totals div{{padding:12px 14px;border-right:1px solid var(--rule)}}
 .totals dt{{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}}
 .totals dd{{margin:2px 0 0;font:800 22px/1.2 var(--f-disp);font-variant-numeric:tabular-nums}}
 .totals .ttc dd{{color:var(--accent)}}
 .row{{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}}
-.reset{{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--rule);background:var(--chip);padding:6px 10px;cursor:pointer;font-size:13px}}
 .gantt{{background:var(--sheet);border:1px solid var(--rule);padding:12px;overflow-x:auto}}
-.gantt-in{{min-width:680px;display:grid;gap:3px}}
-.g-head,.g-row{{display:grid;grid-template-columns:210px 1fr;gap:10px;align-items:center}}
+.gantt-in{{min-width:700px;display:grid;gap:3px}}
+.g-head,.g-row{{display:grid;grid-template-columns:240px 1fr;gap:10px;align-items:center}}
 .g-weeks{{display:grid;grid-template-columns:repeat(15,1fr);font:500 11px var(--f-mono);color:var(--ink-2);text-align:center}}
 .g-name{{font-size:13px}}
 .g-track{{position:relative;height:16px;background:repeating-linear-gradient(90deg,transparent 0 calc(100%/15 - 1px),var(--rule) calc(100%/15 - 1px) calc(100%/15))}}
 .g-track i{{position:absolute;top:3px;bottom:3px;background:var(--water)}}
-.gl td.ar,.ar{{font-family:var(--f-ar);font-size:15.5px;text-align:right}}
+.gl{{max-width:640px}}
+.ar{{font-family:var(--f-ar);font-size:15.5px;text-align:right}}
 ul.ver{{margin:0;padding-left:1.1em;display:grid;gap:8px;max-width:80ch}}
 footer{{margin-top:56px;padding-top:18px;border-top:2px solid var(--ink);display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13.5px;color:var(--ink-2)}}
 footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:var(--ink)}}
-@media (max-width:900px){{.grid{{grid-template-columns:1fr}} nav.idx{{position:static}} nav.idx ol{{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}}}
+@media (max-width:900px){{.grid{{grid-template-columns:minmax(0,1fr)}} nav.idx{{position:static}} nav.idx ol{{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}}}
+@media (max-width:560px){{.photos{{grid-template-columns:1fr}}}}
 @media (prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important}}}}
 {SVG_CSS}
 </style>
 {icon_sprite()}
 <div class="wrap">
 <header class="top">
-  <p class="eyebrow">{ic("compass-drafting")} Dossier d'exécution - Indice {INDICE} - v{VERSION}</p>
-  <h1>Pool and garden plan set, Gharsa Foquiya</h1>
-  <p class="lead">A 10 × 5 m reinforced-concrete pool, set 5.00 m in front of your existing villa and centred on its 12 m facade, with the gardens around it. The drawings follow Moroccan practice (French labels, title block, levels from ±0.00 at the ground floor). The explanations are in English.</p>
-  <p class="meta"><span>{PROJECT['lieu']}, {PROJECT['commune']}, {PROJECT['province']}</span><span>Date <b>{DATE}</b></span><span>Author <b>{AUTHOR['name']}</b></span></p>
+  <p class="eyebrow">{ic("compass-drafting")} Dossier d'exécution - indice {INDICE} - v{VERSION}</p>
+  <h1>Piscine et jardins, terrain Gharsa Foquiya</h1>
+  <p class="lead">{fr("Bassin en béton armé de 10 × 5 m, implanté à 5,00 m devant la villa existante et centré sur sa façade de 12 m, avec l'aménagement des jardins autour. Plans établis selon l'usage marocain : cartouche, cotes en mètres, niveaux rapportés au ±0,00 du sol fini du rez-de-chaussée.")}</p>
+  <p class="meta"><span>{PROJECT['lieu']}, {PROJECT['commune']}, {PROJECT['province']}</span><span>Date <b>{DATE}</b></span><span>Conception <b>{AUTHOR['name']}</b></span></p>
   <dl class="facts">{facts()}</dl>
 </header>
 <div class="grid">
-<nav class="idx" aria-label="Contents"><ol>
-  <li><a href="#site">Site and existing</a></li>
-  <li><a href="#fit">Your dimensions on the survey</a></li>
-  <li><a href="#plans">Drawings</a></li>
-  {"".join(f'<li class="sub"><a href="#{n.lower()}"><span class="mono">{n}</span> {esc(en)}</a></li>' for n, fr, en, sc in SHEETS)}
-  <li><a href="#spec">Specification</a></li>
-  <li><a href="#hyd">Filtration and electrical</a></li>
-  <li><a href="#seq">Construction sequence</a></li>
-  <li><a href="#dqe">Cost estimate</a></li>
-  <li><a href="#planning">Schedule</a></li>
-  <li><a href="#gloss">Glossary FR / EN / AR</a></li>
-  <li><a href="#verify">Check before you start</a></li>
+<nav class="idx" aria-label="Sommaire"><ol>
+  <li><a href="#site">Site et existant</a></li>
+  <li><a href="#fit">Vos cotes sur le plan topographique</a></li>
+  <li><a href="#plans">Plans</a></li>
+  {nav_sheets}
+  <li><a href="#spec">Descriptif technique</a></li>
+  <li><a href="#hyd">Filtration et électricité</a></li>
+  <li><a href="#seq">Phasage des travaux</a></li>
+  <li><a href="#dqe">Devis estimatif</a></li>
+  <li><a href="#planning">Planning</a></li>
+  <li><a href="#safety">Sécurité et entretien</a></li>
+  <li><a href="#gloss">Lexique français - arabe</a></li>
+  <li><a href="#verify">À vérifier avant de commencer</a></li>
 </ol></nav>
 <main>
 <section class="blk" id="site">
-  <h2><span class="sn">01</span>Site and existing</h2>
-  <p class="lead">The parcel is {PROJECT['surface']} m² (survey by Sahraoui Topo, recomputed {PARCEL_AREA:.0f} m² from the 11 boundary points). It runs about 29 m along the NE side and 40–49 m deep from the 6 m public road on the SW. The villa sits near the road and the pool goes on its NE side, facing the orchard and the open view.</p>
+  <h2><span class="sn">01</span>Site et existant</h2>
+  <p class="lead">{fr(f"Le terrain fait {money(PROJECT['surface'])} m² (plan topographique de Sahraoui Topo ; {money(round(PARCEL_AREA))} m² recalculés à partir des 11 bornes). Il mesure environ 29 m côté NE et 40 à 49 m de profondeur depuis le chemin public de 6 m au SO. La villa est proche du chemin ; le bassin se place sur sa face NE, côté verger et vue dégagée.")}</p>
   <div class="photos">{ph}</div>
 </section>
 <section class="blk" id="fit">
-  <h2><span class="sn">02</span>Your dimensions on the survey</h2>
-  <div class="tbl"><table><thead><tr><th>Zone</th><th>You gave</th><th class="num">In the plan</th><th>Note</th></tr></thead><tbody>{fit_rows()}</tbody></table></div>
-  <p class="note">{ic("triangle-exclamation")}<span>The survey shows the parcel is 28.97 m wide on the NE side. Your side dimensions add up to about 22 m around the pool, so the extra width goes to the chicken run on the NW side. The villa's position is taken from your sketch and dimensions, so a topographer should pick up its corners before set-out. The pool is set out from the facade (5.00 m, 1.00 m in from each corner), so it lands in the right place even if the villa sits slightly differently on the parcel.</span></p>
+  <h2><span class="sn">02</span>Vos cotes sur le plan topographique</h2>
+  <div class="tbl"><table><thead><tr><th>Zone</th><th>Vos cotes</th><th class="num">Dans le plan</th><th>Remarque</th></tr></thead><tbody>{fit_rows()}</tbody></table></div>
+  <p class="note">{ic("triangle-exclamation")}<span>{fr("Le plan topographique donne 28,97 m de largeur côté NE. Vos cotes latérales totalisent environ 22 m autour du bassin : la largeur restante revient au parc à poules, côté NO. La position de la villa sur le terrain est reprise de votre croquis et de vos cotes ; un topographe doit relever ses angles avant l'implantation. Le bassin s'implante à partir de la façade (5,00 m devant, retrait de 1,00 m à chaque angle) : il reste donc bien placé même si la villa est légèrement décalée sur le terrain.")}</span></p>
 </section>
 <section class="blk" id="plans">
-  <h2><span class="sn">03</span>Drawings</h2>
-  <p class="lead">Five A3 sheets. Red is new construction, hatched grey is the existing villa, and the yellow dashes show the Intex pool that comes out. Tap <b>Enlarge</b> to read a sheet at full size. The same sheets are in the zip as SVG files, which print at A3 at the stated scales.</p>
+  <h2><span class="sn">03</span>Plans</h2>
+  <p class="lead">{fr("Six planches A3. En rouge : constructions neuves ; hachuré gris : villa existante ; tirets jaunes : piscine Intex à déposer. Touchez « Agrandir » pour lire une planche en pleine taille. Les mêmes planches sont dans le zip en fichiers SVG, imprimables en A3 à 100 % aux échelles indiquées.")}</p>
   {sheet_figs(sheet_objs)}
 </section>
 <section class="blk" id="spec">
-  <h2><span class="sn">04</span>Specification</h2>
+  <h2><span class="sn">04</span>Descriptif technique</h2>
   <div class="specs">{specs}</div>
 </section>
 <section class="blk" id="hyd">
-  <h2><span class="sn">05</span>Filtration and electrical</h2>
+  <h2><span class="sn">05</span>Filtration et électricité</h2>
   <div class="two">
-    <div><h3>{ic("faucet-drip")}Hydraulics (Lot 4)</h3><div class="tbl"><table><tbody>{hyd}</tbody></table></div></div>
-    <div><h3>{ic("bolt")}Electrical (Lot 5)</h3><div class="tbl"><table><tbody>{ele}</tbody></table></div></div>
+    <div><h3>{ic("faucet-drip")}Hydraulique (lot 4)</h3><div class="tbl"><table><tbody>{hyd}</tbody></table></div></div>
+    <div><h3>{ic("bolt")}Électricité (lot 5)</h3><div class="tbl"><table><tbody>{ele}</tbody></table></div></div>
   </div>
 </section>
 <section class="blk" id="seq">
-  <h2><span class="sn">06</span>Construction sequence</h2>
+  <h2><span class="sn">06</span>Phasage des travaux</h2>
   <ol class="seq">{seq}</ol>
 </section>
 <section class="blk" id="dqe">
-  <h2><span class="sn">07</span>Cost estimate (devis quantitatif et estimatif)</h2>
-  <p class="lead">Quantities come from the drawings. Unit prices are indicative for the Tanger region in 2026, in dirhams excluding VAT. Type your contractor's prices into any field and the totals update. Your edits stay in this browser only.</p>
-  <dl class="totals"><div><dt>Total HT</dt><dd id="t-ht">{money(total)}</dd></div><div><dt>TVA 20 %</dt><dd id="t-tva">{money(total * .2)}</dd></div><div class="ttc"><dt>Total TTC (DH)</dt><dd id="t-ttc">{money(total * 1.2)}</dd></div></dl>
-  <div class="row"><span class="meta">Options are listed at the end and are not counted in the totals.</span><button type="button" class="reset" id="reset">{ic("rotate-left")}Reset prices</button></div>
+  <h2><span class="sn">07</span>Devis quantitatif et estimatif</h2>
+  <p class="lead">{fr("Les quantités sont tirées des plans. Les prix unitaires sont indicatifs pour la région de Tanger en 2026, en dirhams hors taxes. Saisissez les prix de votre entrepreneur dans les cases : les totaux se mettent à jour. Vos modifications restent dans ce navigateur.")}</p>
+  <dl class="totals"><div><dt>Total HT</dt><dd id="t-ht">{money(total)}</dd></div><div><dt>TVA 20{NB}%</dt><dd id="t-tva">{money(total * .2)}</dd></div><div class="ttc"><dt>Total TTC (DH)</dt><dd id="t-ttc">{money(total * 1.2)}</dd></div></dl>
+  <div class="row"><span class="meta">Les options figurent à la fin et ne sont pas comptées dans les totaux.</span><button type="button" class="reset" id="reset">{ic("rotate-left")}Rétablir les prix</button></div>
   <div class="tbl"><table class="dqe"><thead><tr><th>N°</th><th>Désignation des ouvrages</th><th class="c">U</th><th class="num">Qté</th><th class="num">P.U. HT</th><th class="num">Montant HT</th></tr></thead>{dqe_html()}</table></div>
 </section>
 <section class="blk" id="planning">
-  <h2><span class="sn">08</span>Schedule</h2>
-  <p class="lead">About 15 weeks. If you start in October, most of the concrete work falls in the rainy season, so keep the sump pump and tarps on site. That timing still has the pool ready in spring 2027, before the hot months.</p>
+  <h2><span class="sn">08</span>Planning prévisionnel</h2>
+  <p class="lead">{fr("Environ 15 semaines. En démarrant en octobre, l'essentiel du gros œuvre tombe pendant la saison des pluies : gardez la pompe d'épuisement et des bâches sur le chantier. Le bassin sera tout de même prêt au printemps 2027, avant les fortes chaleurs.")}</p>
   <div class="gantt"><div class="gantt-in">{gantt_html()}</div></div>
 </section>
 <section class="blk" id="safety">
-  <h2><span class="sn">09</span>Safety and upkeep</h2>
+  <h2><span class="sn">09</span>Sécurité et entretien</h2>
   <div class="two">
-    <div class="spec"><h3>{ic("shield-halved")}Safety</h3><ul>
-      <li>Children use the site, so fit the 1.20 m fence with a self-closing gate (shown on PL-02) or a bar cover, and add a door alarm on the house doors that open onto the pool.</li>
-      <li>Twin anti-vortex main drains, non-slip coping and deck, depth marks and no-diving signs.</li>
-      <li>Never empty the pool between November and April. With high groundwater the empty shell can lift (see PL-05).</li>
-      <li>Keep chickens fenced at least 8 m from the water and chemicals in a locked box in the equipment room.</li>
+    <div class="spec"><h3>{ic("shield-halved")}Sécurité</h3><ul>
+      <li>{fr("Des enfants vivent sur place : posez la clôture de 1,20 m avec portillon à fermeture automatique (indiquée sur le PL-02) ou une couverture à barres, et une alarme sur les portes de la villa qui donnent sur le bassin.")}</li>
+      <li>{fr("Deux bondes de fond anti-vortex, margelles et plage antidérapantes, marquage des profondeurs et « Plongeon interdit ».")}</li>
+      <li>{fr("Ne videz jamais le bassin entre novembre et avril : avec une nappe haute, la coque vide peut se soulever (voir PL-05).")}</li>
+      <li>{fr("Gardez les poules clôturées à au moins 8 m de l'eau, et les produits chimiques dans un coffre fermé à clé dans le local technique.")}</li>
     </ul></div>
-    <div class="spec"><h3>{ic("water")}Water and upkeep</h3><ul>
-      <li>pH 7.2–7.6. Free chlorine 1–3 mg/L, or salt 4 g/L with a chlorinator. TAC 80–120 mg/L.</li>
-      <li>Filtration time in hours ≈ water temperature ÷ 2 in summer, 2–4 h a day in winter (active wintering).</li>
-      <li>Backwash when the gauge rises 0.3–0.5 bar above clean. Change the sand every 5–6 years.</li>
-      <li>Weekly: empty the baskets, brush the waterline, vacuum, test the water.</li>
+    <div class="spec"><h3>{ic("water")}Eau et entretien</h3><ul>
+      <li>{fr("pH 7,2 à 7,6. Chlore libre 1 à 3 mg/L, ou sel 4 g/L avec électrolyseur. TAC 80 à 120 mg/L.")}</li>
+      <li>{fr("Durée de filtration en été : température de l'eau ÷ 2, en heures ; 2 à 4 h par jour en hiver (hivernage actif).")}</li>
+      <li>{fr("Contre-lavage quand le manomètre monte de 0,3 à 0,5 bar au-dessus de la pression du filtre propre. Sable à changer tous les 5 à 6 ans.")}</li>
+      <li>{fr("Chaque semaine : vider les paniers, brosser la ligne d'eau, passer le balai, analyser l'eau.")}</li>
     </ul></div>
   </div>
 </section>
 <section class="blk" id="gloss">
-  <h2><span class="sn">10</span>Glossary for the site</h2>
-  <div class="tbl"><table class="gl"><thead><tr><th>Français</th><th>English</th><th class="ar" lang="ar" dir="rtl">العربية</th></tr></thead><tbody>{gl}</tbody></table></div>
+  <h2><span class="sn">10</span>Lexique de chantier français - arabe</h2>
+  <div class="tbl gl"><table><thead><tr><th>Français</th><th class="ar" lang="ar" dir="rtl">العربية</th></tr></thead><tbody>{gl}</tbody></table></div>
 </section>
 <section class="blk" id="verify">
-  <h2><span class="sn">11</span>Check before you start</h2>
+  <h2><span class="sn">11</span>À vérifier avant de commencer</h2>
   <ul class="ver">{ver}</ul>
-  <p class="note">{ic("helmet-safety")}<span>This is a construction plan and design brief. Concrete sizing follows BAEL 91 mod. 99 principles, with RPS 2000 (2011) to be applied. A licensed structural engineer (BET) should check and stamp the slab, walls and equipment room before work starts, and a qualified electrician should sign off the installation.</span></p>
+  <p class="note">{ic("helmet-safety")}<span>{fr("Ce dossier est un plan d'exécution de principe. Le béton armé est prédimensionné selon les règles BAEL 91 mod. 99 ; le RPS 2000 (version 2011) reste à appliquer. Un bureau d'études agréé (BET) doit vérifier et viser le radier, les voiles et le local technique avant le démarrage, et un électricien qualifié doit réceptionner l'installation.")}</span></p>
 </section>
 </main>
 </div>
-<footer><span><b>{AUTHOR['name']}</b></span><span>{ic("globe")}<a href="{AUTHOR['url']}">{AUTHOR['web']}</a></span><span>{ic("envelope")}{AUTHOR['email']}</span><span>{ic("whatsapp")}WhatsApp {AUTHOR['whatsapp']}</span><span class="mono">v{VERSION} - {DATE}</span></footer>
+<footer><span><b>{AUTHOR['name']}</b></span><span>{ic("globe")}<a href="{AUTHOR['url']}">{AUTHOR['web']}</a></span><span>{ic("envelope")}{AUTHOR['email']}</span><span>{ic("whatsapp")}WhatsApp {AUTHOR['whatsapp']}</span><span class="mono">v{VERSION} - indice {INDICE} - {DATE}</span></footer>
 </div>
 <script>
 (function(){{
-  var fmt=function(n){{return Math.round(n).toLocaleString('fr-FR').replace(/\\u202f|\\u00a0/g,' ');}};
+  var fmt=function(n){{return Math.round(n).toLocaleString('fr-FR').replace(/[\\u202f\\u00a0\\s]/g,'\\u00a0');}};
   var KEY='gf-pool-dqe-v{VERSION}';
   var inputs=[].slice.call(document.querySelectorAll('.pu'));
   var saved={{}};
@@ -532,7 +560,7 @@ footer span{{display:inline-flex;gap:7px;align-items:center}} footer b{{color:va
   document.querySelectorAll('.zoom').forEach(function(b){{
     b.addEventListener('click',function(){{
       var f=b.closest('.plan'), on=f.classList.toggle('big');
-      b.setAttribute('aria-pressed',on); b.querySelector('span').textContent=on?'Fit to width':'Enlarge';
+      b.setAttribute('aria-pressed',on); b.querySelector('span').textContent=on?'Ajuster':'Agrandir';
       b.querySelector('use').setAttribute('href',on?'#i-compress':'#i-expand');
     }});
   }});
@@ -555,7 +583,7 @@ def main():
         fh.write(body)
     # standalone document for the zip
     with open(os.path.join(dist, "index.html"), "w") as fh:
-        fh.write('<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
+        fh.write('<!doctype html>\n<html lang="fr"><head><meta charset="utf-8">'
                  '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
                  f'<meta name="author" content="{AUTHOR["name"]}"></head><body>\n' + body + "\n</body></html>\n")
     for f in os.listdir(os.path.join(ROOT, "assets", "photos")):
@@ -569,26 +597,28 @@ def main():
         name = f"{num}_{slug.replace(' ', '-').replace(chr(39), '')}.svg"
         with open(os.path.join(dist, "plans-svg", name), "w") as fh:
             fh.write('<?xml version="1.0" encoding="UTF-8"?>\n' + svg)
-    readme = f"""Gharsa Foquiya - Pool & Garden plan set
+    readme = f"""Gharsa Foquiya - Piscine et jardins - dossier d'exécution
 Version {VERSION} (indice {INDICE}) - {DATE}
-Author: {AUTHOR['name']} - {AUTHOR['url']} - {AUTHOR['email']} - WhatsApp {AUTHOR['whatsapp']}
+Conception : {AUTHOR['name']} - {AUTHOR['url']} - {AUTHOR['email']} - WhatsApp {AUTHOR['whatsapp']}
 
-index.html        Full plan set: site, drawings, specification, sequence, estimate, schedule, glossary
-plans-svg/        Drawing sheets PL-01 to PL-05 (A3, print at 100 %)
-img/              Site photos and concept render
+index.html        Dossier complet : site, plans, descriptif, phasage, devis, planning, lexique
+plans-svg/        Planches PL-01 à PL-{len(SHEETS):02d} (format A3, imprimer à 100 %)
+img/              Photos du site et image de synthèse
+
+Ouvrir index.html dans un navigateur (connexion internet pour les polices).
 """
     with open(os.path.join(dist, "LISEZMOI.txt"), "w") as fh:
         fh.write(readme)
     rel = os.path.join(os.path.dirname(ROOT), "releases")
     os.makedirs(rel, exist_ok=True)
-    zpath = os.path.join(rel, f"AbodyStudio_Gharsa-Foquiya_Pool-Garden-Plan_v{VERSION}.zip")
+    zpath = os.path.join(rel, f"AbodyStudio_Gharsa-Foquiya_Piscine-Jardins_v{VERSION}.zip")
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
         for dp, dn, fn in os.walk(dist):
             for f in sorted(fn):
                 if f == "index.body.html":
                     continue
                 p = os.path.join(dp, f)
-                z.write(p, os.path.join(f"Pool-Garden-Plan_v{VERSION}", os.path.relpath(p, dist)))
+                z.write(p, os.path.join(f"Piscine-Jardins_v{VERSION}", os.path.relpath(p, dist)))
     print("built", dist, "zip", zpath, os.path.getsize(zpath))
 
 

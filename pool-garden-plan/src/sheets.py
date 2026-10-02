@@ -24,21 +24,58 @@ class S:
     def add(self, s):
         self.o.append(s)
 
+    # ---- view transform: None, ("rot", cx, cy) = 180 deg turn, ("mir", cx) = left/right mirror.
+    # Texts stay upright and keep their side of the feature they label.
+    def flip(self, mode=None, cx=0.0, cy=0.0):
+        self.fl = (mode, cx, cy) if mode else None
+
+    def _p(self, x, y):
+        if not getattr(self, "fl", None):
+            return x, y
+        m, cx, cy = self.fl
+        return (2 * cx - x, 2 * cy - y) if m == "rot" else (2 * cx - x, y)
+
     def line(self, a, b, c="k w2"):
+        a, b = self._p(*a), self._p(*b)
         self.add(f'<line x1="{a[0]:.2f}" y1="{a[1]:.2f}" x2="{b[0]:.2f}" y2="{b[1]:.2f}" class="{c}"/>')
 
     def pl(self, pts, c="k w2", close=False):
         tag = "polygon" if close else "polyline"
-        p = " ".join(f"{x:.2f},{y:.2f}" for x, y in pts)
+        p = " ".join(f"{x:.2f},{y:.2f}" for x, y in (self._p(*q) for q in pts))
         self.add(f'<{tag} points="{p}" class="{c}"/>')
 
     def rect(self, x, y, w, h, c="k w2"):
+        if getattr(self, "fl", None):
+            x, y = self._p(x + w, y + h if self.fl[0] == "rot" else y)
         self.add(f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" class="{c}"/>')
 
     def circ(self, x, y, r, c="k w2"):
+        x, y = self._p(x, y)
         self.add(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{r:.2f}" class="{c}"/>')
 
+    def arc(self, a, rx, ry, large, sweep, b, c="k w1"):
+        a, b = self._p(*a), self._p(*b)
+        if getattr(self, "fl", None) and self.fl[0] == "mir":
+            sweep = 1 - sweep
+        self.add(f'<path d="M{a[0]:.2f} {a[1]:.2f} A {rx:.2f} {ry:.2f} 0 {large} {sweep} {b[0]:.2f} {b[1]:.2f}" class="{c}"/>')
+
+    SIZES = {"ct": 4.6, "ar": 4.4, "cb": 3.2, "lab": 3.0, "dimt": 2.9, "cs": 2.8, "borne": 2.8,
+             "lvl": 2.7, "tiny2": 2.55, "cl": 2.4, "tiny": 1.9}
+
     def t(self, x, y, s, c="t", a="middle", rot=0, size=None):
+        s = str(s).replace(" :", "\u00a0:").replace("« ", "«\u00a0").replace(" »", "\u00a0»")
+        if getattr(self, "fl", None):
+            fs = size or next((v for k, v in self.SIZES.items() if k in c.split()), 3.2)
+            r = math.radians(rot)
+            nx, ny = math.sin(r), -math.cos(r)
+            x, y = self._p(x, y)
+            if self.fl[0] == "rot":
+                x -= 0.7 * fs * nx
+                y -= 0.7 * fs * ny
+            else:
+                x -= 0.7 * fs * nx
+            if self.fl[0] == "rot" or abs(math.cos(r)) > 0.5:
+                a = {"start": "end", "end": "start"}.get(a, a)
         st = f' style="font-size:{size}px"' if size else ""
         tr = f' transform="rotate({rot:.2f} {x:.2f} {y:.2f})"' if rot else ""
         self.add(f'<text x="{x:.2f}" y="{y:.2f}" class="{c}" text-anchor="{a}"{tr}{st}>{s}</text>')
@@ -118,7 +155,9 @@ SVG_CSS = ""
 # Frame + cartouche (right-hand band, Moroccan practice)
 # --------------------------------------------------------------------------
 
-def frame(s, num, title, title_en, scale):
+def frame(s, num, title=None, title_en=None, scale=None):
+    meta = {n: (fr, sub, sc) for n, fr, sub, sc in SHEETS}[num]
+    title, title_en, scale = meta
     s.rect(14, 9, W - 23, H - 18, "k w4")
     x0, x1 = BAND, W - 9
     s.line((x0, 9), (x0, H - 9), "k w4")
@@ -292,13 +331,14 @@ def pl01():
     # chickens, gardens, orchard
     ch = [(u_nw(CHICKEN_V[0]) + 0.3, CHICKEN_V[0]), (NW_GARDEN_EDGE, CHICKEN_V[0]), (NW_GARDEN_EDGE, CHICKEN_V[1]), (u_nw(CHICKEN_V[1]) + 0.3, CHICKEN_V[1])]
     s.pl([P(*p) for p in ch], "k w1 dash fch", True)
-    for (u, v) in [(2, 34), (7, 33), (12, 32), (17, 31), (21, 34), (4, 40), (9, 39), (14, 38), (19, 40), (0, 46), (6, 45), (11, 44), (16, 45), (21, 46), (1, 28), (20, 28), (-1, 9), (2, 6), (3, 11)]:
+    for (u, v) in [(2, 35.5), (8.5, 36), (12, 32), (17, 31), (21, 34), (4, 40), (9, 39), (14, 38), (19, 40), (0, 46), (6, 45), (11, 44), (16, 45), (21, 46), (1, 28), (20, 28), (-1, 9), (2, 6), (3, 11)]:
         x, y = P(u, v)
         tree(s, x, y, 1.6)
     # house (existing)
     hp = rect_uv(HOUSE["u0"], HOUSE["v0"], HOUSE["u1"], HOUSE["v1"])
     s.pl([P(*p) for p in hp], "k w3 fhx", True)
     s.pl([P(*p) for p in rect_uv(STAIR["u0"], STAIR["v0"], STAIR["u1"], STAIR["v1"])], "k w2 fs", True)
+    s.pl([P(*p) for p in rect_uv(POOL_STAIR["u0"], FRONT_GARDEN[0], POOL_STAIR["u1"], FRONT_GARDEN[1])], "red w2 fs", True)
     # deck + walkway, pool, tech room
     s.pl([P(*p) for p in rect_uv(HOUSE["u0"], DECK[0], HOUSE["u1"], DECK[1])], "k w1 fpv", True)
     s.pl([P(*p) for p in rect_uv(POOL["u0"] - WALK, POOL["v0"] - WALK, POOL["u1"] + WALK, POOL["v1"] + WALK)], "k w1 fpv", True)
@@ -321,7 +361,7 @@ def pl01():
     s.t(c[0], c[1], "ALLÉE / PARKING 3.00", "t lab", "middle", U_ANG - 90 + 8.5)
     c = P((u_nw(22) + NW_GARDEN_EDGE) / 2, 22)
     s.t(c[0], c[1], "POULAILLER", "t lab", "middle", U_ANG - 90)
-    c = P(NW_GARDEN_EDGE + 4.2, 17.0)
+    c = P(NW_GARDEN_EDGE + 3.4, 25.6)
     s.t(c[0], c[1], "JARDIN", "t lab", "middle", U_ANG)
     c = P(13, 40.5)
     s.t(c[0], c[1], "VERGER EXISTANT (à conserver)", "t lab", "middle", U_ANG)
@@ -381,7 +421,7 @@ def pl01():
     s.t(268, 112, "Position de la villa : d'après les cotes", "t cs mute", "start")
     s.t(268, 116.5, "du propriétaire - à confirmer par un", "t cs mute", "start")
     s.t(268, 121, "relevé topographique de l'existant.", "t cs mute", "start")
-    frame(s, "PL-01", "Plan de masse", "Site plan on the survey", "1/250")
+    frame(s, "PL-01")
     s.title = "PL-01 Plan de masse"
     return s
 
@@ -392,9 +432,10 @@ def pl01():
 
 def pl02():
     s = S("p2")
-    V = UV(19, 12, -5.4, 27.4, 100)
+    V = UV(19, 12, -5.4, 27.0, 100)
     P = V
     s.k = V.k
+    s.flip("rot", 164.5, 148.5)     # seen from the pool: villa at the top, driveway on the left
     s.add(f'<g clip-path="url(#{s.id}-clip)">')
     # boundaries
     s.pl([P(u_nw(-1), -1), P(u_nw(30), 30)], "k w4 parcel")
@@ -425,16 +466,20 @@ def pl02():
     a = AWNING
     cx, cy = P(a["uc"], HOUSE["v1"])
     r = a["r"] * V.k
-    s.add(f'<path d="M{cx - r:.2f} {cy:.2f} A {r:.2f} {a["depth"] * V.k:.2f} 0 0 1 {cx + r:.2f} {cy:.2f}" class="k w1 dash"/>')
+    s.arc((cx - r, cy), r, a["depth"] * V.k, 0, 1, (cx + r, cy), "k w1 dash")
     # front garden + steps
     s.pl([P(*p) for p in rect_uv(HOUSE["u0"], FRONT_GARDEN[0], HOUSE["u1"], FRONT_GARDEN[1])], "k w1 fgz", True)
-    sd = STEPS_DOOR
-    for i in range(sd["n"]):
-        vv = FRONT_GARDEN[0] + 0.15 + i * sd["tread"]
-        s.pl([P(*p) for p in rect_uv(sd["uc"] - sd["w"] / 2, vv, sd["uc"] + sd["w"] / 2, vv + sd["tread"])], "k w1 fs", True)
+    ps = POOL_STAIR
+    land = FRONT_GARDEN[0] + ps["landing"]
+    s.pl([P(*p) for p in rect_uv(ps["u0"], FRONT_GARDEN[0], STAIR["u1"], land)], "k w2 ftl", True)
+    for i in range(ps["n"] - 1):
+        vv = land + i * ps["tread"]
+        s.pl([P(*p) for p in rect_uv(ps["u0"], vv, ps["u1"], vv + ps["tread"])], "k w2 fs", True)
+    s.line(P(ps["u0"] + 0.06, FRONT_GARDEN[0] + 0.1), P(ps["u0"] + 0.06, FRONT_GARDEN[1]), "k w2")
+    s.line(P((ps["u0"] + ps["u1"]) / 2, FRONT_GARDEN[1] - 0.1), P((ps["u0"] + ps["u1"]) / 2, land - 0.15), "k w2 arrow")
     for k in range(9):
         uu = HOUSE["u0"] + 0.8 + k * 1.3
-        if abs(uu - sd["uc"]) > 1.3:
+        if uu < ps["u0"] - 0.45:
             x, y = P(uu, FRONT_GARDEN[0] + 0.7)
             s.circ(x, y, 3.2, "k w1 shrub")
     # channel drain
@@ -446,8 +491,6 @@ def pl02():
         x, y = P(u, DECK[1] - 0.25)
         s.rect(x, y, 0.72 * V.k, 2.0 * V.k, "k w1 fs")
         s.line((x, y + 5), (x + 7.2, y + 5), "k w1")
-    x, y = P(POOL["u0"] + 0.9 + 4 * 2.35 - 0.2, DECK[1] - 1.1)
-    s.circ(x, y, 13, "k w1 dash")
     # walkway with 50x50 coping
     s.pl([P(*p) for p in rect_uv(POOL["u0"] - WALK, POOL["v0"] - WALK, POOL["u1"] + WALK, POOL["v1"] + WALK)], "k w2 fs", True)
     for i in range(int(POOL_L / 0.5) + 1):
@@ -497,27 +540,33 @@ def pl02():
         x, y = P(u, v)
         s.t(x, y, txt, c, a, rot)
     hc = ((HOUSE["u0"] + HOUSE["u1"]) / 2, (HOUSE["v0"] + HOUSE["v1"]) / 2)
-    lab(hc[0], hc[1] + 0.6, "VILLA EXISTANTE - RDC", "t lab b")
-    lab(hc[0], hc[1] - 0.4, "(attentes R+1 existantes)", "t lab")
-    lab(STAIR["u1"] + 0.25, (STAIR["v0"] + STAIR["v1"]) / 2, "Escalier existant", "t lab", -90)
-    lab(a["uc"] + 2.6, HOUSE["v1"] + 0.12, "Auvent existant (au-dessus)", "t lab mute", 0, "start")
+    lab(hc[0], hc[1] - 0.4, "VILLA EXISTANTE - RDC", "t lab b")
+    lab(hc[0], hc[1] + 0.6, "(attentes R+1 existantes)", "t lab")
+    lab(STAIR["u1"] + 0.25, (STAIR["v0"] + STAIR["v1"]) / 2, "Escalier existant vers toit-terrasse", "t lab", -90)
+    lab(a["uc"] + 2.6, HOUSE["v1"] + 0.10, "Auvent existant (au-dessus)", "t tiny2 mute", 0, "start")
     lab(HOUSE["u0"] + 0.3, FRONT_GARDEN[0] + 1.6, "Jardinière plantée 2.00", "t lab", 0, "start")
-    lab(HOUSE["u1"] - 0.2, FRONT_GARDEN[1] - 0.3, "Caniveau à grille", "t lab", 0, "end")
+    lab(ps["u0"] - 0.2, FRONT_GARDEN[1] - 0.3, "Caniveau à grille", "t lab", 0, "end")
+    lab(HOUSE["u1"] - 0.12, DECK[0] + 1.05, "Esc. piscine", "t tiny2 b red-t", 0, "end")
+    lab(HOUSE["u1"] - 0.12, DECK[0] + 1.42, "5 × 15/30 cm", "t tiny2 red-t", 0, "end")
+    x, y = P(ps["u1"] + 0.15, FRONT_GARDEN[0] + 0.35)
+    s.level(x, y, "±0.00 palier")
+    x, y = P(ps["u1"] - 0.15, DECK[0] + 0.45)
+    s.level(x, y, f"{LV['deck_low']:+.2f}", "l")
     lab(HOUSE["u0"] + 0.3, DECK[0] + 0.45, "PLAGE SOLARIUM 2.50 (transats)", "t lab b", 0, "start")
-    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 + 0.4, "PISCINE 10.00 × 5.00", "t lab b red-t")
-    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 - 0.6, "prof. 1.20 → 1.60 - V ≈ 67 m³", "t lab red-t")
+    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 - 0.6, "PISCINE 10.00 × 5.00", "t lab b red-t")
+    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 + 0.4, "prof. 1.20 → 1.60 - V ≈ 67 m³", "t lab red-t")
     lab(POOL["u1"] - 0.75, POOL["v0"] + 1.0, "Escalier", "t lab", -90)
-    lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v1"] + 0.35, "Local technique", "t lab red-t")
-    lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v0"] - 0.75, "2.40 × 2.00", "t lab red-t")
-    lab((NW_GARDEN_EDGE + POOL["u0"]) / 2 - 0.6, POOL["v1"] + 2.4, "JARDIN", "t lab b")
+    lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v0"] - 0.45, "Local technique", "t lab red-t")
+    lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v1"] + 0.15, "2.40 × 2.00", "t lab red-t")
+    lab((NW_GARDEN_EDGE + POOL["u0"]) / 2 - 0.6, POOL["v1"] + 0.9, "JARDIN", "t lab b")
     lab((u_nw(22) + NW_GARDEN_EDGE) / 2 + 0.15, 22, "PARC À POULES", "t lab b", -90)
     lab(u_nw(26) + 1.5, 28.9, "Abri poules", "t lab")
     lab(u_drive(8) + 1.55, 8, "ALLÉE / PARKING (gravier)", "t lab b", -90 + 8.5)
     lab(u_drive(19) - 1.95, 17.4, "Jardin latéral", "t lab", 0)
     lab(SHOWER["u"] + 0.75, SHOWER["v"] - 0.15, "Douche", "t lab", 0, "start")
     lab((HOUSE["u0"] + HOUSE["u1"]) / 2, POOL["v1"] + 3.1, "Verger existant (agrumes, à conserver)", "t lab")
-    lab(HOUSE["u1"] + 0.7, POOL["v1"] + 0.45, "Clôture sécurité", "t lab red-t", 0, "start")
-    lab(HOUSE["u1"] + 0.7, POOL["v1"] + 0.05, "h 1.20 (option)", "t lab red-t", 0, "start")
+    lab(HOUSE["u1"] + 0.7, POOL["v1"] + 0.05, "Clôture sécurité", "t lab red-t", 0, "start")
+    lab(HOUSE["u1"] + 0.7, POOL["v1"] + 0.45, "h 1.20 (option)", "t lab red-t", 0, "start")
     lab(HOUSE["u0"] + 2.0, 1.7, "JARDIN ARRIÈRE (existant)", "t lab", 0, "start")
     lab(POOL["u0"] + 1.35, DECK[1] + 1.82, "Piscine hors-sol existante (position approx.) : à déposer", "t tiny2 demo-t", 0, "start")
     # dimension chains (v, left of pool zone)
@@ -549,7 +598,6 @@ def pl02():
     s.level(x, y, f"{LV['coping']:+.2f}")
     x, y = P(POOL["u1"] - 2.3, POOL["v1"] - 0.7)
     s.level(x, y, f"eau {LV['water']:+.2f}")
-    band_north(s, -U_ANG, "axe façade : 134.6° (gisement)")
     # section marks
     for (u, v0_, v1_, nm) in [(POOL["u0"] + FITTINGS["drains"][0][0], DECK[0] - 3.4, POOL["v1"] + 0.9, "B")]:
         a1, b1 = P(u, v0_), P(u, v1_)
@@ -557,8 +605,11 @@ def pl02():
         for pp, dy in ((a1, 1), (b1, -1)):
             s.circ(pp[0], pp[1], 2.4, "k w2 fs")
             s.t(pp[0], pp[1] + 1.1, nm, "t cb")
-    s.t(20, 283.5, "* profondeur de la villa supposée 10.00 m - à relever. Les cotes non indiquées se lisent à l'échelle.", "t cs mute", "start")
-    frame(s, "PL-02", "Plan d'aménagement des abords", "Garden and pool layout", "1/100")
+    s.flip()
+    band_north(s, 180 - U_ANG, f"gisement façade : {BEARING_U * 400 / 360:.2f} gr")
+    s.t((BAND + W - 9) / 2, 222, "* profondeur de la villa supposée", "t tiny2 mute")
+    s.t((BAND + W - 9) / 2, 225.6, "10.00 m - à relever sur place", "t tiny2 mute")
+    frame(s, "PL-02")
     s.title = "PL-02 Plan d'aménagement"
     return s
 
@@ -583,6 +634,7 @@ def pl03():
     P = lambda x, y: V(*pool_xy(x, y))
     k = V.k
     s.k = k
+    s.flip("rot", 158, 99.3)        # same reading direction as PL-02
     # walkway coping
     s.pl([P(-WALK, -WALK), P(POOL_L + WALK, -WALK), P(POOL_L + WALK, POOL_W + WALK), P(-WALK, POOL_W + WALK)], "k w2 fs", True)
     for i in range(int(POOL_L / 0.5) + 1):
@@ -640,7 +692,7 @@ def pl03():
         sym.append((c_, "PB"))
     for i, (x, y) in enumerate(FITTINGS["lights"]):
         c_ = P(x, y)
-        s.add(f'<path d="M{c_[0] - 2.4:.2f} {c_[1]:.2f} A 2.4 2.4 0 0 0 {c_[0] + 2.4:.2f} {c_[1]:.2f}" class="k w2 flt"/>')
+        s.arc((c_[0] - 2.4, c_[1]), 2.4, 2.4, 0, 0, (c_[0] + 2.4, c_[1]), "k w2 flt")
         sym.append((c_, f"P{i + 1}"))
     for (x, y) in FITTINGS["ladder"]:
         a_, b_ = P(x - 0.25, y), P(x + 0.25, y)
@@ -683,14 +735,15 @@ def pl03():
     # labels
     x_, y_ = P(POOL_L / 2 - 0.4, 2.0)
     s.t(x_, y_, "BASSIN 10.00 × 5.00 - plan d'eau 50 m²", "t lab b red-t")
-    s.t(x_, y_ + 5, f"Volume ≈ {Q['water_vol']:.0f} m³ - mosaïque pâte de verre 25 × 25", "t lab red-t")
+    s.t(x_, y_ - 5, f"Volume ≈ {Q['water_vol']:.0f} m³ - mosaïque pâte de verre 25 × 25", "t lab red-t")
     x_, y_ = P(-WALK - 0.1, POOL_W + WALK + 0.15)
     s.t(x_, y_, "Margelles 50 × 50 pierre reconstituée", "t lab", "start")
     x_, y_ = P(POOL_L + 0.5, -WALK - 1.45)
     s.t(x_, y_, "Côté villa : plage solarium 2.50, jardinière 2.00, façade", "t lab mute", "end")
-    x_, y_ = P(-WALK, -WALK - 1.45)
-    s.t(x_, y_, "Local technique à 3.55 m du bassin (côté NO)", "t lab mute", "start")
-    band_north(s, -U_ANG)
+    x_, y_ = P(-1.95, POOL_W / 2)
+    s.t(x_, y_, "Local technique à 3.55 m (côté NO)", "t lab mute", "middle", -90)
+    s.flip()
+    band_north(s, 180 - U_ANG)
     # legend
     lg = [("SK1-SK2", "Skimmers grande meurtrière (vers local technique)"),
           ("BF1-BF2", "Bondes de fond anti-vortex reliées, écart 1.00 m"),
@@ -703,14 +756,14 @@ def pl03():
     table(s, 32, 224, ("Repère", "Désignation"), lg, (24, 118), rh=5.0)
     notes = ["Pièces à sceller posées avant coulage des voiles,",
              "colliers d'étanchéité prévus pour la membrane.",
-             "Buses orientées vers les skimmers (rotation horaire).",
+             "Buses orientées vers les skimmers.",
              "Marquage des profondeurs 1.20 / 1.60 et « Plongeon",
              "interdit » sur margelles.",
              "Bondes de fond : clapet de décompression dans le puisard."]
     s.t(184, 222, "NOTES", "t cl", "start")
     for i, n in enumerate(notes):
         s.t(184, 229 + i * 5, n, "t cs", "start")
-    frame(s, "PL-03", "Plan du bassin - implantation des équipements", "Pool plan and fittings", "1/50")
+    frame(s, "PL-03")
     s.title = "PL-03 Plan du bassin"
     return s
 
@@ -729,6 +782,7 @@ def pl04():
     k = 20
     X = lambda x: 30 + (x + 1.2) * k            # x = pool-local from NW wall
     Z = lambda z: 22 + (0.35 - z) * k
+    s.flip("mir", 154)
     fin = FINISH
     xin0, xin1 = 0, POOL_L
     # earth around
@@ -783,7 +837,7 @@ def pl04():
     # TN line
     s.line((X(-1.2), Z(LV["tn"])), (X(POOL_L + 1.2), Z(LV["tn"])), "k w2")
     # levels
-    for z, txt, xx in [(LV["coping"], f"{LV['coping']:+.2f} margelle", POOL_L + 0.75), (LV["water"], f"{LV['water']:+.2f} eau", POOL_L - 1.6),
+    for z, txt, xx in [(LV["coping"], f"{LV['coping']:+.2f} margelle", POOL_L + 0.6), (LV["water"], f"{LV['water']:+.2f} eau", POOL_L - 1.6),
                        (FLOOR_SHALLOW, f"{FLOOR_SHALLOW:+.2f}", POOL_L - 1.9), (FLOOR_DEEP, f"{FLOOR_DEEP:+.2f}", 0.5),
                        (zb_deep, f"{zb_deep:+.2f} fond de fouille", 1.0)]:
         s.level(X(xx), Z(z), txt, section=True)
@@ -794,7 +848,10 @@ def pl04():
     zz = Z(zb_deep - 0.35) + 5
     for a_, b_ in zip(chain, chain[1:]):
         s.dim((X(a_), zz), (X(b_), zz), 0, f"{b_ - a_:.2f}")
-    s.t(X(POOL_L / 2), 16, "COUPE A-A  (longitudinale)  1/50", "t ct", "middle")
+    s.t(X(0.75), zz + 7, "GRAND FOND (côté local technique)", "t tiny2 b", "middle")
+    s.t(X(POOL_L - 1.25), zz + 7, "PETIT BAIN (côté allée)", "t tiny2 b", "middle")
+    s.t(X(POOL_L / 2), 16, "COUPE A-A  (longitudinale, vue vers la villa)  1/50", "t ct", "middle")
+    s.flip()
     # ---- B-B transversal (v axis), 1/100, through drains + house, looking NW
     k2 = 10
     v0 = 1.6
@@ -863,7 +920,7 @@ def pl04():
     s.t(Xb(pv1 + 3.0), Zb(LV["tn"] + 3.4), "Verger", "t lab", "middle")
     s.t(Xb((v0 + vmax) / 2), 136, "COUPE B-B  (transversale villa - jardin - piscine)  1/100", "t ct", "middle")
     s.t(20, 285, "* profondeur de la villa supposée - à relever. Niveaux du terrain naturel à confirmer par relevé.", "t cs mute", "start")
-    frame(s, "PL-04", "Coupes A-A et B-B", "Sections A-A and B-B", "1/50 - 1/100")
+    frame(s, "PL-04")
     s.title = "PL-04 Coupes"
     return s
 
@@ -970,15 +1027,58 @@ def pl05():
     s.dim((X(WALL), Z(zh) + 9), (X(WALL + 0.4), Z(zh) + 9), 0, "0.40")
     s.dim((X(-0.75) - 4, Z(zf)), (X(-0.75) - 4, Z(zs)), 0, "0.20")
     s.t(X(0.5), 16, "DÉTAIL D1 - PAROI ET RADIER (grand fond)  1/20", "t ct")
+
+    # ---- D2 : escalier d'accès piscine (coupe suivant la descente) 1/25
+    k2 = 40
+    ps = POOL_STAIR
+    gx0, gz0 = 30, 196
+    Xs = lambda d: gx0 + d * k2                 # d from the facade, towards the pool
+    Zs = lambda z: gz0 + (0.05 - z) * k2
+    s.t(Xs(1.4), 159, "DÉTAIL D2 - ESCALIER D'ACCÈS PISCINE (côté gauche)  1/25", "t ct")
+    s.rect(Xs(-0.30), Zs(0.0), 0.30 * k2, 0.95 * k2, "k w2 fhx")
+    prof = [(0.0, 0.0), (ps["landing"], 0.0)]
+    z = 0.0
+    d = ps["landing"]
+    for i in range(ps["n"] - 1):
+        z -= ps["rise"]
+        prof += [(d, z), (d + ps["tread"], z)]
+        d += ps["tread"]
+    z -= ps["rise"]
+    prof += [(d, z), (d + 0.75, z)]
+    poly = [(Xs(a), Zs(b)) for a, b in prof] + [(Xs(d + 0.75), Zs(-0.95)), (Xs(0), Zs(-0.95))]
+    s.pl(poly, "k w3 fcc", True)
+    s.pl([(Xs(a), Zs(b)) for a, b in prof], "k w4")
+    s.rect(Xs(d - 0.02), Zs(z + 0.0), 0.20 * k2, 0.22 * k2, "k w2 fk")
+    rail = lambda xx: 0.90 if xx <= ps["landing"] else 0.90 - (xx - ps["landing"]) * ps["rise"] / ps["tread"]
+    s.pl([(Xs(0.15), Zs(0.90)), (Xs(ps["landing"]), Zs(0.90)), (Xs(d), Zs(rail(d))), (Xs(d + 0.30), Zs(rail(d)))], "k w3")
+    for xx in (0.30, ps["landing"] + 0.45, d - 0.15):
+        if xx <= ps["landing"]:
+            zz = 0.0
+        else:
+            zz = -ps["rise"] * (int((xx - ps["landing"]) / ps["tread"]) + 1)
+        s.line((Xs(xx), Zs(zz)), (Xs(xx), Zs(rail(xx))), "k w2")
+    for i in range(ps["n"] - 1):
+        dd = ps["landing"] + i * ps["tread"]
+        s.dim((Xs(dd), Zs(-1.0) + 4), (Xs(dd + ps["tread"]), Zs(-1.0) + 4), 0, "0.30", size=2.5)
+    s.dim((Xs(0), Zs(-1.0) + 4), (Xs(ps["landing"]), Zs(-1.0) + 4), 0, "0.80", size=2.5)
+    s.level(Xs(0.35), Zs(0.0), "±0.00 palier", "r", True)
+    s.level(Xs(d + 0.35), Zs(z), f"{z:+.2f} plage", "r", True)
+    s.t(Xs(d + 0.08), Zs(z) + 12, "caniveau", "t tiny2", "middle")
+    s.t(Xs(1.45), Zs(rail(1.45)) - 1.8, "main courante h 0.90", "t tiny2", "start", -26.57)
+    s.t(Xs(-0.15), Zs(-0.6), "villa", "t tiny2", "middle", -90)
+    s.t(Xs(d + 0.95), Zs(-0.2), "5 contremarches de 15 cm, giron 30 cm", "t tiny2 b", "start")
+    s.t(Xs(d + 0.95), Zs(-0.2) + 4, "2h + g = 60 cm (Blondel)", "t tiny2", "start")
+    s.t(Xs(d + 0.95), Zs(-0.2) + 8, "BA sur hérisson, grès R11 nez arrondi", "t tiny2", "start")
+    s.t(Xs(d + 0.95), Zs(-0.2) + 12, "palier relié au pied de l'escalier du toit", "t tiny2", "start")
     # bar schedule
     rows = [(str(r["pos"]), f"HA{r['d']}", str(r["n"]), f"{r['L']:.2f}", f"{r['kg']:.0f}") for r in Q["rebar"]]
     rows.append(("", "", "", "TOTAL", f"{Q['steel']:.0f} kg"))
     s.t(215, 168, "NOMENCLATURE DES ACIERS (FeE500)", "t cl", "start")
     table(s, 215, 170, ("Pos", "Ø", "Nb", "L (m)", "Poids kg"), rows, (12, 16, 16, 20, 24), rh=4.6)
     desc = [f"{r['pos']}  {r['desc']}" for r in Q["rebar"]]
-    s.t(20, 192, "REPÈRES", "t cl", "start")
+    s.t(20, 250, "REPÈRES DE LA NOMENCLATURE", "t cl", "start")
     for i, d in enumerate(desc):
-        s.t(20 + (i // 7) * 92, 197 + (i % 7) * 4.3, d, "t tiny2", "start")
+        s.t(20 + (i // 7) * 92, 255 + (i % 7) * 4.3, d, "t tiny2", "start")
     notes = [
         "NOTES BÉTON ARMÉ",
         f"B25 dosé 350 kg/m³ CPJ 45, E/C ≤ 0.50, hydrofuge, vibré ({Q['c_total']:.1f} m³).",
@@ -992,10 +1092,233 @@ def pl05():
         "Principe BAEL 91 mod. 99 / RPS 2000 (2011) - à valider par un BET agréé.",
     ]
     for i, n in enumerate(notes):
-        s.t(20, 254 + i * 3.6, n, "t cb" if i == 0 else "t tiny2", "start")
-    frame(s, "PL-05", "Détails béton armé et nomenclature des aciers", "RC details and bar schedule", "1/20")
+        s.t(215, 251 + i * 3.6, n, "t cb" if i == 0 else "t tiny2", "start")
+    frame(s, "PL-05")
     s.title = "PL-05 Détails BA"
     return s
 
 
-SHEET_FUNCS = [pl01, pl02, pl03, pl04, pl05]
+# ==========================================================================
+# PL-06  Réseaux, local technique, électricité
+# ==========================================================================
+
+def pl06():
+    s = S("p6")
+    V = UV(22, 16, -1.7, 32.6, 100)
+    P = V
+    s.k = V.k
+    s.flip("rot", 118.5, 115)       # same reading direction as PL-02
+    s.add(f'<g clip-path="url(#{s.id}-clip)">')
+    # context
+    s.pl([P(*p) for p in rect_uv(HOUSE["u0"], HOUSE["v1"] - 0.6, HOUSE["u1"], HOUSE["v1"])], "k w3 fhx", True)
+    s.pl([P(*p) for p in rect_uv(HOUSE["u0"], DECK[0], HOUSE["u1"], DECK[1])], "k w1 ftl", True)
+    s.pl([P(*p) for p in rect_uv(POOL["u0"] - WALK, POOL["v0"] - WALK, POOL["u1"] + WALK, POOL["v1"] + WALK)], "k w1 fs", True)
+    s.pl([P(*p) for p in rect_uv(POOL["u0"], POOL["v0"], POOL["u1"], POOL["v1"])], "red w3 fw", True)
+    s.pl([P(*p) for p in rect_uv(TECH["u0"], TECH["v0"], TECH["u1"], TECH["v1"])], "red w3 fcc", True)
+    s.pl([P(*p) for p in rect_uv(TECH["u0"] + TECH_WALL, TECH["v0"] + TECH_WALL, TECH["u1"] - TECH_WALL, TECH["v1"] - TECH_WALL)], "k w1 fs", True)
+    x, y = P(SOAKAWAY["u"], SOAKAWAY["v"])
+    s.circ(x, y, SOAKAWAY["r"] * V.k, "red w2 fst")
+    s.pl([P(*p) for p in rect_uv(POOL_STAIR["u0"], FRONT_GARDEN[0], POOL_STAIR["u1"], FRONT_GARDEN[1])], "k w1 fs", True)
+    for i in range(POOL_STAIR["n"]):
+        vv = FRONT_GARDEN[0] + POOL_STAIR["landing"] + i * POOL_STAIR["tread"]
+        s.line(P(POOL_STAIR["u0"], vv), P(POOL_STAIR["u1"], vv), "k w1")
+    s.add("</g>")
+    xl, yl = P((POOL_STAIR["u0"] + POOL_STAIR["u1"]) / 2, FRONT_GARDEN[0] + 0.35)
+    s.t(xl, yl, "Esc. piscine", "t tiny2", "middle")
+    X0 = POOL["u0"]
+    Y0 = POOL["v0"]
+    ent = [TECH["v0"] + 0.45, TECH["v0"] + 0.75, TECH["v0"] + 1.05, TECH["v0"] + 1.35]
+    ret_v = TECH["v0"] + 1.65
+    tu = TECH["u1"]
+    # suction lines (SK1, BF, PB, SK2)
+    srcs = [("SK1", (X0, Y0 + FITTINGS["skimmers"][0][1])), ("BF", (X0 + FITTINGS["drains"][0][0], Y0 + 2.5)),
+            ("PB", (X0, Y0 + FITTINGS["vacuum"][0][1])), ("SK2", (X0, Y0 + FITTINGS["skimmers"][1][1]))]
+    for i, (nm, (u, v)) in enumerate(srcs):
+        uj = tu + 0.55 + 0.32 * i
+        pts = [(u, v), (uj, v), (uj, ent[i]), (tu - TECH_WALL, ent[i])]
+        if nm == "BF":
+            s.line(P(X0 + FITTINGS["drains"][0][0], Y0 + FITTINGS["drains"][0][1]), P(X0 + FITTINGS["drains"][1][0], Y0 + FITTINGS["drains"][1][1]), "pipe-s w3")
+        s.pl([P(*p) for p in pts], "pipe-s w3")
+    # return ring (Ø63) along the NE side, branches Ø50 to R1-R4
+    rv = POOL["v1"] + 0.36
+    ru = POOL["u0"] - 0.36
+    ring = [(tu - TECH_WALL, ret_v), (ru - 0.9, ret_v), (ru - 0.9, rv), (POOL["u1"] + 0.36, rv), (POOL["u1"] + 0.36, Y0 + FITTINGS["returns"][0][1])]
+    s.pl([P(*p) for p in ring], "pipe-r w3")
+    for (x, y) in FITTINGS["returns"]:
+        if y >= POOL_W:
+            s.line(P(X0 + x, rv), P(X0 + x, POOL["v1"]), "pipe-r w2")
+        else:
+            s.line(P(POOL["u1"] + 0.36, Y0 + y), P(POOL["u1"], Y0 + y), "pipe-r w2")
+    # backwash / emptying to soakaway
+    bu = TECH["u0"] + 0.5
+    s.pl([P(bu, TECH["v1"]), P(bu, SOAKAWAY["v"]), P(SOAKAWAY["u"] - SOAKAWAY["r"], SOAKAWAY["v"])], "pipe-e w3")
+    # perimeter drain + outlet
+    o = 0.53
+    s.pl([P(*p) for p in rect_uv(POOL["u0"] - o, POOL["v0"] - o, POOL["u1"] + o, POOL["v1"] + o)], "pipe-d w2", True)
+    s.pl([P(POOL["u0"] - o, POOL["v1"] + o), P(POOL["u0"] - o, SOAKAWAY["v"] - 0.9), P(SOAKAWAY["u"] + 0.45, SOAKAWAY["v"] - 0.45)], "pipe-d w2")
+    # slot drain + outlet
+    cv = FRONT_GARDEN[1] + 0.08
+    s.line(P(HOUSE["u0"], cv), P(HOUSE["u1"], cv), "k w4")
+    cu = 4.6
+    s.pl([P(HOUSE["u0"], cv), P(cu, cv), P(cu, SOAKAWAY["v"] - 1.6), P(SOAKAWAY["u"] + 0.5, SOAKAWAY["v"] - 0.3)], "pipe-d w2")
+    # electrical supply from the house + water supply
+    eu = HOUSE["u0"] + 0.45
+    s.pl([P(eu, HOUSE["v1"]), P(eu, FRONT_GARDEN[0] + 0.7), P(4.15, FRONT_GARDEN[0] + 0.7), P(4.15, TECH["v0"] + 0.30), P(tu, TECH["v0"] + 0.30)], "elec w3")
+    s.pl([P(eu + 0.25, HOUSE["v1"]), P(eu + 0.25, FRONT_GARDEN[0] + 0.45), P(3.9, FRONT_GARDEN[0] + 0.45), P(3.9, TECH["v0"]), P(3.5, TECH["v0"])], "water-l w2")
+    # light cables to P1-P3 under the SW walkway
+    lv = POOL["v0"] - 0.36
+    s.pl([P(tu, TECH["v0"] + 0.15), P(POOL["u0"] - 0.65, TECH["v0"] + 0.15), P(POOL["u0"] - 0.65, lv), P(X0 + FITTINGS["lights"][-1][0], lv)], "elec w2")
+    for (x, y) in FITTINGS["lights"]:
+        s.line(P(X0 + x, lv), P(X0 + x, POOL["v0"]), "elec w2")
+        c_ = P(X0 + x, POOL["v0"])
+        s.arc((c_[0] - 2, c_[1]), 2, 2, 0, 0, (c_[0] + 2, c_[1]), "k w1 flt")
+    # fitting symbols
+    for nm, (u, v) in srcs:
+        c_ = P(u, v)
+        s.circ(c_[0], c_[1], 0.9, "k w1 fk")
+        s.t(c_[0] + 1.6, c_[1] - 1.4, nm, "t tiny2 b", "start")
+    for i, (x, y) in enumerate(FITTINGS["returns"]):
+        c_ = P(X0 + x, Y0 + y)
+        s.circ(c_[0], c_[1], 0.9, "k w1 fred")
+        s.t(c_[0] + 1.4, c_[1] + (3.2 if y >= POOL_W else -1.4), f"R{i + 1}", "t tiny2 b", "start")
+    # labels
+    def lab(u, v, txt, c="t lab", a="middle", rot=0):
+        x_, y_ = P(u, v)
+        s.t(x_, y_, txt, c, a, rot)
+    lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2, "BASSIN 10.00 × 5.00", "t lab b red-t")
+    lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v0"] - 0.55, "Local technique", "t lab red-t")
+    lab(SOAKAWAY["u"] + 0.9, SOAKAWAY["v"] + 0.15, "Puits perdu Ø1.20, prof. 2.50", "t lab red-t", "start")
+    lab((HOUSE["u0"] + HOUSE["u1"]) / 2, HOUSE["v1"] - 0.42, "VILLA EXISTANTE (TGBT)", "t lab b")
+    lab(HOUSE["u1"] - 0.3, FRONT_GARDEN[1] + 0.35, "Caniveau à grille", "t tiny2", "end")
+    lab(cu + 0.25, 26.6, "EP caniveau Ø110", "t tiny2", "start", -90)
+    lab(bu - 0.25, 27.8, "Vidange / contre-lavage Ø50", "t tiny2", "start", -90)
+    lab(POOL["u0"] - o - 0.25, 27.0, "Drain périph. Ø100", "t tiny2", "start", -90)
+    lab(4.15 - 0.2, FRONT_GARDEN[0] + 2.4, "Câble 3G6 sous TPC Ø63", "t tiny2", "start", -90)
+    lab((POOL["u0"] + POOL["u1"]) / 2, rv + 0.55, "Refoulement Ø63 en boucle (Ø50 vers buses)", "t tiny2")
+    lab(POOL["u0"] + 3.5, lv - 0.55, "Câbles projecteurs 12 V sous gaine", "t tiny2")
+    # line legend (orchard corner)
+    s.flip()
+    lgx, lgy = 30, 142
+    items = [("pipe-s w3", "Aspiration Ø50 PVC PN16 (4 lignes)"), ("pipe-r w3", "Refoulement Ø63 / Ø50"),
+             ("pipe-e w3", "Vidange, contre-lavage"), ("pipe-d w2", "Drains et eaux pluviales"),
+             ("elec w3", "Électricité sous gaine TPC"), ("water-l w2", "Arrivée d'eau PEHD Ø25")]
+    s.rect(lgx - 2, lgy - 1, 84, 6 * 5.2 + 7, "k w1 fs")
+    s.t(lgx, lgy + 3.4, "LÉGENDE DES RÉSEAUX", "t cl", "start")
+    for i, (c_, txt) in enumerate(items):
+        yy = lgy + 8.2 + i * 5.2
+        s.line((lgx, yy), (lgx + 12, yy), c_)
+        s.t(lgx + 15, yy + 1.1, txt, "t cs", "start")
+    s.t(22 + 96, 14.2, "TRACÉ DES RÉSEAUX  1/100", "t ct")
+    # ---------------- equipment room plan 1/25 ----------------
+    k = 40
+    ox, oy = 214, 148
+    A = lambda a, b: (ox + a * k, oy - b * k)
+    s.t(ox + 48, 26, "LOCAL TECHNIQUE - PLAN  1/25", "t ct")
+    s.rect(*A(0, 2.0), 2.4 * k, 2.0 * k, "k w3 fcc")
+    s.rect(*A(0.2, 1.8), 2.0 * k, 1.6 * k, "k w2 fs")
+    # door + stair well
+    s.rect(*A(1.25, 2.0), 0.80 * k, 0.2 * k, "k w1 fs")
+    s.add(f'<path d="M{A(1.25, 2.0)[0]:.2f} {A(1.25, 2.0)[1]:.2f} A {0.8 * k:.2f} {0.8 * k:.2f} 0 0 1 {A(2.05, 2.8)[0]:.2f} {A(2.05, 2.8)[1]:.2f}" class="k w1 dash"/>')
+    s.line(A(1.25, 2.0), A(1.25, 2.8), "k w1")
+    for i in range(4):
+        s.line(A(1.15, 2.0 + 0.3 * i), A(2.15, 2.0 + 0.3 * i), "k w1")
+    s.line(A(1.15, 2.0), A(1.15, 2.9), "k w2")
+    s.line(A(2.15, 2.0), A(2.15, 2.9), "k w2")
+    # equipment
+    c_ = A(0.72, 0.72)
+    s.circ(c_[0], c_[1], 0.375 * k, "k w2 fs")
+    s.circ(c_[0], c_[1], 0.12 * k, "k w1")
+    s.rect(*A(1.30, 0.60), 0.60 * k, 0.30 * k, "k w2 fs")
+    s.circ(*A(1.42, 0.45), 0.10 * k, "k w1")
+    s.rect(*A(2.04, 1.50), 0.10 * k, 1.10 * k, "k w2 fpv")
+    for b in (0.55, 0.80, 1.05, 1.30):
+        s.circ(*A(2.09, b), 1.2, "pipe-s w2 fs")
+        s.line(A(2.20, b), A(2.40, b), "pipe-s w3")
+    s.line(A(2.40, 1.62), A(1.30, 1.62), "pipe-r w3")
+    s.rect(*A(1.50, 1.70), 0.30 * k, 0.16 * k, "k w1 dash fs")
+    s.line(A(0.72, 1.09), A(0.72, 1.62), "pipe-r w3")
+    s.line(A(0.72, 1.62), A(1.30, 1.62), "pipe-r w3")
+    s.line(A(1.60, 0.60), A(2.04, 0.80), "pipe-s w2")
+    s.line(A(1.30, 0.45), A(1.09, 0.65), "pipe-s w2")
+    s.rect(*A(0.20, 1.72), 0.16 * k, 0.55 * k, "k w2 fpv")
+    s.rect(*A(0.48, 1.80), 0.30 * k, 0.12 * k, "k w1 fpv")
+    s.circ(*A(1.00, 1.30), 0.07 * k, "k w1 fk")
+    s.line(A(0.50, 1.80), A(0.50, 2.0), "pipe-e w3")
+    s.rect(*A(1.70, 0.20), 0.25 * k, 0.20 * k, "k w1 fgr")
+    s.rect(*A(0.0, 0.70), 0.20 * k, 0.25 * k, "k w1 fgr")
+    s.line(A(2.40, 0.32), A(2.20, 0.32), "elec w2")
+    marks = [((0.72, 0.72), "1"), ((1.60, 0.45), "2"), ((2.09, 0.30), "3"), ((1.05, 1.62), "4"), ((1.65, 1.78), "5"),
+             ((0.28, 1.45), "6"), ((0.63, 1.95), "7"), ((1.00, 1.30), "8"), ((1.82, 0.10), "9"), ((1.65, 2.45), "10")]
+    for (a, b), n in marks:
+        x_, y_ = A(a, b)
+        s.circ(x_ + 3.2, y_ - 3.2, 2.0, "k w1 fs")
+        s.t(x_ + 3.2, y_ - 2.2, n, "t tiny2 b")
+    s.dim(A(0, 0), A(2.4, 0), -5, "2.40")
+    s.dim(A(0, 0), A(0, 2.0), 5, "2.00")
+    s.dim(A(0.2, 0.2), A(2.2, 0.2), 0, "2.00 int.")
+    s.level(*A(1.88, 1.02), "sol -1.45", "l")
+    s.t(ox + 48, oy + 13, "Pompe en charge : axe -1.25 sous le plan d'eau -0.85", "t cs")
+    s.t(ox + 48, oy + 17.5, "Dalle de couverture +0.50 - TN ≈ -0.85", "t cs mute")
+    rep = ["1  Filtre à sable Ø750, vanne 6 voies", "2  Pompe 15 m³/h + préfiltre", "3  Nourrice aspiration, 4 vannes",
+           "4  Refoulement Ø63 vers bassin", "5  Électrolyseur au sel (option)", "6  Coffret électrique piscine",
+           "7  Transformateur 12 V 300 VA", "8  Siphon de sol → puits perdu", "9  Grilles de ventilation (2)",
+           "10 Porte métallique 0.80 + 3 marches"]
+    for i, r_ in enumerate(rep):
+        s.t(224, oy + 25 + i * 4.2, r_, "t tiny2", "start")
+    # ---------------- hydraulic synoptic ----------------
+    y0 = 232
+    s.t(20, 226, "SYNOPTIQUE HYDRAULIQUE (sans échelle)", "t cl", "start")
+    srcs_b = ["SK1", "SK2", "BF1 + BF2", "PB"]
+    for i, nm in enumerate(srcs_b):
+        yy = y0 + i * 8.5
+        s.rect(20, yy, 20, 6, "k w1 fs")
+        s.t(30, yy + 4.2, nm, "t tiny2 b")
+        s.line((40, yy + 3), (52, yy + 3), "pipe-s w3")
+        s.circ(50, yy + 3, 1.3, "k w1 fs")
+        s.line((49.1, yy + 2.1), (50.9, yy + 3.9), "k w1")
+    s.line((52, y0 + 3), (52, y0 + 28.5), "pipe-s w4")
+    s.line((52, y0 + 16), (60, y0 + 16), "pipe-s w3 arrow")
+    boxes = [(60, "Préfiltre +", "pompe 15 m³/h"), (88, "Filtre Ø750", "vanne 6 voies"), (116, "Électrolyseur", "(option)"), (144, "Buses", "R1 à R4")]
+    for i, (bx, l1, l2) in enumerate(boxes):
+        s.rect(bx, y0 + 10, 22, 12, "k w2 fs" + (" dash" if i == 2 else ""))
+        s.t(bx + 11, y0 + 15, l1, "t tiny2 b")
+        s.t(bx + 11, y0 + 19.2, l2, "t tiny2")
+        if i < 3:
+            s.line((bx + 22, y0 + 16), (bx + 28, y0 + 16), "pipe-r w3 arrow")
+    s.line((99, y0 + 22), (99, y0 + 36), "pipe-e w3 arrow")
+    s.t(101, y0 + 33, "égout → puits perdu", "t tiny2", "start")
+    s.t(20, 280, "Chaque ligne d'aspiration a sa vanne. Essai de pression 24 h avant remblai.", "t tiny2", "start")
+    # ---------------- single-line diagram ----------------
+    s.t(176, 226, "SCHÉMA UNIFILAIRE (sans échelle)", "t cl", "start")
+    s.rect(176, 230, 22, 9, "k w2 fs")
+    s.t(187, 235.8, "TGBT villa", "t tiny2 b")
+    s.line((198, 234.5), (206, 234.5), "elec w3")
+    s.t(202, 232.3, "3G6", "t tiny", "middle")
+    s.rect(206, 230, 18, 9, "k w2 fs")
+    s.t(215, 233.6, "Inter. gén.", "t tiny2")
+    s.t(215, 237.6, "40 A", "t tiny2 b")
+    s.line((224, 234.5), (230, 234.5), "elec w3")
+    s.rect(230, 230, 22, 9, "k w2 fs")
+    s.t(241, 233.6, "DDR 30 mA", "t tiny2")
+    s.t(241, 237.6, "type A 40 A", "t tiny2 b")
+    s.line((252, 234.5), (258, 234.5), "elec w3")
+    s.line((258, 234.5), (258, 246), "elec w3")
+    s.line((186, 246), (306, 246), "k w4")
+    loads = [(194, "16 A", "Pompe", "contacteur + horloge"), (224, "10 A", "Transfo 12 V", "→ P1, P2, P3"),
+             (254, "10 A", "Électrolyseur", "(option)"), (284, "16 A", "Prise 2P+T", "local technique")]
+    for x_, a_, l1, l2 in loads:
+        s.line((x_, 246), (x_, 251), "elec w2")
+        s.rect(x_ - 5, 251, 10, 6, "k w2 fs")
+        s.t(x_, 255.2, a_, "t tiny2 b")
+        s.line((x_, 257), (x_, 263), "elec w2")
+        s.t(x_, 267, l1, "t tiny2 b")
+        s.t(x_, 271, l2, "t tiny2 mute")
+    s.t(176, 277, "Parafoudre en tête. Liaison équipotentielle : ferraillage, échelle, niches", "t tiny2", "start")
+    s.t(176, 281, "et pièces métalliques reliées au piquet de terre. Local hors volumes 0, 1, 2.", "t tiny2", "start")
+    band_north(s, 180 - U_ANG)
+    frame(s, "PL-06")
+    s.title = "PL-06 Réseaux et local technique"
+    return s
+
+
+SHEET_FUNCS = [pl01, pl02, pl03, pl04, pl05, pl06]
