@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="VB-01 Principe"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}
+.pipe-a1{stroke:var(--p-r);fill:none}.pipe-a2{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}.pipe-b{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.selv{stroke:var(--p-el);fill:none;stroke-dasharray:.7 .7}.memb{stroke:#0b5d7a;fill:none;stroke-width:.75}.pe{stroke:#3a8a3a;fill:none;stroke-width:.35;stroke-dasharray:2 .6 .6 .6}.z1{fill:#7b3fb0;fill-opacity:.07;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:2 1}.z2{fill:#7b3fb0;fill-opacity:.03;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:1 1}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fcc2{fill:url(#cc);opacity:.45}.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="b1-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><defs><clipPath id="b1c0"><rect x="22" y="30" width="115.00" height="108.00"/></clipPath></defs>
+<rect x="22.00" y="30.00" width="115.00" height="108.00" class="k w2"/>
+<text x="79.50" y="25.50" class="t ct" text-anchor="middle">ORIGINAL - indice E (v1.3.1)</text>
+<g clip-path="url(#b1c0)">
+<polygon points="106.25,20.00 46.25,20.00 46.25,42.00 106.25,42.00" class="k w3 fhx"/>
+<polygon points="46.25,16.00 41.25,16.00 41.25,42.00 46.25,42.00" class="k w1 fs"/>
+<polygon points="106.25,42.00 46.25,42.00 46.25,52.00 106.25,52.00" class="k w1 fgz"/>
+<polygon points="106.25,52.00 46.25,52.00 46.25,64.50 106.25,64.50" class="k w1 fpv"/>
+<polygon points="20.28,20.00 1.62,145.00 16.78,145.00 35.45,20.00" class="k w1 fgr"/>
+<polyline points="20.28,20.00 1.62,145.00" class="k w3 parcel"/>
+<polygon points="103.75,64.50 48.75,64.50 48.75,94.50 103.75,94.50" class="k w1 fs"/>
+<polygon points="101.25,67.00 51.25,67.00 51.25,92.00 101.25,92.00" class="red w3 fw"/>
+<circle cx="123.00" cy="131.00" r="3.00" class="k w2 fst"/>
+<circle cx="96.00" cy="108.00" r="4.20" class="k w1 tree"/>
+<circle cx="96.00" cy="108.00" r="0.35" class="k w1 fk"/>
+<circle cx="76.00" cy="109.50" r="4.20" class="k w1 tree"/>
+<circle cx="76.00" cy="109.50" r="0.35" class="k w1 fk"/>
+<circle cx="56.00" cy="108.00" r="4.20" class="k w1 tree"/>
+<circle cx="56.00" cy="108.00" r="0.35" class="k w1 fk"/>
+<circle cx="124.00" cy="110.00" r="4.20" class="k w1 tree"/>
+<circle cx="124.00" cy="110.00" r="0.35" class="k w1 fk"/>
+<polygon points="131.00,74.50 119.00,74.50 119.00,84.50 131.00,84.50" class="red w3 fcc"/>
+<polyline points="101.25,73.25 116.25,73.25 116.25,76.75 120.00,76.75" class="pipe-s w2"/>
+<polyline points="98.25,79.50 114.65,79.50 114.65,78.25 120.00,78.25" class="pipe-s w2"/>
+<polyline points="101.25,79.50 113.05,79.50 113.05,79.75 120.00,79.75" class="pipe-s w2"/>
+<polyline points="101.25,85.75 111.45,85.75 111.45,81.25 120.00,81.25" class="pipe-s w2"/>
+<polyline points="120.00,82.75 107.55,82.75 107.55,93.80 49.45,93.80 49.45,84.50" class="pipe-a1 w2"/>
+<line x1="49.45" y1="84.50" x2="51.25" y2="84.50" class="pipe-a1 w2"/>
+<line x1="60.00" y1="93.80" x2="60.00" y2="92.00" class="pipe-a1 w2"/>
+<line x1="76.25" y1="93.80" x2="76.25" y2="92.00" class="pipe-a1 w2"/>
+<line x1="92.50" y1="93.80" x2="92.50" y2="92.00" class="pipe-a1 w2"/>
+<polyline points="128.50,84.50 128.50,131.00 126.00,131.00" class="pipe-b w2"/>
+<polyline points="104.00,42.00 104.00,45.50 113.25,45.50 113.25,76.00 119.00,76.00" class="elec w2"/>
+</g>
+<text x="76.25" y="36.28" class="t tiny2 b" text-anchor="middle">VILLA EXISTANTE</text>
+<text x="76.25" y="82.28" class="t tiny2 b red-t" text-anchor="middle">BASSIN 10.00 × 5.00</text>
+<text x="123.00" y="139.28" class="t tiny2" text-anchor="middle">Puits perdu</text>
+<text x="125.00" y="73.28" class="t tiny2 b red-t" text-anchor="middle">Local technique</text>
+<text x="125.00" y="94.28" class="t tiny2 red-t" text-anchor="middle">2.40 × 2.00 à 3.55 m</text>
+<text x="76.25" y="99.53" class="t tiny2" text-anchor="middle">Boucle de refoulement + 4 buses</text>
+<text x="109.50" y="64.28" class="t tiny2" text-anchor="middle">4 aspirations</text>
+<defs><clipPath id="b1c1"><rect x="168" y="30" width="115.00" height="108.00"/></clipPath></defs>
+<rect x="168.00" y="30.00" width="115.00" height="108.00" class="k w2"/>
+<text x="225.50" y="25.50" class="t ct" text-anchor="middle">VARIANTE B - indice F (v2.0.0)</text>
+<g clip-path="url(#b1c1)">
+<polygon points="252.25,20.00 192.25,20.00 192.25,42.00 252.25,42.00" class="k w3 fhx"/>
+<polygon points="192.25,16.00 187.25,16.00 187.25,42.00 192.25,42.00" class="k w1 fs"/>
+<polygon points="252.25,42.00 192.25,42.00 192.25,52.00 252.25,52.00" class="k w1 fgz"/>
+<polygon points="252.25,52.00 192.25,52.00 192.25,64.50 252.25,64.50" class="k w1 fpv"/>
+<polygon points="166.28,20.00 147.62,145.00 162.78,145.00 181.45,20.00" class="k w1 fgr"/>
+<polyline points="166.28,20.00 147.62,145.00" class="k w3 parcel"/>
+<polygon points="249.75,64.50 194.75,64.50 194.75,94.50 249.75,94.50" class="k w1 fs"/>
+<polygon points="247.25,67.00 197.25,67.00 197.25,92.00 247.25,92.00" class="red w3 fw"/>
+<circle cx="269.00" cy="131.00" r="3.00" class="k w2 fst"/>
+<circle cx="242.00" cy="108.00" r="4.20" class="k w1 tree"/>
+<circle cx="242.00" cy="108.00" r="0.35" class="k w1 fk"/>
+<circle cx="222.00" cy="109.50" r="4.20" class="k w1 tree"/>
+<circle cx="222.00" cy="109.50" r="0.35" class="k w1 fk"/>
+<circle cx="202.00" cy="108.00" r="4.20" class="k w1 tree"/>
+<circle cx="202.00" cy="108.00" r="0.35" class="k w1 fk"/>
+<circle cx="270.00" cy="110.00" r="4.20" class="k w1 tree"/>
+<circle cx="270.00" cy="110.00" r="0.35" class="k w1 fk"/>
+<polygon points="255.75,74.75 249.75,74.75 249.75,84.25 255.75,84.25" class="k w2 fpv"/>
+<polygon points="253.65,76.50 249.90,76.50 249.90,82.50 253.65,82.50" class="red w3 fs"/>
+<line x1="253.65" y1="76.50" x2="249.90" y2="82.50" class="k w1 dash"/>
+<line x1="253.65" y1="82.50" x2="249.90" y2="76.50" class="k w1 dash"/>
+<polygon points="254.90,75.25 248.40,75.25 248.40,83.75 254.90,83.75" class="red w2 dash"/>
+<polygon points="253.90,76.25 248.40,76.25 248.40,82.75 253.90,82.75" class="k w1 dash"/>
+<polygon points="197.25,80.00 195.25,80.00 195.25,89.00 197.25,89.00" class="red w3 fcc"/>
+<line x1="197.55" y1="83.00" x2="197.55" y2="86.00" class="red w4"/>
+<polygon points="247.25,77.50 244.25,77.50 244.25,81.50 247.25,81.50" class="k w3 fs"/>
+<polygon points="264.50,88.50 261.50,88.50 261.50,90.50 264.50,90.50" class="red w3 fs"/>
+<polyline points="249.90,85.75 249.05,85.75 249.05,82.75" class="pipe-s w2"/>
+<polyline points="249.90,73.25 249.05,73.25 249.05,76.25" class="pipe-s w2"/>
+<polyline points="251.15,83.75 251.15,94.50 194.75,94.50 194.75,81.50" class="pipe-a1 w2"/>
+<polyline points="194.75,81.50 197.25,81.50" class="pipe-a1 w2"/>
+<polyline points="194.75,87.50 197.25,87.50" class="pipe-a1 w2"/>
+<polyline points="250.15,83.75 250.15,93.90 195.35,93.90 195.35,84.50 195.65,84.50" class="pipe-a2 w2"/>
+<polyline points="254.90,82.00 263.00,82.00 263.00,89.50" class="pipe-b w2"/>
+<polyline points="250.00,42.00 250.00,44.50 259.50,44.50 259.50,77.00 254.90,77.00" class="elec w2"/>
+<polyline points="263.00,89.50 263.00,131.00 266.00,131.00" class="pipe-b w2"/>
+</g>
+<text x="222.25" y="36.28" class="t tiny2 b" text-anchor="middle">VILLA EXISTANTE</text>
+<text x="222.25" y="82.28" class="t tiny2 b red-t" text-anchor="middle">BASSIN 10.00 × 5.00 (inchangé)</text>
+<text x="269.00" y="139.28" class="t tiny2" text-anchor="middle">Puits perdu</text>
+<text x="256.75" y="79.78" class="t tiny2 b red-t" text-anchor="start">Fosse sous trappe</text>
+<text x="256.75" y="84.53" class="t tiny2 red-t" text-anchor="start">1.30 × 1.70 (enterrée)</text>
+<text x="193.75" y="87.28" class="t tiny2 b red-t" text-anchor="end">Cascade</text>
+<text x="263.00" y="97.78" class="t tiny2 red-t" text-anchor="middle">Borne de rejet</text>
+<text x="222.25" y="101.03" class="t tiny2" text-anchor="middle">A1 + A2 dans une tranchée</text>
+<text x="260.00" y="62.78" class="t tiny2" text-anchor="start">Câble vers coffret</text>
+<g transform="rotate(135.40 363.00 197.00)"><circle cx="363.0" cy="197" r="9" class="k w1"/><polygon points="363.0,186 365.6,200 363.0,198 360.4,200" class="k w1 fk"/><text x="363.0" y="184.8" class="t cb" text-anchor="middle">N</text></g>
+<text x="363.00" y="214.50" class="t cs mute" text-anchor="middle">Nord (Lambert)</text>
+<text x="22.00" y="147.00" class="t cl" text-anchor="start">ORIGINAL</text>
+<rect x="22.00" y="150.00" width="90.67" height="12.00" class="k w2 fs"/>
+<text x="67.33" y="155.20" class="t tiny2 b" text-anchor="middle">BASSIN</text>
+<text x="67.33" y="159.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">10.00 × 5.00 - 50,37 m³</text>
+<rect x="120.67" y="150.00" width="90.67" height="12.00" class="k w2 fs"/>
+<text x="166.00" y="155.20" class="t tiny2 b" text-anchor="middle">LOCAL TECHNIQUE EXTÉRIEUR</text>
+<text x="166.00" y="159.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">2.40 × 2.00 semi-enterré, à 3.55 m</text>
+<text x="116.67" y="157.20" class="t cb" text-anchor="middle">+</text>
+<rect x="219.33" y="150.00" width="90.67" height="12.00" class="k w2 fs"/>
+<text x="264.67" y="155.20" class="t tiny2 b" text-anchor="middle">ÉQUIPEMENTS CLASSIQUES</text>
+<text x="264.67" y="159.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">sable Ø600, vanne 6 voies, 4 aspirations, 4 buses</text>
+<text x="215.33" y="157.20" class="t cb" text-anchor="middle">+</text>
+<line x1="166.00" y1="164.00" x2="166.00" y2="172.00" class="red w3 arrow"/>
+<text x="170.00" y="169.50" class="t tiny2 b red-t" text-anchor="start">MÊME BASSIN, SYSTÈME HYDRAULIQUE ENTIÈREMENT REPENSÉ</text>
+<text x="22.00" y="174.00" class="t cl" text-anchor="start">VARIANTE B</text>
+<rect x="22.00" y="177.00" width="37.71" height="12.00" class="red w2 fs"/>
+<text x="40.86" y="182.20" class="t tiny2 b red-t" text-anchor="middle">BASSIN (inchangé)</text>
+<text x="40.86" y="186.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">dimensions, niveaux, profil</text>
+<rect x="63.71" y="177.00" width="37.71" height="12.00" class="red w2 fs"/>
+<text x="82.57" y="182.20" class="t tiny2 b red-t" text-anchor="middle">FOSSE INTÉGRÉE</text>
+<text x="82.57" y="186.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">sèche, sous trappe A15</text>
+<rect x="105.43" y="177.00" width="37.71" height="12.00" class="red w2 fs"/>
+<text x="124.29" y="182.20" class="t tiny2 b red-t" text-anchor="middle">UNE POMPE</text>
+<text x="124.29" y="186.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">12 m³/h, préfiltre</text>
+<rect x="147.14" y="177.00" width="37.71" height="12.00" class="red w2 fs"/>
+<text x="166.00" y="182.20" class="t tiny2 b red-t" text-anchor="middle">FILTRE À CARTOUCHE</text>
+<text x="166.00" y="186.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">13.9 m², sans contre-lavage</text>
+<rect x="188.86" y="177.00" width="37.71" height="12.00" class="red w2 fs"/>
+<text x="207.71" y="182.20" class="t tiny2 b red-t" text-anchor="middle">2 CIRCUITS CONTRÔLÉS</text>
+<text x="207.71" y="186.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">A retour - B jardin</text>
+<rect x="230.57" y="177.00" width="37.71" height="12.00" class="red w2 fs"/>
+<text x="249.43" y="182.20" class="t tiny2 b red-t" text-anchor="middle">RETOUR ARCHITECTURAL</text>
+<text x="249.43" y="186.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">cascade + 2 buses</text>
+<rect x="272.29" y="177.00" width="37.71" height="12.00" class="red w2 fs"/>
+<text x="291.14" y="182.20" class="t tiny2 b red-t" text-anchor="middle">REJET JARDIN</text>
+<text x="291.14" y="186.40" class="t tiny2" text-anchor="middle" style="font-size:2.3px">borne de contrôle</text>
+<text x="166.00" y="197.00" class="t ct red-t" text-anchor="middle">PAS DE LOCAL TECHNIQUE EXTÉRIEUR</text>
+<text x="22.00" y="214.00" class="t cl" text-anchor="start">CHIFFRES CLÉS - CALCULÉS SUR LES DEUX MODÈLES (voir dossier, § comparaison)</text>
+<rect x="22.00" y="216.00" width="168.00" height="50.60" class="k w2 fs"/>
+<rect x="22.00" y="216.00" width="168.00" height="4.60" class="k w2 fh"/>
+<line x1="92.00" y1="216.00" x2="92.00" y2="266.60" class="k w1"/>
+<line x1="122.00" y1="216.00" x2="122.00" y2="266.60" class="k w1"/>
+<line x1="172.00" y1="216.00" x2="172.00" y2="266.60" class="k w1"/>
+<line x1="22.00" y1="220.60" x2="190.00" y2="220.60" class="k w1"/>
+<line x1="22.00" y1="225.20" x2="190.00" y2="225.20" class="k w1"/>
+<line x1="22.00" y1="229.80" x2="190.00" y2="229.80" class="k w1"/>
+<line x1="22.00" y1="234.40" x2="190.00" y2="234.40" class="k w1"/>
+<line x1="22.00" y1="239.00" x2="190.00" y2="239.00" class="k w1"/>
+<line x1="22.00" y1="243.60" x2="190.00" y2="243.60" class="k w1"/>
+<line x1="22.00" y1="248.20" x2="190.00" y2="248.20" class="k w1"/>
+<line x1="22.00" y1="252.80" x2="190.00" y2="252.80" class="k w1"/>
+<line x1="22.00" y1="257.40" x2="190.00" y2="257.40" class="k w1"/>
+<line x1="22.00" y1="262.00" x2="190.00" y2="262.00" class="k w1"/>
+<text x="23.20" y="219.25" class="t cb" text-anchor="start" style="font-size:2.5px">Indicateur</text>
+<text x="120.80" y="219.25" class="t cb" text-anchor="end" style="font-size:2.5px">Original (E)</text>
+<text x="170.80" y="219.25" class="t cb" text-anchor="end" style="font-size:2.5px">Variante B (F)</text>
+<text x="188.80" y="219.25" class="t cb" text-anchor="end" style="font-size:2.5px">Écart</text>
+<text x="23.20" y="223.85" class="t cs" text-anchor="start" style="font-size:2.5px">Local technique hors œuvre (emprise)</text>
+<text x="120.80" y="223.85" class="t cs" text-anchor="end" style="font-size:2.5px">4.80 m²</text>
+<text x="170.80" y="223.85" class="t cs" text-anchor="end" style="font-size:2.5px">aucun</text>
+<text x="188.80" y="223.85" class="t cs" text-anchor="end" style="font-size:2.5px">-100 %</text>
+<text x="23.20" y="228.45" class="t cs" text-anchor="start" style="font-size:2.5px">Fosse enterrée sous dallage (emprise)</text>
+<text x="120.80" y="228.45" class="t cs" text-anchor="end" style="font-size:2.5px">-</text>
+<text x="170.80" y="228.45" class="t cs" text-anchor="end" style="font-size:2.5px">2.21 m²</text>
+<text x="188.80" y="228.45" class="t cs" text-anchor="end" style="font-size:2.5px"></text>
+<text x="23.20" y="233.05" class="t cs" text-anchor="start" style="font-size:2.5px">Hauteur manométrique moyenne</text>
+<text x="120.80" y="233.05" class="t cs" text-anchor="end" style="font-size:2.5px">7.16 mCE</text>
+<text x="170.80" y="233.05" class="t cs" text-anchor="end" style="font-size:2.5px">6.07 mCE</text>
+<text x="188.80" y="233.05" class="t cs" text-anchor="end" style="font-size:2.5px">-15 %</text>
+<text x="23.20" y="237.65" class="t cs" text-anchor="start" style="font-size:2.5px">Canalisations PVC (hors PEHD de rejet)</text>
+<text x="120.80" y="237.65" class="t cs" text-anchor="end" style="font-size:2.5px">70 ml</text>
+<text x="170.80" y="237.65" class="t cs" text-anchor="end" style="font-size:2.5px">43.4 ml</text>
+<text x="188.80" y="237.65" class="t cs" text-anchor="end" style="font-size:2.5px">-38 %</text>
+<text x="23.20" y="242.25" class="t cs" text-anchor="start" style="font-size:2.5px">Fouilles en tranchée et local</text>
+<text x="120.80" y="242.25" class="t cs" text-anchor="end" style="font-size:2.5px">27.7 m³</text>
+<text x="170.80" y="242.25" class="t cs" text-anchor="end" style="font-size:2.5px">11.3 m³</text>
+<text x="188.80" y="242.25" class="t cs" text-anchor="end" style="font-size:2.5px">-59 %</text>
+<text x="23.20" y="246.85" class="t cs" text-anchor="start" style="font-size:2.5px">Béton armé des ouvrages techniques</text>
+<text x="120.80" y="246.85" class="t cs" text-anchor="end" style="font-size:2.5px">4.56 m³</text>
+<text x="170.80" y="246.85" class="t cs" text-anchor="end" style="font-size:2.5px">1.98 m³ + 1.56 gros béton</text>
+<text x="188.80" y="246.85" class="t cs" text-anchor="end" style="font-size:2.5px"></text>
+<text x="23.20" y="251.45" class="t cs" text-anchor="start" style="font-size:2.5px">Eau de lavage du filtre</text>
+<text x="120.80" y="251.45" class="t cs" text-anchor="end" style="font-size:2.5px">25.6 m³/an</text>
+<text x="170.80" y="251.45" class="t cs" text-anchor="end" style="font-size:2.5px">0.8 m³/an</text>
+<text x="188.80" y="251.45" class="t cs" text-anchor="end" style="font-size:2.5px">-97 %</text>
+<text x="23.20" y="256.05" class="t cs" text-anchor="start" style="font-size:2.5px">Coût du périmètre modifié (DH HT)</text>
+<text x="120.80" y="256.05" class="t cs" text-anchor="end" style="font-size:2.5px">56 969</text>
+<text x="170.80" y="256.05" class="t cs" text-anchor="end" style="font-size:2.5px">71 354</text>
+<text x="188.80" y="256.05" class="t cs" text-anchor="end" style="font-size:2.5px">+25 %</text>
+<text x="23.20" y="260.65" class="t cs" text-anchor="start" style="font-size:2.5px">  dont cascade, borne et PEHD demandés</text>
+<text x="120.80" y="260.65" class="t cs" text-anchor="end" style="font-size:2.5px">-</text>
+<text x="170.80" y="260.65" class="t cs" text-anchor="end" style="font-size:2.5px">10 963</text>
+<text x="188.80" y="260.65" class="t cs" text-anchor="end" style="font-size:2.5px"></text>
+<text x="23.20" y="265.25" class="t cs" text-anchor="start" style="font-size:2.5px">Coût d'exploitation calculé (DH/an)</text>
+<text x="120.80" y="265.25" class="t cs" text-anchor="end" style="font-size:2.5px">2 742</text>
+<text x="170.80" y="265.25" class="t cs" text-anchor="end" style="font-size:2.5px">2 312</text>
+<text x="188.80" y="265.25" class="t cs" text-anchor="end" style="font-size:2.5px">-16 %</text>
+<text x="222.00" y="214.00" class="t cl" text-anchor="start">CE QUI NE CHANGE PAS</text>
+<text x="222.00" y="221.00" class="t cs" text-anchor="start">- Bassin 10.00 × 5.00, implantation et niveaux</text>
+<text x="222.00" y="226.00" class="t cs" text-anchor="start">- Profondeur 0.55 → 1.80, profil du fond</text>
+<text x="222.00" y="231.00" class="t cs" text-anchor="start">- Volume d'eau 50.373 m³</text>
+<text x="222.00" y="236.00" class="t cs" text-anchor="start">- Structure BA, radier, voiles, chaînage</text>
+<text x="222.00" y="241.00" class="t cs" text-anchor="start">- Margelles, plage, escalier, éclairage 12 V</text>
+<text x="222.00" y="246.00" class="t cs" text-anchor="start">- Lot 6 jardins et lot 7 mise en eau</text>
+<text x="222.00" y="255.00" class="t cl" text-anchor="start">CE QUI DISPARAÎT</text>
+<text x="222.00" y="262.00" class="t cs" text-anchor="start">- Local technique 2.40 × 2.00 et sa porte</text>
+<text x="222.00" y="267.00" class="t cs" text-anchor="start">- Bondes BF1-BF2, prise balai, buses R1-R4</text>
+<text x="222.00" y="272.00" class="t cs" text-anchor="start">- Filtre à sable, vanne 6 voies, contre-lavages</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Variante B : sans local technique</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">PRINCIPE : EXISTANT ET PROPOSÉ</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Même bassin, système hydraulique entièrement repensé</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">VB-01</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/200</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">F - v2.0.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 20/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>

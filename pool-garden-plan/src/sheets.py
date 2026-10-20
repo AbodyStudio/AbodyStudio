@@ -7,6 +7,8 @@ from model import *  # noqa: F401,F403
 
 W, H = 420, 297
 BAND = 315          # cartouche band starts here (right side)
+FRAME_SUB = "Villa existante (RDC)"   # third line of the PROJET box
+VARIANT = None      # dict of drawing hooks set by a design variant (replaces the technical room)
 
 
 def f2(x):
@@ -63,7 +65,8 @@ class S:
              "lvl": 2.7, "tiny2": 2.55, "cl": 2.4, "tiny": 1.9}
 
     def t(self, x, y, s, c="t", a="middle", rot=0, size=None):
-        s = str(s).replace(" :", "\u00a0:").replace("« ", "«\u00a0").replace(" »", "\u00a0»")
+        s = str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        s = s.replace(" :", "\u00a0:").replace("« ", "«\u00a0").replace(" »", "\u00a0»")
         if getattr(self, "fl", None):
             fs = size or next((v for k, v in self.SIZES.items() if k in c.split()), 3.2)
             r = math.radians(rot)
@@ -171,7 +174,7 @@ def frame(s, num, title=None, title_en=None, scale=None):
     s.t(x0 + 3, y + 26, "PROJET", "t cl", "start")
     s.t(cx, y + 32, "CONSTRUCTION D'UNE PISCINE", "t cb", size=3.6)
     s.t(cx, y + 37, "ET AMÉNAGEMENT DES ABORDS", "t cb", size=3.6)
-    s.t(cx, y + 42, "Villa existante (RDC)", "t cs")
+    s.t(cx, y + 42, FRAME_SUB, "t cs")
     s.line((x0, y + 46), (x1, y + 46), "k w2")
     s.t(x0 + 3, y + 52, "SITUATION", "t cl", "start")
     s.t(x0 + 3, y + 58, f"{PROJECT['lieu']} - Terrain dit « {PROJECT['terrain']} »", "t cs", "start")
@@ -240,7 +243,7 @@ def tree(s, x, y, r, c="k w1 tree"):
     s.circ(x, y, 0.35, "k w1 fk")
 
 
-def table(s, x, y, cols, rows, widths, rh=4.6, head=True, size=None):
+def table(s, x, y, cols, rows, widths, rh=4.6, head=True, size=None, align=None):
     tw = sum(widths)
     n = len(rows) + (1 if head else 0)
     s.rect(x, y, tw, rh * n, "k w2 fs")
@@ -257,7 +260,8 @@ def table(s, x, y, cols, rows, widths, rh=4.6, head=True, size=None):
         cx = x
         for ci, (cell, w) in enumerate(zip(r, widths)):
             cls = "t cb" if (head and ri == 0) else "t cs"
-            if ci == 0 or (isinstance(cell, str) and not cell.replace('.', '').replace(' ', '').replace('-', '').isdigit() and len(cell) > 8):
+            left = (align[ci] == "l") if align else (ci == 0 or (isinstance(cell, str) and not cell.replace('.', '').replace(' ', '').replace('-', '').isdigit() and len(cell) > 8))
+            if left:
                 s.t(cx + 1.2, y + rh * ri + rh - 1.35, cell, cls, "start", size=size)
             else:
                 s.t(cx + w - 1.2, y + rh * ri + rh - 1.35, cell, cls, "end", size=size)
@@ -348,7 +352,10 @@ def pl01():
     s.pl([P(*p) for p in rect_uv(HOUSE["u0"], DECK[0], HOUSE["u1"], DECK[1])], "k w1 fpv", True)
     s.pl([P(*p) for p in rect_uv(POOL["u0"] - WALK, POOL["v0"] - WALK, POOL["u1"] + WALK, POOL["v1"] + WALK)], "k w1 fpv", True)
     s.pl([P(*p) for p in rect_uv(POOL["u0"], POOL["v0"], POOL["u1"], POOL["v1"])], "red w3 fw", True)
-    s.pl([P(*p) for p in rect_uv(TECH["u0"], TECH["v0"], TECH["u1"], TECH["v1"])], "red w3 fs", True)
+    if VARIANT:
+        VARIANT["pl01"](s, P)
+    else:
+        s.pl([P(*p) for p in rect_uv(TECH["u0"], TECH["v0"], TECH["u1"], TECH["v1"])], "red w3 fs", True)
     x, y = P(SOAKAWAY["u"], SOAKAWAY["v"])
     s.circ(x, y, SOAKAWAY["r"] * 4, "red w2 fs")
     s.add("</g>")
@@ -358,8 +365,9 @@ def pl01():
     s.t(c[0] - 2.6, c[1] + 4.4, "RDC ±0.00", "t lab", "middle", U_ANG)
     c = P((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2)
     s.t(c[0], c[1] + 1, "PISCINE 10.00 × 5.00", "t lab b red-t", "middle", U_ANG)
-    c = P((TECH["u0"] + TECH["u1"]) / 2 + 0.6, TECH["v0"] - 1.3)
-    s.t(c[0], c[1], "Local technique", "t lab red-t", "middle", U_ANG)
+    if not VARIANT:
+        c = P((TECH["u0"] + TECH["u1"]) / 2 + 0.6, TECH["v0"] - 1.3)
+        s.t(c[0], c[1], "Local technique", "t lab red-t", "middle", U_ANG)
     c = P(SOAKAWAY["u"] + 1.2, SOAKAWAY["v"] + 1.6)
     s.t(c[0], c[1], "Puits perdu", "t lab red-t", "start", U_ANG)
     c = P(u_drive(24) + 1.5, 24)
@@ -400,7 +408,7 @@ def pl01():
     hs = (HOUSE["u1"] - HOUSE["u0"]) * (HOUSE["v1"] - HOUSE["v0"])
     st = (STAIR["u1"] - STAIR["u0"]) * (STAIR["v1"] - STAIR["v0"])
     pav = Q["deck"] + (POOL_L + 2 * WALK) * (POOL_W + 2 * WALK) - POOL_L * POOL_W
-    tech = (TECH["u1"] - TECH["u0"]) * (TECH["v1"] - TECH["v0"])
+    tech = 0.0 if VARIANT else (TECH["u1"] - TECH["u0"]) * (TECH["v1"] - TECH["v0"])
     drive = DRIVE_W * 39
     green = PARCEL_AREA - hs - st - POOL_L * POOL_W - pav - tech - drive
     rows = [
@@ -409,7 +417,7 @@ def pl01():
         ("Escalier existant", f"{st:.1f} m²"),
         ("Plan d'eau piscine", f"{POOL_L * POOL_W:.0f} m²"),
         ("Plage + margelles", f"{pav:.1f} m²"),
-        ("Local technique", f"{tech:.1f} m²"),
+        ("Local technique", "aucun" if VARIANT else f"{tech:.1f} m²"),
         ("Allée / parking gravier", f"{drive:.0f} m²"),
         ("Espaces verts, verger, poulailler", f"{green:.0f} m²"),
     ]
@@ -512,9 +520,12 @@ def pl02():
         uu = POOL["u1"] - STEP["tread"] * (i + 1)
         s.line(P(uu, POOL["v0"]), P(uu, POOL["v0"] + STEP["width"]), "k w1")
     s.line(P(POOL["u1"] - STEP["tread"] * STEP["n_tread"], POOL["v0"] + STEP["width"]), P(POOL["u1"], POOL["v0"] + STEP["width"]), "k w1")
-    # tech room
-    s.pl([P(*p) for p in rect_uv(TECH["u0"], TECH["v0"], TECH["u1"], TECH["v1"])], "red w3 fcc", True)
-    s.pl([P(*p) for p in rect_uv(TECH["u0"] + TECH_WALL, TECH["v0"] + TECH_WALL, TECH["u1"] - TECH_WALL, TECH["v1"] - TECH_WALL)], "k w1 fs", True)
+    # tech room (or the variant's integrated elements)
+    if VARIANT:
+        VARIANT["pl02"](s, P)
+    else:
+        s.pl([P(*p) for p in rect_uv(TECH["u0"], TECH["v0"], TECH["u1"], TECH["v1"])], "red w3 fcc", True)
+        s.pl([P(*p) for p in rect_uv(TECH["u0"] + TECH_WALL, TECH["v0"] + TECH_WALL, TECH["u1"] - TECH_WALL, TECH["v1"] - TECH_WALL)], "k w1 fs", True)
     # shower
     sh = SHOWER
     s.pl([P(*p) for p in rect_uv(sh["u"] - sh["s"] / 2, sh["v"] - sh["s"] / 2, sh["u"] + sh["s"] / 2, sh["v"] + sh["s"] / 2)], "k w1 ftl", True)
@@ -561,8 +572,11 @@ def pl02():
     lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 - 0.6, "PISCINE 10.00 × 5.00", "t lab b red-t")
     lab((POOL["u0"] + POOL["u1"]) / 2, (POOL["v0"] + POOL["v1"]) / 2 + 0.4, f"prof. {WATER_SHALLOW:.2f} → {WATER_DEEP:.2f} - V = {Q['water_vol']:.1f} m³", "t lab red-t")
     lab(POOL["u1"] - 0.75, POOL["v0"] + 1.0, "Escalier", "t lab", -90)
-    lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v0"] - 0.45, "Local technique", "t lab red-t")
-    lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v1"] + 0.15, "2.40 × 2.00", "t lab red-t")
+    if VARIANT:
+        VARIANT["pl02_lab"](s, P, lab)
+    else:
+        lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v0"] - 0.45, "Local technique", "t lab red-t")
+        lab((TECH["u0"] + TECH["u1"]) / 2, TECH["v1"] + 0.15, "2.40 × 2.00", "t lab red-t")
     lab((NW_GARDEN_EDGE + POOL["u0"]) / 2 - 0.6, POOL["v1"] + 0.9, "JARDIN", "t lab b")
     lab((u_nw(22) + NW_GARDEN_EDGE) / 2 + 0.15, 22, "PARC À POULES", "t lab b", -90)
     lab(u_nw(26) + 1.5, 28.9, "Abri poules", "t lab")

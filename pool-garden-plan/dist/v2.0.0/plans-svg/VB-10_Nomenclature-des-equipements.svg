@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="VB-10 Nomenclature"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}
+.pipe-a1{stroke:var(--p-r);fill:none}.pipe-a2{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}.pipe-b{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.selv{stroke:var(--p-el);fill:none;stroke-dasharray:.7 .7}.memb{stroke:#0b5d7a;fill:none;stroke-width:.75}.pe{stroke:#3a8a3a;fill:none;stroke-width:.35;stroke-dasharray:2 .6 .6 .6}.z1{fill:#7b3fb0;fill-opacity:.07;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:2 1}.z2{fill:#7b3fb0;fill-opacity:.03;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:1 1}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fcc2{fill:url(#cc);opacity:.45}.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="b10-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><text x="18.00" y="18.00" class="t cl" text-anchor="start">NOMENCLATURE DES ÉQUIPEMENTS - VARIANTE B (coûts estimés, DH HT, mêmes prix unitaires que le devis)</text>
+<rect x="18.00" y="20.00" width="295.00" height="104.65" class="k w2 fs"/>
+<rect x="18.00" y="20.00" width="295.00" height="4.55" class="k w2 fh"/>
+<line x1="32.00" y1="20.00" x2="32.00" y2="124.65" class="k w1"/>
+<line x1="70.00" y1="20.00" x2="70.00" y2="124.65" class="k w1"/>
+<line x1="81.00" y1="20.00" x2="81.00" y2="124.65" class="k w1"/>
+<line x1="157.00" y1="20.00" x2="157.00" y2="124.65" class="k w1"/>
+<line x1="191.00" y1="20.00" x2="191.00" y2="124.65" class="k w1"/>
+<line x1="225.00" y1="20.00" x2="225.00" y2="124.65" class="k w1"/>
+<line x1="243.00" y1="20.00" x2="243.00" y2="124.65" class="k w1"/>
+<line x1="18.00" y1="24.55" x2="313.00" y2="24.55" class="k w1"/>
+<line x1="18.00" y1="29.10" x2="313.00" y2="29.10" class="k w1"/>
+<line x1="18.00" y1="33.65" x2="313.00" y2="33.65" class="k w1"/>
+<line x1="18.00" y1="38.20" x2="313.00" y2="38.20" class="k w1"/>
+<line x1="18.00" y1="42.75" x2="313.00" y2="42.75" class="k w1"/>
+<line x1="18.00" y1="47.30" x2="313.00" y2="47.30" class="k w1"/>
+<line x1="18.00" y1="51.85" x2="313.00" y2="51.85" class="k w1"/>
+<line x1="18.00" y1="56.40" x2="313.00" y2="56.40" class="k w1"/>
+<line x1="18.00" y1="60.95" x2="313.00" y2="60.95" class="k w1"/>
+<line x1="18.00" y1="65.50" x2="313.00" y2="65.50" class="k w1"/>
+<line x1="18.00" y1="70.05" x2="313.00" y2="70.05" class="k w1"/>
+<line x1="18.00" y1="74.60" x2="313.00" y2="74.60" class="k w1"/>
+<line x1="18.00" y1="79.15" x2="313.00" y2="79.15" class="k w1"/>
+<line x1="18.00" y1="83.70" x2="313.00" y2="83.70" class="k w1"/>
+<line x1="18.00" y1="88.25" x2="313.00" y2="88.25" class="k w1"/>
+<line x1="18.00" y1="92.80" x2="313.00" y2="92.80" class="k w1"/>
+<line x1="18.00" y1="97.35" x2="313.00" y2="97.35" class="k w1"/>
+<line x1="18.00" y1="101.90" x2="313.00" y2="101.90" class="k w1"/>
+<line x1="18.00" y1="106.45" x2="313.00" y2="106.45" class="k w1"/>
+<line x1="18.00" y1="111.00" x2="313.00" y2="111.00" class="k w1"/>
+<line x1="18.00" y1="115.55" x2="313.00" y2="115.55" class="k w1"/>
+<line x1="18.00" y1="120.10" x2="313.00" y2="120.10" class="k w1"/>
+<text x="19.20" y="23.20" class="t cb" text-anchor="start" style="font-size:2.25px">Rep.</text>
+<text x="33.20" y="23.20" class="t cb" text-anchor="start" style="font-size:2.25px">Composant</text>
+<text x="79.80" y="23.20" class="t cb" text-anchor="end" style="font-size:2.25px">Qté</text>
+<text x="82.20" y="23.20" class="t cb" text-anchor="start" style="font-size:2.25px">Spécification</text>
+<text x="158.20" y="23.20" class="t cb" text-anchor="start" style="font-size:2.25px">Emplacement</text>
+<text x="192.20" y="23.20" class="t cb" text-anchor="start" style="font-size:2.25px">Fonction</text>
+<text x="241.80" y="23.20" class="t cb" text-anchor="end" style="font-size:2.25px">Coût est.</text>
+<text x="244.20" y="23.20" class="t cb" text-anchor="start" style="font-size:2.25px">Entretien</text>
+<text x="19.20" y="27.75" class="t cs" text-anchor="start" style="font-size:2.25px">P</text>
+<text x="33.20" y="27.75" class="t cs" text-anchor="start" style="font-size:2.25px">Pompe de filtration</text>
+<text x="79.80" y="27.75" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="27.75" class="t cs" text-anchor="start" style="font-size:2.25px">12 m³/h à 9 mCE, VS, 230 V, IPX5, préfiltre, auto-amorçante</text>
+<text x="158.20" y="27.75" class="t cs" text-anchor="start" style="font-size:2.25px">Fosse FT, sur socle</text>
+<text x="192.20" y="27.75" class="t cs" text-anchor="start" style="font-size:2.25px">Circulation, vidange</text>
+<text x="241.80" y="27.75" class="t cs" text-anchor="end" style="font-size:2.25px">8 500</text>
+<text x="244.20" y="27.75" class="t cs" text-anchor="start" style="font-size:2.25px">Panier PF chaque semaine ; joint du couvercle 1 fois/an</text>
+<text x="19.20" y="32.30" class="t cs" text-anchor="start" style="font-size:2.25px">F</text>
+<text x="33.20" y="32.30" class="t cs" text-anchor="start" style="font-size:2.25px">Filtre à cartouche + rechange</text>
+<text x="79.80" y="32.30" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="32.30" class="t cs" text-anchor="start" style="font-size:2.25px">13.9 m² (150 ft²), ≤ Ø0.40 × h 0.90, purgeur, manomètre</text>
+<text x="158.20" y="32.30" class="t cs" text-anchor="start" style="font-size:2.25px">Fosse FT</text>
+<text x="192.20" y="32.30" class="t cs" text-anchor="start" style="font-size:2.25px">Filtration</text>
+<text x="241.80" y="32.30" class="t cs" text-anchor="end" style="font-size:2.25px">7 500</text>
+<text x="244.20" y="32.30" class="t cs" text-anchor="start" style="font-size:2.25px">Lavage au jet à +0.5 bar ; cartouche tous les 2 ans</text>
+<text x="19.20" y="36.85" class="t cs" text-anchor="start" style="font-size:2.25px">PG</text>
+<text x="33.20" y="36.85" class="t cs" text-anchor="start" style="font-size:2.25px">Grille anti-coincement</text>
+<text x="79.80" y="36.85" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="36.85" class="t cs" text-anchor="start" style="font-size:2.25px">800 × 600, fentes ≤ 8 mm, 0.009 m/s au passage</text>
+<text x="158.20" y="36.85" class="t cs" text-anchor="start" style="font-size:2.25px">Puisard, grand fond</text>
+<text x="192.20" y="36.85" class="t cs" text-anchor="start" style="font-size:2.25px">Aspiration de fond</text>
+<text x="241.80" y="36.85" class="t cs" text-anchor="end" style="font-size:2.25px">3 200</text>
+<text x="244.20" y="36.85" class="t cs" text-anchor="start" style="font-size:2.25px">Contrôle de la grille et des vis à chaque vidange</text>
+<text x="19.20" y="41.40" class="t cs" text-anchor="start" style="font-size:2.25px">SK1-2</text>
+<text x="33.20" y="41.40" class="t cs" text-anchor="start" style="font-size:2.25px">Skimmers</text>
+<text x="79.80" y="41.40" class="t cs" text-anchor="end" style="font-size:2.25px">2</text>
+<text x="82.20" y="41.40" class="t cs" text-anchor="start" style="font-size:2.25px">grande meurtrière à sceller, panier + volet</text>
+<text x="158.20" y="41.40" class="t cs" text-anchor="start" style="font-size:2.25px">Voile NO</text>
+<text x="192.20" y="41.40" class="t cs" text-anchor="start" style="font-size:2.25px">Aspiration de surface</text>
+<text x="241.80" y="41.40" class="t cs" text-anchor="end" style="font-size:2.25px">2 200</text>
+<text x="244.20" y="41.40" class="t cs" text-anchor="start" style="font-size:2.25px">Paniers 2 fois par semaine en saison</text>
+<text x="19.20" y="45.95" class="t cs" text-anchor="start" style="font-size:2.25px">VA...V3</text>
+<text x="33.20" y="45.95" class="t cs" text-anchor="start" style="font-size:2.25px">Nourrices et sélecteur</text>
+<text x="79.80" y="45.95" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="45.95" class="t cs" text-anchor="start" style="font-size:2.25px">6 vannes 1/4 de tour PVC, raccords union, V3 cadenassable, étiquettes</text>
+<text x="158.20" y="45.95" class="t cs" text-anchor="start" style="font-size:2.25px">Fosse FT</text>
+<text x="192.20" y="45.95" class="t cs" text-anchor="start" style="font-size:2.25px">Positions A / B / A+B / C / E</text>
+<text x="241.80" y="45.95" class="t cs" text-anchor="end" style="font-size:2.25px">2 900</text>
+<text x="244.20" y="45.95" class="t cs" text-anchor="start" style="font-size:2.25px">Manœuvrer chaque mois ; graisse silicone</text>
+<text x="19.20" y="50.50" class="t cs" text-anchor="start" style="font-size:2.25px">RA1-2</text>
+<text x="33.20" y="50.50" class="t cs" text-anchor="start" style="font-size:2.25px">Buses dissimulées</text>
+<text x="79.80" y="50.50" class="t cs" text-anchor="end" style="font-size:2.25px">2</text>
+<text x="82.20" y="50.50" class="t cs" text-anchor="start" style="font-size:2.25px">orifice Ø25, axe -1.15, orientées vers PG</text>
+<text x="158.20" y="50.50" class="t cs" text-anchor="start" style="font-size:2.25px">Voile SE, sous la cascade</text>
+<text x="192.20" y="50.50" class="t cs" text-anchor="start" style="font-size:2.25px">Retour A1</text>
+<text x="241.80" y="50.50" class="t cs" text-anchor="end" style="font-size:2.25px">360</text>
+<text x="244.20" y="50.50" class="t cs" text-anchor="start" style="font-size:2.25px">Contrôle de l'orientation au printemps</text>
+<text x="19.20" y="55.05" class="t cs" text-anchor="start" style="font-size:2.25px">CAS</text>
+<text x="33.20" y="55.05" class="t cs" text-anchor="start" style="font-size:2.25px">Mur de cascade + lame</text>
+<text x="79.80" y="55.05" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="55.05" class="t cs" text-anchor="start" style="font-size:2.25px">1.80 × 0.40, lame 600 × 6 mm, chambre inox 316L</text>
+<text x="158.20" y="55.05" class="t cs" text-anchor="start" style="font-size:2.25px">Petit bain, côté allée</text>
+<text x="192.20" y="55.05" class="t cs" text-anchor="start" style="font-size:2.25px">Retour A2 architectural</text>
+<text x="241.80" y="55.05" class="t cs" text-anchor="end" style="font-size:2.25px">7 500</text>
+<text x="244.20" y="55.05" class="t cs" text-anchor="start" style="font-size:2.25px">Détartrer la fente 2 fois par an</text>
+<text x="19.20" y="59.60" class="t cs" text-anchor="start" style="font-size:2.25px">TR</text>
+<text x="33.20" y="59.60" class="t cs" text-anchor="start" style="font-size:2.25px">Trappe à carreler</text>
+<text x="79.80" y="59.60" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="59.60" class="t cs" text-anchor="start" style="font-size:2.25px">1 200 × 750, classe A15, à clé, vérins, joint</text>
+<text x="158.20" y="59.60" class="t cs" text-anchor="start" style="font-size:2.25px">Dallage NO</text>
+<text x="192.20" y="59.60" class="t cs" text-anchor="start" style="font-size:2.25px">Accès à la fosse</text>
+<text x="241.80" y="59.60" class="t cs" text-anchor="end" style="font-size:2.25px">4 500</text>
+<text x="244.20" y="59.60" class="t cs" text-anchor="start" style="font-size:2.25px">Vérins et joint : contrôle annuel</text>
+<text x="19.20" y="64.15" class="t cs" text-anchor="start" style="font-size:2.25px">SF, VT</text>
+<text x="33.20" y="64.15" class="t cs" text-anchor="start" style="font-size:2.25px">Siphon, ventilation</text>
+<text x="79.80" y="64.15" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="64.15" class="t cs" text-anchor="start" style="font-size:2.25px">siphon à clapet anti-retour, 2 manchons Ø100, procédure</text>
+<text x="158.20" y="64.15" class="t cs" text-anchor="start" style="font-size:2.25px">Fosse FT</text>
+<text x="192.20" y="64.15" class="t cs" text-anchor="start" style="font-size:2.25px">Drainage, aération</text>
+<text x="241.80" y="64.15" class="t cs" text-anchor="end" style="font-size:2.25px">1 400</text>
+<text x="244.20" y="64.15" class="t cs" text-anchor="start" style="font-size:2.25px">Nettoyer le siphon au printemps</text>
+<text x="19.20" y="68.70" class="t cs" text-anchor="start" style="font-size:2.25px">B</text>
+<text x="33.20" y="68.70" class="t cs" text-anchor="start" style="font-size:2.25px">Borne de contrôle</text>
+<text x="79.80" y="68.70" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="68.70" class="t cs" text-anchor="start" style="font-size:2.25px">CL, CV à ±0.00, RP, V4 3 voies, raccord rapide</text>
+<text x="158.20" y="68.70" class="t cs" text-anchor="start" style="font-size:2.25px">Jardin NO</text>
+<text x="192.20" y="68.70" class="t cs" text-anchor="start" style="font-size:2.25px">Rejet contrôlé</text>
+<text x="241.80" y="68.70" class="t cs" text-anchor="end" style="font-size:2.25px">2 800</text>
+<text x="244.20" y="68.70" class="t cs" text-anchor="start" style="font-size:2.25px">Vérifier le casse-vide avant chaque rejet</text>
+<text x="19.20" y="73.25" class="t cs" text-anchor="start" style="font-size:2.25px">PVC</text>
+<text x="33.20" y="73.25" class="t cs" text-anchor="start" style="font-size:2.25px">Canalisations PVC PN16</text>
+<text x="79.80" y="73.25" class="t cs" text-anchor="end" style="font-size:2.25px">43 ml</text>
+<text x="82.20" y="73.25" class="t cs" text-anchor="start" style="font-size:2.25px">Ø63 (36 ml) et Ø50 (7 ml), collées, essai 24 h</text>
+<text x="158.20" y="73.25" class="t cs" text-anchor="start" style="font-size:2.25px">Tranchées</text>
+<text x="192.20" y="73.25" class="t cs" text-anchor="start" style="font-size:2.25px">Réseaux</text>
+<text x="241.80" y="73.25" class="t cs" text-anchor="end" style="font-size:2.25px">2 725</text>
+<text x="244.20" y="73.25" class="t cs" text-anchor="start" style="font-size:2.25px">-</text>
+<text x="19.20" y="77.80" class="t cs" text-anchor="start" style="font-size:2.25px">PEHD</text>
+<text x="33.20" y="77.80" class="t cs" text-anchor="start" style="font-size:2.25px">Conduite de rejet</text>
+<text x="79.80" y="77.80" class="t cs" text-anchor="end" style="font-size:2.25px">10 ml</text>
+<text x="82.20" y="77.80" class="t cs" text-anchor="start" style="font-size:2.25px">PEHD Ø50</text>
+<text x="158.20" y="77.80" class="t cs" text-anchor="start" style="font-size:2.25px">Jardin NO</text>
+<text x="192.20" y="77.80" class="t cs" text-anchor="start" style="font-size:2.25px">Rejet</text>
+<text x="241.80" y="77.80" class="t cs" text-anchor="end" style="font-size:2.25px">450</text>
+<text x="244.20" y="77.80" class="t cs" text-anchor="start" style="font-size:2.25px">-</text>
+<text x="19.20" y="82.35" class="t cs" text-anchor="start" style="font-size:2.25px">FC</text>
+<text x="33.20" y="82.35" class="t cs" text-anchor="start" style="font-size:2.25px">Fourreaux à collerette</text>
+<text x="79.80" y="82.35" class="t cs" text-anchor="end" style="font-size:2.25px">9</text>
+<text x="82.20" y="82.35" class="t cs" text-anchor="start" style="font-size:2.25px">bague hydrogonflante</text>
+<text x="158.20" y="82.35" class="t cs" text-anchor="start" style="font-size:2.25px">Traversées</text>
+<text x="192.20" y="82.35" class="t cs" text-anchor="start" style="font-size:2.25px">Étanchéité</text>
+<text x="241.80" y="82.35" class="t cs" text-anchor="end" style="font-size:2.25px">2 250</text>
+<text x="244.20" y="82.35" class="t cs" text-anchor="start" style="font-size:2.25px">-</text>
+<text x="19.20" y="86.90" class="t cs" text-anchor="start" style="font-size:2.25px">CP</text>
+<text x="33.20" y="86.90" class="t cs" text-anchor="start" style="font-size:2.25px">Coffret piscine</text>
+<text x="79.80" y="86.90" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="86.90" class="t cs" text-anchor="start" style="font-size:2.25px">Q0, parafoudre, DDR 30 mA A, Q1-Q5, KM1, horloge, T2 24 V</text>
+<text x="158.20" y="86.90" class="t cs" text-anchor="start" style="font-size:2.25px">Façade villa, 5.00 m</text>
+<text x="192.20" y="86.90" class="t cs" text-anchor="start" style="font-size:2.25px">Protection, commande</text>
+<text x="241.80" y="86.90" class="t cs" text-anchor="end" style="font-size:2.25px">4 600</text>
+<text x="244.20" y="86.90" class="t cs" text-anchor="start" style="font-size:2.25px">Bouton test du DDR chaque mois</text>
+<text x="19.20" y="91.45" class="t cs" text-anchor="start" style="font-size:2.25px">T1</text>
+<text x="33.20" y="91.45" class="t cs" text-anchor="start" style="font-size:2.25px">Transformateur de sécurité</text>
+<text x="79.80" y="91.45" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="91.45" class="t cs" text-anchor="start" style="font-size:2.25px">230 / 12 V, 300 VA</text>
+<text x="158.20" y="91.45" class="t cs" text-anchor="start" style="font-size:2.25px">Coffret CP</text>
+<text x="192.20" y="91.45" class="t cs" text-anchor="start" style="font-size:2.25px">Éclairage TBTS</text>
+<text x="241.80" y="91.45" class="t cs" text-anchor="end" style="font-size:2.25px">1 100</text>
+<text x="244.20" y="91.45" class="t cs" text-anchor="start" style="font-size:2.25px">-</text>
+<text x="19.20" y="96.00" class="t cs" text-anchor="start" style="font-size:2.25px">P1-P3</text>
+<text x="33.20" y="96.00" class="t cs" text-anchor="start" style="font-size:2.25px">Projecteurs LED</text>
+<text x="79.80" y="96.00" class="t cs" text-anchor="end" style="font-size:2.25px">3</text>
+<text x="82.20" y="96.00" class="t cs" text-anchor="start" style="font-size:2.25px">12 V 30 W + niche + presse-étoupe</text>
+<text x="158.20" y="96.00" class="t cs" text-anchor="start" style="font-size:2.25px">Voile SO</text>
+<text x="192.20" y="96.00" class="t cs" text-anchor="start" style="font-size:2.25px">Éclairage du bassin</text>
+<text x="241.80" y="96.00" class="t cs" text-anchor="end" style="font-size:2.25px">4 200</text>
+<text x="244.20" y="96.00" class="t cs" text-anchor="start" style="font-size:2.25px">Joint neuf à chaque ouverture</text>
+<text x="19.20" y="100.55" class="t cs" text-anchor="start" style="font-size:2.25px">FL, CT</text>
+<text x="33.20" y="100.55" class="t cs" text-anchor="start" style="font-size:2.25px">Sécurités de fosse</text>
+<text x="79.80" y="100.55" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="100.55" class="t cs" text-anchor="start" style="font-size:2.25px">flotteur + contact de trappe en TBTS 24 V</text>
+<text x="158.20" y="100.55" class="t cs" text-anchor="start" style="font-size:2.25px">Fosse FT</text>
+<text x="192.20" y="100.55" class="t cs" text-anchor="start" style="font-size:2.25px">Coupure de la pompe</text>
+<text x="241.80" y="100.55" class="t cs" text-anchor="end" style="font-size:2.25px">900</text>
+<text x="244.20" y="100.55" class="t cs" text-anchor="start" style="font-size:2.25px">Essai à chaque ouverture de la trappe</text>
+<text x="19.20" y="105.10" class="t cs" text-anchor="start" style="font-size:2.25px">LEL</text>
+<text x="33.20" y="105.10" class="t cs" text-anchor="start" style="font-size:2.25px">Liaison équipotentielle</text>
+<text x="79.80" y="105.10" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="105.10" class="t cs" text-anchor="start" style="font-size:2.25px">ferraillages, trappe, lame, échelle, moteur, piquet de terre</text>
+<text x="158.20" y="105.10" class="t cs" text-anchor="start" style="font-size:2.25px">Bassin et fosse</text>
+<text x="192.20" y="105.10" class="t cs" text-anchor="start" style="font-size:2.25px">Sécurité électrique</text>
+<text x="241.80" y="105.10" class="t cs" text-anchor="end" style="font-size:2.25px">1 300</text>
+<text x="244.20" y="105.10" class="t cs" text-anchor="start" style="font-size:2.25px">Contrôle de continuité 1 fois par an</text>
+<text x="19.20" y="109.65" class="t cs" text-anchor="start" style="font-size:2.25px">C1</text>
+<text x="33.20" y="109.65" class="t cs" text-anchor="start" style="font-size:2.25px">Câbles pompe et TBTS</text>
+<text x="79.80" y="109.65" class="t cs" text-anchor="end" style="font-size:2.25px">12 ml</text>
+<text x="82.20" y="109.65" class="t cs" text-anchor="start" style="font-size:2.25px">U1000 R2V 3G2.5 + câble TBTS sous TPC Ø40</text>
+<text x="158.20" y="109.65" class="t cs" text-anchor="start" style="font-size:2.25px">Tranchée</text>
+<text x="192.20" y="109.65" class="t cs" text-anchor="start" style="font-size:2.25px">Alimentation</text>
+<text x="241.80" y="109.65" class="t cs" text-anchor="end" style="font-size:2.25px">960</text>
+<text x="244.20" y="109.65" class="t cs" text-anchor="start" style="font-size:2.25px">-</text>
+<text x="19.20" y="114.20" class="t cs" text-anchor="start" style="font-size:2.25px">ECH</text>
+<text x="33.20" y="114.20" class="t cs" text-anchor="start" style="font-size:2.25px">Échelle inox 316L</text>
+<text x="79.80" y="114.20" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="114.20" class="t cs" text-anchor="start" style="font-size:2.25px">4 marches</text>
+<text x="158.20" y="114.20" class="t cs" text-anchor="start" style="font-size:2.25px">Grand fond</text>
+<text x="192.20" y="114.20" class="t cs" text-anchor="start" style="font-size:2.25px">Sortie du bassin</text>
+<text x="241.80" y="114.20" class="t cs" text-anchor="end" style="font-size:2.25px">3 200</text>
+<text x="244.20" y="114.20" class="t cs" text-anchor="start" style="font-size:2.25px">Serrage des fixations</text>
+<text x="19.20" y="118.75" class="t cs" text-anchor="start" style="font-size:2.25px">KIT</text>
+<text x="33.20" y="118.75" class="t cs" text-anchor="start" style="font-size:2.25px">Kit d'entretien</text>
+<text x="79.80" y="118.75" class="t cs" text-anchor="end" style="font-size:2.25px">1</text>
+<text x="82.20" y="118.75" class="t cs" text-anchor="start" style="font-size:2.25px">épuisette, balai, plaque d'aspiration skimmer, analyse</text>
+<text x="158.20" y="118.75" class="t cs" text-anchor="start" style="font-size:2.25px">Remise</text>
+<text x="192.20" y="118.75" class="t cs" text-anchor="start" style="font-size:2.25px">Entretien</text>
+<text x="241.80" y="118.75" class="t cs" text-anchor="end" style="font-size:2.25px">1 600</text>
+<text x="244.20" y="118.75" class="t cs" text-anchor="start" style="font-size:2.25px">-</text>
+<text x="19.20" y="123.30" class="t cs" text-anchor="start" style="font-size:2.25px"></text>
+<text x="33.20" y="123.30" class="t cs" text-anchor="start" style="font-size:2.25px">TOTAL ÉQUIPEMENTS (DH HT)</text>
+<text x="79.80" y="123.30" class="t cs" text-anchor="end" style="font-size:2.25px"></text>
+<text x="82.20" y="123.30" class="t cs" text-anchor="start" style="font-size:2.25px">prix unitaires du devis, lots 4 et 5</text>
+<text x="158.20" y="123.30" class="t cs" text-anchor="start" style="font-size:2.25px"></text>
+<text x="192.20" y="123.30" class="t cs" text-anchor="start" style="font-size:2.25px"></text>
+<text x="241.80" y="123.30" class="t cs" text-anchor="end" style="font-size:2.25px">64 145</text>
+<text x="244.20" y="123.30" class="t cs" text-anchor="start" style="font-size:2.25px"></text>
+<text x="18.00" y="131.65" class="t cl" text-anchor="start">SUPPRIMÉS PAR RAPPORT À L'INDICE E</text>
+<rect x="18.00" y="133.65" width="106.00" height="35.20" class="k w2 fs"/>
+<rect x="18.00" y="133.65" width="106.00" height="4.40" class="k w2 fh"/>
+<line x1="30.00" y1="133.65" x2="30.00" y2="168.85" class="k w1"/>
+<line x1="100.00" y1="133.65" x2="100.00" y2="168.85" class="k w1"/>
+<line x1="18.00" y1="138.05" x2="124.00" y2="138.05" class="k w1"/>
+<line x1="18.00" y1="142.45" x2="124.00" y2="142.45" class="k w1"/>
+<line x1="18.00" y1="146.85" x2="124.00" y2="146.85" class="k w1"/>
+<line x1="18.00" y1="151.25" x2="124.00" y2="151.25" class="k w1"/>
+<line x1="18.00" y1="155.65" x2="124.00" y2="155.65" class="k w1"/>
+<line x1="18.00" y1="160.05" x2="124.00" y2="160.05" class="k w1"/>
+<line x1="18.00" y1="164.45" x2="124.00" y2="164.45" class="k w1"/>
+<text x="19.20" y="136.70" class="t cb" text-anchor="start" style="font-size:2.3px">Art.</text>
+<text x="31.20" y="136.70" class="t cb" text-anchor="start" style="font-size:2.3px">Ouvrage</text>
+<text x="122.80" y="136.70" class="t cb" text-anchor="end" style="font-size:2.3px">Montant</text>
+<text x="19.20" y="141.10" class="t cs" text-anchor="start" style="font-size:2.3px">2.06</text>
+<text x="31.20" y="141.10" class="t cs" text-anchor="start" style="font-size:2.3px">Local technique 2.40 × 2.00</text>
+<text x="122.80" y="141.10" class="t cs" text-anchor="end" style="font-size:2.3px">18 000</text>
+<text x="19.20" y="145.50" class="t cs" text-anchor="start" style="font-size:2.3px">4.02</text>
+<text x="31.20" y="145.50" class="t cs" text-anchor="start" style="font-size:2.3px">Bondes de fond BF1-BF2</text>
+<text x="122.80" y="145.50" class="t cs" text-anchor="end" style="font-size:2.3px">1 200</text>
+<text x="19.20" y="149.90" class="t cs" text-anchor="start" style="font-size:2.3px">4.03</text>
+<text x="31.20" y="149.90" class="t cs" text-anchor="start" style="font-size:2.3px">Buses R1-R4</text>
+<text x="122.80" y="149.90" class="t cs" text-anchor="end" style="font-size:2.3px">720</text>
+<text x="19.20" y="154.30" class="t cs" text-anchor="start" style="font-size:2.3px">4.04</text>
+<text x="31.20" y="154.30" class="t cs" text-anchor="start" style="font-size:2.3px">Prise balai PB</text>
+<text x="122.80" y="154.30" class="t cs" text-anchor="end" style="font-size:2.3px">180</text>
+<text x="19.20" y="158.70" class="t cs" text-anchor="start" style="font-size:2.3px">4.06</text>
+<text x="31.20" y="158.70" class="t cs" text-anchor="start" style="font-size:2.3px">Nourrices du local technique</text>
+<text x="122.80" y="158.70" class="t cs" text-anchor="end" style="font-size:2.3px">2 500</text>
+<text x="19.20" y="163.10" class="t cs" text-anchor="start" style="font-size:2.3px">4.08</text>
+<text x="31.20" y="163.10" class="t cs" text-anchor="start" style="font-size:2.3px">Filtre à sable Ø600 + vanne 6 voies</text>
+<text x="122.80" y="163.10" class="t cs" text-anchor="end" style="font-size:2.3px">6 000</text>
+<text x="19.20" y="167.50" class="t cs" text-anchor="start" style="font-size:2.3px"></text>
+<text x="31.20" y="167.50" class="t cs" text-anchor="start" style="font-size:2.3px">Total supprimé (DH HT)</text>
+<text x="122.80" y="167.50" class="t cs" text-anchor="end" style="font-size:2.3px">28 600</text>
+<text x="132.00" y="131.65" class="t cl" text-anchor="start">CONSERVÉS / AJOUTÉS</text>
+<text x="132.00" y="137.65" class="t tiny2" text-anchor="start">Pompe : même débit, même prix (hauteur demandée 9 au lieu de 10 mCE).</text>
+<text x="132.00" y="142.45" class="t tiny2" text-anchor="start">Skimmers SK1-SK2, projecteurs P1-P3, échelle : conservés à l'identique.</text>
+<text x="132.00" y="147.25" class="t tiny2" text-anchor="start">Coffret : déplacé du local technique vers la façade, complété (KM1, TBTS 24 V).</text>
+<text x="132.00" y="152.05" class="t tiny2" text-anchor="start">Ajoutés : puisard + grille, fosse et trappe, cascade, borne et circuit B.</text>
+<text x="132.00" y="156.85" class="t tiny2" text-anchor="start">Comparaison complète des coûts et des quantités : dossier, § comparaison.</text>
+<text x="18.00" y="181.25" class="t cl" text-anchor="start">INVESTISSEMENT - MÊME BASE DE PRIX (DH HT)</text>
+<rect x="18.00" y="183.25" width="162.00" height="23.00" class="k w2 fs"/>
+<rect x="18.00" y="183.25" width="162.00" height="4.60" class="k w2 fh"/>
+<line x1="110.00" y1="183.25" x2="110.00" y2="206.25" class="k w1"/>
+<line x1="134.00" y1="183.25" x2="134.00" y2="206.25" class="k w1"/>
+<line x1="158.00" y1="183.25" x2="158.00" y2="206.25" class="k w1"/>
+<line x1="18.00" y1="187.85" x2="180.00" y2="187.85" class="k w1"/>
+<line x1="18.00" y1="192.45" x2="180.00" y2="192.45" class="k w1"/>
+<line x1="18.00" y1="197.05" x2="180.00" y2="197.05" class="k w1"/>
+<line x1="18.00" y1="201.65" x2="180.00" y2="201.65" class="k w1"/>
+<text x="19.20" y="186.50" class="t cb" text-anchor="start" style="font-size:2.3px">Poste</text>
+<text x="132.80" y="186.50" class="t cb" text-anchor="end" style="font-size:2.3px">Indice E</text>
+<text x="156.80" y="186.50" class="t cb" text-anchor="end" style="font-size:2.3px">Variante B</text>
+<text x="178.80" y="186.50" class="t cb" text-anchor="end" style="font-size:2.3px">Écart</text>
+<text x="19.20" y="191.10" class="t cs" text-anchor="start" style="font-size:2.3px">Périmètre modifié (lots 1 à 5, articles concernés)</text>
+<text x="132.80" y="191.10" class="t cs" text-anchor="end" style="font-size:2.3px">56 969</text>
+<text x="156.80" y="191.10" class="t cs" text-anchor="end" style="font-size:2.3px">71 354</text>
+<text x="178.80" y="191.10" class="t cs" text-anchor="end" style="font-size:2.3px">+14 385</text>
+<text x="19.20" y="195.70" class="t cs" text-anchor="start" style="font-size:2.3px">  dont cascade, borne et PEHD (demandés, sans équivalent E)</text>
+<text x="132.80" y="195.70" class="t cs" text-anchor="end" style="font-size:2.3px">-</text>
+<text x="156.80" y="195.70" class="t cs" text-anchor="end" style="font-size:2.3px">10 963</text>
+<text x="178.80" y="195.70" class="t cs" text-anchor="end" style="font-size:2.3px"></text>
+<text x="19.20" y="200.30" class="t cs" text-anchor="start" style="font-size:2.3px">  à périmètre égal (sans ces ajouts)</text>
+<text x="132.80" y="200.30" class="t cs" text-anchor="end" style="font-size:2.3px">56 969</text>
+<text x="156.80" y="200.30" class="t cs" text-anchor="end" style="font-size:2.3px">60 391</text>
+<text x="178.80" y="200.30" class="t cs" text-anchor="end" style="font-size:2.3px">+3 422</text>
+<text x="19.20" y="204.90" class="t cs" text-anchor="start" style="font-size:2.3px">Total général HT du devis</text>
+<text x="132.80" y="204.90" class="t cs" text-anchor="end" style="font-size:2.3px">272 410</text>
+<text x="156.80" y="204.90" class="t cs" text-anchor="end" style="font-size:2.3px">286 894</text>
+<text x="178.80" y="204.90" class="t cs" text-anchor="end" style="font-size:2.3px">+14 485</text>
+<text x="186.00" y="181.25" class="t cl" text-anchor="start">EXPLOITATION - HYPOTHÈSES IDENTIQUES (DH / an)</text>
+<rect x="186.00" y="183.25" width="120.00" height="23.00" class="k w2 fs"/>
+<rect x="186.00" y="183.25" width="120.00" height="4.60" class="k w2 fh"/>
+<line x1="246.00" y1="183.25" x2="246.00" y2="206.25" class="k w1"/>
+<line x1="266.00" y1="183.25" x2="266.00" y2="206.25" class="k w1"/>
+<line x1="286.00" y1="183.25" x2="286.00" y2="206.25" class="k w1"/>
+<line x1="186.00" y1="187.85" x2="306.00" y2="187.85" class="k w1"/>
+<line x1="186.00" y1="192.45" x2="306.00" y2="192.45" class="k w1"/>
+<line x1="186.00" y1="197.05" x2="306.00" y2="197.05" class="k w1"/>
+<line x1="186.00" y1="201.65" x2="306.00" y2="201.65" class="k w1"/>
+<text x="187.20" y="186.50" class="t cb" text-anchor="start" style="font-size:2.3px">Poste</text>
+<text x="264.80" y="186.50" class="t cb" text-anchor="end" style="font-size:2.3px">Indice E</text>
+<text x="284.80" y="186.50" class="t cb" text-anchor="end" style="font-size:2.3px">Var. B</text>
+<text x="304.80" y="186.50" class="t cb" text-anchor="end" style="font-size:2.3px">Écart</text>
+<text x="187.20" y="191.10" class="t cs" text-anchor="start" style="font-size:2.3px">Énergie de filtration</text>
+<text x="264.80" y="191.10" class="t cs" text-anchor="end" style="font-size:2.3px">1 814</text>
+<text x="284.80" y="191.10" class="t cs" text-anchor="end" style="font-size:2.3px">1 538</text>
+<text x="304.80" y="191.10" class="t cs" text-anchor="end" style="font-size:2.3px">-276</text>
+<text x="187.20" y="195.70" class="t cs" text-anchor="start" style="font-size:2.3px">Eau de lavage (contre-lavages / nettoyages)</text>
+<text x="264.80" y="195.70" class="t cs" text-anchor="end" style="font-size:2.3px">768</text>
+<text x="284.80" y="195.70" class="t cs" text-anchor="end" style="font-size:2.3px">24</text>
+<text x="304.80" y="195.70" class="t cs" text-anchor="end" style="font-size:2.3px">-744</text>
+<text x="187.20" y="200.30" class="t cs" text-anchor="start" style="font-size:2.3px">Média filtrant (sable / cartouche)</text>
+<text x="264.80" y="200.30" class="t cs" text-anchor="end" style="font-size:2.3px">160</text>
+<text x="284.80" y="200.30" class="t cs" text-anchor="end" style="font-size:2.3px">750</text>
+<text x="304.80" y="200.30" class="t cs" text-anchor="end" style="font-size:2.3px">+590</text>
+<text x="187.20" y="204.90" class="t cs" text-anchor="start" style="font-size:2.3px">Total d'exploitation calculé (DH / an)</text>
+<text x="264.80" y="204.90" class="t cs" text-anchor="end" style="font-size:2.3px">2 742</text>
+<text x="284.80" y="204.90" class="t cs" text-anchor="end" style="font-size:2.3px">2 312</text>
+<text x="304.80" y="204.90" class="t cs" text-anchor="end" style="font-size:2.3px">-430</text>
+<text x="18.00" y="214.25" class="t tiny2" text-anchor="start">Hypothèses : 2383 h de filtration par an, 1.30 DH/kWh, rendement global 0.40, HMT moyennes 7.16 / 6.07 mCE,</text>
+<text x="18.00" y="218.85" class="t tiny2" text-anchor="start">contre-lavage 0.8 m³ × 32 par an, eau à 30 DH/m³, sable 800 DH tous les 5 ans, cartouche 1500 DH tous les 2 ans.</text>
+<text x="18.00" y="223.45" class="t tiny2" text-anchor="start">La variante coûte plus cher à construire ; elle économise un local hors œuvre, des canalisations, l'eau de contre-lavage et un peu d'énergie.</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Variante B : sans local technique</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">NOMENCLATURE DES ÉQUIPEMENTS</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Composants, spécifications, coûts, entretien</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">VB-10</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">-</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">F - v2.0.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 20/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>

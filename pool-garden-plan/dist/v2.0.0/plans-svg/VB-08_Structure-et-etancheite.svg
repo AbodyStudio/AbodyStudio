@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="VB-08 Structure et étanchéité"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}
+.pipe-a1{stroke:var(--p-r);fill:none}.pipe-a2{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}.pipe-b{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.selv{stroke:var(--p-el);fill:none;stroke-dasharray:.7 .7}.memb{stroke:#0b5d7a;fill:none;stroke-width:.75}.pe{stroke:#3a8a3a;fill:none;stroke-width:.35;stroke-dasharray:2 .6 .6 .6}.z1{fill:#7b3fb0;fill-opacity:.07;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:2 1}.z2{fill:#7b3fb0;fill-opacity:.03;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:1 1}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fcc2{fill:url(#cc);opacity:.45}.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="b8-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><defs><clipPath id="b8c"><rect x="22" y="26" width="156" height="166"/></clipPath></defs><g clip-path="url(#b8c)">
+<rect x="28.50" y="44.00" width="147.50" height="153.00" class="k w1 fea"/>
+<rect x="100.00" y="104.00" width="65.00" height="58.00" class="k w2 fcc2"/>
+<rect x="28.50" y="148.00" width="71.50" height="14.00" class="k w1 fst"/>
+<rect x="47.00" y="148.00" width="53.00" height="34.00" class="k w1 fst"/>
+<rect x="28.50" y="138.00" width="71.50" height="10.00" class="k w3 fcc"/>
+<rect x="47.00" y="138.00" width="53.00" height="30.00" class="k w3 fcc"/>
+<rect x="58.50" y="136.50" width="30.00" height="20.00" class="k w1 fw"/>
+<rect x="28.50" y="46.50" width="60.00" height="90.00" class="k w1 fw"/>
+<rect x="88.50" y="42.50" width="10.00" height="95.50" class="k w3 fcc"/>
+<rect x="100.00" y="94.00" width="65.00" height="10.00" class="k w3 fcc"/>
+<rect x="155.00" y="44.00" width="10.00" height="60.00" class="k w3 fcc"/>
+<rect x="100.00" y="44.00" width="55.00" height="50.00" class="k w1 fs"/>
+<rect x="100.00" y="44.00" width="13.50" height="7.50" class="k w3 fcc"/>
+<rect x="87.00" y="39.00" width="26.50" height="3.50" class="k w2 fs"/>
+<polygon points="156.00,40.00 115.00,40.00 115.00,45.00 156.00,45.00" class="red w3 fs"/>
+<rect x="165.00" y="40.00" width="12.50" height="5.00" class="k w1 fpv"/>
+<polyline points="88.50,40.00 88.50,136.50 88.50,136.50 88.50,156.50 58.50,156.50 58.50,136.50 28.50,136.50" class="memb"/>
+<polyline points="100.75,45.00 100.75,93.25 155.75,93.25 155.75,45.00" class="k w2 dash"/>
+<polyline points="166.00,45.00 166.00,105.00 100.00,105.00" class="k w4"/>
+<rect x="166.50" y="51.50" width="10.00" height="52.50" class="k w1 fgr"/>
+<line x1="98.00" y1="44.50" x2="98.00" y2="146.00" class="red w2"/>
+<line x1="90.50" y1="44.50" x2="90.50" y2="146.00" class="red w2"/>
+<line x1="163.00" y1="46.00" x2="163.00" y2="102.00" class="red w2"/>
+<line x1="157.00" y1="46.00" x2="157.00" y2="102.00" class="red w2"/>
+<line x1="163.00" y1="96.00" x2="102.00" y2="96.00" class="red w2"/>
+<line x1="163.00" y1="102.00" x2="102.00" y2="102.00" class="red w2"/>
+<line x1="28.50" y1="140.00" x2="57.00" y2="140.00" class="red w2"/>
+<line x1="28.50" y1="146.00" x2="57.00" y2="146.00" class="red w2"/>
+<polyline points="49.00,140.00 49.00,166.00 98.00,166.00 98.00,140.00" class="red w2"/>
+<polyline points="103.00,96.00 95.00,96.00 95.00,74.00" class="red w3"/>
+<polyline points="103.00,59.00 95.00,59.00" class="red w3"/>
+<circle cx="98.00" cy="130.62" r="0.45" class="k w1 fk"/>
+<circle cx="98.00" cy="118.88" r="0.45" class="k w1 fk"/>
+<circle cx="98.00" cy="107.12" r="0.45" class="k w1 fk"/>
+<circle cx="98.00" cy="95.38" r="0.45" class="k w1 fk"/>
+<circle cx="98.00" cy="83.62" r="0.45" class="k w1 fk"/>
+<circle cx="98.00" cy="71.88" r="0.45" class="k w1 fk"/>
+<circle cx="98.00" cy="60.12" r="0.45" class="k w1 fk"/>
+<circle cx="98.00" cy="48.38" r="0.45" class="k w1 fk"/>
+<rect x="99.50" y="94.00" width="2.00" height="2.00" class="k w1 fk"/>
+<rect x="159.00" y="93.50" width="2.00" height="2.00" class="k w1 fk"/>
+<polyline points="86.00,151.50 106.50,151.50 106.50,86.50" class="pipe-s w4"/>
+<line x1="103.00" y1="148.50" x2="103.00" y2="154.50" class="k w4"/>
+<line x1="103.50" y1="99.00" x2="109.50" y2="99.00" class="k w4"/>
+</g>
+<line x1="135.00" y1="40.00" x2="181.40" y2="34.00" class="k w1"/>
+<circle cx="135.00" cy="40.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="34.00" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="35.00" class="t cb" text-anchor="middle">1</text>
+<text x="188.00" y="35.00" class="t tiny2" text-anchor="start">Trappe A15 sur cornière scellée, joint à lèvre</text>
+<line x1="95.00" y1="69.00" x2="181.40" y2="41.60" class="k w1"/>
+<circle cx="95.00" cy="69.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="41.60" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="42.60" class="t cb" text-anchor="middle">2</text>
+<text x="188.00" y="42.60" class="t tiny2" text-anchor="start">Voile commun BA 0.20 : pas de modification d'armature (indice E)</text>
+<line x1="166.00" y1="74.00" x2="181.40" y2="49.20" class="k w1"/>
+<circle cx="166.00" cy="74.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="49.20" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="50.20" class="t cb" text-anchor="middle">3</text>
+<text x="188.00" y="50.20" class="t tiny2" text-anchor="start">Fosse : membrane bitumineuse extérieure + gravier drainant</text>
+<line x1="95.00" y1="84.00" x2="181.40" y2="56.80" class="k w1"/>
+<circle cx="95.00" cy="84.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="56.80" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="57.80" class="t cb" text-anchor="middle">4</text>
+<text x="188.00" y="57.80" class="t tiny2" text-anchor="start">Attentes HA10 e=15 scellées dans le voile (repère 16)</text>
+<line x1="88.50" y1="89.00" x2="181.40" y2="64.40" class="k w1"/>
+<circle cx="88.50" cy="89.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="64.40" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="65.40" class="t cb" text-anchor="middle">5</text>
+<text x="188.00" y="65.40" class="t tiny2" text-anchor="start">Étanchéité du bassin : ciment flexible 2 couches + bandes d'angle</text>
+<line x1="127.50" y1="93.50" x2="181.40" y2="72.00" class="k w1"/>
+<circle cx="127.50" cy="93.50" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="72.00" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="73.00" class="t cb" text-anchor="middle">6</text>
+<text x="188.00" y="73.00" class="t tiny2" text-anchor="start">Fosse : cristallin 2 couches en face intérieure</text>
+<line x1="100.50" y1="95.00" x2="181.40" y2="79.60" class="k w1"/>
+<circle cx="100.50" cy="95.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="79.60" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="80.60" class="t cb" text-anchor="middle">7</text>
+<text x="188.00" y="80.60" class="t tiny2" text-anchor="start">Joint hydrogonflant aux reprises radier / voiles</text>
+<line x1="106.50" y1="99.00" x2="181.40" y2="87.20" class="k w1"/>
+<circle cx="106.50" cy="99.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="87.20" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="88.20" class="t cb" text-anchor="middle">8</text>
+<text x="188.00" y="88.20" class="t tiny2" text-anchor="start">Fourreaux à collerette + bague hydrogonflante</text>
+<line x1="127.50" y1="124.00" x2="181.40" y2="94.80" class="k w1"/>
+<circle cx="127.50" cy="124.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="94.80" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="95.80" class="t cb" text-anchor="middle">9</text>
+<text x="188.00" y="95.80" class="t tiny2" text-anchor="start">Gros béton jusqu'au fond de fouille du bassin</text>
+<line x1="73.50" y1="136.00" x2="181.40" y2="102.40" class="k w1"/>
+<circle cx="73.50" cy="136.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="102.40" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="103.40" class="t cb" text-anchor="middle">10</text>
+<text x="188.00" y="103.40" class="t tiny2" text-anchor="start">Cadre de grille scellé, collier d'étanchéité sous la membrane</text>
+<line x1="73.50" y1="156.50" x2="181.40" y2="110.00" class="k w1"/>
+<circle cx="73.50" cy="156.50" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="110.00" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="111.00" class="t cb" text-anchor="middle">11</text>
+<text x="188.00" y="111.00" class="t tiny2" text-anchor="start">Puisard : même membrane continue, angles en gorge 5 × 5</text>
+<line x1="53.50" y1="163.00" x2="181.40" y2="117.60" class="k w1"/>
+<circle cx="53.50" cy="163.00" r="0.50" class="k w1 fk"/>
+<circle cx="184.00" cy="117.60" r="2.40" class="k w2 fs"/>
+<text x="184.00" y="118.60" class="t cb" text-anchor="middle">12</text>
+<text x="188.00" y="118.60" class="t tiny2" text-anchor="start">Caisson du puisard BA 0.20, cadres HA12 (repère 17)</text>
+<polygon points="42.10,44.30 44.90,44.30 43.50,46.50" class="k w1 fk"/>
+<line x1="40.50" y1="46.50" x2="46.50" y2="46.50" class="k w1"/>
+<text x="45.70" y="43.90" class="t lvl" text-anchor="start">-0.85</text>
+<polygon points="34.60,134.30 37.40,134.30 36.00,136.50" class="k w1 fk"/>
+<line x1="33.00" y1="136.50" x2="39.00" y2="136.50" class="k w1"/>
+<text x="38.20" y="133.90" class="t lvl" text-anchor="start">-2.65</text>
+<polygon points="54.60,154.30 57.40,154.30 56.00,156.50" class="k w1 fk"/>
+<line x1="53.00" y1="156.50" x2="59.00" y2="156.50" class="k w1"/>
+<text x="58.20" y="153.90" class="t lvl" text-anchor="start">-3.05</text>
+<polygon points="111.10,91.80 113.90,91.80 112.50,94.00" class="k w1 fk"/>
+<line x1="109.50" y1="94.00" x2="115.50" y2="94.00" class="k w1"/>
+<text x="114.70" y="91.40" class="t lvl" text-anchor="start">-1.80</text>
+<polygon points="127.10,159.80 129.90,159.80 128.50,162.00" class="k w1 fk"/>
+<line x1="125.50" y1="162.00" x2="131.50" y2="162.00" class="k w1"/>
+<text x="130.70" y="159.40" class="t lvl" text-anchor="start">-3.16</text>
+<polygon points="49.60,179.80 52.40,179.80 51.00,182.00" class="k w1 fk"/>
+<line x1="48.00" y1="182.00" x2="54.00" y2="182.00" class="k w1"/>
+<text x="53.20" y="179.40" class="t lvl" text-anchor="start">-3.56</text>
+<text x="100.00" y="22.00" class="t ct" text-anchor="middle">COUPE AU PUISARD ET À LA FOSSE (à 2.50 du bord SO)  1/20</text>
+<text x="22.00" y="200.00" class="t cl" text-anchor="start">STRATÉGIE D'ÉTANCHÉITÉ - QUELLE COUCHE ÉTANCHE</text>
+<rect x="22.00" y="202.00" width="154.00" height="36.00" class="k w2 fs"/>
+<rect x="22.00" y="202.00" width="154.00" height="4.50" class="k w2 fh"/>
+<line x1="66.00" y1="202.00" x2="66.00" y2="238.00" class="k w1"/>
+<line x1="118.00" y1="202.00" x2="118.00" y2="238.00" class="k w1"/>
+<line x1="22.00" y1="206.50" x2="176.00" y2="206.50" class="k w1"/>
+<line x1="22.00" y1="211.00" x2="176.00" y2="211.00" class="k w1"/>
+<line x1="22.00" y1="215.50" x2="176.00" y2="215.50" class="k w1"/>
+<line x1="22.00" y1="220.00" x2="176.00" y2="220.00" class="k w1"/>
+<line x1="22.00" y1="224.50" x2="176.00" y2="224.50" class="k w1"/>
+<line x1="22.00" y1="229.00" x2="176.00" y2="229.00" class="k w1"/>
+<line x1="22.00" y1="233.50" x2="176.00" y2="233.50" class="k w1"/>
+<text x="23.20" y="205.15" class="t cb" text-anchor="start" style="font-size:2.4px">Couche</text>
+<text x="116.80" y="205.15" class="t cb" text-anchor="end" style="font-size:2.4px">Rôle</text>
+<text x="174.80" y="205.15" class="t cb" text-anchor="end" style="font-size:2.4px">Où</text>
+<text x="23.20" y="209.65" class="t cs" text-anchor="start" style="font-size:2.4px">Membrane ciment flexible</text>
+<text x="67.20" y="209.65" class="t cs" text-anchor="start" style="font-size:2.4px">ÉTANCHÉITÉ du bassin</text>
+<text x="119.20" y="209.65" class="t cs" text-anchor="start" style="font-size:2.4px">faces mouillées, puisard, face de la cascade</text>
+<text x="23.20" y="214.15" class="t cs" text-anchor="start" style="font-size:2.4px">Enduit hydrofuge 2 couches</text>
+<text x="67.20" y="214.15" class="t cs" text-anchor="start" style="font-size:2.4px">support régulier</text>
+<text x="119.20" y="214.15" class="t cs" text-anchor="start" style="font-size:2.4px">sous la membrane</text>
+<text x="23.20" y="218.65" class="t cs" text-anchor="start" style="font-size:2.4px">Béton B25 + hydrofuge</text>
+<text x="67.20" y="218.65" class="t cs" text-anchor="start" style="font-size:2.4px">structure (non considérée étanche)</text>
+<text x="119.20" y="218.65" class="t cs" text-anchor="start" style="font-size:2.4px">radier, voiles, caisson, fosse</text>
+<text x="23.20" y="223.15" class="t cs" text-anchor="start" style="font-size:2.4px">Mosaïque + joint époxy</text>
+<text x="67.20" y="223.15" class="t cs" text-anchor="start" style="font-size:2.4px">FINITION (non étanche)</text>
+<text x="119.20" y="223.15" class="t cs" text-anchor="start" style="font-size:2.4px">sur la membrane</text>
+<text x="23.20" y="227.65" class="t cs" text-anchor="start" style="font-size:2.4px">Cristallin 2 couches</text>
+<text x="67.20" y="227.65" class="t cs" text-anchor="start" style="font-size:2.4px">ÉTANCHÉITÉ de la fosse (côté sec)</text>
+<text x="119.20" y="227.65" class="t cs" text-anchor="start" style="font-size:2.4px">faces intérieures de la fosse</text>
+<text x="23.20" y="232.15" class="t cs" text-anchor="start" style="font-size:2.4px">Membrane bitumineuse</text>
+<text x="67.20" y="232.15" class="t cs" text-anchor="start" style="font-size:2.4px">ÉTANCHÉITÉ de la fosse (côté terre)</text>
+<text x="119.20" y="232.15" class="t cs" text-anchor="start" style="font-size:2.4px">faces extérieures + sous-face</text>
+<text x="23.20" y="236.65" class="t cs" text-anchor="start" style="font-size:2.4px">Joints et fourreaux</text>
+<text x="67.20" y="236.65" class="t cs" text-anchor="start" style="font-size:2.4px">continuité aux reprises / traversées</text>
+<text x="119.20" y="236.65" class="t cs" text-anchor="start" style="font-size:2.4px">toutes reprises et traversées</text>
+<text x="182.00" y="200.00" class="t cl" text-anchor="start">ACIERS DE LA VARIANTE (FeE500)</text>
+<rect x="182.00" y="202.00" width="126.00" height="31.50" class="k w2 fs"/>
+<rect x="182.00" y="202.00" width="126.00" height="4.50" class="k w2 fh"/>
+<line x1="191.00" y1="202.00" x2="191.00" y2="233.50" class="k w1"/>
+<line x1="265.00" y1="202.00" x2="265.00" y2="233.50" class="k w1"/>
+<line x1="275.00" y1="202.00" x2="275.00" y2="233.50" class="k w1"/>
+<line x1="283.00" y1="202.00" x2="283.00" y2="233.50" class="k w1"/>
+<line x1="294.00" y1="202.00" x2="294.00" y2="233.50" class="k w1"/>
+<line x1="182.00" y1="206.50" x2="308.00" y2="206.50" class="k w1"/>
+<line x1="182.00" y1="211.00" x2="308.00" y2="211.00" class="k w1"/>
+<line x1="182.00" y1="215.50" x2="308.00" y2="215.50" class="k w1"/>
+<line x1="182.00" y1="220.00" x2="308.00" y2="220.00" class="k w1"/>
+<line x1="182.00" y1="224.50" x2="308.00" y2="224.50" class="k w1"/>
+<line x1="182.00" y1="229.00" x2="308.00" y2="229.00" class="k w1"/>
+<text x="183.20" y="205.15" class="t cb" text-anchor="start" style="font-size:2.3px">Rep.</text>
+<text x="192.20" y="205.15" class="t cb" text-anchor="start" style="font-size:2.3px">Désignation</text>
+<text x="273.80" y="205.15" class="t cb" text-anchor="end" style="font-size:2.3px">Ø</text>
+<text x="281.80" y="205.15" class="t cb" text-anchor="end" style="font-size:2.3px">Nb</text>
+<text x="292.80" y="205.15" class="t cb" text-anchor="end" style="font-size:2.3px">L (m)</text>
+<text x="306.80" y="205.15" class="t cb" text-anchor="end" style="font-size:2.3px">kg</text>
+<text x="183.20" y="209.65" class="t cs" text-anchor="start" style="font-size:2.3px">14</text>
+<text x="192.20" y="209.65" class="t cs" text-anchor="start" style="font-size:2.3px">Fosse - voiles 2 faces HA10 e=15 (V + H)</text>
+<text x="273.80" y="209.65" class="t cs" text-anchor="end" style="font-size:2.3px">HA10</text>
+<text x="281.80" y="209.65" class="t cs" text-anchor="end" style="font-size:2.3px">100</text>
+<text x="292.80" y="209.65" class="t cs" text-anchor="end" style="font-size:2.3px">2.50</text>
+<text x="306.80" y="209.65" class="t cs" text-anchor="end" style="font-size:2.3px">154.2</text>
+<text x="183.20" y="214.15" class="t cs" text-anchor="start" style="font-size:2.3px">15</text>
+<text x="192.20" y="214.15" class="t cs" text-anchor="start" style="font-size:2.3px">Fosse - radier 2 nappes HA10 e=15</text>
+<text x="273.80" y="214.15" class="t cs" text-anchor="end" style="font-size:2.3px">HA10</text>
+<text x="281.80" y="214.15" class="t cs" text-anchor="end" style="font-size:2.3px">42</text>
+<text x="292.80" y="214.15" class="t cs" text-anchor="end" style="font-size:2.3px">1.50</text>
+<text x="306.80" y="214.15" class="t cs" text-anchor="end" style="font-size:2.3px">38.9</text>
+<text x="183.20" y="218.65" class="t cs" text-anchor="start" style="font-size:2.3px">16</text>
+<text x="192.20" y="218.65" class="t cs" text-anchor="start" style="font-size:2.3px">Fosse - attentes dans le voile du bassin HA10 e=15</text>
+<text x="273.80" y="218.65" class="t cs" text-anchor="end" style="font-size:2.3px">HA10</text>
+<text x="281.80" y="218.65" class="t cs" text-anchor="end" style="font-size:2.3px">32</text>
+<text x="292.80" y="218.65" class="t cs" text-anchor="end" style="font-size:2.3px">0.90</text>
+<text x="306.80" y="218.65" class="t cs" text-anchor="end" style="font-size:2.3px">17.8</text>
+<text x="183.20" y="223.15" class="t cs" text-anchor="start" style="font-size:2.3px">17</text>
+<text x="192.20" y="223.15" class="t cs" text-anchor="start" style="font-size:2.3px">Puisard - cadres et chevêtres HA12</text>
+<text x="273.80" y="223.15" class="t cs" text-anchor="end" style="font-size:2.3px">HA12</text>
+<text x="281.80" y="223.15" class="t cs" text-anchor="end" style="font-size:2.3px">8</text>
+<text x="292.80" y="223.15" class="t cs" text-anchor="end" style="font-size:2.3px">1.60</text>
+<text x="306.80" y="223.15" class="t cs" text-anchor="end" style="font-size:2.3px">11.4</text>
+<text x="183.20" y="227.65" class="t cs" text-anchor="start" style="font-size:2.3px">18</text>
+<text x="192.20" y="227.65" class="t cs" text-anchor="start" style="font-size:2.3px">Mur de cascade - noyau HA10 e=20, 2 faces</text>
+<text x="273.80" y="227.65" class="t cs" text-anchor="end" style="font-size:2.3px">HA10</text>
+<text x="281.80" y="227.65" class="t cs" text-anchor="end" style="font-size:2.3px">26</text>
+<text x="292.80" y="227.65" class="t cs" text-anchor="end" style="font-size:2.3px">0.95</text>
+<text x="306.80" y="227.65" class="t cs" text-anchor="end" style="font-size:2.3px">15.2</text>
+<text x="183.20" y="232.15" class="t cs" text-anchor="start" style="font-size:2.3px"></text>
+<text x="192.20" y="232.15" class="t cs" text-anchor="start" style="font-size:2.3px">Total variante (en plus de la nomenclature PL-05)</text>
+<text x="273.80" y="232.15" class="t cs" text-anchor="end" style="font-size:2.3px"></text>
+<text x="281.80" y="232.15" class="t cs" text-anchor="end" style="font-size:2.3px"></text>
+<text x="292.80" y="232.15" class="t cs" text-anchor="end" style="font-size:2.3px"></text>
+<text x="306.80" y="232.15" class="t cs" text-anchor="end" style="font-size:2.3px">237.5</text>
+<text x="22.00" y="245.00" class="t tiny2" text-anchor="start">Béton de la fosse et du puisard : 1.98 m³ B25 + hydrofuge - gros béton : 1.56 m³ - surfaces : cristallin 6.23 m², membrane extérieure 6.89 m², puisard 1.60 m².</text>
+<text x="22.00" y="252.00" class="t tiny2" text-anchor="start">Le voile NO reste un voile de bassin : il est calculé à l'indice E pour la poussée de l'eau sans remblai, cas qui devient permanent sur la hauteur de la fosse.</text>
+<text x="22.00" y="256.80" class="t tiny2" text-anchor="start">Le puisard abaisse localement le radier de 0.40 : caisson armé coulé avec le radier, sans reprise sous l'eau.</text>
+<text x="22.00" y="261.60" class="t tiny2" text-anchor="start">La fosse ne s'appuie pas sur le remblai : radier sur gros béton descendu au fond de fouille du bassin, attentes dans le voile commun.</text>
+<text x="22.00" y="266.40" class="t tiny2" text-anchor="start">Prédimensionnement BAEL 91 mod. 99 à faire vérifier et viser par un BET agréé (RPS 2000 version 2011 à appliquer).</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Variante B : sans local technique</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">STRUCTURE ET ÉTANCHÉITÉ</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Grand fond, puisard, voile commun, fosse</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">VB-08</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/20</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">F - v2.0.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 20/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>
