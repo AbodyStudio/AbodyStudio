@@ -1,0 +1,17 @@
+Gharsa Foquiya - Piscine - Variante B : sans local technique
+Version 2.1.0 (indice G) - 20/10/2026
+Même bassin que l'indice E (v1.3.1) ; système hydraulique entièrement repensé.
+Conception : AbodyStudio Limited - https://abodystudio.com/ - Support@abodystudio.com - WhatsApp +212 663 033 383
+Exécution : ABOUDI BTP Group - SARL au capital de 100 000 MAD - RC 168595 Tanger - ICE 003823697000094
+            Bd Moulay Ismail, Résidence Volubilis, Bloc C, 1er étage, N° 53 - Tanger-Médina - Tél. +212 717 783 570 / +212 663 033 383 - contact@aboudibtp.com / aboudibtpgroup@gmail.com
+
+index.html        Dossier : principe, variante C (pompe dans le puisard), plans, calculs hydrauliques, comparaison E / B, équipements,
+                  étanchéité, électricité, rejet, descriptif, phasage, devis, planning, lexique
+plans-svg/        Planches VB-01 à VB-10, PL-01, PL-02, PL-05 (variante B) et VC-01 à VC-04 (variante C)
+                  format A3, imprimer à 100 %
+img/              Photos du site + cover.png et image1.png, image2.png... (galerie) :
+                  déposez-les dans img/, ils s'affichent automatiquement à l'ouverture de index.html
+
+Ouvrir index.html dans un navigateur (connexion internet pour les polices).
+Variante C : pompe 24 V CC (TBTS) dans le puisard ; votre pompe 220 V ne doit pas aller dans l'eau du bassin.
+Concept électrique non vérifié pour la conformité : à valider par un électricien qualifié.

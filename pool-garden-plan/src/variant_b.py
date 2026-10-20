@@ -12,8 +12,8 @@ import math
 import model as M
 from model import LV, POOL, POOL_L, POOL_W, FINISH, WALL, SLAB, Q, PUMP_FLOW, WATER_DEEP, FLOOR_DEEP, FLOOR_SHALLOW
 
-VERSION = "2.0.0"
-INDICE = "F"
+VERSION = "2.1.0"
+INDICE = "G"
 SUBTITLE = "Variante B : sans local technique"
 
 G = 9.81
@@ -96,9 +96,14 @@ VLAY = dict(
     riser=(0.97, 0.31), skim_in=(0.97, 1.30), skim1_in=(0.97, 0.0), vs2=(0.97, 0.85), vs1=(0.97, 0.12),
     header_b=1.15, header_a=(0.20, 0.80),
     A1_out=(0.55, 1.30), A2_out=(0.75, 1.30), B_out=(0.0, 1.15),
-    cable_in=(0.0, 0.15), vents=[(0.0, 0.45), (0.0, 0.85)], drain=(0.14, 0.50), float=(0.08, 0.59),
-    z_suction=-1.45, z_A1=-1.45, z_A2=-1.30, z_B=-1.30,
+    cable_in=(0.0, 0.15), vents=[(0.0, 0.45), (0.0, 0.85)], drain=(0.70, 0.58), float=(0.86, 0.66),
+    z_suction=-1.55, z_skim=-1.30, z_disch=-1.25, z_fout=-1.45, z_header=-1.30, z_A1=-1.45, z_A2=-1.30, z_B=-1.30,
 )
+
+
+PUMP_AXIS = VAULT["floor"] + VLAY["plinth"] + 0.13      # motor axis level
+CAGE = dict(a0=VLAY["pump"][0] - 0.05, a1=VLAY["pump"][1] + 0.05, b0=VLAY["pump"][2] - 0.05, b1=VLAY["pump"][3] + 0.05,
+            h=0.42, mesh=0.02)                         # removable stainless guard around the pump
 
 
 def vu(a, b):
@@ -138,7 +143,7 @@ def lengths():
     a1 = a1_main + sum(plen(s) for s in ROUTES["A1_stubs"]) + 2 * (INLET_LEVEL - VLAY["z_A1"]) + inside
     a2 = plen(ROUTES["A2"]) + (SLOT["level"] - 0.05 - VLAY["z_A2"]) + inside
     return dict(
-        suction=0.45 + ((VAULT["floor"] + 0.15) - SUMP_OUT) + 0.40,
+        suction=0.45 + (VLAY["z_suction"] - SUMP_OUT) + 0.40,
         skimmer=plen(ROUTES["SK"]) + plen(ROUTES["SK1"]) + 2 * 0.35,
         a1=a1, a2=a2,
         b_post=plen(ROUTES["B"]) + (0.0 - VLAY["z_B"]) + inside,
@@ -237,7 +242,7 @@ def calc():
     r["head_dirty"] = max(tdh("A", state="dirty")[1], tdh("B", state="dirty")[1])
     r["head_clean"] = min(tdh("A", state="clean")[1], tdh("B", state="clean")[1])
     r["drain_hours"] = Q["water_vol"] / Q_GARDEN
-    r["suction_lift_end"] = (VAULT["floor"] + 0.15) - SUMP_OUT
+    r["suction_lift_end"] = VLAY["z_suction"] - SUMP_OUT
     r["v_suction"] = vel(SUMP_SHARE * q, 63)
     r["v_trunk"] = vel(q, 63)
     r["v_b"] = vel(Q_GARDEN, 50)

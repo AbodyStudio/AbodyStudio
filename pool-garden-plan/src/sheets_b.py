@@ -24,6 +24,7 @@ VB_SHEETS = [
     ("VB-08", "Structure et étanchéité", "Grand fond, puisard, voile commun, fosse", "1/20"),
     ("VB-09", "Concept de sécurité électrique", "Volumes, coffret, unifilaire, liaisons", "1/100 - s.é."),
     ("VB-10", "Nomenclature des équipements", "Composants, spécifications, coûts, entretien", "-"),
+
     ("PL-01", "Plan de masse", "Implantation sur le plan topographique", "1/250"),
     ("PL-02", "Plan d'aménagement des abords", "Piscine, plage, jardins, allée et poulailler", "1/100"),
     ("PL-05", "Détails béton armé et nomenclature des aciers", "Paroi, radier, chaînage, margelle (inchangés)", "1/20"),
@@ -797,7 +798,7 @@ def vb04():
         s.level(X(xx), Z(z), txt, side=sd, section=True)
     s.dim((X(0.15), Z(LV["water"])), (X(0.15), Z(FLOOR_DEEP)), 0, f"{WATER_DEEP:.2f}")
     s.dim((X(vw_in + 0.10), Z(VAULT["top"])), (X(vw_in + 0.10), Z(VAULT["floor"])), 0, f"{V_IN_H:.2f}")
-    s.dim((X(vw_in + 0.50), Z(LV["water"])), (X(vw_in + 0.50), Z(VAULT["floor"] + 0.15)), 0, f"{LV['water'] - VAULT['floor'] - 0.15:.2f}")
+    s.dim((X(vw_in + 0.50), Z(LV["water"])), (X(vw_in + 0.50), Z(B.PUMP_AXIS)), 0, f"{LV['water'] - B.PUMP_AXIS:.2f}")
     chain = [vw_out, vw_in, wall_o, 0, POOL_L, POOL_L + CASCADE["thick"]]
     zz = Z(zb_sump - 0.30) + 5
     for a_, b_ in zip(chain, chain[1:]):
@@ -885,7 +886,7 @@ def vb04():
              f"Fosse : radier 0.20 sur gros béton coulé jusqu'au fond de fouille du bassin ({zb_deep:+.2f}) :",
              "même assise que le bassin, pas de tassement différentiel.",
              "Voile NO commun : étanchéité du bassin côté eau, revêtement cristallin côté fosse (VB-08).",
-             f"Pompe {LV['water'] - VAULT['floor'] - 0.15:.2f} m sous le plan d'eau : aspiration en charge, pas d'amorçage en service.",
+             f"Axe de la pompe {LV['water'] - B.PUMP_AXIS:.2f} m sous le plan d'eau : aspiration en charge, pas d'amorçage en service.",
              "Seule canalisation sous l'ouvrage : la sortie du puisard, noyée dans le gros béton, éprouvée avant coulage.",
              "Buses RA1-RA2 et chambre de la cascade : coupe C-C (VB-06)."]
     s.t(24, 236, "NOTES", "t cl", "start")
@@ -973,7 +974,7 @@ def vb05():
     fla, flb = VLAY["float"]
     rr(fla - 0.03, flb - 0.03, fla + 0.03, flb + 0.03, "k w2 fk")
     rr(HATCH["a0"] + 0.01, 0.62, HATCH["a0"] + 0.05, 0.70, "k w2 fs")
-    s.line(Pp(0.52, 0.555), Pp(0.22, 0.53), "k w1 arrow")
+    s.line(Pp(0.40, 0.57), Pp(0.62, 0.58), "k w1 arrow")
     s.add("</g>")
     # tags
     tg = [("P", (0.39, (pb0 + pb1) / 2)), ("PF", (0.775, pb1 + 0.07)), ("F", (fa, fb + 0.02)), ("M", (fa + 0.20, fb - 0.13)),
@@ -993,7 +994,7 @@ def vb05():
     s.t(x_, y_, "BASSIN", "t tiny2 b red-t", "middle", -90)
     x_, y_ = Pp(0.45, 0.03)
     s.t(x_, y_ + 0.6, "trappe 0.75 × 1.20 (au-dessus)", "t tiny red-t", "middle")
-    x_, y_ = Pp(0.36, 0.555)
+    x_, y_ = Pp(0.50, 0.555)
     s.t(x_, y_ - 1.0, "pente 1 % vers SF", "t tiny", "middle")
     # plan dimensions
     s.dim(Pp(1.10, -0.20), Pp(0.0, -0.20), -4, f"{V_IN_A:.2f}")
@@ -1035,7 +1036,7 @@ def vb05():
     s.rect(xa(pa1 + 0.01), za(zb + PUMP["H"] + 0.02), (pa1 - 0.69 + 0.02) * k, 0.04 * k, "k w2 fs")
     s.pl([(xa(0.62), za(zb + PUMP["H"])), (xa(0.62), za(-1.20))], "k w4")
     s.circ(xa(0.62), za(-1.20), 1.2, "k w2 fs")
-    zs = VLAY["z_suction"] - 0.10
+    zs = VLAY["z_suction"]
     s.pl([(xa(ra), za(-2.40)), (xa(ra), za(zs)), (xa(pa1), za(zs))], "pipe-s w4")
     valve(s, xa(ra), za(zf + 0.14), horiz=False, r=1.4)
     s.circ(xa(ra), za(VLAY["z_A2"]), 1.3, "pipe-s w3 fs")
@@ -1077,12 +1078,9 @@ def vb05():
     for b_, z_, r_ in ((VLAY["cable_in"][1], -0.95, 1.0), (VLAY["vents"][0][1], -0.95, 2.4), (VLAY["vents"][1][1], -0.93, 2.4)):
         s.circ(xb(b_), zb_(z_), r_, "k w1 fs")
     s.line((xb(VLAY["vents"][0][1]), zb_(-0.95) + 2.4), (xb(VLAY["vents"][0][1]), zb_(zf + 0.12)), "k w1 dash")
-    s.rect(xb(db - 0.06), zb_(zf + 0.01), 0.12 * k, 0.10 * k, "k w2 fs")
-    s.line((xb(db), zb_(zf - 0.09)), (xb(db), zb_(-2.10)), "pipe-d w3")
-    s.rect(xb(flb - 0.03), zb_(zf + 0.12), 0.06 * k, 0.06 * k, "k w2 fk")
     s.add("</g>")
     for t_, (b_, z_) in (("F", (fb, -1.30)), ("P (coupé)", (0.31, -1.75 + 0.42)), ("V3 / B", (hb, VLAY["z_B"] - 0.12)), ("230 V", (VLAY["cable_in"][1], -1.06)),
-                         ("VT1", (VLAY["vents"][0][1] + 0.10, -1.06)), ("VT2", (VLAY["vents"][1][1], -1.04)), ("SF", (db + 0.13, zf + 0.05)), ("FL", (flb, zf + 0.25))):
+                         ("VT1", (VLAY["vents"][0][1] + 0.10, -1.06)), ("VT2", (VLAY["vents"][1][1], -1.04))):
         s.t(xb(b_), zb_(z_), t_, "t tiny2 b")
     s.dim((xb(0.0), zb_(zt) - 6), (xb(1.30), zb_(zt) - 6), 0, f"{V_IN_B:.2f}", size=2.5)
     s.dim((xb(1.40), zb_(zt)), (xb(1.40), zb_(zf)), 0, f"{V_IN_H:.2f}", size=2.5)
@@ -1733,6 +1731,150 @@ def vb10():
     frame(s, "VB-10")
     s.title = "VB-10 Nomenclature"
     return s
+
+
+
+# ==========================================================================
+# Axonometric helpers (used by the variant C close-up)
+# ==========================================================================
+
+TUBE = {   # colour, label
+    "s": ("#1683a8", "Aspiration (puisard, skimmers)"),
+    "p": ("#3c4a55", "Refoulement pompe → filtre"),
+    "f": ("#2c6e49", "Eau filtrée → sélecteur"),
+    "a1": ("#1b8a5a", "A1 → buses RA1-RA2"),
+    "a2": ("#5fb38a", "A2 → cascade"),
+    "b": ("#8a5a2b", "B → borne de rejet"),
+    "d": ("#4f7f35", "Évacuation SF"),
+    "e": ("#7b3fb0", "Câble 230 V / TBTS"),
+}
+
+
+class Iso:
+    """Axonometric (isometric) projection of vault-local coordinates (a, b, z).
+    The viewer stands at the pool / NE corner: pool side to the left, NE to the right."""
+
+    def __init__(self, ox, oy, S, z0=VAULT["top"]):
+        self.ox, self.oy, self.S, self.z0 = ox, oy, S, z0
+
+    def __call__(self, a, b, z):
+        S = self.S
+        return (self.ox - (a - b) * 0.866 * S, self.oy + (a + b) * 0.5 * S - (z - self.z0) * S)
+
+
+def _hull(pts):
+    pts = sorted(set((round(x, 3), round(y, 3)) for x, y in pts))
+    if len(pts) < 3:
+        return pts
+    cross = lambda o, a, b: (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+    lo, up = [], []
+    for p in pts:
+        while len(lo) >= 2 and cross(lo[-2], lo[-1], p) <= 0:
+            lo.pop()
+        lo.append(p)
+    for p in reversed(pts):
+        while len(up) >= 2 and cross(up[-2], up[-1], p) <= 0:
+            up.pop()
+        up.append(p)
+    return lo[:-1] + up[:-1]
+
+
+def _poly(s, pts, fill, stroke="var(--ink)", w=0.25, extra=""):
+    p = " ".join(f"{x:.2f},{y:.2f}" for x, y in pts)
+    s.add(f'<polygon points="{p}" style="fill:{fill};stroke:{stroke};stroke-width:{w};stroke-linejoin:round{extra}"/>')
+
+
+def iso_box(s, I, a0, b0, z0, a1, b1, z1, top="#eef1f3", fa="#d9dfe3", fb="#c7cfd5", w=0.25):
+    """Visible faces of a box: +a face, +b face, top."""
+    _poly(s, [I(a1, b0, z0), I(a1, b1, z0), I(a1, b1, z1), I(a1, b0, z1)], fa, w=w)
+    _poly(s, [I(a0, b1, z0), I(a1, b1, z0), I(a1, b1, z1), I(a0, b1, z1)], fb, w=w)
+    _poly(s, [I(a0, b0, z1), I(a1, b0, z1), I(a1, b1, z1), I(a0, b1, z1)], top, w=w)
+
+
+def iso_cyl(s, I, axis, c, r, l0, l1, body="#dfe5e9", cap="#f3f5f7", n=28, w=0.3):
+    """Cylinder along 'a', 'b' or 'z'; c = centre of the other two coordinates; l0..l1 along the axis."""
+    def pt(l, t):
+        u, v = r * math.cos(t), r * math.sin(t)
+        if axis == "z":
+            return I(c[0] + u, c[1] + v, l)
+        if axis == "a":
+            return I(l, c[0] + u, c[1] + v)
+        return I(c[0] + u, l, c[1] + v)
+    e0 = [pt(l0, 2 * math.pi * i / n) for i in range(n)]
+    e1 = [pt(l1, 2 * math.pi * i / n) for i in range(n)]
+    _poly(s, _hull(e0 + e1), body, w=w)
+    near = e1 if axis in ("z", "a", "b") else e0
+    _poly(s, near, cap, w=w)
+
+
+def iso_tube(s, I, pts, kind, d, arrows=True):
+    col = TUBE[kind][0]
+    P2 = [I(*p) for p in pts]
+    pp = " ".join(f"{x:.2f},{y:.2f}" for x, y in P2)
+    wd = max(d * I.S, 0.9)
+    s.add(f'<polyline points="{pp}" style="fill:none;stroke:var(--ink);stroke-width:{wd + 0.7:.2f};stroke-linecap:round;stroke-linejoin:round"/>')
+    s.add(f'<polyline points="{pp}" style="fill:none;stroke:{col};stroke-width:{wd:.2f};stroke-linecap:round;stroke-linejoin:round"/>')
+    if arrows:
+        for (x0, y0), (x1, y1) in zip(P2, P2[1:]):
+            L = math.hypot(x1 - x0, y1 - y0)
+            if L < 7:
+                continue
+            ux, uy = (x1 - x0) / L, (y1 - y0) / L
+            mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+            h = 1.5
+            s.add(f'<polygon points="{mx + ux * h:.2f},{my + uy * h:.2f} {mx - ux * h - uy * h * 0.8:.2f},{my - uy * h + ux * h * 0.8:.2f} '
+                  f'{mx - ux * h + uy * h * 0.8:.2f},{my - uy * h - ux * h * 0.8:.2f}" style="fill:#ffffff;stroke:none"/>')
+
+
+def iso_valve(s, I, p, d=0.063, padlock=False):
+    x, y = I(*p)
+    r = max(d * I.S * 0.85, 1.6)
+    s.circ(x, y, r, "k w2 fs")
+    s.add(f'<line x1="{x:.2f}" y1="{y:.2f}" x2="{x + r * 1.6:.2f}" y2="{y - r * 1.9:.2f}" style="stroke:#c8372d;stroke-width:{r * 0.55:.2f};stroke-linecap:round"/>')
+    if padlock:
+        s.rect(x - r * 1.9, y - r * 0.4, r * 1.1, r * 0.9, "k w1 fk")
+
+
+def iso_union(s, I, p, axis, d=0.063):
+    a, b, z = p
+    e = 0.012
+    q0 = {"a": (a - e, b, z), "b": (a, b - e, z), "z": (a, b, z - e)}[axis]
+    q1 = {"a": (a + e, b, z), "b": (a, b + e, z), "z": (a, b, z + e)}[axis]
+    for q in (q0, q1):
+        x, y = I(*q)
+        s.circ(x, y, d * I.S * 0.75, "k w2 fs")
+
+
+def place_callouts(s, I, items, bounds=(22, 20, 192, 192), dist=15, r=2.5):
+    pts = [I(*p) for _, p, _ in items]
+    cx = sum(x for x, _ in pts) / len(pts)
+    cy = sum(y for _, y in pts) / len(pts)
+    pos = []
+    for (x, y) in pts:
+        dx, dy = x - cx, y - cy
+        L = math.hypot(dx, dy) or 1
+        pos.append([x + dx / L * dist, y + dy / L * dist])
+    x0, y0, x1, y1 = bounds
+    for _ in range(400):
+        for i in range(len(pos)):
+            for j in range(i + 1, len(pos)):
+                dx, dy = pos[j][0] - pos[i][0], pos[j][1] - pos[i][1]
+                d = math.hypot(dx, dy) or 0.01
+                if d < 2 * r + 1.6:
+                    f = (2 * r + 1.6 - d) / 2
+                    pos[i][0] -= dx / d * f
+                    pos[i][1] -= dy / d * f
+                    pos[j][0] += dx / d * f
+                    pos[j][1] += dy / d * f
+        for q in pos:
+            q[0] = min(max(q[0], x0 + r), x1 - r)
+            q[1] = min(max(q[1], y0 + r), y1 - r)
+    for n, ((x, y), (qx, qy)) in enumerate(zip(pts, pos), 1):
+        d = math.hypot(qx - x, qy - y) or 1
+        s.circ(x, y, 0.55, "k w1 fk")
+        s.line((x, y), (qx - (qx - x) / d * r, qy - (qy - y) / d * r), "k w1")
+        s.circ(qx, qy, r, "k w2 fs")
+        s.t(qx, qy + 1.0, str(n), "t tiny2 b", size=2.6)
 
 
 SHEET_FUNCS = [vb01, vb02, vb03, vb04, vb05, vb06, vb07, vb08, vb09, vb10, SH.pl01, SH.pl02, SH.pl05]

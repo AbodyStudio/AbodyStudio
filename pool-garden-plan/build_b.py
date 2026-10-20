@@ -22,6 +22,8 @@ model.VERSION, model.INDICE, model.DATE = B.VERSION, B.INDICE, DATE
 
 import sheets as SH  # noqa: E402
 import sheets_b as SB  # noqa: E402
+import sheets_c as SC  # noqa: E402
+import variant_c as VC  # noqa: E402
 import build  # noqa: E402
 from build import esc, fr, nf, money, hm, ic, NB  # noqa: E402
 from model import Q, LV, POOL_L, POOL_W, PUMP_FLOW, WATER_SHALLOW, WATER_DEEP, AUTHOR, CONTRACTOR, hu  # noqa: E402
@@ -33,10 +35,10 @@ ZIP_NAME = f"AbodyStudio_Gharsa-Foquiya_Piscine-Sans-Local-Technique_v{VERSION}.
 # ---------------------------------------------------------------------------
 # Wiring: variant sheets, estimate, cartouche
 # ---------------------------------------------------------------------------
-SH.SHEETS = SB.VB_SHEETS
+SH.SHEETS = SB.VB_SHEETS + SC.VC_SHEETS
 SH.VARIANT = SB.HOOKS
 SH.FRAME_SUB = B.SUBTITLE
-build.SHEETS = SB.VB_SHEETS
+build.SHEETS = SB.VB_SHEETS + SC.VC_SHEETS
 build.dqe = B.dqe_b
 build.ICONS["solid"] += ["arrow-down", "filter", "plug", "ban", "scale-balanced", "toolbox", "gauge-high", "droplet", "circle-plus", "lock", "recycle"]
 
@@ -80,7 +82,7 @@ build.facts = facts
 L = R["L"]
 P_ = R["pipes_new"]
 build.HYD = [
-    ("Pompe", f"{PUMP_FLOW} m³/h à {PUMP['head']:.0f} mCE, vitesse variable, préfiltre intégré, 230 V, montée à sec dans la fosse, {nf(LV['water'] - VAULT['floor'] - 0.15)} m sous le plan d'eau (aspiration en charge)"),
+    ("Pompe", f"{PUMP_FLOW} m³/h à {PUMP['head']:.0f} mCE, vitesse variable, préfiltre intégré, 230 V, montée à sec dans la fosse, axe {nf(LV['water'] - B.PUMP_AXIS)} m sous le plan d'eau (aspiration en charge)"),
     ("Filtre à cartouche", f"{nf(FILTER['area'], 1)} m² ({FILTER['area_ft2']} ft²) : {nf(R['filter_rate'])} m³/h par m², sans contre-lavage. Enveloppe maximale Ø 0,40 × 0,90 m"),
     ("Aspiration", f"Puisard sous grille 800 × 600 au grand fond ({B.SUMP_SHARE * 100:.0f} %) et 2 skimmers ({(1 - B.SUMP_SHARE) / 2 * 100:.0f} % chacun) : vannes VA, VS1, VS2"),
     ("Refoulement", "Sélecteur V1 (A1 : 2 buses dissimulées), V2 (A2 : cascade), V3 cadenassée (B : rejet au jardin)"),
@@ -207,7 +209,7 @@ def sec_principle():
       <li>{fr("Une pompe 230 V ne peut pas être posée dans l'eau du bassin (volume 0). Le croquis d'origine (pompe dans une fente de 20 à 30 cm sur 2 m de profondeur) est donc séparé en deux.")}</li>
       <li>{fr(f"Le puisard, sous la grille, fait partie du bassin : {nf(SUMP['x1'] - SUMP['x0'])} × {nf(SUMP['y1'] - SUMP['y0'])} m sur {nf(SUMP_DEPTH)} m, étanché comme le bassin.")}</li>
       <li>{fr(f"La fosse est sèche, à côté du voile NO : {nf(V_IN_A)} × {nf(V_IN_B)} × {nf(V_IN_H)} m intérieur, dimensions tirées de l'encombrement maximal de la pompe, du filtre et des vannes, avec la place pour les mains.")}</li>
-      <li>{fr(f"La pompe est {nf(LV['water'] - VAULT['floor'] - 0.15)} m sous le plan d'eau : elle est toujours en charge et ne se désamorce pas en service.")}</li>
+      <li>{fr(f"L'axe de la pompe est {nf(LV['water'] - B.PUMP_AXIS)} m sous le plan d'eau : elle est toujours en charge et ne se désamorce pas en service.")}</li>
     </ul></div>
     <div class="spec"><h3>{ic("circle-check")}Ce qui ne change pas</h3><ul>
       <li>{fr("Bassin 10,00 × 5,00 m centré sur la façade, à 5,00 m de la villa ; margelles à −0,70, eau à −0,85.")}</li>
@@ -224,6 +226,59 @@ def loss_table(mode, title, q=PUMP_FLOW):
     trs = "".join(f"<tr><td>{esc(n)}</td><td class='num'>{nf(v)}</td></tr>" for n, v in rows)
     return (f'<div class="loss"><h4>{esc(title)} <span class="mono">{nf(q, 0)}{NB}m³/h</span></h4><div class="tbl"><table><tbody>{trs}'
             f'<tr class="vol-tot"><th>HMT moyenne</th><td class="num">{nf(tot)}{NB}mCE</td></tr></tbody></table></div></div>')
+
+
+def sec_variant_c():
+    """Variante C : the owner's scheme (pump lying in a pit at the deepest point, under a breathable cage)."""
+    items = SC.pit_items()
+    lis = "".join(f"<li>{esc(t_)}</li>" for _, _, t_ in items)
+    rc, pc, cg = VC.R, VC.PUMP_C, VC.CAGE
+    cc = VC.compare()
+    e_e = B.ops_costs()["rows"][0][2]
+    pos = [("1 - Tube 1", "jardin (verger, puits perdu)", "par la borne : casse-vide au point haut, robinet de prélèvement", f"{nf(VC.Q_GARDEN, 0)} m³/h", f"{nf(rc['tdh_1'][1])} mCE"),
+           ("2 - Tube 2", "cascade, puis retour au bassin", "par le filtre à cartouche du coffre de la cascade", f"{nf(VC.Q_C, 0)} m³/h", f"{nf(rc['tdh_2'][1])} mCE"),
+           ("Entretien", "nulle part", "pompe arrêtée, boîtier AL coupé, V-C fermée", "0", "-")]
+    data = [("Débit de la pompe", f"{nf(VC.Q_C, 0)} m³/h : recyclage en {hm(Q['water_vol'] / VC.Q_C)}"),
+            ("Cage du puisard", f"{nf(cg['L'])} × {nf(cg['W'])} m, inox 316L, trous Ø8 au pas de 12 mm, {cg['open_ratio'] * 100:.0f} % de vide : {nf(rc['cage_open'], 3)} m² de passage"),
+            ("Vitesse au travers de la cage", f"{nf(rc['v_cage'], 4)} m/s, pour une limite usuelle de 0,5 m/s"),
+            ("Cage non obstruable par un corps", f"plus grande que 457 × 584 mm : {'oui' if rc['unblockable'] else 'non'}"),
+            ("Partage fond / skimmers", f"{(1 - VC.SK_SHARE) * 100:.0f} / {VC.SK_SHARE * 100:.0f} % : diaphragme Ø{rc['orifice']['d'] * 1000:.0f} mm sur l'embout de la chemise"),
+            ("Refroidissement du moteur", f"chemise Ø{pc['sleeve_D'] * 1000:.0f} : {nf(rc['v_sleeve'])} m/s le long du moteur (minimum usuel 0,08 m/s)"),
+            ("HMT tube 2 (cascade)", f"{nf(rc['tdh_2_clean'])} filtre propre, {nf(rc['tdh_2'][1])} en moyenne, {nf(rc['tdh_2_dirty'])} mCE filtre au seuil"),
+            ("HMT tube 1 (jardin)", f"{nf(rc['tdh_1'][1])} mCE à {nf(VC.Q_GARDEN, 0)} m³/h"),
+            ("Pompe", f"forage 4\" immergée, {nf(VC.Q_C, 0)} m³/h à {pc['head']} mCE, {VC.U_DC:.0f} V CC, Ø{pc['D'] * 1000:.0f} × {nf(pc['L'])} m, sortie {pc['outlet']}"),
+            ("Puissance et courant", f"{n0(rc['p1'])} W en moyenne, {n0(rc['p1_dirty'])} W au maximum ; {nf(rc['cable']['i_avg'], 1)} A et {nf(rc['i_dc'], 1)} A sous {VC.U_DC:.0f} V"),
+            ("Câble de la pompe", f"plat, 2 × {rc['cable']['s']:g} mm², {nf(VC.L['pump_cable'], 1)} m d'un seul tenant ; chute de tension {nf(rc['cable']['drop_avg_pct'], 1)} % en moyenne, {nf(rc['cable']['drop_pct'], 1)} % au maximum (limite 5 %)"),
+            ("Vidange complète par le tube 1", f"{nf(rc['drain_h'], 1)} h à {nf(VC.Q_GARDEN, 0)} m³/h : la pompe est au point le plus bas")]
+    cmp_ = [("Où est la pompe", "local technique extérieur", "fosse sèche sous trappe", "dans le puisard, sous la cage, dans l'eau"),
+            ("Tension de la pompe", "230 V", "230 V (fosse sèche)", f"{VC.U_DC:.0f} V CC (TBTS)"),
+            ("Ouvrage technique", "local 2,40 × 2,00 m", "fosse étanche sous l'eau + trappe", f"puisard {nf(cg['L'])} × {nf(cg['W'])} × {nf(VC.PIT['depth'])} m + coffre du filtre"),
+            ("Coût du périmètre (DH HT)", n0(cc["orig"]), n0(cc["b"]), n0(cc["c"])),
+            ("À périmètre égal, sans cascade, borne ni rejet (DH HT)", n0(cc["orig"]), n0(cc["b_like"]), n0(cc["c_like"])),
+            ("Énergie de filtration (kWh / an)", n0(e_e), n0(cc["e_b"]), n0(cc["e_c"])),
+            ("Exploitation (DH / an)", n0(cc["ops_e"]), n0(cc["ops_b"]), n0(cc["ops_c"])),
+            ("Accès à la pompe", "porte du local", "trappe à clé", "cage vissée : raccords rapides défaits à la perche, pompe remontée par ses anneaux"),
+            ("À faire valider", "-", "étanchéité de la fosse", f"pompe 24 V : point {nf(VC.Q_C, 0)} m³/h à {pc['head']} mCE sur la courbe, pose horizontale admise")]
+    return f'''<section class="blk" id="variantec">
+  <h2><span class="sn">00</span>Variante C : la pompe dans le puisard, sous une cage</h2>
+  <p class="lead">{fr(f"C'est votre schéma : la pompe est couchée au point le plus bas du bassin, dans un puisard fermé par une cage métallique ajourée posée au ras du fond. L'eau traverse la cage et la pompe l'envoie soit dehors par le tube 1 (jardin), soit vers la cascade par le tube 2, d'où elle retombe dans le bassin. La pompe a la forme et la longueur de la vôtre ({nf(pc['L'])} m, 4 pouces, tête laiton, crépine, câble plat bleu), avec un moteur {VC.U_DC:.0f} V CC.")}</p>
+  <p class="note">{ic("triangle-exclamation")}<span>{fr(f"Votre pompe 1 HP 220 V ne doit pas être posée dans l'eau du bassin. Dans l'eau (volume 0), seule la très basse tension de sécurité est admise : 12 V alternatif ou 30 V continu au plus, produite par une source de sécurité placée hors des volumes. Un défaut d'isolement d'un moteur 220 V dans le bassin peut électrocuter un baigneur, même avec un différentiel. La pompe du puisard est donc en {VC.U_DC:.0f} V CC, alimentée par le boîtier AL posé à {nf(model.POOL['u0'] - VC.AL['u'])} m du bassin. Votre pompe 220 V reste utile dans le puits du terrain. Conformité non vérifiée : un électricien qualifié doit valider ce concept.")}</span></p>
+  <figure class="plan" id="fig-pit"><figcaption><span class="pl-n mono">VC-01</span><span class="pl-t">Puisard, cage et pompe, vue rapprochée<small>écorché sans échelle ; cage représentée soulevée</small></span>
+  <button type="button" class="zoom" aria-pressed="false" aria-label="Agrandir la vue du puisard">{ic("expand")}<span>Agrandir</span></button></figcaption>
+  <div class="plan-scroll">{SC.pit_figure()}</div></figure>
+  <ol class="callouts">{lis}</ol>
+  <h3>{ic("toolbox")}La pompe : même forme et même longueur que la vôtre</h3>
+  <figure class="plan"><figcaption><span class="pl-n mono">VC-04</span><span class="pl-t">Pompe de forage 4" {VC.U_DC:.0f} V CC, couchée<small>élévation ; cotes et détails sur VC-04</small></span></figcaption>
+  <div class="plan-scroll">{SC.pump_figure()}</div></figure>
+  <h3>{ic("faucet-drip")}Les deux tubes</h3>
+  <figure class="plan"><div class="plan-scroll">{SC.principle_figure()}</div></figure>
+  {tbl(("Position de la vanne V-C", "L'eau va vers", "Passage", "Débit", "HMT moyenne"), pos, num=(3, 4))}
+  <h3>{ic("gauge-high")}Calculs de la variante C</h3>
+  {tbl(("Grandeur", "Valeur"), data)}
+  <h3>{ic("scale-balanced")}Indice E, variante B, variante C</h3>
+  {tbl(("Critère", "Indice E", "Variante B", "Variante C"), cmp_)}
+  <p class="mute small">{fr("Mêmes prix unitaires et mêmes hypothèses d'exploitation que la comparaison E / B plus bas. Le reste du dossier (planches VB, devis, phasage, planning) décrit la variante B. La variante C est détaillée ici et sur les planches VC-01 à VC-04 ; si vous la retenez, tout le dossier sera mis à jour dans la version suivante.")}</p>
+</section>'''
 
 
 def sec_calc():
@@ -376,6 +431,12 @@ def sec_points():
 
 
 EXTRA_CSS = """
+.plan-scroll .sheet.iso,.plan-scroll .sheet.conn{min-width:0}
+.plan.big .plan-scroll .sheet.iso{min-width:1150px}
+.callouts{margin:0;padding-left:2.2em;columns:2 260px;column-gap:28px;font-size:14px}
+.callouts li{break-inside:avoid;padding:2px 0}
+ol.steps{margin:0;padding-left:1.3em;display:grid;gap:6px;font-size:14px}
+.sw{display:inline-block;width:22px;height:8px;border-radius:4px;border:1px solid var(--ink);vertical-align:middle;margin-right:6px}
 .flow{display:grid;gap:10px;border:1px solid var(--rule);background:var(--panel);padding:14px 16px}
 .flow-l{font:600 11.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)} .flow-l.red{color:var(--accent)}
 .chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px}
@@ -407,17 +468,18 @@ def page_b(objs):
     rep(fr("Villa existante avec l'escalier extérieur côté allée et l'ancien coffret de filtration. Le nouveau local technique se place côté NO."),
         fr("Villa existante avec l'escalier extérieur côté allée et l'ancien coffret de filtration. Dans cette variante, aucun local technique : la fosse est sous le dallage, côté NO."))
     rep(fr("Six planches A3. En rouge : constructions neuves ; hachuré gris : villa existante ; tirets jaunes : piscine Intex à déposer. Touchez « Agrandir » pour lire une planche en pleine taille. Les mêmes planches sont dans le zip en fichiers SVG, imprimables en A3 à 100 % aux échelles indiquées."),
-        fr("Treize planches A3 : VB-01 à VB-10 pour la variante, puis PL-01, PL-02 et PL-05 mis à jour. En rouge : ouvrages neufs ; tirets rouges : fosse enterrée sous le dallage. Touchez « Agrandir » pour lire une planche en pleine taille. Les mêmes planches sont dans le zip en fichiers SVG, imprimables en A3 à 100 % aux échelles indiquées."))
+        fr("Dix-sept planches A3 : VB-01 à VB-10 pour la variante B, PL-01, PL-02 et PL-05 mis à jour, puis VC-01 à VC-04 pour la variante C (pompe dans le puisard). En rouge : ouvrages neufs ; tirets rouges : fosse enterrée sous le dallage. Touchez « Agrandir » pour lire une planche en pleine taille. Les mêmes planches sont dans le zip en fichiers SVG, imprimables en A3 à 100 % aux échelles indiquées."))
     # renumber the existing sections after the inserted ones
-    sec_ids = ["spec", "hyd", "seq", "dqe", "planning", "safety", "gloss", "verify"]
-    for i, sid in enumerate(sec_ids):
-        html_ = re.sub(rf'(<section class="blk" id="{sid}">\s*<h2><span class="sn">)\d+(</span>)', rf"\g<1>{i + 9:02d}\2", html_)
-    rep('<section class="blk" id="plans">\n  <h2><span class="sn">03</span>Plans</h2>', '<section class="blk" id="plans">\n  <h2><span class="sn">04</span>Plans</h2>')
+    fosse_at = html_.index('<section class="blk" id="plans">')
+    html_ = html_[:fosse_at] + sec_variant_c() + html_[fosse_at:]
     plans_end = html_.index('<section class="blk" id="spec">')
     html_ = html_[:plans_end] + sec_calc() + sec_compare() + sec_equipment() + sec_points() + html_[plans_end:]
     fit_start = html_.index('<section class="blk" id="plans">')
     html_ = html_[:fit_start] + sec_principle() + html_[fit_start:]
-    rep('  <li><a href="#plans">Plans</a></li>', '  <li><a href="#principe">Principe de la variante</a></li>\n  <li><a href="#plans">Plans</a></li>')
+    # number every section in reading order
+    count = iter(range(1, 100))
+    html_ = re.sub(r'(<section class="blk" id="[a-z0-9]+">\s*<h2><span class="sn">)\d+(</span>)', lambda m: f"{m.group(1)}{next(count):02d}{m.group(2)}", html_)
+    rep('  <li><a href="#plans">Plans</a></li>', '  <li><a href="#principe">Principe de la variante</a></li>\n  <li><a href="#variantec">Variante C : pompe au puisard</a></li>\n  <li><a href="#plans">Plans</a></li>')
     rep('  <li><a href="#spec">Descriptif technique</a></li>',
         '  <li><a href="#calc">Calculs hydrauliques</a></li>\n  <li><a href="#comparaison">Comparaison E / B</a></li>\n  <li><a href="#equip">Équipements</a></li>\n'
         '  <li><a href="#points">Étanchéité, électricité, rejet</a></li>\n  <li><a href="#spec">Descriptif technique</a></li>')
@@ -437,7 +499,7 @@ def page_b(objs):
 
 
 def main():
-    objs = [f() for f in SB.SHEET_FUNCS]
+    objs = [f() for f in SB.SHEET_FUNCS + SC.SHEET_FUNCS]
     dist = os.path.join(ROOT, "dist", f"v{VERSION}")
     if os.path.isdir(dist):
         shutil.rmtree(dist)
@@ -459,10 +521,10 @@ def main():
             shutil.copy(os.path.join(gdir, f), os.path.join(dist, "img", f))
     fonts = ('<style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700'
              '&amp;family=Cairo:wght@600&amp;display=swap");</style>')
-    for (num, fr_, en, sc), o in zip(SB.VB_SHEETS, objs):
+    for (num, fr_, en, sc), o in zip(SH.SHEETS, objs):
         svg = o.svg(o.title, standalone=True).replace("<style>", "<style>" + build.LIGHT_SVG_VARS).replace("<defs>", fonts + "<defs>", 1)
         slug = unicodedata.normalize("NFKD", fr_.split(" - ")[0].split(" : ")[0]).encode("ascii", "ignore").decode()
-        name = f"{num}_{slug.replace(' ', '-').replace(chr(39), '')}.svg"
+        name = f"{num}_{slug.replace(',', '').replace(' ', '-').replace(chr(39), '')}.svg"
         with open(os.path.join(dist, "plans-svg", name), "w") as fh:
             fh.write('<?xml version="1.0" encoding="UTF-8"?>\n' + svg)
     readme = f"""Gharsa Foquiya - Piscine - Variante B : sans local technique
@@ -472,13 +534,15 @@ Conception : {AUTHOR['name']} - {AUTHOR['url']} - {AUTHOR['email']} - WhatsApp {
 Exécution : {CONTRACTOR['name']} - {CONTRACTOR['form']} - RC {CONTRACTOR['rc']} {CONTRACTOR['tribunal']} - ICE {CONTRACTOR['ice']}
             {CONTRACTOR['address']} - Tél. {CONTRACTOR['phones']} - {CONTRACTOR['emails']}
 
-index.html        Dossier : principe, plans, calculs hydrauliques, comparaison E / B, équipements,
+index.html        Dossier : principe, variante C (pompe dans le puisard), plans, calculs hydrauliques, comparaison E / B, équipements,
                   étanchéité, électricité, rejet, descriptif, phasage, devis, planning, lexique
-plans-svg/        Planches VB-01 à VB-10, PL-01, PL-02, PL-05 (format A3, imprimer à 100 %)
+plans-svg/        Planches VB-01 à VB-10, PL-01, PL-02, PL-05 (variante B) et VC-01 à VC-04 (variante C)
+                  format A3, imprimer à 100 %
 img/              Photos du site + cover.png et image1.png, image2.png... (galerie) :
                   déposez-les dans img/, ils s'affichent automatiquement à l'ouverture de index.html
 
 Ouvrir index.html dans un navigateur (connexion internet pour les polices).
+Variante C : pompe 24 V CC (TBTS) dans le puisard ; votre pompe 220 V ne doit pas aller dans l'eau du bassin.
 Concept électrique non vérifié pour la conformité : à valider par un électricien qualifié.
 """
     with open(os.path.join(dist, "LISEZMOI.txt"), "w") as fh:

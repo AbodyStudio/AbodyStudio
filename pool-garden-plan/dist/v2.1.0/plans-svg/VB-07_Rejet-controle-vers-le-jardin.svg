@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="VB-07 Rejet jardin"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}
+.pipe-a1{stroke:var(--p-r);fill:none}.pipe-a2{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}.pipe-b{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.selv{stroke:var(--p-el);fill:none;stroke-dasharray:.7 .7}.memb{stroke:#0b5d7a;fill:none;stroke-width:.75}.pe{stroke:#3a8a3a;fill:none;stroke-width:.35;stroke-dasharray:2 .6 .6 .6}.z1{fill:#7b3fb0;fill-opacity:.07;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:2 1}.z2{fill:#7b3fb0;fill-opacity:.03;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:1 1}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fcc2{fill:url(#cc);opacity:.45}.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="b7-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><defs><clipPath id="b7p"><rect x="20" y="22" width="114" height="150"/></clipPath></defs><g clip-path="url(#b7p)">
+<polygon points="132.00,24.00 19.00,24.00 19.00,178.00 132.00,178.00" class="k w1 fgz"/>
+<polygon points="163.50,-12.00 128.50,-12.00 128.50,148.00 163.50,148.00" class="k w2 dash fch"/>
+<polygon points="53.50,27.00 19.00,27.00 19.00,87.00 53.50,87.00" class="k w1 fs"/>
+<polygon points="48.50,32.00 19.00,32.00 19.00,82.00 48.50,82.00" class="red w3 fw"/>
+<polygon points="58.50,24.00 19.00,24.00 19.00,27.00 58.50,27.00" class="k w1 ftl"/>
+<polygon points="65.50,47.50 53.50,47.50 53.50,66.50 65.50,66.50" class="k w2 fpv"/>
+<polygon points="61.30,51.00 53.80,51.00 53.80,63.00 61.30,63.00" class="red w3 fs"/>
+<line x1="61.30" y1="51.00" x2="53.80" y2="63.00" class="k w1 dash"/>
+<line x1="61.30" y1="63.00" x2="53.80" y2="51.00" class="k w1 dash"/>
+<polygon points="63.80,48.50 50.80,48.50 50.80,65.50 63.80,65.50" class="red w2 dash"/>
+<polygon points="61.80,50.50 50.80,50.50 50.80,63.50 61.80,63.50" class="k w1 dash"/>
+<polygon points="83.00,75.00 77.00,75.00 77.00,79.00 83.00,79.00" class="red w3 fs"/>
+<circle cx="92.00" cy="160.00" r="6.00" class="k w2 fst"/>
+<circle cx="38.00" cy="114.00" r="2.60" class="k w1 tree"/>
+<circle cx="38.00" cy="114.00" r="0.35" class="k w1 fk"/>
+<circle cx="64.00" cy="143.00" r="2.60" class="k w1 tree"/>
+<circle cx="64.00" cy="143.00" r="0.35" class="k w1 fk"/>
+<circle cx="34.00" cy="163.00" r="2.60" class="k w1 tree"/>
+<circle cx="34.00" cy="163.00" r="0.35" class="k w1 fk"/>
+<circle cx="94.00" cy="118.00" r="2.60" class="k w1 tree"/>
+<circle cx="94.00" cy="118.00" r="0.35" class="k w1 fk"/>
+<circle cx="112.00" cy="154.00" r="2.60" class="k w1 tree"/>
+<circle cx="112.00" cy="154.00" r="0.35" class="k w1 fk"/>
+<polyline points="63.80,62.00 80.00,62.00 80.00,77.00" class="pipe-b w4"/>
+<polyline points="80.00,77.00 80.00,160.00 86.00,160.00" class="pipe-b w4"/>
+</g>
+<text x="30.75" y="57.00" class="t tiny2 b red-t" text-anchor="middle">BASSIN</text>
+<text x="84.50" y="78.50" class="t tiny2 b red-t" text-anchor="start">BORNE</text>
+<text x="92.00" y="172.50" class="t tiny2 b" text-anchor="middle">Puits perdu Ø1.20</text>
+<text x="92.00" y="177.50" class="t tiny2" text-anchor="middle">(verger)</text>
+<text x="125.00" y="88.00" class="t tiny2 mute" text-anchor="middle" transform="rotate(-90.00 125.00 88.00)">limite du parc à poules</text>
+<text x="67.50" y="43.50" class="t tiny2 b red-t" text-anchor="end">fosse FT</text>
+<text x="78.50" y="123.00" class="t tiny2" text-anchor="end">PEHD Ø50</text>
+<text x="72.00" y="59.00" class="t tiny2" text-anchor="middle">B PVC Ø50</text>
+<text x="54.00" y="31.00" class="t tiny2 mute" text-anchor="middle">plage</text>
+<line x1="48.50" y1="90.80" x2="48.50" y2="94.20" class="k w1"/>
+<line x1="63.80" y1="90.80" x2="63.80" y2="94.20" class="k w1"/>
+<line x1="47.30" y1="93.00" x2="65.00" y2="93.00" class="k w1"/>
+<line x1="47.60" y1="93.90" x2="49.40" y2="92.10" class="k w3"/>
+<line x1="62.90" y1="93.90" x2="64.70" y2="92.10" class="k w3"/>
+<text x="56.15" y="92.10" class="t dimt" text-anchor="middle" style="font-size:2.4px">1.53</text>
+<line x1="63.80" y1="90.80" x2="63.80" y2="94.20" class="k w1"/>
+<line x1="80.00" y1="90.80" x2="80.00" y2="94.20" class="k w1"/>
+<line x1="62.60" y1="93.00" x2="81.20" y2="93.00" class="k w1"/>
+<line x1="62.90" y1="93.90" x2="64.70" y2="92.10" class="k w3"/>
+<line x1="79.10" y1="93.90" x2="80.90" y2="92.10" class="k w3"/>
+<text x="71.90" y="92.10" class="t dimt" text-anchor="middle" style="font-size:2.4px">1.62</text>
+<line x1="86.80" y1="77.00" x2="87.20" y2="77.00" class="k w1"/>
+<line x1="86.80" y1="160.00" x2="87.20" y2="160.00" class="k w1"/>
+<line x1="86.00" y1="75.80" x2="86.00" y2="161.20" class="k w1"/>
+<line x1="85.10" y1="76.10" x2="86.90" y2="77.90" class="k w3"/>
+<line x1="85.10" y1="159.10" x2="86.90" y2="160.90" class="k w3"/>
+<text x="86.90" y="118.50" class="t dimt" text-anchor="middle" transform="rotate(90.00 86.90 118.50)" style="font-size:2.4px">8.30</text>
+<text x="77.00" y="20.00" class="t ct" text-anchor="middle">TRACÉ DU CIRCUIT B  1/100</text>
+<g transform="rotate(135.40 363.00 197.00)"><circle cx="363.0" cy="197" r="9" class="k w1"/><polygon points="363.0,186 365.6,200 363.0,198 360.4,200" class="k w1 fk"/><text x="363.0" y="184.8" class="t cb" text-anchor="middle">N</text></g>
+<text x="363.00" y="214.50" class="t cs mute" text-anchor="middle">Nord (Lambert)</text>
+<defs><clipPath id="b7b"><rect x="146" y="26" width="166" height="160"/></clipPath></defs><g clip-path="url(#b7b)">
+<rect x="152.00" y="126.00" width="124.00" height="75.00" class="k w1 fea"/>
+<rect x="169.00" y="126.00" width="90.00" height="12.00" class="k w2 fcc"/>
+<rect x="184.00" y="42.00" width="60.00" height="84.00" class="k w3 fs"/>
+<rect x="184.00" y="42.00" width="60.00" height="4.00" class="k w2 fcc"/>
+<rect x="184.00" y="42.00" width="7.00" height="84.00" class="k w2 fcc"/>
+<rect x="237.00" y="42.00" width="7.00" height="84.00" class="k w2 fcc"/>
+<rect x="152.00" y="186.00" width="124.00" height="20.00" class="k w1 fgr"/>
+<polyline points="152.00,176.00 202.00,176.00 202.00,58.00" class="pipe-b w4"/>
+<polygon points="200.50,74.00 203.50,74.00 202.00,78.00" class="k w2 fs"/>
+<line x1="200.40" y1="78.00" x2="203.60" y2="78.00" class="k w3"/>
+<polyline points="202.00,58.00 202.00,52.00 218.00,52.00 218.00,81.00" class="pipe-b w4"/>
+<circle cx="210.00" cy="48.80" r="2.40" class="k w2 fs"/>
+<line x1="210.00" y1="52.00" x2="210.00" y2="51.20" class="k w2"/>
+<line x1="218.00" y1="66.00" x2="228.00" y2="66.00" class="k w2"/>
+<polygon points="228.90,64.80 228.90,67.20 232.10,64.80 232.10,67.20" class="k w2 fs"/>
+<circle cx="230.50" cy="66.00" r="0.35" class="k w1 fk"/>
+<line x1="233.00" y1="66.00" x2="233.00" y2="71.00" class="k w2"/>
+<polygon points="215.80,81.00 220.20,81.00 218.00,84.40" class="k w2 fs"/>
+<polyline points="220.20,82.70 244.00,82.70" class="pipe-b w4"/>
+<circle cx="247.00" cy="82.70" r="1.80" class="k w2 fs"/>
+<polyline points="218.00,84.40 218.00,156.00 276.00,156.00" class="pipe-b w4"/>
+</g>
+<circle cx="202.00" cy="76.00" r="0.45" class="k w1 fk"/>
+<line x1="202.00" y1="76.00" x2="192.00" y2="70.00" class="k w1"/>
+<line x1="192.00" y1="70.00" x2="190.00" y2="70.00" class="k w1"/>
+<text x="189.40" y="71.10" class="t tiny2" text-anchor="end">CL clapet anti-retour</text>
+<circle cx="210.00" cy="44.00" r="0.45" class="k w1 fk"/>
+<line x1="210.00" y1="44.00" x2="192.00" y2="40.00" class="k w1"/>
+<line x1="192.00" y1="40.00" x2="190.00" y2="40.00" class="k w1"/>
+<text x="189.40" y="41.10" class="t tiny2" text-anchor="end">CV casse-vide, point haut ±0.00</text>
+<circle cx="230.50" cy="66.00" r="0.45" class="k w1 fk"/>
+<line x1="230.50" y1="66.00" x2="270.00" y2="52.00" class="k w1"/>
+<line x1="270.00" y1="52.00" x2="272.00" y2="52.00" class="k w1"/>
+<text x="272.60" y="53.10" class="t tiny2" text-anchor="start">RP robinet de prélèvement</text>
+<circle cx="218.00" cy="83.00" r="0.45" class="k w1 fk"/>
+<line x1="218.00" y1="83.00" x2="270.00" y2="62.00" class="k w1"/>
+<line x1="270.00" y1="62.00" x2="272.00" y2="62.00" class="k w1"/>
+<text x="272.60" y="63.10" class="t tiny2" text-anchor="start">V4 vanne 3 voies</text>
+<circle cx="247.00" cy="79.00" r="0.45" class="k w1 fk"/>
+<line x1="247.00" y1="79.00" x2="270.00" y2="74.00" class="k w1"/>
+<line x1="270.00" y1="74.00" x2="272.00" y2="74.00" class="k w1"/>
+<text x="272.60" y="75.10" class="t tiny2" text-anchor="start">Raccord rapide tuyau d'arrosage</text>
+<circle cx="259.00" cy="156.00" r="0.45" class="k w1 fk"/>
+<line x1="259.00" y1="156.00" x2="270.00" y2="120.00" class="k w1"/>
+<line x1="270.00" y1="120.00" x2="272.00" y2="120.00" class="k w1"/>
+<text x="272.60" y="121.10" class="t tiny2" text-anchor="start">PEHD Ø50 → verger / puits perdu</text>
+<circle cx="169.00" cy="176.00" r="0.45" class="k w1 fk"/>
+<line x1="169.00" y1="176.00" x2="192.00" y2="150.00" class="k w1"/>
+<line x1="192.00" y1="150.00" x2="190.00" y2="150.00" class="k w1"/>
+<text x="189.40" y="151.10" class="t tiny2" text-anchor="end">B PVC Ø50 depuis la fosse (V3)</text>
+<circle cx="241.00" cy="101.00" r="0.45" class="k w1 fk"/>
+<line x1="241.00" y1="101.00" x2="270.00" y2="92.00" class="k w1"/>
+<line x1="270.00" y1="92.00" x2="272.00" y2="92.00" class="k w1"/>
+<text x="272.60" y="93.10" class="t tiny2" text-anchor="start">Borne maçonnée 0.60 × 0.40</text>
+<text x="272.60" y="96.50" class="t tiny2" text-anchor="start">porte inox à clé, chapeau BA</text>
+<polygon points="245.60,39.80 248.40,39.80 247.00,42.00" class="k w1 fk"/>
+<line x1="244.00" y1="42.00" x2="250.00" y2="42.00" class="k w1"/>
+<text x="249.20" y="39.40" class="t lvl" text-anchor="start">+0.04 chapeau</text>
+<polygon points="162.60,123.80 165.40,123.80 164.00,126.00" class="k w1 fk"/>
+<line x1="161.00" y1="126.00" x2="167.00" y2="126.00" class="k w1"/>
+<text x="161.80" y="123.40" class="t lvl" text-anchor="end">-0.80 TN</text>
+<line x1="184.00" y1="36.20" x2="184.00" y2="35.80" class="k w1"/>
+<line x1="244.00" y1="36.20" x2="244.00" y2="35.80" class="k w1"/>
+<line x1="182.80" y1="37.00" x2="245.20" y2="37.00" class="k w1"/>
+<line x1="183.10" y1="37.90" x2="184.90" y2="36.10" class="k w3"/>
+<line x1="243.10" y1="37.90" x2="244.90" y2="36.10" class="k w3"/>
+<text x="214.00" y="36.10" class="t dimt" text-anchor="middle" style="font-size:2.5px">0.60</text>
+<line x1="259.80" y1="42.00" x2="260.20" y2="42.00" class="k w1"/>
+<line x1="259.80" y1="126.00" x2="260.20" y2="126.00" class="k w1"/>
+<line x1="259.00" y1="40.80" x2="259.00" y2="127.20" class="k w1"/>
+<line x1="258.10" y1="41.10" x2="259.90" y2="42.90" class="k w3"/>
+<line x1="258.10" y1="125.10" x2="259.90" y2="126.90" class="k w3"/>
+<text x="259.90" y="84.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 259.90 84.00)" style="font-size:2.5px">0.84</text>
+<text x="229.00" y="20.00" class="t ct" text-anchor="middle">BORNE DE CONTRÔLE - COUPE  1/10</text>
+<text x="22.00" y="196.00" class="t cl" text-anchor="start">CONDITIONS DE REJET AU JARDIN (position C du sélecteur)</text>
+<rect x="22.00" y="198.00" width="288.00" height="43.20" class="k w2 fs"/>
+<rect x="22.00" y="198.00" width="288.00" height="4.80" class="k w2 fh"/>
+<line x1="62.00" y1="198.00" x2="62.00" y2="241.20" class="k w1"/>
+<line x1="114.00" y1="198.00" x2="114.00" y2="241.20" class="k w1"/>
+<line x1="160.00" y1="198.00" x2="160.00" y2="241.20" class="k w1"/>
+<line x1="22.00" y1="202.80" x2="310.00" y2="202.80" class="k w1"/>
+<line x1="22.00" y1="207.60" x2="310.00" y2="207.60" class="k w1"/>
+<line x1="22.00" y1="212.40" x2="310.00" y2="212.40" class="k w1"/>
+<line x1="22.00" y1="217.20" x2="310.00" y2="217.20" class="k w1"/>
+<line x1="22.00" y1="222.00" x2="310.00" y2="222.00" class="k w1"/>
+<line x1="22.00" y1="226.80" x2="310.00" y2="226.80" class="k w1"/>
+<line x1="22.00" y1="231.60" x2="310.00" y2="231.60" class="k w1"/>
+<line x1="22.00" y1="236.40" x2="310.00" y2="236.40" class="k w1"/>
+<text x="23.20" y="201.45" class="t cb" text-anchor="start" style="font-size:2.45px">Paramètre</text>
+<text x="112.80" y="201.45" class="t cb" text-anchor="end" style="font-size:2.45px">Seuil</text>
+<text x="158.80" y="201.45" class="t cb" text-anchor="end" style="font-size:2.45px">Contrôle</text>
+<text x="161.20" y="201.45" class="t cb" text-anchor="start" style="font-size:2.45px">Si non conforme</text>
+<text x="23.20" y="206.25" class="t cs" text-anchor="start" style="font-size:2.45px">Chlore libre</text>
+<text x="63.20" y="206.25" class="t cs" text-anchor="start" style="font-size:2.45px">&lt; 0.1 mg/L</text>
+<text x="115.20" y="206.25" class="t cs" text-anchor="start" style="font-size:2.45px">trousse DPD au robinet RP</text>
+<text x="161.20" y="206.25" class="t cs" text-anchor="start" style="font-size:2.45px">arrêter le chlore 5 à 7 jours, ou neutraliser, puis recontrôler</text>
+<text x="23.20" y="211.05" class="t cs" text-anchor="start" style="font-size:2.45px">pH</text>
+<text x="63.20" y="211.05" class="t cs" text-anchor="start" style="font-size:2.45px">6.5 à 8.5</text>
+<text x="115.20" y="211.05" class="t cs" text-anchor="start" style="font-size:2.45px">trousse ou bandelette</text>
+<text x="161.20" y="211.05" class="t cs" text-anchor="start" style="font-size:2.45px">corriger le pH avant le rejet</text>
+<text x="23.20" y="215.85" class="t cs" text-anchor="start" style="font-size:2.45px">Sel</text>
+<text x="63.20" y="215.85" class="t cs" text-anchor="start" style="font-size:2.45px">aucun électrolyseur au sel</text>
+<text x="115.20" y="215.85" class="t cs" text-anchor="start" style="font-size:2.45px">équipement du bassin</text>
+<text x="161.20" y="215.85" class="t cs" text-anchor="start" style="font-size:2.45px">eau salée : jamais au verger (puits perdu ou évacuation autorisée)</text>
+<text x="23.20" y="220.65" class="t cs" text-anchor="start" style="font-size:2.45px">Algicide, floculant, cuivre</text>
+<text x="63.20" y="220.65" class="t cs" text-anchor="start" style="font-size:2.45px">aucun ajout récent</text>
+<text x="115.20" y="220.65" class="t cs" text-anchor="start" style="font-size:2.45px">carnet d'entretien</text>
+<text x="161.20" y="220.65" class="t cs" text-anchor="start" style="font-size:2.45px">attendre le délai du fabricant, ou puits perdu</text>
+<text x="23.20" y="225.45" class="t cs" text-anchor="start" style="font-size:2.45px">Débit</text>
+<text x="63.20" y="225.45" class="t cs" text-anchor="start" style="font-size:2.45px">≤ 6 m³/h, V3 réglée</text>
+<text x="115.20" y="225.45" class="t cs" text-anchor="start" style="font-size:2.45px">manomètre, durée</text>
+<text x="161.20" y="225.45" class="t cs" text-anchor="start" style="font-size:2.45px">vidange complète 50.373 m³ = 8.4 h de pompage</text>
+<text x="23.20" y="230.25" class="t cs" text-anchor="start" style="font-size:2.45px">Sol</text>
+<text x="63.20" y="230.25" class="t cs" text-anchor="start" style="font-size:2.45px">pas de flaque ni de ruissellement</text>
+<text x="115.20" y="230.25" class="t cs" text-anchor="start" style="font-size:2.45px">visuel pendant le rejet</text>
+<text x="161.20" y="230.25" class="t cs" text-anchor="start" style="font-size:2.45px">arrêter et reprendre le lendemain ; répartir sur plusieurs jours</text>
+<text x="23.20" y="235.05" class="t cs" text-anchor="start" style="font-size:2.45px">Destination</text>
+<text x="63.20" y="235.05" class="t cs" text-anchor="start" style="font-size:2.45px">verger NO / NE seulement</text>
+<text x="158.80" y="235.05" class="t cs" text-anchor="end" style="font-size:2.45px">-</text>
+<text x="161.20" y="235.05" class="t cs" text-anchor="start" style="font-size:2.45px">jamais vers le chemin public ni chez les voisins</text>
+<text x="23.20" y="239.85" class="t cs" text-anchor="start" style="font-size:2.45px">Saison</text>
+<text x="63.20" y="239.85" class="t cs" text-anchor="start" style="font-size:2.45px">vidange totale de mai à octobre</text>
+<text x="158.80" y="239.85" class="t cs" text-anchor="end" style="font-size:2.45px">-</text>
+<text x="161.20" y="239.85" class="t cs" text-anchor="start" style="font-size:2.45px">bassin vide en saison des pluies : risque de soulèvement (PL-05)</text>
+<text x="22.00" y="249.00" class="t tiny2" text-anchor="start">Le circuit B part du sélecteur après le filtre : l'eau rejetée est filtrée. Le verger est plus bas que le bassin : le casse-vide CV (±0.00, 0.85 m au-dessus du plan d'eau) coupe tout siphonnage à l'arrêt de la pompe.</text>
+<text x="22.00" y="254.00" class="t tiny2" text-anchor="start">V3 reste fermée et cadenassée hors rejet. Le clapet CL interdit tout retour d'eau ou de terre vers la fosse. Valeurs de seuil usuelles : à adapter aux règles locales en vigueur.</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Variante B : sans local technique</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">REJET CONTRÔLÉ VERS LE JARDIN</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Circuit B, borne de contrôle, conditions de rejet</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">VB-07</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/100 - 1/10</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">G - v2.1.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 20/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>

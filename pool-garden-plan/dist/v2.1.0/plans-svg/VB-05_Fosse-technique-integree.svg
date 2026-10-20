@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="VB-05 Fosse technique"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}
+.pipe-a1{stroke:var(--p-r);fill:none}.pipe-a2{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}.pipe-b{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.selv{stroke:var(--p-el);fill:none;stroke-dasharray:.7 .7}.memb{stroke:#0b5d7a;fill:none;stroke-width:.75}.pe{stroke:#3a8a3a;fill:none;stroke-width:.35;stroke-dasharray:2 .6 .6 .6}.z1{fill:#7b3fb0;fill-opacity:.07;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:2 1}.z2{fill:#7b3fb0;fill-opacity:.03;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:1 1}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fcc2{fill:url(#cc);opacity:.45}.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="b5-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><defs><clipPath id="b5p"><rect x="20" y="30" width="162" height="186"/></clipPath></defs><g clip-path="url(#b5p)">
+<polygon points="194.00,18.00 14.00,18.00 14.00,228.00 194.00,228.00" class="k w1 fpv"/>
+<polygon points="174.00,38.00 44.00,38.00 44.00,58.00 174.00,58.00" class="k w3 fcc"/>
+<polygon points="174.00,188.00 44.00,188.00 44.00,208.00 174.00,208.00" class="k w3 fcc"/>
+<polygon points="174.00,58.00 154.00,58.00 154.00,188.00 174.00,188.00" class="k w3 fcc"/>
+<polygon points="44.00,18.00 24.00,18.00 24.00,228.00 44.00,228.00" class="k w3 fcc"/>
+<polygon points="24.00,18.00 21.00,18.00 21.00,228.00 24.00,228.00" class="k w1 fs"/>
+<polygon points="21.00,18.00 14.00,18.00 14.00,228.00 21.00,228.00" class="k w1 fw"/>
+<polygon points="154.00,58.00 44.00,58.00 44.00,188.00 154.00,188.00" class="k w2 fs"/>
+<polygon points="149.00,63.00 74.00,63.00 74.00,183.00 149.00,183.00" class="red w2 dash"/>
+<line x1="149.00" y1="63.00" x2="74.00" y2="183.00" class="red w1 dash"/>
+<line x1="149.00" y1="183.00" x2="74.00" y2="63.00" class="red w1 dash"/>
+<line x1="71.00" y1="18.00" x2="71.00" y2="228.00" class="k w1 axis"/>
+<polygon points="104.00,188.00 94.00,188.00 94.00,208.00 104.00,208.00" class="k w2 fs"/>
+<polygon points="84.00,188.00 74.00,188.00 74.00,208.00 84.00,208.00" class="k w2 fs"/>
+<polygon points="61.50,188.00 52.50,188.00 52.50,208.00 61.50,208.00" class="k w2 fs"/>
+<polygon points="61.50,38.00 52.50,38.00 52.50,58.00 61.50,58.00" class="k w2 fs"/>
+<polygon points="174.00,168.50 154.00,168.50 154.00,177.50 174.00,177.50" class="k w2 fs"/>
+<polygon points="174.00,69.50 154.00,69.50 154.00,76.50 174.00,76.50" class="k w2 fs"/>
+<polygon points="174.00,96.50 154.00,96.50 154.00,109.50 174.00,109.50" class="k w2 fs"/>
+<polygon points="174.00,136.50 154.00,136.50 154.00,149.50 174.00,149.50" class="k w2 fs"/>
+<polygon points="136.00,71.00 64.00,71.00 64.00,107.00 136.00,107.00" class="k w1 dash"/>
+<polygon points="131.00,78.00 99.00,78.00 99.00,100.00 131.00,100.00" class="k w2 fs"/>
+<line x1="126.43" y1="79.00" x2="126.43" y2="99.00" class="k w1"/>
+<line x1="121.86" y1="79.00" x2="121.86" y2="99.00" class="k w1"/>
+<line x1="117.29" y1="79.00" x2="117.29" y2="99.00" class="k w1"/>
+<line x1="112.71" y1="79.00" x2="112.71" y2="99.00" class="k w1"/>
+<line x1="108.14" y1="79.00" x2="108.14" y2="99.00" class="k w1"/>
+<line x1="103.57" y1="79.00" x2="103.57" y2="99.00" class="k w1"/>
+<polygon points="99.00,76.00 85.00,76.00 85.00,102.00 99.00,102.00" class="k w2 fs"/>
+<circle cx="76.50" cy="89.00" r="8.50" class="k w2 fs"/>
+<circle cx="76.50" cy="89.00" r="6.50" class="k w1 dash"/>
+<circle cx="124.00" cy="138.00" r="18.00" class="k w3 fs"/>
+<circle cx="124.00" cy="138.00" r="12.00" class="k w1 dash"/>
+<circle cx="111.00" cy="125.00" r="1.60" class="k w2 fs"/>
+<line x1="111.00" y1="125.00" x2="111.96" y2="124.04" class="k w1"/>
+<line x1="57.00" y1="198.00" x2="57.00" y2="89.00" class="pipe-s w4"/>
+<line x1="57.00" y1="48.00" x2="57.00" y2="89.00" class="pipe-s w4"/>
+<line x1="57.00" y1="89.00" x2="68.00" y2="89.00" class="pipe-s w4"/>
+<circle cx="57.00" cy="89.00" r="3.50" class="pipe-s w3 fs"/>
+<polygon points="55.50,141.00 58.50,141.00 55.50,145.00 58.50,145.00" class="k w2 fs"/>
+<circle cx="57.00" cy="143.00" r="0.35" class="k w1 fk"/>
+<polygon points="55.50,68.00 58.50,68.00 55.50,72.00 58.50,72.00" class="k w2 fs"/>
+<circle cx="57.00" cy="70.00" r="0.35" class="k w1 fk"/>
+<polyline points="94.00,89.00 94.00,138.00 106.00,138.00" class="k w4"/>
+<polyline points="124.00,156.00 124.00,173.00" class="k w4"/>
+<line x1="134.00" y1="173.00" x2="74.00" y2="173.00" class="k w4"/>
+<line x1="99.00" y1="173.00" x2="99.00" y2="228.00" class="pipe-a1 w4"/>
+<polygon points="97.65,178.70 100.35,178.70 97.65,182.30 100.35,182.30" class="k w2 fs"/>
+<circle cx="99.00" cy="180.50" r="0.35" class="k w1 fk"/>
+<line x1="79.00" y1="173.00" x2="79.00" y2="228.00" class="pipe-a2 w4"/>
+<polygon points="77.65,178.70 80.35,178.70 77.65,182.30 80.35,182.30" class="k w2 fs"/>
+<circle cx="79.00" cy="180.50" r="0.35" class="k w1 fk"/>
+<line x1="134.00" y1="173.00" x2="194.00" y2="173.00" class="pipe-b w4"/>
+<polygon points="142.20,171.65 142.20,174.35 145.80,171.65 145.80,174.35" class="k w2 fs"/>
+<circle cx="144.00" cy="173.00" r="0.35" class="k w1 fk"/>
+<line x1="154.00" y1="73.00" x2="131.00" y2="73.00" class="elec w3"/>
+<line x1="131.00" y1="73.00" x2="131.00" y2="82.00" class="elec w3"/>
+<line x1="194.00" y1="73.00" x2="174.00" y2="73.00" class="elec w3"/>
+<polygon points="90.00,110.00 78.00,110.00 78.00,122.00 90.00,122.00" class="k w2 fs"/>
+<line x1="90.00" y1="113.00" x2="78.00" y2="113.00" class="k w1"/>
+<line x1="90.00" y1="116.00" x2="78.00" y2="116.00" class="k w1"/>
+<line x1="90.00" y1="119.00" x2="78.00" y2="119.00" class="k w1"/>
+<polygon points="71.00,121.00 65.00,121.00 65.00,127.00 71.00,127.00" class="k w2 fk"/>
+<polygon points="148.00,120.00 144.00,120.00 144.00,128.00 148.00,128.00" class="k w2 fs"/>
+<line x1="114.00" y1="115.00" x2="92.00" y2="116.00" class="k w1 arrow"/>
+</g>
+<text x="115.00" y="90.00" class="t tiny2 b" text-anchor="middle">P</text>
+<text x="76.50" y="110.00" class="t tiny2 b" text-anchor="middle">PF</text>
+<text x="124.00" y="141.00" class="t tiny2 b" text-anchor="middle">F</text>
+<text x="104.00" y="126.00" class="t tiny2 b" text-anchor="middle">M</text>
+<text x="50.00" y="96.00" class="t tiny2 b" text-anchor="middle">VA</text>
+<text x="49.00" y="71.00" class="t tiny2 b" text-anchor="middle">VS1</text>
+<text x="49.00" y="144.00" class="t tiny2 b" text-anchor="middle">VS2</text>
+<text x="93.00" y="181.50" class="t tiny2 b" text-anchor="middle">V1</text>
+<text x="73.00" y="181.50" class="t tiny2 b" text-anchor="middle">V2</text>
+<text x="144.00" y="168.00" class="t tiny2 b" text-anchor="middle">V3</text>
+<text x="74.00" y="119.00" class="t tiny2 b" text-anchor="middle">SF</text>
+<text x="61.00" y="127.00" class="t tiny2 b" text-anchor="middle">FL</text>
+<text x="140.00" y="125.00" class="t tiny2 b" text-anchor="middle">CT</text>
+<text x="164.00" y="95.00" class="t tiny2 b" text-anchor="middle">VT1</text>
+<text x="164.00" y="135.00" class="t tiny2 b" text-anchor="middle">VT2</text>
+<text x="97.00" y="221.00" class="t tiny2" text-anchor="start">A1 → buses</text>
+<text x="81.00" y="221.00" class="t tiny2" text-anchor="end">A2 → cascade</text>
+<text x="59.00" y="221.00" class="t tiny2" text-anchor="start">← SK2</text>
+<text x="59.00" y="22.00" class="t tiny2" text-anchor="start">← SK1</text>
+<text x="176.00" y="180.00" class="t tiny2" text-anchor="end">B → borne</text>
+<text x="176.00" y="68.00" class="t tiny2" text-anchor="end">230 V → coffret</text>
+<text x="18.00" y="123.00" class="t tiny2 b red-t" text-anchor="middle" transform="rotate(-90.00 18.00 123.00)">BASSIN</text>
+<text x="109.00" y="61.60" class="t tiny red-t" text-anchor="middle">trappe 0.75 × 1.20 (au-dessus)</text>
+<text x="104.00" y="112.50" class="t tiny" text-anchor="middle">pente 1 % vers SF</text>
+<line x1="44.00" y1="38.80" x2="44.00" y2="43.20" class="k w1"/>
+<line x1="154.00" y1="38.80" x2="154.00" y2="43.20" class="k w1"/>
+<line x1="42.80" y1="42.00" x2="155.20" y2="42.00" class="k w1"/>
+<line x1="43.10" y1="42.90" x2="44.90" y2="41.10" class="k w3"/>
+<line x1="153.10" y1="42.90" x2="154.90" y2="41.10" class="k w3"/>
+<text x="99.00" y="41.10" class="t dimt" text-anchor="middle" style="font-size:2.9px">1.10</text>
+<line x1="154.00" y1="38.80" x2="154.00" y2="43.20" class="k w1"/>
+<line x1="174.00" y1="38.80" x2="174.00" y2="43.20" class="k w1"/>
+<line x1="152.80" y1="42.00" x2="175.20" y2="42.00" class="k w1"/>
+<line x1="153.10" y1="42.90" x2="154.90" y2="41.10" class="k w3"/>
+<line x1="173.10" y1="42.90" x2="174.90" y2="41.10" class="k w3"/>
+<text x="164.00" y="41.10" class="t dimt" text-anchor="middle" style="font-size:2.9px">0.20</text>
+<line x1="24.00" y1="38.80" x2="24.00" y2="43.20" class="k w1"/>
+<line x1="44.00" y1="38.80" x2="44.00" y2="43.20" class="k w1"/>
+<line x1="22.80" y1="42.00" x2="45.20" y2="42.00" class="k w1"/>
+<line x1="23.10" y1="42.90" x2="24.90" y2="41.10" class="k w3"/>
+<line x1="43.10" y1="42.90" x2="44.90" y2="41.10" class="k w3"/>
+<text x="34.00" y="41.10" class="t dimt" text-anchor="middle" style="font-size:2.9px">0.20</text>
+<line x1="174.80" y1="58.00" x2="184.20" y2="58.00" class="k w1"/>
+<line x1="174.80" y1="188.00" x2="184.20" y2="188.00" class="k w1"/>
+<line x1="183.00" y1="56.80" x2="183.00" y2="189.20" class="k w1"/>
+<line x1="182.10" y1="57.10" x2="183.90" y2="58.90" class="k w3"/>
+<line x1="182.10" y1="187.10" x2="183.90" y2="188.90" class="k w3"/>
+<text x="183.90" y="123.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 183.90 123.00)" style="font-size:2.9px">1.30</text>
+<line x1="74.00" y1="207.20" x2="74.00" y2="200.80" class="k w1"/>
+<line x1="149.00" y1="207.20" x2="149.00" y2="200.80" class="k w1"/>
+<line x1="72.80" y1="202.00" x2="150.20" y2="202.00" class="k w1"/>
+<line x1="73.10" y1="202.90" x2="74.90" y2="201.10" class="k w3"/>
+<line x1="148.10" y1="202.90" x2="149.90" y2="201.10" class="k w3"/>
+<text x="111.50" y="201.10" class="t dimt" text-anchor="middle" style="font-size:2.5px">0.75</text>
+<line x1="69.00" y1="72.20" x2="69.00" y2="69.80" class="k w1"/>
+<line x1="131.00" y1="72.20" x2="131.00" y2="69.80" class="k w1"/>
+<line x1="67.80" y1="71.00" x2="132.20" y2="71.00" class="k w1"/>
+<line x1="68.10" y1="71.90" x2="69.90" y2="70.10" class="k w3"/>
+<line x1="130.10" y1="71.90" x2="131.90" y2="70.10" class="k w3"/>
+<text x="100.00" y="70.10" class="t dimt" text-anchor="middle" style="font-size:2.4px">0.62</text>
+<text x="100.00" y="26.00" class="t ct" text-anchor="middle">PLAN DE LA FOSSE  1/10</text>
+<defs><clipPath id="b5a"><rect x="200" y="28" width="112" height="98"/></clipPath></defs><g clip-path="url(#b5a)">
+<polygon points="310.00,44.50 305.00,44.50 305.00,127.00 310.00,127.00" class="k w1 fea"/>
+<rect x="240.00" y="107.00" width="65.00" height="20.00" class="k w1 fcc2"/>
+<rect x="240.00" y="97.00" width="65.00" height="10.00" class="k w3 fcc"/>
+<rect x="295.00" y="47.00" width="10.00" height="60.00" class="k w3 fcc"/>
+<rect x="230.00" y="45.50" width="10.00" height="81.50" class="k w3 fcc"/>
+<rect x="228.50" y="45.50" width="1.50" height="81.50" class="k w1 fs"/>
+<polygon points="228.50,49.50 205.00,49.50 205.00,127.00 228.50,127.00" class="k w1 fw"/>
+<rect x="240.00" y="47.00" width="16.00" height="7.50" class="k w3 fcc"/>
+<rect x="227.00" y="42.00" width="26.50" height="3.50" class="k w2 fs"/>
+<rect x="296.00" y="43.00" width="2.00" height="5.00" class="k w1 fs"/>
+<rect x="310.00" y="43.00" width="15.00" height="4.00" class="k w1 fpv"/>
+<polygon points="296.00,43.00 254.00,43.00 254.00,48.00 296.00,48.00" class="red w3 fs"/>
+<line x1="296.00" y1="47.00" x2="254.00" y2="47.00" class="k w1"/>
+<line x1="294.00" y1="43.00" x2="281.17" y2="7.76" class="red w2 dash"/>
+<line x1="305.00" y1="49.50" x2="305.00" y2="107.00" class="k w4"/>
+<line x1="305.00" y1="107.00" x2="240.00" y2="107.00" class="k w4"/>
+<line x1="294.00" y1="96.00" x2="241.00" y2="96.00" class="pipe-d w2"/>
+<line x1="294.00" y1="47.00" x2="294.00" y2="97.00" class="pipe-d w2"/>
+<line x1="241.00" y1="54.50" x2="241.00" y2="97.00" class="pipe-d w2"/>
+<rect x="250.00" y="94.00" width="36.00" height="3.00" class="k w1 fs"/>
+<rect x="267.50" y="81.00" width="16.00" height="12.00" class="k w2 fs"/>
+<rect x="260.50" y="77.50" width="7.00" height="16.50" class="k w2 fs"/>
+<rect x="252.50" y="78.50" width="8.00" height="15.50" class="k w2 fs"/>
+<rect x="252.00" y="76.50" width="9.00" height="2.00" class="k w2 fs"/>
+<polyline points="264.00,77.50 264.00,67.00" class="k w4"/>
+<circle cx="264.00" cy="67.00" r="1.20" class="k w2 fs"/>
+<polyline points="246.50,127.00 246.50,84.50 252.50,84.50" class="pipe-s w4"/>
+<polygon points="245.45,88.60 247.55,88.60 245.45,91.40 247.55,91.40" class="k w2 fs"/>
+<circle cx="246.50" cy="90.00" r="0.35" class="k w1 fk"/>
+<circle cx="246.50" cy="72.00" r="1.30" class="pipe-s w3 fs"/>
+<text x="244.50" y="73.00" class="t tiny2 b" text-anchor="end">SK1</text>
+<line x1="246.50" y1="73.30" x2="246.50" y2="84.50" class="pipe-s w3"/>
+<rect x="295.00" y="52.00" width="10.00" height="3.50" class="k w2 fs"/>
+</g>
+<polygon points="212.60,47.30 215.40,47.30 214.00,49.50" class="k w1 fk"/>
+<line x1="211.00" y1="49.50" x2="217.00" y2="49.50" class="k w1"/>
+<text x="216.20" y="46.90" class="t lvl" text-anchor="start">-0.85</text>
+<polygon points="302.60,40.80 305.40,40.80 304.00,43.00" class="k w1 fk"/>
+<line x1="301.00" y1="43.00" x2="307.00" y2="43.00" class="k w1"/>
+<text x="301.80" y="40.40" class="t lvl" text-anchor="end">-0.72</text>
+<polygon points="248.60,94.80 251.40,94.80 250.00,97.00" class="k w1 fk"/>
+<line x1="247.00" y1="97.00" x2="253.00" y2="97.00" class="k w1"/>
+<text x="252.20" y="94.40" class="t lvl" text-anchor="start">-1.80</text>
+<polygon points="233.60,39.80 236.40,39.80 235.00,42.00" class="k w1 fk"/>
+<line x1="232.00" y1="42.00" x2="238.00" y2="42.00" class="k w1"/>
+<text x="237.20" y="39.40" class="t lvl" text-anchor="start">-0.70</text>
+<line x1="290.80" y1="47.00" x2="291.20" y2="47.00" class="k w1"/>
+<line x1="290.80" y1="97.00" x2="291.20" y2="97.00" class="k w1"/>
+<line x1="290.00" y1="45.80" x2="290.00" y2="98.20" class="k w1"/>
+<line x1="289.10" y1="46.10" x2="290.90" y2="47.90" class="k w3"/>
+<line x1="289.10" y1="96.10" x2="290.90" y2="97.90" class="k w3"/>
+<text x="290.90" y="72.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 290.90 72.00)" style="font-size:2.5px">1.00</text>
+<line x1="220.80" y1="49.50" x2="221.20" y2="49.50" class="k w1"/>
+<line x1="220.80" y1="84.50" x2="221.20" y2="84.50" class="k w1"/>
+<line x1="220.00" y1="48.30" x2="220.00" y2="85.70" class="k w1"/>
+<line x1="219.10" y1="48.60" x2="220.90" y2="50.40" class="k w3"/>
+<line x1="219.10" y1="83.60" x2="220.90" y2="85.40" class="k w3"/>
+<text x="220.90" y="67.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 220.90 67.00)" style="font-size:2.5px">0.70</text>
+<text x="280.00" y="72.00" class="t tiny2 b" text-anchor="middle">P</text>
+<text x="256.00" y="72.50" class="t tiny2 b" text-anchor="middle">PF</text>
+<text x="244.30" y="91.00" class="t tiny2 b" text-anchor="end">VA</text>
+<text x="248.50" y="122.00" class="t tiny2" text-anchor="start">vers PG</text>
+<text x="275.00" y="38.00" class="t tiny2 b red-t" text-anchor="middle">TR</text>
+<text x="307.50" y="122.00" class="t tiny" text-anchor="end">gros béton</text>
+<text x="255.00" y="26.00" class="t ct" text-anchor="middle">COUPE A'-A'  1/20</text>
+<defs><clipPath id="b5b"><rect x="200" y="134" width="112" height="90"/></clipPath></defs><g clip-path="url(#b5b)">
+<rect x="206.00" y="155.00" width="95.00" height="80.00" class="k w1 fea"/>
+<rect x="211.00" y="215.00" width="85.00" height="20.00" class="k w1 fcc2"/>
+<rect x="211.00" y="205.00" width="85.00" height="10.00" class="k w3 fcc"/>
+<rect x="211.00" y="155.00" width="10.00" height="60.00" class="k w3 fcc"/>
+<rect x="286.00" y="155.00" width="10.00" height="60.00" class="k w3 fcc"/>
+<rect x="221.00" y="155.00" width="65.00" height="50.00" class="k w1 fs"/>
+<polygon points="221.00,151.00 286.00,151.00 286.00,156.00 221.00,156.00" class="red w3 fs"/>
+<rect x="206.00" y="151.00" width="5.00" height="4.00" class="k w1 fpv"/>
+<rect x="296.00" y="151.00" width="5.00" height="4.00" class="k w1 fpv"/>
+<rect x="252.00" y="160.00" width="18.00" height="43.00" class="k w2 fs"/>
+<rect x="255.00" y="164.00" width="12.00" height="35.00" class="k w1 dash"/>
+<rect x="251.00" y="203.00" width="20.00" height="2.00" class="k w1 fs"/>
+<rect x="230.00" y="189.00" width="13.00" height="12.00" class="k w2 fhx"/>
+<circle cx="278.50" cy="180.00" r="1.60" class="k w3 fs"/>
+<polyline points="270.00,187.50 278.50,187.50 278.50,181.60" class="k w4"/>
+<circle cx="228.50" cy="162.50" r="1.00" class="k w1 fs"/>
+<circle cx="243.50" cy="162.50" r="2.40" class="k w1 fs"/>
+<circle cx="263.50" cy="161.50" r="2.40" class="k w1 fs"/>
+<line x1="243.50" y1="164.90" x2="243.50" y2="199.00" class="k w1 dash"/>
+</g>
+<text x="261.00" y="180.00" class="t tiny2 b" text-anchor="middle">F</text>
+<text x="236.50" y="181.50" class="t tiny2 b" text-anchor="middle">P (coupé)</text>
+<text x="278.50" y="186.00" class="t tiny2 b" text-anchor="middle">V3 / B</text>
+<text x="228.50" y="168.00" class="t tiny2 b" text-anchor="middle">230 V</text>
+<text x="248.50" y="168.00" class="t tiny2 b" text-anchor="middle">VT1</text>
+<text x="263.50" y="167.00" class="t tiny2 b" text-anchor="middle">VT2</text>
+<line x1="221.00" y1="148.20" x2="221.00" y2="147.80" class="k w1"/>
+<line x1="286.00" y1="148.20" x2="286.00" y2="147.80" class="k w1"/>
+<line x1="219.80" y1="149.00" x2="287.20" y2="149.00" class="k w1"/>
+<line x1="220.10" y1="149.90" x2="221.90" y2="148.10" class="k w3"/>
+<line x1="285.10" y1="149.90" x2="286.90" y2="148.10" class="k w3"/>
+<text x="253.50" y="148.10" class="t dimt" text-anchor="middle" style="font-size:2.5px">1.30</text>
+<line x1="291.80" y1="155.00" x2="292.20" y2="155.00" class="k w1"/>
+<line x1="291.80" y1="205.00" x2="292.20" y2="205.00" class="k w1"/>
+<line x1="291.00" y1="153.80" x2="291.00" y2="206.20" class="k w1"/>
+<line x1="290.10" y1="154.10" x2="291.90" y2="155.90" class="k w3"/>
+<line x1="290.10" y1="204.10" x2="291.90" y2="205.90" class="k w3"/>
+<text x="291.90" y="180.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 291.90 180.00)" style="font-size:2.5px">1.00</text>
+<text x="255.00" y="132.00" class="t ct" text-anchor="middle">COUPE B'-B'  1/20</text>
+<text x="192.00" y="232.00" class="t cl" text-anchor="start">ÉQUIPEMENTS DE LA FOSSE</text>
+<rect x="192.00" y="234.00" width="119.00" height="50.60" class="k w2 fs"/>
+<rect x="192.00" y="234.00" width="119.00" height="4.60" class="k w2 fh"/>
+<line x1="209.00" y1="234.00" x2="209.00" y2="284.60" class="k w1"/>
+<line x1="267.00" y1="234.00" x2="267.00" y2="284.60" class="k w1"/>
+<line x1="192.00" y1="238.60" x2="311.00" y2="238.60" class="k w1"/>
+<line x1="192.00" y1="243.20" x2="311.00" y2="243.20" class="k w1"/>
+<line x1="192.00" y1="247.80" x2="311.00" y2="247.80" class="k w1"/>
+<line x1="192.00" y1="252.40" x2="311.00" y2="252.40" class="k w1"/>
+<line x1="192.00" y1="257.00" x2="311.00" y2="257.00" class="k w1"/>
+<line x1="192.00" y1="261.60" x2="311.00" y2="261.60" class="k w1"/>
+<line x1="192.00" y1="266.20" x2="311.00" y2="266.20" class="k w1"/>
+<line x1="192.00" y1="270.80" x2="311.00" y2="270.80" class="k w1"/>
+<line x1="192.00" y1="275.40" x2="311.00" y2="275.40" class="k w1"/>
+<line x1="192.00" y1="280.00" x2="311.00" y2="280.00" class="k w1"/>
+<text x="193.20" y="237.25" class="t cb" text-anchor="start" style="font-size:2.4px">Repère</text>
+<text x="210.20" y="237.25" class="t cb" text-anchor="start" style="font-size:2.4px">Désignation</text>
+<text x="268.20" y="237.25" class="t cb" text-anchor="start" style="font-size:2.4px">Enveloppe / position</text>
+<text x="193.20" y="241.85" class="t cs" text-anchor="start" style="font-size:2.4px">P</text>
+<text x="210.20" y="241.85" class="t cs" text-anchor="start" style="font-size:2.4px">Pompe 12 m³/h à 9 mCE, VS, 230 V, IPX5</text>
+<text x="268.20" y="241.85" class="t cs" text-anchor="start" style="font-size:2.4px">≤ 0.62 × 0.26 × 0.33, socle 0.06</text>
+<text x="193.20" y="246.45" class="t cs" text-anchor="start" style="font-size:2.4px">PF</text>
+<text x="210.20" y="246.45" class="t cs" text-anchor="start" style="font-size:2.4px">Préfiltre intégré (panier)</text>
+<text x="268.20" y="246.45" class="t cs" text-anchor="start" style="font-size:2.4px">couvercle sous la trappe</text>
+<text x="193.20" y="251.05" class="t cs" text-anchor="start" style="font-size:2.4px">F</text>
+<text x="210.20" y="251.05" class="t cs" text-anchor="start" style="font-size:2.4px">Filtre à cartouche 13.9 m²</text>
+<text x="268.20" y="251.05" class="t cs" text-anchor="start" style="font-size:2.4px">≤ Ø0.40 × h 0.90, purgeur</text>
+<text x="193.20" y="255.65" class="t cs" text-anchor="start" style="font-size:2.4px">M</text>
+<text x="210.20" y="255.65" class="t cs" text-anchor="start" style="font-size:2.4px">Manomètre 0 - 2.5 bar</text>
+<text x="268.20" y="255.65" class="t cs" text-anchor="start" style="font-size:2.4px">sur le filtre</text>
+<text x="193.20" y="260.25" class="t cs" text-anchor="start" style="font-size:2.4px">VA / VS1-2</text>
+<text x="210.20" y="260.25" class="t cs" text-anchor="start" style="font-size:2.4px">Vannes puisard Ø63 / skimmers Ø50</text>
+<text x="268.20" y="260.25" class="t cs" text-anchor="start" style="font-size:2.4px">ligne a = 0.97</text>
+<text x="193.20" y="264.85" class="t cs" text-anchor="start" style="font-size:2.4px">V1 / V2</text>
+<text x="210.20" y="264.85" class="t cs" text-anchor="start" style="font-size:2.4px">Sélecteur : A1 buses / A2 cascade Ø63</text>
+<text x="268.20" y="264.85" class="t cs" text-anchor="start" style="font-size:2.4px">sorties voile NE</text>
+<text x="193.20" y="269.45" class="t cs" text-anchor="start" style="font-size:2.4px">V3</text>
+<text x="210.20" y="269.45" class="t cs" text-anchor="start" style="font-size:2.4px">Sélecteur : B rejet Ø50, cadenassable</text>
+<text x="268.20" y="269.45" class="t cs" text-anchor="start" style="font-size:2.4px">sortie voile NO</text>
+<text x="193.20" y="274.05" class="t cs" text-anchor="start" style="font-size:2.4px">SF</text>
+<text x="210.20" y="274.05" class="t cs" text-anchor="start" style="font-size:2.4px">Siphon de sol à clapet anti-retour</text>
+<text x="268.20" y="274.05" class="t cs" text-anchor="start" style="font-size:2.4px">→ drain périphérique</text>
+<text x="193.20" y="278.65" class="t cs" text-anchor="start" style="font-size:2.4px">FL / CT</text>
+<text x="210.20" y="278.65" class="t cs" text-anchor="start" style="font-size:2.4px">Flotteur et contact de trappe TBTS 24 V</text>
+<text x="268.20" y="278.65" class="t cs" text-anchor="start" style="font-size:2.4px">coupent la pompe</text>
+<text x="193.20" y="283.25" class="t cs" text-anchor="start" style="font-size:2.4px">VT1-VT2</text>
+<text x="210.20" y="283.25" class="t cs" text-anchor="start" style="font-size:2.4px">Ventilation Ø100 basse / haute</text>
+<text x="268.20" y="283.25" class="t cs" text-anchor="start" style="font-size:2.4px">→ grilles en massif</text>
+<text x="22.00" y="229.00" class="t cl" text-anchor="start">NOTES</text>
+<text x="22.00" y="234.50" class="t tiny2" text-anchor="start">Fosse sèche : aucun appareil 230 V dans l'eau du bassin. Seul le moteur</text>
+<text x="22.00" y="239.05" class="t tiny2" text-anchor="start">de la pompe est en 230 V, dans la fosse fermée à clé (VB-09).</text>
+<text x="22.00" y="243.60" class="t tiny2" text-anchor="start">Commandes VA, VS1, VS2, V1 à V3, préfiltre et cartouche sous la trappe,</text>
+<text x="22.00" y="248.15" class="t tiny2" text-anchor="start">ou à 0.17 m de son bord (sous la margelle).</text>
+<text x="22.00" y="252.70" class="t tiny2" text-anchor="start">Pompe montée sur raccords union : dépose verticale par la trappe.</text>
+<text x="22.00" y="257.25" class="t tiny2" text-anchor="start">Cartouche : levée verticale de 0.70 m, trappe ouverte.</text>
+<text x="22.00" y="261.80" class="t tiny2" text-anchor="start">Avant d'ouvrir PF ou F : position E (VB-03) - procédure sous la trappe.</text>
+<text x="22.00" y="266.35" class="t tiny2" text-anchor="start">Ventilation naturelle VT1 / VT2 : chaleur du moteur et humidité.</text>
+<text x="22.00" y="270.90" class="t tiny2" text-anchor="start">Aucun produit chimique stocké dans la fosse.</text>
+<text x="22.00" y="275.45" class="t tiny2" text-anchor="start">Dimensions intérieures = encombrement maximal des équipements</text>
+<text x="22.00" y="280.00" class="t tiny2" text-anchor="start">+ passage de main : à recontrôler sur les fiches des modèles achetés.</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Variante B : sans local technique</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">FOSSE TECHNIQUE INTÉGRÉE</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Plan d'équipement et coupes de la fosse</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">VB-05</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/10 - 1/20</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">G - v2.1.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 20/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>
