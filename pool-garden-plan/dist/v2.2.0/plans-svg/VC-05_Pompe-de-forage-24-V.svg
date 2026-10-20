@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="VC-05 Pompe de forage 24 V"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}
+.pipe-a1{stroke:var(--p-r);fill:none}.pipe-a2{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}.pipe-b{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.selv{stroke:var(--p-el);fill:none;stroke-dasharray:.7 .7}.memb{stroke:#0b5d7a;fill:none;stroke-width:.75}.pe{stroke:#3a8a3a;fill:none;stroke-width:.35;stroke-dasharray:2 .6 .6 .6}.z1{fill:#7b3fb0;fill-opacity:.07;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:2 1}.z2{fill:#7b3fb0;fill-opacity:.03;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:1 1}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fcc2{fill:url(#cc);opacity:.45}.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="c5-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><text x="24.00" y="18.00" class="t cl" text-anchor="start">ÉLÉVATION 1/10 : LA POMPE ENTIÈRE (1.50 m), COUCHÉE COMME DANS LE PUISARD</text>
+<rect x="64.30" y="45.50" width="2.40" height="2.60" class="k w1 fhx"/>
+<rect x="148.80" y="45.50" width="2.40" height="2.60" class="k w1 fhx"/>
+<rect x="177.30" y="45.50" width="2.40" height="2.60" class="k w1 fhx"/>
+<rect x="45.50" y="48.10" width="150.00" height="1.00" class="k w1 fs"/>
+<rect x="33.00" y="36.10" width="4.00" height="1.14" style="fill:#4a565e;stroke:#4a565e;stroke-width:.04"/>
+<rect x="33.00" y="37.24" width="4.00" height="1.52" style="fill:#2a3339;stroke:#2a3339;stroke-width:.04"/>
+<rect x="33.00" y="38.76" width="4.00" height="1.14" style="fill:#161c20;stroke:#161c20;stroke-width:.04"/>
+<rect x="33.00" y="36.10" width="4.00" height="3.80" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<path d="M33.30 36.10 l 0.80 -0.30 l 0 4.40 l -0.80 -0.30" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.11"/>
+<path d="M34.50 36.10 l 0.80 -0.30 l 0 4.40 l -0.80 -0.30" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.11"/>
+<path d="M35.70 36.10 l 0.80 -0.30 l 0 4.40 l -0.80 -0.30" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.11"/>
+<rect x="37.00" y="35.60" width="3.50" height="0.72" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="37.00" y="36.32" width="3.50" height="0.96" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="37.00" y="37.28" width="3.50" height="0.96" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="37.00" y="38.24" width="3.50" height="0.96" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="37.00" y="39.20" width="3.50" height="1.20" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="37.00" y="35.60" width="3.50" height="4.80" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<line x1="37.50" y1="35.60" x2="37.50" y2="40.40" class="k w1"/>
+<line x1="38.00" y1="35.60" x2="38.00" y2="40.40" class="k w1"/>
+<line x1="38.50" y1="35.60" x2="38.50" y2="40.40" class="k w1"/>
+<line x1="39.00" y1="35.60" x2="39.00" y2="40.40" class="k w1"/>
+<line x1="39.50" y1="35.60" x2="39.50" y2="40.40" class="k w1"/>
+<line x1="40.00" y1="35.60" x2="40.00" y2="40.40" class="k w1"/>
+<rect x="40.50" y="33.00" width="3.50" height="1.50" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="40.50" y="34.50" width="3.50" height="2.00" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="40.50" y="36.50" width="3.50" height="2.00" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="40.50" y="38.50" width="3.50" height="2.00" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="40.50" y="40.50" width="3.50" height="2.50" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="40.50" y="33.00" width="3.50" height="10.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<line x1="40.80" y1="35.25" x2="43.70" y2="35.25" class="k w1"/>
+<line x1="40.80" y1="40.75" x2="43.70" y2="40.75" class="k w1"/>
+<rect x="44.50" y="31.60" width="1.60" height="1.40" rx="0.40" style="fill:#c0c9d0;stroke:var(--ink);stroke-width:0.13"/>
+<rect x="44.50" y="43.00" width="1.60" height="1.40" rx="0.40" style="fill:#c0c9d0;stroke:var(--ink);stroke-width:0.13"/>
+<rect x="44.00" y="33.00" width="2.50" height="1.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="44.00" y="34.00" width="2.50" height="1.50" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="44.00" y="35.50" width="2.50" height="1.40" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="44.00" y="36.90" width="2.50" height="1.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="44.00" y="37.90" width="2.50" height="0.80" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="44.00" y="38.70" width="2.50" height="1.70" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="44.00" y="40.40" width="2.50" height="1.60" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="44.00" y="42.00" width="2.50" height="1.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="44.00" y="33.00" width="2.50" height="10.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="46.50" y="33.00" width="63.00" height="1.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="46.50" y="34.00" width="63.00" height="1.50" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="46.50" y="35.50" width="63.00" height="1.40" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="46.50" y="36.90" width="63.00" height="1.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="46.50" y="37.90" width="63.00" height="0.80" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="46.50" y="38.70" width="63.00" height="1.70" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="46.50" y="40.40" width="63.00" height="1.60" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="46.50" y="42.00" width="63.00" height="1.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="46.50" y="33.00" width="63.00" height="10.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="49.50" y="34.90" width="9.00" height="5.85" style="fill:#f3f5f6;stroke:#8c98a1;stroke-width:0.09"/>
+<rect x="49.50" y="34.90" width="1.50" height="5.85" style="fill:#3c4a55"/>
+<line x1="52.30" y1="35.50" x2="52.30" y2="40.25" class="k w1"/>
+<line x1="53.90" y1="35.50" x2="53.90" y2="40.25" class="k w1"/>
+<line x1="55.50" y1="35.50" x2="55.50" y2="40.25" class="k w1"/>
+<line x1="57.10" y1="35.50" x2="57.10" y2="40.25" class="k w1"/>
+<rect x="74.50" y="32.98" width="3.50" height="2.01" style="fill:#d6a618;stroke:#d6a618;stroke-width:.04"/>
+<rect x="74.50" y="34.99" width="3.50" height="4.02" style="fill:#ffdb52;stroke:#ffdb52;stroke-width:.04"/>
+<rect x="74.50" y="39.00" width="3.50" height="4.02" style="fill:#e0b020;stroke:#e0b020;stroke-width:.04"/>
+<rect x="74.50" y="32.98" width="3.50" height="10.04" style="fill:none;stroke:var(--ink);stroke-width:0.108"/>
+<rect x="75.30" y="35.75" width="1.90" height="4.50" style="fill:#1f272d"/>
+<rect x="90.50" y="35.25" width="9.00" height="5.25" style="fill:#ffffff;stroke:#e4572e;stroke-width:0.15"/>
+<rect x="90.50" y="35.25" width="1.60" height="5.25" style="fill:#e4572e"/>
+<path d="M93.50 37.25 l 1.25 0.69 l -1.25 0.69 z" style="fill:#ffd94d;stroke:#1f272d;stroke-width:0.08"/>
+<rect x="109.50" y="33.00" width="2.50" height="1.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="109.50" y="34.00" width="2.50" height="1.50" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="109.50" y="35.50" width="2.50" height="1.40" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="109.50" y="36.90" width="2.50" height="1.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="109.50" y="37.90" width="2.50" height="0.80" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="109.50" y="38.70" width="2.50" height="1.70" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="109.50" y="40.40" width="2.50" height="1.60" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="109.50" y="42.00" width="2.50" height="1.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="109.50" y="33.00" width="2.50" height="10.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<line x1="110.10" y1="33.00" x2="110.10" y2="43.00" class="k w2"/>
+<line x1="110.70" y1="33.00" x2="110.70" y2="43.00" class="k w2"/>
+<line x1="111.30" y1="33.00" x2="111.30" y2="43.00" class="k w2"/>
+<rect x="112.00" y="32.80" width="1.20" height="1.56" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="112.00" y="34.36" width="1.20" height="2.08" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="112.00" y="36.44" width="1.20" height="2.08" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="112.00" y="38.52" width="1.20" height="2.08" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="112.00" y="40.60" width="1.20" height="2.60" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="112.00" y="32.80" width="1.20" height="10.40" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="113.20" y="33.00" width="7.10" height="2.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="113.20" y="35.00" width="7.10" height="3.00" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="113.20" y="38.00" width="7.10" height="3.00" style="fill:#b3bec6;stroke:#b3bec6;stroke-width:.04"/>
+<rect x="113.20" y="41.00" width="7.10" height="2.00" style="fill:#7d8a93;stroke:#7d8a93;stroke-width:.04"/>
+<rect x="113.20" y="33.00" width="7.10" height="10.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<circle cx="113.71" cy="33.53" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="34.58" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="35.63" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="36.68" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="37.74" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="38.79" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="39.84" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="40.89" r="0.28" style="fill:#2c3840"/>
+<circle cx="113.71" cy="41.95" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="33.79" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="34.84" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="35.89" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="36.95" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="38.00" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="39.05" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="40.11" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="41.16" r="0.28" style="fill:#2c3840"/>
+<circle cx="114.72" cy="42.21" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="33.53" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="34.58" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="35.63" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="36.68" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="37.74" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="38.79" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="39.84" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="40.89" r="0.28" style="fill:#2c3840"/>
+<circle cx="115.74" cy="41.95" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="33.79" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="34.84" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="35.89" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="36.95" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="38.00" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="39.05" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="40.11" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="41.16" r="0.28" style="fill:#2c3840"/>
+<circle cx="116.75" cy="42.21" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="33.53" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="34.58" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="35.63" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="36.68" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="37.74" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="38.79" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="39.84" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="40.89" r="0.28" style="fill:#2c3840"/>
+<circle cx="117.76" cy="41.95" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="33.79" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="34.84" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="35.89" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="36.95" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="38.00" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="39.05" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="40.11" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="41.16" r="0.28" style="fill:#2c3840"/>
+<circle cx="118.78" cy="42.21" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="33.53" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="34.58" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="35.63" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="36.68" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="37.74" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="38.79" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="39.84" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="40.89" r="0.28" style="fill:#2c3840"/>
+<circle cx="119.79" cy="41.95" r="0.28" style="fill:#2c3840"/>
+<rect x="120.30" y="32.80" width="1.20" height="1.56" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="120.30" y="34.36" width="1.20" height="2.08" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="120.30" y="36.44" width="1.20" height="2.08" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="120.30" y="38.52" width="1.20" height="2.08" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="120.30" y="40.60" width="1.20" height="2.60" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="120.30" y="32.80" width="1.20" height="10.40" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="121.50" y="33.00" width="69.00" height="1.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="121.50" y="34.00" width="69.00" height="1.50" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="121.50" y="35.50" width="69.00" height="1.40" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="121.50" y="36.90" width="69.00" height="1.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="121.50" y="37.90" width="69.00" height="0.80" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="121.50" y="38.70" width="69.00" height="1.70" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="121.50" y="40.40" width="69.00" height="1.60" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="121.50" y="42.00" width="69.00" height="1.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="121.50" y="33.00" width="69.00" height="10.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<circle cx="124.00" cy="35.25" r="0.40" style="fill:#5b6b76;stroke:var(--ink);stroke-width:0.07"/>
+<circle cx="124.00" cy="40.75" r="0.40" style="fill:#5b6b76;stroke:var(--ink);stroke-width:0.07"/>
+<rect x="129.50" y="35.00" width="20.00" height="5.75" style="fill:#eef1f3;stroke:#8c98a1;stroke-width:0.09"/>
+<line x1="131.50" y1="35.60" x2="131.50" y2="40.10" class="k w1"/>
+<line x1="133.90" y1="35.60" x2="133.90" y2="40.10" class="k w1"/>
+<line x1="136.30" y1="35.60" x2="136.30" y2="40.10" class="k w1"/>
+<line x1="138.70" y1="35.60" x2="138.70" y2="40.10" class="k w1"/>
+<line x1="141.10" y1="35.60" x2="141.10" y2="40.10" class="k w1"/>
+<line x1="143.50" y1="35.60" x2="143.50" y2="40.10" class="k w1"/>
+<line x1="145.90" y1="35.60" x2="145.90" y2="40.10" class="k w1"/>
+<line x1="170.50" y1="33.00" x2="170.50" y2="43.00" class="k w2"/>
+<line x1="171.10" y1="33.00" x2="171.10" y2="43.00" class="k w2"/>
+<rect x="189.30" y="33.40" width="1.40" height="9.20" rx="0.60" style="fill:#aab5bd;stroke:var(--ink);stroke-width:0.13"/>
+<polyline points="122.50,32.50 55.50,32.50" style="fill:none;stroke:#1d5f9e;stroke-width:1.35;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="122.50,32.50 55.50,32.50" style="fill:none;stroke:#2a86d8;stroke-width:1.00;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="122.50,32.50 55.50,32.50" style="fill:none;stroke:#9ad0f6;stroke-width:0.28;stroke-linejoin:round;stroke-linecap:round"/>
+<rect x="66.10" y="31.80" width="0.80" height="1.40" style="fill:#3c4a55"/>
+<rect x="86.10" y="31.80" width="0.80" height="1.40" style="fill:#3c4a55"/>
+<rect x="104.10" y="31.80" width="0.80" height="1.40" style="fill:#3c4a55"/>
+<rect x="110.30" y="31.80" width="0.80" height="1.40" style="fill:#3c4a55"/>
+<rect x="107.50" y="30.50" width="93.00" height="15.00" style="fill:#7cc3dc;fill-opacity:.16;stroke:#1683a8;stroke-width:0.18;stroke-dasharray:1.4 .8"/>
+<rect x="107.10" y="30.50" width="0.80" height="15.00" style="fill:#1683a8;opacity:.55"/>
+<rect x="199.90" y="30.50" width="1.20" height="15.00" class="k w2 fs"/>
+<line x1="199.90" y1="33.00" x2="201.10" y2="33.00" class="k w1"/>
+<line x1="199.90" y1="35.50" x2="201.10" y2="35.50" class="k w1"/>
+<line x1="199.90" y1="38.00" x2="201.10" y2="38.00" class="k w1"/>
+<line x1="199.90" y1="40.50" x2="201.10" y2="40.50" class="k w1"/>
+<line x1="199.90" y1="43.00" x2="201.10" y2="43.00" class="k w1"/>
+<polyline points="55.50,32.50 52.50,28.50 46.50,26.50" style="fill:none;stroke:#1d5f9e;stroke-width:1.25;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="55.50,32.50 52.50,28.50 46.50,26.50" style="fill:none;stroke:#2a86d8;stroke-width:0.90;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="55.50,32.50 52.50,28.50 46.50,26.50" style="fill:none;stroke:#9ad0f6;stroke-width:0.25;stroke-linejoin:round;stroke-linecap:round"/>
+<text x="45.50" y="25.90" class="t tiny" text-anchor="end">câble → fourreau → AL</text>
+<line x1="107.50" y1="26.20" x2="107.50" y2="25.80" class="k w1"/>
+<line x1="200.50" y1="26.20" x2="200.50" y2="25.80" class="k w1"/>
+<line x1="106.30" y1="27.00" x2="201.70" y2="27.00" class="k w1"/>
+<line x1="106.60" y1="27.90" x2="108.40" y2="26.10" class="k w3"/>
+<line x1="199.60" y1="27.90" x2="201.40" y2="26.10" class="k w3"/>
+<text x="154.00" y="26.10" class="t dimt" text-anchor="middle" style="font-size:2.3px">chemise 0.93</text>
+<line x1="40.50" y1="52.20" x2="40.50" y2="51.80" class="k w1"/>
+<line x1="121.50" y1="52.20" x2="121.50" y2="51.80" class="k w1"/>
+<line x1="39.30" y1="53.00" x2="122.70" y2="53.00" class="k w1"/>
+<line x1="39.60" y1="53.90" x2="41.40" y2="52.10" class="k w3"/>
+<line x1="120.60" y1="53.90" x2="122.40" y2="52.10" class="k w3"/>
+<text x="81.00" y="52.10" class="t dimt" text-anchor="middle" style="font-size:2.4px">pompe 0.81</text>
+<line x1="121.50" y1="52.20" x2="121.50" y2="51.80" class="k w1"/>
+<line x1="190.50" y1="52.20" x2="190.50" y2="51.80" class="k w1"/>
+<line x1="120.30" y1="53.00" x2="191.70" y2="53.00" class="k w1"/>
+<line x1="120.60" y1="53.90" x2="122.40" y2="52.10" class="k w3"/>
+<line x1="189.60" y1="53.90" x2="191.40" y2="52.10" class="k w3"/>
+<text x="156.00" y="52.10" class="t dimt" text-anchor="middle" style="font-size:2.4px">moteur 0.69</text>
+<line x1="40.50" y1="59.20" x2="40.50" y2="58.80" class="k w1"/>
+<line x1="190.50" y1="59.20" x2="190.50" y2="58.80" class="k w1"/>
+<line x1="39.30" y1="60.00" x2="191.70" y2="60.00" class="k w1"/>
+<line x1="39.60" y1="60.90" x2="41.40" y2="59.10" class="k w3"/>
+<line x1="189.60" y1="60.90" x2="191.40" y2="59.10" class="k w3"/>
+<text x="115.50" y="59.10" class="t dimt" text-anchor="middle" style="font-size:2.6px">1.50 (longueur totale, comme votre pompe)</text>
+<text x="214.00" y="18.00" class="t cl" text-anchor="start">BOÎTIER AL  1/10 (sur poteau, hors volumes)</text>
+<rect x="230.50" y="64.00" width="9.00" height="6.00" class="k w1 fhx"/>
+<rect x="220.00" y="24.00" width="30.00" height="40.00" rx="1.6" style="fill:#f4f6f7;stroke:var(--ink);stroke-width:.4"/>
+<rect x="221.40" y="25.40" width="27.20" height="37.20" rx="1.0" style="fill:#fbfcfc;stroke:#9aa6ae;stroke-width:.25"/>
+<circle cx="222.60" cy="26.60" r=".6" style="fill:#cfd7dc;stroke:var(--ink);stroke-width:.15"/>
+<circle cx="247.40" cy="26.60" r=".6" style="fill:#cfd7dc;stroke:var(--ink);stroke-width:.15"/>
+<circle cx="222.60" cy="61.40" r=".6" style="fill:#cfd7dc;stroke:var(--ink);stroke-width:.15"/>
+<circle cx="247.40" cy="61.40" r=".6" style="fill:#cfd7dc;stroke:var(--ink);stroke-width:.15"/>
+<rect x="224.00" y="36.00" width="15.60" height="14.40" style="fill:#fff7d6;stroke:#9aa6ae;stroke-width:.2"/>
+<path d="M227.40 38.00 l 2.4 4.2 l -4.8 0 z" style="fill:#ffd94d;stroke:#1f272d;stroke-width:.2"/>
+<line x1="231.00" y1="39.00" x2="238.40" y2="39.00" class="k w1"/>
+<line x1="231.00" y1="40.90" x2="238.40" y2="40.90" class="k w1"/>
+<line x1="231.00" y1="42.80" x2="238.40" y2="42.80" class="k w1"/>
+<line x1="231.00" y1="44.70" x2="238.40" y2="44.70" class="k w1"/>
+<line x1="231.00" y1="46.60" x2="238.40" y2="46.60" class="k w1"/>
+<rect x="240.50" y="31.00" width="5.6" height="8" rx=".6" style="fill:#1f272d;stroke:var(--ink);stroke-width:.2"/>
+<rect x="241.30" y="31.80" width="4" height="6.4" rx=".4" style="fill:#d63031"/>
+<circle cx="243.30" cy="45.00" r="1.5" style="fill:#2ecc71;stroke:var(--ink);stroke-width:.2"/>
+<rect x="227.00" y="64.00" width="4" height="2.4" style="fill:#9aa6ae;stroke:var(--ink);stroke-width:.2"/>
+<rect x="239.00" y="64.00" width="4" height="2.4" style="fill:#9aa6ae;stroke:var(--ink);stroke-width:.2"/>
+<path d="M229.00 66.40 q 0 6 -6 9" style="fill:none;stroke:#5b6b76;stroke-width:1.2;stroke-linecap:round"/>
+<polyline points="241.00,66.40 241.00,70.00 245.00,73.00 253.00,73.00" style="fill:none;stroke:#1d5f9e;stroke-width:1.35;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="241.00,66.40 241.00,70.00 245.00,73.00 253.00,73.00" style="fill:none;stroke:#2a86d8;stroke-width:1.00;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="241.00,66.40 241.00,70.00 245.00,73.00 253.00,73.00" style="fill:none;stroke:#9ad0f6;stroke-width:0.28;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="245.50,33.00 262.00,27.00 264.00,27.00" style="fill:none;stroke:var(--ink);stroke-width:.18"/>
+<circle cx="245.50" cy="33.00" r="0.45" class="k w1 fk"/>
+<text x="265.00" y="27.80" class="t tiny2" text-anchor="start" style="font-size:2.2px">interrupteur marche / arrêt</text>
+<polyline points="244.80,45.00 262.00,34.60 264.00,34.60" style="fill:none;stroke:var(--ink);stroke-width:.18"/>
+<circle cx="244.80" cy="45.00" r="0.45" class="k w1 fk"/>
+<text x="265.00" y="35.40" class="t tiny2" text-anchor="start" style="font-size:2.2px">voyant de marche</text>
+<polyline points="235.00,54.00 262.00,42.20 264.00,42.20" style="fill:none;stroke:var(--ink);stroke-width:.18"/>
+<circle cx="235.00" cy="54.00" r="0.45" class="k w1 fk"/>
+<text x="265.00" y="43.00" class="t tiny2" text-anchor="start" style="font-size:2.2px">transformateur de sécurité + contrôleur</text>
+<polyline points="229.00,65.20 262.00,49.80 264.00,49.80" style="fill:none;stroke:var(--ink);stroke-width:.18"/>
+<circle cx="229.00" cy="65.20" r="0.45" class="k w1 fk"/>
+<text x="265.00" y="50.60" class="t tiny2" text-anchor="start" style="font-size:2.2px">entrée 230 V depuis le TGBT (3G2.5)</text>
+<polyline points="251.00,73.00 262.00,57.40 264.00,57.40" style="fill:none;stroke:var(--ink);stroke-width:.18"/>
+<circle cx="251.00" cy="73.00" r="0.45" class="k w1 fk"/>
+<text x="265.00" y="58.20" class="t tiny2" text-anchor="start" style="font-size:2.2px">câble plat bleu 24 V CC → pompe</text>
+<text x="265.00" y="65.80" class="t tiny2 b" text-anchor="start" style="font-size:2.2px">IP65, fermé à clé, à 3.60 m du bassin</text>
+<text x="24.00" y="72.00" class="t cl" text-anchor="start">DÉTAIL 1/5 : TÊTE, CORPS ET CRÉPINE (même aspect que la pompe de la photo)</text>
+<defs><clipPath id="c4d"><rect x="24" y="84" width="217.00" height="44"/></clipPath></defs><g clip-path="url(#c4d)">
+<rect x="32.00" y="106.20" width="8.00" height="2.28" style="fill:#4a565e;stroke:#4a565e;stroke-width:.04"/>
+<rect x="32.00" y="108.48" width="8.00" height="3.04" style="fill:#2a3339;stroke:#2a3339;stroke-width:.04"/>
+<rect x="32.00" y="111.52" width="8.00" height="2.28" style="fill:#161c20;stroke:#161c20;stroke-width:.04"/>
+<rect x="32.00" y="106.20" width="8.00" height="7.60" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<path d="M32.60 106.20 l 1.60 -0.60 l 0 8.80 l -1.60 -0.60" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.21"/>
+<path d="M35.00 106.20 l 1.60 -0.60 l 0 8.80 l -1.60 -0.60" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.21"/>
+<path d="M37.40 106.20 l 1.60 -0.60 l 0 8.80 l -1.60 -0.60" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.21"/>
+<rect x="40.00" y="105.20" width="7.00" height="1.44" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="40.00" y="106.64" width="7.00" height="1.92" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="40.00" y="108.56" width="7.00" height="1.92" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="40.00" y="110.48" width="7.00" height="1.92" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="40.00" y="112.40" width="7.00" height="2.40" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="40.00" y="105.20" width="7.00" height="9.60" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<line x1="41.00" y1="105.20" x2="41.00" y2="114.80" class="k w1"/>
+<line x1="42.00" y1="105.20" x2="42.00" y2="114.80" class="k w1"/>
+<line x1="43.00" y1="105.20" x2="43.00" y2="114.80" class="k w1"/>
+<line x1="44.00" y1="105.20" x2="44.00" y2="114.80" class="k w1"/>
+<line x1="45.00" y1="105.20" x2="45.00" y2="114.80" class="k w1"/>
+<line x1="46.00" y1="105.20" x2="46.00" y2="114.80" class="k w1"/>
+<rect x="47.00" y="100.00" width="7.00" height="3.00" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="47.00" y="103.00" width="7.00" height="4.00" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="47.00" y="107.00" width="7.00" height="4.00" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="47.00" y="111.00" width="7.00" height="4.00" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="47.00" y="115.00" width="7.00" height="5.00" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="47.00" y="100.00" width="7.00" height="20.00" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<line x1="47.30" y1="104.50" x2="53.70" y2="104.50" class="k w1"/>
+<line x1="47.30" y1="115.50" x2="53.70" y2="115.50" class="k w1"/>
+<rect x="55.00" y="97.20" width="3.20" height="2.80" rx="0.80" style="fill:#c0c9d0;stroke:var(--ink);stroke-width:0.24"/>
+<rect x="55.00" y="120.00" width="3.20" height="2.80" rx="0.80" style="fill:#c0c9d0;stroke:var(--ink);stroke-width:0.24"/>
+<rect x="54.00" y="100.00" width="5.00" height="2.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="54.00" y="102.00" width="5.00" height="3.00" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="54.00" y="105.00" width="5.00" height="2.80" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="54.00" y="107.80" width="5.00" height="2.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="54.00" y="109.80" width="5.00" height="1.60" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="54.00" y="111.40" width="5.00" height="3.40" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="54.00" y="114.80" width="5.00" height="3.20" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="54.00" y="118.00" width="5.00" height="2.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="54.00" y="100.00" width="5.00" height="20.00" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<rect x="59.00" y="100.00" width="126.00" height="2.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="59.00" y="102.00" width="126.00" height="3.00" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="59.00" y="105.00" width="126.00" height="2.80" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="59.00" y="107.80" width="126.00" height="2.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="59.00" y="109.80" width="126.00" height="1.60" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="59.00" y="111.40" width="126.00" height="3.40" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="59.00" y="114.80" width="126.00" height="3.20" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="59.00" y="118.00" width="126.00" height="2.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="59.00" y="100.00" width="126.00" height="20.00" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<rect x="65.00" y="103.80" width="18.00" height="11.70" style="fill:#f3f5f6;stroke:#8c98a1;stroke-width:0.17"/>
+<rect x="65.00" y="103.80" width="3.00" height="11.70" style="fill:#3c4a55"/>
+<line x1="70.60" y1="105.00" x2="70.60" y2="114.50" class="k w1"/>
+<line x1="73.80" y1="105.00" x2="73.80" y2="114.50" class="k w1"/>
+<line x1="77.00" y1="105.00" x2="77.00" y2="114.50" class="k w1"/>
+<line x1="80.20" y1="105.00" x2="80.20" y2="114.50" class="k w1"/>
+<rect x="115.00" y="99.96" width="7.00" height="4.02" style="fill:#d6a618;stroke:#d6a618;stroke-width:.04"/>
+<rect x="115.00" y="103.98" width="7.00" height="8.03" style="fill:#ffdb52;stroke:#ffdb52;stroke-width:.04"/>
+<rect x="115.00" y="112.01" width="7.00" height="8.03" style="fill:#e0b020;stroke:#e0b020;stroke-width:.04"/>
+<rect x="115.00" y="99.96" width="7.00" height="20.08" style="fill:none;stroke:var(--ink);stroke-width:0.21"/>
+<text x="119.40" y="110.00" class="t tiny2 b" text-anchor="middle" transform="rotate(-90.00 119.40 110.00)" style="font-size:2.4px">24 V CC</text>
+<rect x="147.00" y="104.50" width="18.00" height="10.50" style="fill:#ffffff;stroke:#e4572e;stroke-width:0.30"/>
+<rect x="147.00" y="104.50" width="3.20" height="10.50" style="fill:#e4572e"/>
+<path d="M153.00 108.50 l 2.50 1.38 l -2.50 1.38 z" style="fill:#ffd94d;stroke:#1f272d;stroke-width:0.15"/>
+<rect x="185.00" y="100.00" width="5.00" height="2.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="185.00" y="102.00" width="5.00" height="3.00" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="185.00" y="105.00" width="5.00" height="2.80" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="185.00" y="107.80" width="5.00" height="2.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="185.00" y="109.80" width="5.00" height="1.60" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="185.00" y="111.40" width="5.00" height="3.40" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="185.00" y="114.80" width="5.00" height="3.20" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="185.00" y="118.00" width="5.00" height="2.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="185.00" y="100.00" width="5.00" height="20.00" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<line x1="186.20" y1="100.00" x2="186.20" y2="120.00" class="k w2"/>
+<line x1="187.40" y1="100.00" x2="187.40" y2="120.00" class="k w2"/>
+<line x1="188.60" y1="100.00" x2="188.60" y2="120.00" class="k w2"/>
+<rect x="190.00" y="99.60" width="2.40" height="3.12" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="190.00" y="102.72" width="2.40" height="4.16" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="190.00" y="106.88" width="2.40" height="4.16" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="190.00" y="111.04" width="2.40" height="4.16" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="190.00" y="115.20" width="2.40" height="5.20" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="190.00" y="99.60" width="2.40" height="20.80" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<rect x="192.40" y="100.00" width="14.20" height="4.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="192.40" y="104.00" width="14.20" height="6.00" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="192.40" y="110.00" width="14.20" height="6.00" style="fill:#b3bec6;stroke:#b3bec6;stroke-width:.04"/>
+<rect x="192.40" y="116.00" width="14.20" height="4.00" style="fill:#7d8a93;stroke:#7d8a93;stroke-width:.04"/>
+<rect x="192.40" y="100.00" width="14.20" height="20.00" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<circle cx="193.41" cy="101.05" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="103.16" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="105.26" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="107.37" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="109.47" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="111.58" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="113.68" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="115.79" r="0.56" style="fill:#2c3840"/>
+<circle cx="193.41" cy="117.89" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="101.58" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="103.68" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="105.79" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="107.89" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="110.00" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="112.11" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="114.21" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="116.32" r="0.56" style="fill:#2c3840"/>
+<circle cx="195.44" cy="118.42" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="101.05" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="103.16" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="105.26" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="107.37" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="109.47" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="111.58" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="113.68" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="115.79" r="0.56" style="fill:#2c3840"/>
+<circle cx="197.47" cy="117.89" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="101.58" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="103.68" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="105.79" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="107.89" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="110.00" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="112.11" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="114.21" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="116.32" r="0.56" style="fill:#2c3840"/>
+<circle cx="199.50" cy="118.42" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="101.05" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="103.16" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="105.26" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="107.37" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="109.47" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="111.58" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="113.68" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="115.79" r="0.56" style="fill:#2c3840"/>
+<circle cx="201.53" cy="117.89" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="101.58" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="103.68" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="105.79" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="107.89" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="110.00" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="112.11" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="114.21" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="116.32" r="0.56" style="fill:#2c3840"/>
+<circle cx="203.56" cy="118.42" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="101.05" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="103.16" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="105.26" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="107.37" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="109.47" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="111.58" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="113.68" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="115.79" r="0.56" style="fill:#2c3840"/>
+<circle cx="205.59" cy="117.89" r="0.56" style="fill:#2c3840"/>
+<rect x="206.60" y="99.60" width="2.40" height="3.12" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="206.60" y="102.72" width="2.40" height="4.16" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="206.60" y="106.88" width="2.40" height="4.16" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="206.60" y="111.04" width="2.40" height="4.16" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="206.60" y="115.20" width="2.40" height="5.20" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="206.60" y="99.60" width="2.40" height="20.80" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<rect x="209.00" y="100.00" width="138.00" height="2.00" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="209.00" y="102.00" width="138.00" height="3.00" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="209.00" y="105.00" width="138.00" height="2.80" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="209.00" y="107.80" width="138.00" height="2.00" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="209.00" y="109.80" width="138.00" height="1.60" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="209.00" y="111.40" width="138.00" height="3.40" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="209.00" y="114.80" width="138.00" height="3.20" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="209.00" y="118.00" width="138.00" height="2.00" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="209.00" y="100.00" width="138.00" height="20.00" style="fill:none;stroke:var(--ink);stroke-width:0.35"/>
+<circle cx="214.00" cy="104.50" r="0.80" style="fill:#5b6b76;stroke:var(--ink);stroke-width:0.14"/>
+<circle cx="214.00" cy="115.50" r="0.80" style="fill:#5b6b76;stroke:var(--ink);stroke-width:0.14"/>
+<rect x="225.00" y="104.00" width="40.00" height="11.50" style="fill:#eef1f3;stroke:#8c98a1;stroke-width:0.17"/>
+<line x1="229.00" y1="105.20" x2="229.00" y2="114.20" class="k w1"/>
+<line x1="233.80" y1="105.20" x2="233.80" y2="114.20" class="k w1"/>
+<line x1="238.60" y1="105.20" x2="238.60" y2="114.20" class="k w1"/>
+<line x1="243.40" y1="105.20" x2="243.40" y2="114.20" class="k w1"/>
+<line x1="248.20" y1="105.20" x2="248.20" y2="114.20" class="k w1"/>
+<line x1="253.00" y1="105.20" x2="253.00" y2="114.20" class="k w1"/>
+<line x1="257.80" y1="105.20" x2="257.80" y2="114.20" class="k w1"/>
+<line x1="307.00" y1="100.00" x2="307.00" y2="120.00" class="k w2"/>
+<line x1="308.20" y1="100.00" x2="308.20" y2="120.00" class="k w2"/>
+<rect x="344.60" y="100.80" width="2.80" height="18.40" rx="1.20" style="fill:#aab5bd;stroke:var(--ink);stroke-width:0.24"/>
+<polyline points="211.00,99.00 77.00,99.00" style="fill:none;stroke:#1d5f9e;stroke-width:2.35;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="211.00,99.00 77.00,99.00" style="fill:none;stroke:#2a86d8;stroke-width:2.00;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="211.00,99.00 77.00,99.00" style="fill:none;stroke:#9ad0f6;stroke-width:0.56;stroke-linejoin:round;stroke-linecap:round"/>
+<rect x="98.20" y="97.60" width="1.60" height="2.80" style="fill:#3c4a55"/>
+<rect x="138.20" y="97.60" width="1.60" height="2.80" style="fill:#3c4a55"/>
+<rect x="174.20" y="97.60" width="1.60" height="2.80" style="fill:#3c4a55"/>
+<rect x="186.60" y="97.60" width="1.60" height="2.80" style="fill:#3c4a55"/>
+<rect x="181.00" y="95.00" width="186.00" height="30.00" style="fill:#7cc3dc;fill-opacity:.16;stroke:#1683a8;stroke-width:0.35;stroke-dasharray:1.4 .8"/>
+<rect x="180.20" y="95.00" width="1.60" height="30.00" style="fill:#1683a8;opacity:.55"/>
+<rect x="366.40" y="95.00" width="1.20" height="30.00" class="k w2 fs"/>
+<line x1="366.40" y1="100.00" x2="367.60" y2="100.00" class="k w1"/>
+<line x1="366.40" y1="105.00" x2="367.60" y2="105.00" class="k w1"/>
+<line x1="366.40" y1="110.00" x2="367.60" y2="110.00" class="k w1"/>
+<line x1="366.40" y1="115.00" x2="367.60" y2="115.00" class="k w1"/>
+<line x1="366.40" y1="120.00" x2="367.60" y2="120.00" class="k w1"/>
+<polyline points="77.00,99.00 73.00,94.00 67.00,92.00" style="fill:none;stroke:#1d5f9e;stroke-width:2.35;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="77.00,99.00 73.00,94.00 67.00,92.00" style="fill:none;stroke:#2a86d8;stroke-width:2.00;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="77.00,99.00 73.00,94.00 67.00,92.00" style="fill:none;stroke:#9ad0f6;stroke-width:0.56;stroke-linejoin:round;stroke-linecap:round"/>
+</g>
+<path d="M241.00 93.00 l 1.6 9.00 l -3.2 7.50 l 1.6 17.50" style="fill:none;stroke:var(--ink);stroke-width:.35"/>
+<line x1="36.00" y1="106.20" x2="36.00" y2="86.40" class="k w1"/>
+<circle cx="36.00" cy="106.20" r="0.45" class="k w1 fk"/>
+<circle cx="36.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="36.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">1</text>
+<circle cx="254.60" cy="81.20" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="82.00" class="t tiny b" text-anchor="middle" style="font-size:1.9px">1</text>
+<text x="257.60" y="82.00" class="t tiny2" text-anchor="start" style="font-size:2.15px">raccord cannelé (comme celui de la photo)</text>
+<line x1="43.40" y1="105.20" x2="43.40" y2="86.40" class="k w1"/>
+<circle cx="43.40" cy="105.20" r="0.45" class="k w1 fk"/>
+<circle cx="43.40" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="43.40" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">2</text>
+<circle cx="254.60" cy="85.30" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="86.10" class="t tiny b" text-anchor="middle" style="font-size:1.9px">2</text>
+<text x="257.60" y="86.10" class="t tiny2" text-anchor="start" style="font-size:2.15px">mamelon laiton 1-1/4"</text>
+<line x1="50.40" y1="100.00" x2="50.40" y2="86.40" class="k w1"/>
+<circle cx="50.40" cy="100.00" r="0.45" class="k w1 fk"/>
+<circle cx="50.40" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="50.40" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">3</text>
+<circle cx="254.60" cy="89.40" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="90.20" class="t tiny b" text-anchor="middle" style="font-size:1.9px">3</text>
+<text x="257.60" y="90.20" class="t tiny2" text-anchor="start" style="font-size:2.15px">tête de refoulement laiton</text>
+<line x1="56.60" y1="97.20" x2="56.60" y2="86.40" class="k w1"/>
+<circle cx="56.60" cy="97.20" r="0.45" class="k w1 fk"/>
+<circle cx="56.60" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="56.60" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">4</text>
+<circle cx="254.60" cy="93.50" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="94.30" class="t tiny b" text-anchor="middle" style="font-size:1.9px">4</text>
+<text x="257.60" y="94.30" class="t tiny2" text-anchor="start" style="font-size:2.15px">anneaux de levage</text>
+<line x1="74.00" y1="103.80" x2="74.00" y2="86.40" class="k w1"/>
+<circle cx="74.00" cy="103.80" r="0.45" class="k w1 fk"/>
+<circle cx="74.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="74.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">5</text>
+<circle cx="254.60" cy="97.60" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="98.40" class="t tiny b" text-anchor="middle" style="font-size:1.9px">5</text>
+<text x="257.60" y="98.40" class="t tiny2" text-anchor="start" style="font-size:2.15px">plaque signalétique</text>
+<line x1="99.00" y1="107.00" x2="99.00" y2="86.40" class="k w1"/>
+<circle cx="99.00" cy="107.00" r="0.45" class="k w1 fk"/>
+<circle cx="99.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="99.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">6</text>
+<circle cx="254.60" cy="101.70" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="102.50" class="t tiny b" text-anchor="middle" style="font-size:1.9px">6</text>
+<text x="257.60" y="102.50" class="t tiny2" text-anchor="start" style="font-size:2.15px">corps inox 4" : étages de la pompe</text>
+<line x1="119.00" y1="103.00" x2="119.00" y2="86.40" class="k w1"/>
+<circle cx="119.00" cy="103.00" r="0.45" class="k w1 fk"/>
+<circle cx="119.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="119.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">7</text>
+<circle cx="254.60" cy="105.80" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="106.60" class="t tiny b" text-anchor="middle" style="font-size:1.9px">7</text>
+<text x="257.60" y="106.60" class="t tiny2" text-anchor="start" style="font-size:2.15px">bande jaune (24 V CC)</text>
+<line x1="131.00" y1="99.00" x2="131.00" y2="86.40" class="k w1"/>
+<circle cx="131.00" cy="99.00" r="0.45" class="k w1 fk"/>
+<circle cx="131.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="131.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">8</text>
+<circle cx="254.60" cy="109.90" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="110.70" class="t tiny b" text-anchor="middle" style="font-size:1.9px">8</text>
+<text x="257.60" y="110.70" class="t tiny2" text-anchor="start" style="font-size:2.15px">câble plat bleu 2 × 4 mm²</text>
+<line x1="139.00" y1="99.00" x2="139.00" y2="86.40" class="k w1"/>
+<circle cx="139.00" cy="99.00" r="0.45" class="k w1 fk"/>
+<circle cx="139.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="139.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">9</text>
+<circle cx="254.60" cy="114.00" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="114.80" class="t tiny b" text-anchor="middle" style="font-size:1.9px">9</text>
+<text x="257.60" y="114.80" class="t tiny2" text-anchor="start" style="font-size:2.15px">colliers inox du câble</text>
+<line x1="157.00" y1="104.50" x2="157.00" y2="86.40" class="k w1"/>
+<circle cx="157.00" cy="104.50" r="0.45" class="k w1 fk"/>
+<circle cx="157.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="157.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">10</text>
+<circle cx="254.60" cy="118.10" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="118.90" class="t tiny b" text-anchor="middle" style="font-size:1.9px">10</text>
+<text x="257.60" y="118.90" class="t tiny2" text-anchor="start" style="font-size:2.15px">étiquette de sécurité</text>
+<line x1="181.00" y1="95.00" x2="181.00" y2="86.40" class="k w1"/>
+<circle cx="181.00" cy="95.00" r="0.45" class="k w1 fk"/>
+<circle cx="181.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="181.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">11</text>
+<circle cx="254.60" cy="122.20" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="123.00" class="t tiny b" text-anchor="middle" style="font-size:1.9px">11</text>
+<text x="257.60" y="123.00" class="t tiny2" text-anchor="start" style="font-size:2.15px">passe-câble étanche de la chemise</text>
+<line x1="191.20" y1="99.60" x2="191.20" y2="86.40" class="k w1"/>
+<circle cx="191.20" cy="99.60" r="0.45" class="k w1 fk"/>
+<circle cx="191.20" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="191.20" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">12</text>
+<circle cx="254.60" cy="126.30" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="127.10" class="t tiny b" text-anchor="middle" style="font-size:1.9px">12</text>
+<text x="257.60" y="127.10" class="t tiny2" text-anchor="start" style="font-size:2.15px">bagues laiton</text>
+<line x1="199.00" y1="104.00" x2="199.00" y2="86.40" class="k w1"/>
+<circle cx="199.00" cy="104.00" r="0.45" class="k w1 fk"/>
+<circle cx="199.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="199.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">13</text>
+<circle cx="254.60" cy="130.40" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="131.20" class="t tiny b" text-anchor="middle" style="font-size:1.9px">13</text>
+<text x="257.60" y="131.20" class="t tiny2" text-anchor="start" style="font-size:2.15px">crépine perforée : l'eau entre ici</text>
+<line x1="221.00" y1="95.00" x2="221.00" y2="86.40" class="k w1"/>
+<circle cx="221.00" cy="95.00" r="0.45" class="k w1 fk"/>
+<circle cx="221.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="221.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">14</text>
+<circle cx="254.60" cy="134.50" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="135.30" class="t tiny b" text-anchor="middle" style="font-size:1.9px">14</text>
+<text x="257.60" y="135.30" class="t tiny2" text-anchor="start" style="font-size:2.15px">chemise de refroidissement (transparente)</text>
+<line x1="229.00" y1="107.00" x2="229.00" y2="86.40" class="k w1"/>
+<circle cx="229.00" cy="107.00" r="0.45" class="k w1 fk"/>
+<circle cx="229.00" cy="84.20" r="2.20" class="k w2 fw"/>
+<text x="229.00" y="85.10" class="t tiny2 b" text-anchor="middle" style="font-size:2.4px">15</text>
+<circle cx="254.60" cy="138.60" r="1.70" class="k w1 fw"/>
+<text x="254.60" y="139.40" class="t tiny b" text-anchor="middle" style="font-size:1.9px">15</text>
+<text x="257.60" y="139.40" class="t tiny2" text-anchor="start" style="font-size:2.15px">moteur 24 V CC (suite sur l'élévation 1/10)</text>
+<line x1="47.00" y1="130.20" x2="47.00" y2="129.80" class="k w1"/>
+<line x1="59.00" y1="130.20" x2="59.00" y2="129.80" class="k w1"/>
+<line x1="45.80" y1="131.00" x2="60.20" y2="131.00" class="k w1"/>
+<line x1="46.10" y1="131.90" x2="47.90" y2="130.10" class="k w3"/>
+<line x1="58.10" y1="131.90" x2="59.90" y2="130.10" class="k w3"/>
+<text x="53.00" y="130.10" class="t dimt" text-anchor="middle" style="font-size:2.5px">0.06</text>
+<line x1="59.00" y1="130.20" x2="59.00" y2="129.80" class="k w1"/>
+<line x1="185.00" y1="130.20" x2="185.00" y2="129.80" class="k w1"/>
+<line x1="57.80" y1="131.00" x2="186.20" y2="131.00" class="k w1"/>
+<line x1="58.10" y1="131.90" x2="59.90" y2="130.10" class="k w3"/>
+<line x1="184.10" y1="131.90" x2="185.90" y2="130.10" class="k w3"/>
+<text x="122.00" y="130.10" class="t dimt" text-anchor="middle" style="font-size:2.5px">0.63</text>
+<line x1="185.00" y1="130.20" x2="185.00" y2="129.80" class="k w1"/>
+<line x1="209.00" y1="130.20" x2="209.00" y2="129.80" class="k w1"/>
+<line x1="183.80" y1="131.00" x2="210.20" y2="131.00" class="k w1"/>
+<line x1="184.10" y1="131.90" x2="185.90" y2="130.10" class="k w3"/>
+<line x1="208.10" y1="131.90" x2="209.90" y2="130.10" class="k w3"/>
+<text x="197.00" y="130.10" class="t dimt" text-anchor="middle" style="font-size:2.5px">0.12</text>
+<text x="212.00" y="131.90" class="t tiny2" text-anchor="start" style="font-size:2.3px">→ moteur 0.69</text>
+<line x1="28.80" y1="100.00" x2="29.20" y2="100.00" class="k w1"/>
+<line x1="28.80" y1="120.00" x2="29.20" y2="120.00" class="k w1"/>
+<line x1="28.00" y1="98.80" x2="28.00" y2="121.20" class="k w1"/>
+<line x1="27.10" y1="99.10" x2="28.90" y2="100.90" class="k w3"/>
+<line x1="27.10" y1="119.10" x2="28.90" y2="120.90" class="k w3"/>
+<text x="28.90" y="110.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 28.90 110.00)" style="font-size:2.3px">Ø100</text>
+<circle cx="66" cy="194" r="37.50" style="fill:#7cc3dc;fill-opacity:.16;stroke:#1683a8;stroke-width:.4;stroke-dasharray:1.6 .9"/>
+<circle cx="66" cy="194" r="25.00" style="fill:#dfe5e9;stroke:var(--ink);stroke-width:.45"/>
+<circle cx="89.60" cy="194.00" r=".55" style="fill:#2c3840"/>
+<circle cx="89.24" cy="198.10" r=".55" style="fill:#2c3840"/>
+<circle cx="88.18" cy="202.07" r=".55" style="fill:#2c3840"/>
+<circle cx="86.44" cy="205.80" r=".55" style="fill:#2c3840"/>
+<circle cx="84.08" cy="209.17" r=".55" style="fill:#2c3840"/>
+<circle cx="81.17" cy="212.08" r=".55" style="fill:#2c3840"/>
+<circle cx="77.80" cy="214.44" r=".55" style="fill:#2c3840"/>
+<circle cx="74.07" cy="216.18" r=".55" style="fill:#2c3840"/>
+<circle cx="70.10" cy="217.24" r=".55" style="fill:#2c3840"/>
+<circle cx="66.00" cy="217.60" r=".55" style="fill:#2c3840"/>
+<circle cx="61.90" cy="217.24" r=".55" style="fill:#2c3840"/>
+<circle cx="57.93" cy="216.18" r=".55" style="fill:#2c3840"/>
+<circle cx="54.20" cy="214.44" r=".55" style="fill:#2c3840"/>
+<circle cx="50.83" cy="212.08" r=".55" style="fill:#2c3840"/>
+<circle cx="47.92" cy="209.17" r=".55" style="fill:#2c3840"/>
+<circle cx="45.56" cy="205.80" r=".55" style="fill:#2c3840"/>
+<circle cx="43.82" cy="202.07" r=".55" style="fill:#2c3840"/>
+<circle cx="42.76" cy="198.10" r=".55" style="fill:#2c3840"/>
+<circle cx="42.40" cy="194.00" r=".55" style="fill:#2c3840"/>
+<circle cx="42.76" cy="189.90" r=".55" style="fill:#2c3840"/>
+<circle cx="43.82" cy="185.93" r=".55" style="fill:#2c3840"/>
+<circle cx="45.56" cy="182.20" r=".55" style="fill:#2c3840"/>
+<circle cx="47.92" cy="178.83" r=".55" style="fill:#2c3840"/>
+<circle cx="50.83" cy="175.92" r=".55" style="fill:#2c3840"/>
+<circle cx="54.20" cy="173.56" r=".55" style="fill:#2c3840"/>
+<circle cx="57.93" cy="171.82" r=".55" style="fill:#2c3840"/>
+<circle cx="61.90" cy="170.76" r=".55" style="fill:#2c3840"/>
+<circle cx="66.00" cy="170.40" r=".55" style="fill:#2c3840"/>
+<circle cx="70.10" cy="170.76" r=".55" style="fill:#2c3840"/>
+<circle cx="74.07" cy="171.82" r=".55" style="fill:#2c3840"/>
+<circle cx="77.80" cy="173.56" r=".55" style="fill:#2c3840"/>
+<circle cx="81.17" cy="175.92" r=".55" style="fill:#2c3840"/>
+<circle cx="84.08" cy="178.83" r=".55" style="fill:#2c3840"/>
+<circle cx="86.44" cy="182.20" r=".55" style="fill:#2c3840"/>
+<circle cx="88.18" cy="185.93" r=".55" style="fill:#2c3840"/>
+<circle cx="89.24" cy="189.90" r=".55" style="fill:#2c3840"/>
+<circle cx="66" cy="194" r="15.50" style="fill:#c3cdd4;stroke:var(--ink);stroke-width:.3"/>
+<circle cx="66.00" cy="194.00" r="2.00" class="k w2 fk"/>
+<rect x="56.85" y="166.11" width="9" height="3" rx="1.2" transform="rotate(-10 61.35 167.61)" style="fill:#2a86d8;stroke:#1d5f9e;stroke-width:.3"/>
+<circle cx="59.55" cy="167.81" r="0.90" class="k w1 fs"/>
+<circle cx="63.15" cy="167.41" r="0.90" class="k w1 fs"/>
+<rect x="43.50" y="231.50" width="45.00" height="8.00" class="k w1 fhx"/>
+<line x1="92.25" y1="167.75" x2="111.00" y2="159.00" class="k w1"/>
+<text x="112.00" y="160.00" class="t tiny2" text-anchor="start" style="font-size:2.4px">chemise Ø150</text>
+<line x1="83.50" y1="211.50" x2="111.00" y2="211.00" class="k w1"/>
+<text x="112.00" y="212.00" class="t tiny2" text-anchor="start" style="font-size:2.4px">crépine perforée Ø100</text>
+<line x1="64.35" y1="166.61" x2="111.00" y2="169.00" class="k w1"/>
+<text x="112.00" y="170.00" class="t tiny2" text-anchor="start" style="font-size:2.4px">câble plat bleu</text>
+<line x1="66.00" y1="194.00" x2="111.00" y2="195.00" class="k w1"/>
+<text x="112.00" y="196.00" class="t tiny2" text-anchor="start" style="font-size:2.4px">arbre</text>
+<line x1="92.04" y1="215.86" x2="111.00" y2="227.00" class="k w1"/>
+<text x="112.00" y="228.00" class="t tiny2" text-anchor="start" style="font-size:2.4px">eau de refroidissement</text>
+<text x="66.00" y="150.00" class="t cl" text-anchor="middle">COUPE PAR LA CRÉPINE  1/2</text>
+<text x="142.00" y="152.00" class="t cl" text-anchor="start">CARACTÉRISTIQUES EXIGÉES</text>
+<rect x="142.00" y="154.00" width="170.00" height="49.50" class="k w2 fs"/>
+<rect x="142.00" y="154.00" width="170.00" height="4.50" class="k w2 fh"/>
+<line x1="178.00" y1="154.00" x2="178.00" y2="203.50" class="k w1"/>
+<line x1="142.00" y1="158.50" x2="312.00" y2="158.50" class="k w1"/>
+<line x1="142.00" y1="163.00" x2="312.00" y2="163.00" class="k w1"/>
+<line x1="142.00" y1="167.50" x2="312.00" y2="167.50" class="k w1"/>
+<line x1="142.00" y1="172.00" x2="312.00" y2="172.00" class="k w1"/>
+<line x1="142.00" y1="176.50" x2="312.00" y2="176.50" class="k w1"/>
+<line x1="142.00" y1="181.00" x2="312.00" y2="181.00" class="k w1"/>
+<line x1="142.00" y1="185.50" x2="312.00" y2="185.50" class="k w1"/>
+<line x1="142.00" y1="190.00" x2="312.00" y2="190.00" class="k w1"/>
+<line x1="142.00" y1="194.50" x2="312.00" y2="194.50" class="k w1"/>
+<line x1="142.00" y1="199.00" x2="312.00" y2="199.00" class="k w1"/>
+<text x="143.20" y="157.15" class="t cb" text-anchor="start" style="font-size:2.3px">Critère</text>
+<text x="179.20" y="157.15" class="t cb" text-anchor="start" style="font-size:2.3px">Exigence</text>
+<text x="143.20" y="161.65" class="t cs" text-anchor="start" style="font-size:2.3px">Type</text>
+<text x="179.20" y="161.65" class="t cs" text-anchor="start" style="font-size:2.3px">pompe de forage 4" immergée, multicellulaire, moteur sans balais</text>
+<text x="143.20" y="166.15" class="t cs" text-anchor="start" style="font-size:2.3px">Tension</text>
+<text x="179.20" y="166.15" class="t cs" text-anchor="start" style="font-size:2.3px">24 V CC (TBTS ≤ 30 V CC) - contrôleur dans le boîtier AL, hors volumes</text>
+<text x="143.20" y="170.65" class="t cs" text-anchor="start" style="font-size:2.3px">Points de fonctionnement</text>
+<text x="179.20" y="170.65" class="t cs" text-anchor="start" style="font-size:2.3px">9 m³/h à 3 mCE (cascade) et 6 m³/h à 4 mCE (fin de vidange)</text>
+<text x="143.20" y="175.15" class="t cs" text-anchor="start" style="font-size:2.3px">Puissance / courant</text>
+<text x="179.20" y="175.15" class="t cs" text-anchor="start" style="font-size:2.3px">143 W en cascade, 184 W nominal - 7.7 A à 24 V</text>
+<text x="143.20" y="179.65" class="t cs" text-anchor="start" style="font-size:2.3px">Dimensions maximales</text>
+<text x="179.20" y="179.65" class="t cs" text-anchor="start" style="font-size:2.3px">Ø100 × 1.50 m, sortie 1-1/4"</text>
+<text x="143.20" y="184.15" class="t cs" text-anchor="start" style="font-size:2.3px">Pose</text>
+<text x="179.20" y="184.15" class="t cs" text-anchor="start" style="font-size:2.3px">horizontale admise par le fabricant (butée), sur berceau, dans sa chemise</text>
+<text x="143.20" y="188.65" class="t cs" text-anchor="start" style="font-size:2.3px">Refroidissement</text>
+<text x="179.20" y="188.65" class="t cs" text-anchor="start" style="font-size:2.3px">chemise Ø150 : 0.25 m/s le long du moteur (mini usuel 0.08)</text>
+<text x="143.20" y="193.15" class="t cs" text-anchor="start" style="font-size:2.3px">Matériaux</text>
+<text x="179.20" y="193.15" class="t cs" text-anchor="start" style="font-size:2.3px">inox 316 (eau chlorée), tête laiton ou inox, joints pour eau de piscine</text>
+<text x="143.20" y="197.65" class="t cs" text-anchor="start" style="font-size:2.3px">Protections</text>
+<text x="179.20" y="197.65" class="t cs" text-anchor="start" style="font-size:2.3px">thermique du moteur, marche à sec et blocage par le contrôleur</text>
+<text x="143.20" y="202.15" class="t cs" text-anchor="start" style="font-size:2.3px">Câble</text>
+<text x="179.20" y="202.15" class="t cs" text-anchor="start" style="font-size:2.3px">plat bleu 2 × 4 mm², 10 m d'un seul tenant jusqu'au boîtier AL</text>
+<text x="142.00" y="211.00" class="t cl" text-anchor="start">VOTRE POMPE (PHOTO) ET LA POMPE DU PUISARD</text>
+<rect x="142.00" y="213.00" width="170.00" height="35.20" class="k w2 fs"/>
+<rect x="142.00" y="213.00" width="170.00" height="4.40" class="k w2 fh"/>
+<line x1="172.00" y1="213.00" x2="172.00" y2="248.20" class="k w1"/>
+<line x1="236.00" y1="213.00" x2="236.00" y2="248.20" class="k w1"/>
+<line x1="142.00" y1="217.40" x2="312.00" y2="217.40" class="k w1"/>
+<line x1="142.00" y1="221.80" x2="312.00" y2="221.80" class="k w1"/>
+<line x1="142.00" y1="226.20" x2="312.00" y2="226.20" class="k w1"/>
+<line x1="142.00" y1="230.60" x2="312.00" y2="230.60" class="k w1"/>
+<line x1="142.00" y1="235.00" x2="312.00" y2="235.00" class="k w1"/>
+<line x1="142.00" y1="239.40" x2="312.00" y2="239.40" class="k w1"/>
+<line x1="142.00" y1="243.80" x2="312.00" y2="243.80" class="k w1"/>
+<text x="143.20" y="216.05" class="t cb" text-anchor="start" style="font-size:2.3px"></text>
+<text x="173.20" y="216.05" class="t cb" text-anchor="start" style="font-size:2.3px">Pompe de la photo</text>
+<text x="237.20" y="216.05" class="t cb" text-anchor="start" style="font-size:2.3px">Pompe du puisard</text>
+<text x="143.20" y="220.45" class="t cs" text-anchor="start" style="font-size:2.3px">Forme</text>
+<text x="173.20" y="220.45" class="t cs" text-anchor="start" style="font-size:2.3px">4" inox, tête laiton, crépine</text>
+<text x="237.20" y="220.45" class="t cs" text-anchor="start" style="font-size:2.3px">identique</text>
+<text x="143.20" y="224.85" class="t cs" text-anchor="start" style="font-size:2.3px">Longueur</text>
+<text x="173.20" y="224.85" class="t cs" text-anchor="start" style="font-size:2.3px">≈ 1.50 m</text>
+<text x="237.20" y="224.85" class="t cs" text-anchor="start" style="font-size:2.3px">1.50 m</text>
+<text x="143.20" y="229.25" class="t cs" text-anchor="start" style="font-size:2.3px">Sortie</text>
+<text x="173.20" y="229.25" class="t cs" text-anchor="start" style="font-size:2.3px">1-1/4" + raccord cannelé</text>
+<text x="237.20" y="229.25" class="t cs" text-anchor="start" style="font-size:2.3px">identique</text>
+<text x="143.20" y="233.65" class="t cs" text-anchor="start" style="font-size:2.3px">Tension</text>
+<text x="173.20" y="233.65" class="t cs" text-anchor="start" style="font-size:2.3px">220 V</text>
+<text x="237.20" y="233.65" class="t cs" text-anchor="start" style="font-size:2.3px">24 V CC</text>
+<text x="143.20" y="238.05" class="t cs" text-anchor="start" style="font-size:2.3px">Puissance</text>
+<text x="173.20" y="238.05" class="t cs" text-anchor="start" style="font-size:2.3px">1 HP (0.75 kW)</text>
+<text x="237.20" y="238.05" class="t cs" text-anchor="start" style="font-size:2.3px">184 W nominal</text>
+<text x="143.20" y="242.45" class="t cs" text-anchor="start" style="font-size:2.3px">Câble</text>
+<text x="173.20" y="242.45" class="t cs" text-anchor="start" style="font-size:2.3px">plat bleu</text>
+<text x="237.20" y="242.45" class="t cs" text-anchor="start" style="font-size:2.3px">plat bleu 2 × 4 mm²</text>
+<text x="143.20" y="246.85" class="t cs" text-anchor="start" style="font-size:2.3px">Coffret</text>
+<text x="173.20" y="246.85" class="t cs" text-anchor="start" style="font-size:2.3px">boîtier blanc 220 V</text>
+<text x="237.20" y="246.85" class="t cs" text-anchor="start" style="font-size:2.3px">boîtier AL 24 V CC (TBTS)</text>
+<text x="24.00" y="256.00" class="t cl red-t" text-anchor="start">À SAVOIR</text>
+<text x="24.00" y="262.00" class="t tiny2" text-anchor="start" style="font-size:2.4px">La pompe de la photo (220 V) ne doit pas être placée dans le bassin : un défaut d'isolement dans l'eau peut être mortel.</text>
+<text x="24.00" y="266.60" class="t tiny2" text-anchor="start" style="font-size:2.4px">Elle reste utilisable dans le puits du terrain. La pompe du puisard a la même forme et la même longueur, en 24 V CC.</text>
+<text x="24.00" y="271.20" class="t tiny2" text-anchor="start" style="font-size:2.4px">Les pompes de forage sont faites pour de grandes hauteurs : le modèle 24 V choisi doit avoir ses points 9 m³/h à 3 mCE</text>
+<text x="24.00" y="275.80" class="t tiny2" text-anchor="start" style="font-size:2.4px">et 6 m³/h à 4 mCE sur sa courbe, et accepter la pose horizontale : à vérifier sur la fiche du fabricant avant l'achat.</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Variante C : pompe au puisard, deux tubes</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">POMPE DE FORAGE 24 V</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Élévation, détail, boîtier AL, coupe et exigences</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">VC-05</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/10 - 1/5 - 1/2</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">H - v2.2.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 20/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>

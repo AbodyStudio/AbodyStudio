@@ -1,0 +1,18 @@
+Gharsa Foquiya - Piscine - Variante C : une pompe au puisard, deux tubes
+Version 2.2.0 (indice H) - 20/10/2026
+Même bassin que l'indice E (v1.3.1). Ni local technique, ni filtre, ni skimmer : une pompe 24 V couchée au fond
+sous une cage inox, le tube 1 vers le jardin, le tube 2 vers la cascade.
+Conception : AbodyStudio Limited - https://abodystudio.com/ - Support@abodystudio.com - WhatsApp +212 663 033 383
+Exécution : ABOUDI BTP Group - SARL au capital de 100 000 MAD - RC 168595 Tanger - ICE 003823697000094
+            Bd Moulay Ismail, Résidence Volubilis, Bloc C, 1er étage, N° 53 - Tanger-Médina - Tél. +212 717 783 570 / +212 663 033 383 - contact@aboudibtp.com / aboudibtpgroup@gmail.com
+
+index.html        Dossier : principe, la pompe dans le puisard, plans, calculs, comparaison E / B / C, équipements,
+                  étanchéité, électricité, entretien, descriptif, phasage, devis, planning, lexique
+plans-svg/        Planches VC-01 à VC-08, PL-01, PL-02, PL-05 (format A3, imprimer à 100 %)
+img/              Photos du site + cover.png et image1.png, image2.png... (galerie) :
+                  déposez-les dans img/, ils s'affichent automatiquement à l'ouverture de index.html
+
+Ouvrir index.html dans un navigateur (connexion internet pour les polices).
+Votre pompe 220 V ne doit pas aller dans l'eau du bassin : la pompe du puisard est en 24 V CC (TBTS).
+Sans filtre, l'eau se trouble plus vite : options possibles (filtre sur le tube 2, robot sans fil).
+Concept électrique non vérifié pour la conformité : à valider par un électricien qualifié.

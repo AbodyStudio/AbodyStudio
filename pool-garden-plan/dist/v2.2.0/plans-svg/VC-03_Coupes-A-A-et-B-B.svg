@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" class="sheet" role="img" aria-label="VC-03 Coupes"><style>@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=Cairo:wght@600&amp;display=swap");</style><defs>
+<pattern id="hx" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" class="pat"/></pattern>
+<pattern id="cc" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="0.8" cy="0.8" r="0.22" class="patf"/><circle cx="2.2" cy="2.1" r="0.16" class="patf"/><path d="M1.9 0.6 l0.5 0.4 -0.6 0.1z" class="patf"/></pattern>
+<pattern id="ea" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.6" class="pat"/><line x1="2" y1="2" x2="2" y2="3.6" class="pat"/></pattern>
+<pattern id="gr" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><circle cx="0.9" cy="0.9" r="0.45" class="pat"/><circle cx="2.4" cy="2.3" r="0.35" class="pat"/></pattern>
+<pattern id="st" width="5" height="4" patternUnits="userSpaceOnUse"><path d="M0.4 1.6 q1 -1.4 2.2 -0.2 q0.6 1 -0.6 1.6 q-1.4 0.4 -1.6 -1.4z" class="pat"/><path d="M3 3.2 q0.8 -1 1.7 0" class="pat"/></pattern>
+<pattern id="gz" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M1 3 l0.3 -1 M1.6 3 l0 -1.2 M2.2 3 l-0.3 -1" class="patg"/></pattern>
+<pattern id="tl" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 V6 H0" class="patt"/></pattern>
+<marker id="ar" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6z" class="patk"/></marker>
+</defs><style>:root,svg{--sheet:#ffffff;--ink:#14212b;--ink-2:#5b6b76;--new:#c8372d;--parcel:#c8372d;--water:#1683a8;--water-f:#cdebf5;--light-f:#fff2b8;--paved-f:#eceff1;--chick-f:#f6efe2;--tree-f:#e3efd9;--green:#4f7f35;--hatch:#7d8b95;--head:#e8eef2;--demo:#d9a400;--demo-ink:#8a6a00;--p-s:#1683a8;--p-r:#1b8a5a;--p-e:#8a5a2b;--p-el:#7b3fb0}
+.sheet{display:block;width:100%;height:auto}
+.sh-bg{fill:var(--sheet)}
+.k{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.red{stroke:var(--new);fill:none;stroke-linejoin:round}
+.demo{stroke:var(--demo);fill:none;stroke-dasharray:2 1}
+.w1{stroke-width:.18}.w2{stroke-width:.3}.w3{stroke-width:.5}.w4{stroke-width:.75}
+.dash{stroke-dasharray:1.6 1}.axis{stroke-dasharray:7 1.2 1 1.2}.fence{stroke-dasharray:3 1 .6 1}
+.parcel{stroke:var(--parcel)}
+.pipe{stroke:var(--water);stroke-width:.7}
+.pipe-s{stroke:var(--p-s);fill:none}.pipe-r{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}
+.pipe-e{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.pipe-d{stroke:var(--green);fill:none;stroke-dasharray:.4 .8;stroke-linecap:round}
+.elec{stroke:var(--p-el);fill:none;stroke-dasharray:3 .8 .6 .8}
+.pipe-a1{stroke:var(--p-r);fill:none}.pipe-a2{stroke:var(--p-r);fill:none;stroke-dasharray:2.4 .8}.pipe-b{stroke:var(--p-e);fill:none;stroke-dasharray:1.2 .8}.selv{stroke:var(--p-el);fill:none;stroke-dasharray:.7 .7}.memb{stroke:#0b5d7a;fill:none;stroke-width:.75}.pe{stroke:#3a8a3a;fill:none;stroke-width:.35;stroke-dasharray:2 .6 .6 .6}.z1{fill:#7b3fb0;fill-opacity:.07;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:2 1}.z2{fill:#7b3fb0;fill-opacity:.03;stroke:#7b3fb0;stroke-width:.3;stroke-dasharray:1 1}.water-l{stroke:var(--p-s);fill:none;stroke-dasharray:.8 .6}
+.arrow{marker-end:url(#ar)}
+.fk{fill:var(--ink)}.fs{fill:var(--sheet)}.fh{fill:var(--head)}.fred{fill:var(--new)}
+.fw{fill:var(--water-f)}.flt{fill:var(--light-f)}.fpv{fill:var(--paved-f)}.fch{fill:var(--chick-f)}
+.fcc2{fill:url(#cc);opacity:.45}.fhx{fill:url(#hx)}.fcc{fill:url(#cc)}.fea{fill:url(#ea)}.fea2{fill:url(#ea);opacity:.55}.fgr{fill:url(#gr)}
+.fst{fill:url(#st)}.fgz{fill:url(#gz)}.ftl{fill:url(#tl)}
+.tree{fill:var(--tree-f)}.shrub{fill:var(--tree-f)}.op{opacity:.85}
+.pat{stroke:var(--hatch);stroke-width:.15;fill:none}.patf{fill:var(--hatch)}.patk{fill:var(--ink)}
+.patg{stroke:var(--green);stroke-width:.22;fill:none}.patt{stroke:var(--hatch);stroke-width:.12;fill:none}
+.t{fill:var(--ink);font-family:"Archivo Narrow","Arial Narrow",Arial,sans-serif;font-size:3.2px}
+.lab{font-size:3px}.b{font-weight:700}.dimt{font-size:2.9px}.lvl{font-size:2.7px}
+.borne{font-size:2.8px;fill:var(--parcel)}.tiny{font-size:1.9px;fill:var(--ink-2)}.tiny2{font-size:2.55px}
+.cl{font-size:2.4px;letter-spacing:.25px;fill:var(--ink-2);font-weight:600}.cs{font-size:2.8px}
+.cb{font-size:3.2px;font-weight:700}.ct{font-size:4.6px;font-weight:700;letter-spacing:.15px}
+.ar{font-family:"Cairo",sans-serif;font-size:4.4px;font-weight:600}
+.mute{fill:var(--ink-2)}.red-t{fill:var(--new)}.demo-t{fill:var(--demo-ink)}.road{font-style:italic}
+</style><defs><clipPath id="c3-clip"><rect x="16" y="11" width="297" height="275"/></clipPath></defs><rect x="0" y="0" width="420" height="297" class="sh-bg"/><polygon points="292.00,53.00 25.00,53.00 25.00,113.20 292.00,113.20" class="k w1 fea"/>
+<polygon points="43.40,53.00 34.40,53.00 34.40,75.00 43.40,75.00" class="k w1 fgr"/>
+<polygon points="261.60,53.00 252.60,53.00 252.60,100.00 261.60,100.00" class="k w1 fgr"/>
+<polygon points="252.60,96.20 248.00,96.20 224.00,96.20 188.00,84.20 98.00,71.20 48.00,71.20 43.40,71.20 43.40,75.20 48.00,75.20 98.00,75.20 188.00,88.20 224.00,100.20 248.00,100.20 252.60,100.20" class="k w1 fst"/>
+<polygon points="252.60,94.60 248.00,94.60 224.00,94.60 188.00,82.60 98.00,69.60 48.00,69.60 43.40,69.60 43.40,71.20 48.00,71.20 98.00,71.20 188.00,84.20 224.00,96.20 248.00,96.20 252.60,96.20" class="k w1 fs"/>
+<polygon points="252.60,90.60 248.00,90.60 224.00,90.60 188.00,78.60 98.00,65.60 48.00,65.60 43.40,65.60 43.40,69.60 48.00,69.60 98.00,69.60 188.00,82.60 224.00,94.60 248.00,94.60 252.60,94.60" class="k w3 fcc"/>
+<polygon points="252.60,94.60 233.40,94.60 233.40,107.20 252.60,107.20" class="k w1 fst"/>
+<polygon points="252.60,90.60 233.40,90.60 233.40,101.60 252.60,101.60" class="k w3 fcc"/>
+<rect x="248.60" y="52.40" width="4.00" height="38.20" class="k w3 fcc"/>
+<rect x="43.40" y="52.40" width="4.00" height="13.20" class="k w3 fcc"/>
+<rect x="248.00" y="51.00" width="10.60" height="1.40" class="k w2 fs"/>
+<rect x="38.00" y="51.00" width="10.60" height="1.40" class="k w2 fs"/>
+<polygon points="48.00,39.00 40.00,39.00 40.00,52.40 48.00,52.40" class="red w3 fcc"/>
+<polyline points="49.60,46.00 47.00,46.00" class="red w4"/>
+<path d="M49.60 46.00 q 2.00 1.00 2.60 8.00" class="red w2"/>
+<polygon points="248.00,54.00 248.00,90.00 224.00,90.00 188.00,78.00 98.00,65.00 48.00,65.00 48.00,54.00" class="k w1 fw"/>
+<polygon points="248.00,90.00 238.00,90.00 238.00,97.00 248.00,97.00" class="k w1 fw"/>
+<line x1="248.00" y1="90.00" x2="238.00" y2="90.00" class="k w4"/>
+<polyline points="48.00,55.67 55.00,55.67 55.00,60.33 62.00,60.33 62.00,65.00 48.00,65.00" class="k w1"/>
+<circle cx="213.00" cy="63.00" r="1.40" class="k w1 flt"/>
+<circle cx="163.00" cy="63.00" r="1.40" class="k w1 flt"/>
+<circle cx="118.00" cy="63.00" r="1.40" class="k w1 flt"/>
+<rect x="227.00" y="51.00" width="10.00" height="24.00" class="k w1 dash"/>
+<circle cx="243.00" cy="94.50" r="1.50" style="fill:#7cc3dc;fill-opacity:.2;stroke:#1683a8;stroke-width:.3;stroke-dasharray:1 .6"/>
+<circle cx="243.00" cy="94.50" r="1.00" style="fill:#c3ccd3;stroke:var(--ink);stroke-width:.3"/>
+<rect x="241.20" y="96.00" width="3.60" height="1.00" class="k w1 fk"/>
+<polyline points="247.60,94.60 255.00,94.60 255.00,58.00 270.00,58.00" style="fill:none;stroke:#3c4a55;stroke-width:1.26;stroke-linejoin:round;stroke-linecap:round;opacity:0.55"/>
+<polygon points="275.20,51.20 264.80,51.20 264.80,63.40 275.20,63.40" class="k w1 dash"/>
+<line x1="275.20" y1="51.20" x2="264.80" y2="51.20" class="red w3"/>
+<polyline points="41.60,58.00 41.60,46.20 45.20,46.20" style="fill:none;stroke:#1b8a5a;stroke-width:1.26;stroke-linejoin:round;stroke-linecap:round;opacity:0.55"/>
+<line x1="292.00" y1="53.00" x2="258.60" y2="53.00" class="k w2"/>
+<line x1="38.00" y1="53.00" x2="25.00" y2="53.00" class="k w2"/>
+<polygon points="166.60,51.80 169.40,51.80 168.00,54.00" class="k w1 fk"/>
+<line x1="165.00" y1="54.00" x2="171.00" y2="54.00" class="k w1"/>
+<text x="170.20" y="51.40" class="t lvl" text-anchor="start">-0.85 eau</text>
+<polygon points="66.60,48.80 69.40,48.80 68.00,51.00" class="k w1 fk"/>
+<line x1="65.00" y1="51.00" x2="71.00" y2="51.00" class="k w1"/>
+<text x="70.20" y="48.40" class="t lvl" text-anchor="start">-0.70</text>
+<polygon points="217.60,87.80 220.40,87.80 219.00,90.00" class="k w1 fk"/>
+<line x1="216.00" y1="90.00" x2="222.00" y2="90.00" class="k w1"/>
+<text x="221.20" y="87.40" class="t lvl" text-anchor="start">-2.65</text>
+<polygon points="262.60,94.80 265.40,94.80 264.00,97.00" class="k w1 fk"/>
+<line x1="261.00" y1="97.00" x2="267.00" y2="97.00" class="k w1"/>
+<text x="266.20" y="94.40" class="t lvl" text-anchor="start">-3.00 puisard</text>
+<polygon points="82.60,62.80 85.40,62.80 84.00,65.00" class="k w1 fk"/>
+<line x1="81.00" y1="65.00" x2="87.00" y2="65.00" class="k w1"/>
+<text x="86.20" y="62.40" class="t lvl" text-anchor="start">-1.40</text>
+<polygon points="42.60,36.80 45.40,36.80 44.00,39.00" class="k w1 fk"/>
+<line x1="41.00" y1="39.00" x2="47.00" y2="39.00" class="k w1"/>
+<text x="41.80" y="36.40" class="t lvl" text-anchor="end">-0.10 arase</text>
+<polygon points="53.60,43.80 56.40,43.80 55.00,46.00" class="k w1 fk"/>
+<line x1="52.00" y1="46.00" x2="58.00" y2="46.00" class="k w1"/>
+<text x="52.80" y="43.40" class="t lvl" text-anchor="end">-0.45 lame</text>
+<polygon points="281.60,49.00 284.40,49.00 283.00,51.20" class="k w1 fk"/>
+<line x1="280.00" y1="51.20" x2="286.00" y2="51.20" class="k w1"/>
+<text x="285.20" y="48.60" class="t lvl" text-anchor="start">-0.71 RV</text>
+<line x1="221.80" y1="54.00" x2="222.20" y2="54.00" class="k w1"/>
+<line x1="221.80" y1="90.00" x2="222.20" y2="90.00" class="k w1"/>
+<line x1="221.00" y1="52.80" x2="221.00" y2="91.20" class="k w1"/>
+<line x1="220.10" y1="53.10" x2="221.90" y2="54.90" class="k w3"/>
+<line x1="220.10" y1="89.10" x2="221.90" y2="90.90" class="k w3"/>
+<text x="221.90" y="72.00" class="t dimt" text-anchor="middle" transform="rotate(90.00 221.90 72.00)" style="font-size:2.9px">1.80</text>
+<line x1="237.20" y1="90.00" x2="237.60" y2="90.00" class="k w1"/>
+<line x1="237.20" y1="97.00" x2="237.60" y2="97.00" class="k w1"/>
+<line x1="236.40" y1="88.80" x2="236.40" y2="98.20" class="k w1"/>
+<line x1="235.50" y1="89.10" x2="237.30" y2="90.90" class="k w3"/>
+<line x1="235.50" y1="96.10" x2="237.30" y2="97.90" class="k w3"/>
+<text x="237.30" y="93.50" class="t dimt" text-anchor="middle" transform="rotate(90.00 237.30 93.50)" style="font-size:2.4px">0.35</text>
+<line x1="270.00" y1="119.00" x2="270.00" y2="119.40" class="k w1"/>
+<line x1="252.60" y1="119.00" x2="252.60" y2="119.40" class="k w1"/>
+<line x1="271.20" y1="118.20" x2="251.40" y2="118.20" class="k w1"/>
+<line x1="270.90" y1="117.30" x2="269.10" y2="119.10" class="k w3"/>
+<line x1="253.50" y1="117.30" x2="251.70" y2="119.10" class="k w3"/>
+<text x="261.30" y="117.30" class="t dimt" text-anchor="middle" transform="rotate(360.00 261.30 117.30)" style="font-size:2.9px">0.87</text>
+<line x1="252.60" y1="119.00" x2="252.60" y2="119.40" class="k w1"/>
+<line x1="248.00" y1="119.00" x2="248.00" y2="119.40" class="k w1"/>
+<line x1="253.80" y1="118.20" x2="246.80" y2="118.20" class="k w1"/>
+<line x1="253.50" y1="117.30" x2="251.70" y2="119.10" class="k w3"/>
+<line x1="248.90" y1="117.30" x2="247.10" y2="119.10" class="k w3"/>
+<text x="250.30" y="117.30" class="t dimt" text-anchor="middle" transform="rotate(360.00 250.30 117.30)" style="font-size:2.9px">0.23</text>
+<line x1="248.00" y1="119.00" x2="248.00" y2="119.40" class="k w1"/>
+<line x1="238.00" y1="119.00" x2="238.00" y2="119.40" class="k w1"/>
+<line x1="249.20" y1="118.20" x2="236.80" y2="118.20" class="k w1"/>
+<line x1="248.90" y1="117.30" x2="247.10" y2="119.10" class="k w3"/>
+<line x1="238.90" y1="117.30" x2="237.10" y2="119.10" class="k w3"/>
+<text x="243.00" y="117.30" class="t dimt" text-anchor="middle" transform="rotate(360.00 243.00 117.30)" style="font-size:2.9px">0.50</text>
+<line x1="238.00" y1="119.00" x2="238.00" y2="119.40" class="k w1"/>
+<line x1="48.00" y1="119.00" x2="48.00" y2="119.40" class="k w1"/>
+<line x1="239.20" y1="118.20" x2="46.80" y2="118.20" class="k w1"/>
+<line x1="238.90" y1="117.30" x2="237.10" y2="119.10" class="k w3"/>
+<line x1="48.90" y1="117.30" x2="47.10" y2="119.10" class="k w3"/>
+<text x="143.00" y="117.30" class="t dimt" text-anchor="middle" transform="rotate(360.00 143.00 117.30)" style="font-size:2.9px">9.50</text>
+<line x1="48.00" y1="119.00" x2="48.00" y2="119.40" class="k w1"/>
+<line x1="40.00" y1="119.00" x2="40.00" y2="119.40" class="k w1"/>
+<line x1="49.20" y1="118.20" x2="38.80" y2="118.20" class="k w1"/>
+<line x1="48.90" y1="117.30" x2="47.10" y2="119.10" class="k w3"/>
+<line x1="40.90" y1="117.30" x2="39.10" y2="119.10" class="k w3"/>
+<text x="44.00" y="117.30" class="t dimt" text-anchor="middle" transform="rotate(360.00 44.00 117.30)" style="font-size:2.9px">0.40</text>
+<text x="243.00" y="109.40" class="t tiny2 b" text-anchor="middle">PU</text>
+<text x="270.00" y="46.80" class="t tiny2 b red-t" text-anchor="middle">RV (au-delà)</text>
+<text x="256.50" y="72.00" class="t tiny2" text-anchor="start">T0 (au-delà)</text>
+<text x="44.00" y="32.60" class="t tiny2 b red-t" text-anchor="middle">CAS</text>
+<text x="41.50" y="57.00" class="t tiny2" text-anchor="end">tube 2 (au-delà)</text>
+<text x="148.00" y="22.00" class="t ct" text-anchor="middle">COUPE A-A  (longitudinale à 2.70 du bord SO, vue vers la villa)  1/50</text>
+<text x="243.00" y="125.20" class="t tiny2 b" text-anchor="middle">GRAND FOND - PUISARD (côté NO)</text>
+<text x="73.00" y="125.20" class="t tiny2 b" text-anchor="middle">PETIT BAIN - CASCADE (côté allée)</text>
+<polygon points="24.00,169.00 204.00,169.00 204.00,229.20 24.00,229.20" class="k w1 fea"/>
+<rect x="58.40" y="169.00" width="127.20" height="41.60" class="k w1 fgr"/>
+<rect x="58.40" y="210.60" width="127.20" height="5.60" class="k w1 fst"/>
+<rect x="67.40" y="206.60" width="109.20" height="4.00" class="k w3 fcc"/>
+<rect x="98.40" y="210.60" width="47.20" height="12.60" class="k w1 fst"/>
+<rect x="98.40" y="206.60" width="47.20" height="11.00" class="k w3 fcc"/>
+<rect x="67.40" y="168.40" width="4.00" height="38.20" class="k w3 fcc"/>
+<rect x="172.60" y="168.40" width="4.00" height="38.20" class="k w3 fcc"/>
+<rect x="72.00" y="170.00" width="100.00" height="36.00" class="k w1 fw"/>
+<rect x="103.00" y="206.00" width="38.00" height="7.00" class="k w1 fw"/>
+<line x1="103.00" y1="206.00" x2="141.00" y2="206.00" class="k w4"/>
+<rect x="62.00" y="167.00" width="10.60" height="1.40" class="k w2 fs"/>
+<rect x="171.40" y="167.00" width="10.60" height="1.40" class="k w2 fs"/>
+<polygon points="24.00,168.00 62.00,167.20 62.00,169.60 24.00,170.40" class="k w1 fs"/>
+<rect x="110.60" y="212.00" width="0.80" height="1.00" class="k w1 fk"/>
+<rect x="127.50" y="212.00" width="0.80" height="1.00" class="k w1 fk"/>
+<rect x="133.20" y="212.00" width="0.80" height="1.00" class="k w1 fk"/>
+<rect x="104.50" y="210.12" width="0.80" height="0.23" style="fill:#4a565e;stroke:#4a565e;stroke-width:.04"/>
+<rect x="104.50" y="210.35" width="0.80" height="0.30" style="fill:#2a3339;stroke:#2a3339;stroke-width:.04"/>
+<rect x="104.50" y="210.65" width="0.80" height="0.23" style="fill:#161c20;stroke:#161c20;stroke-width:.04"/>
+<rect x="104.50" y="210.12" width="0.80" height="0.76" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<path d="M104.56 210.12 l 0.16 -0.06 l 0 0.88 l -0.16 -0.06" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.11"/>
+<path d="M104.80 210.12 l 0.16 -0.06 l 0 0.88 l -0.16 -0.06" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.11"/>
+<path d="M105.04 210.12 l 0.16 -0.06 l 0 0.88 l -0.16 -0.06" style="fill:#1f272d;stroke:var(--ink);stroke-width:0.11"/>
+<rect x="105.30" y="210.02" width="0.70" height="0.14" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="105.30" y="210.16" width="0.70" height="0.19" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="105.30" y="210.36" width="0.70" height="0.19" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="105.30" y="210.55" width="0.70" height="0.19" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="105.30" y="210.74" width="0.70" height="0.24" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="105.30" y="210.02" width="0.70" height="0.96" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<line x1="105.40" y1="210.02" x2="105.40" y2="210.98" class="k w1"/>
+<line x1="105.50" y1="210.02" x2="105.50" y2="210.98" class="k w1"/>
+<line x1="105.60" y1="210.02" x2="105.60" y2="210.98" class="k w1"/>
+<line x1="105.70" y1="210.02" x2="105.70" y2="210.98" class="k w1"/>
+<line x1="105.80" y1="210.02" x2="105.80" y2="210.98" class="k w1"/>
+<line x1="105.90" y1="210.02" x2="105.90" y2="210.98" class="k w1"/>
+<rect x="106.00" y="209.50" width="0.70" height="0.30" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="106.00" y="209.80" width="0.70" height="0.40" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="106.00" y="210.20" width="0.70" height="0.40" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="106.00" y="210.60" width="0.70" height="0.40" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="106.00" y="211.00" width="0.70" height="0.50" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="106.00" y="209.50" width="0.70" height="2.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<line x1="106.30" y1="209.95" x2="106.40" y2="209.95" class="k w1"/>
+<line x1="106.30" y1="211.05" x2="106.40" y2="211.05" class="k w1"/>
+<rect x="106.80" y="209.22" width="0.32" height="0.28" rx="0.08" style="fill:#c0c9d0;stroke:var(--ink);stroke-width:0.13"/>
+<rect x="106.80" y="211.50" width="0.32" height="0.28" rx="0.08" style="fill:#c0c9d0;stroke:var(--ink);stroke-width:0.13"/>
+<rect x="106.70" y="209.50" width="0.50" height="0.20" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="106.70" y="209.70" width="0.50" height="0.30" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="106.70" y="210.00" width="0.50" height="0.28" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="106.70" y="210.28" width="0.50" height="0.20" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="106.70" y="210.48" width="0.50" height="0.16" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="106.70" y="210.64" width="0.50" height="0.34" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="106.70" y="210.98" width="0.50" height="0.32" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="106.70" y="211.30" width="0.50" height="0.20" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="106.70" y="209.50" width="0.50" height="2.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="107.20" y="209.50" width="12.60" height="0.20" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="107.20" y="209.70" width="12.60" height="0.30" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="107.20" y="210.00" width="12.60" height="0.28" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="107.20" y="210.28" width="12.60" height="0.20" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="107.20" y="210.48" width="12.60" height="0.16" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="107.20" y="210.64" width="12.60" height="0.34" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="107.20" y="210.98" width="12.60" height="0.32" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="107.20" y="211.30" width="12.60" height="0.20" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="107.20" y="209.50" width="12.60" height="2.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="107.80" y="209.88" width="1.80" height="1.17" style="fill:#f3f5f6;stroke:#8c98a1;stroke-width:0.09"/>
+<rect x="107.80" y="209.88" width="0.30" height="1.17" style="fill:#3c4a55"/>
+<line x1="108.36" y1="210.00" x2="108.36" y2="210.95" class="k w1"/>
+<line x1="108.68" y1="210.00" x2="108.68" y2="210.95" class="k w1"/>
+<line x1="109.00" y1="210.00" x2="109.00" y2="210.95" class="k w1"/>
+<line x1="109.32" y1="210.00" x2="109.32" y2="210.95" class="k w1"/>
+<rect x="112.80" y="209.50" width="0.70" height="0.40" style="fill:#d6a618;stroke:#d6a618;stroke-width:.04"/>
+<rect x="112.80" y="209.90" width="0.70" height="0.80" style="fill:#ffdb52;stroke:#ffdb52;stroke-width:.04"/>
+<rect x="112.80" y="210.70" width="0.70" height="0.80" style="fill:#e0b020;stroke:#e0b020;stroke-width:.04"/>
+<rect x="112.80" y="209.50" width="0.70" height="2.01" style="fill:none;stroke:var(--ink);stroke-width:0.108"/>
+<rect x="112.96" y="210.05" width="0.38" height="0.90" style="fill:#1f272d"/>
+<rect x="116.00" y="209.95" width="1.80" height="1.05" style="fill:#ffffff;stroke:#e4572e;stroke-width:0.15"/>
+<rect x="116.00" y="209.95" width="0.32" height="1.05" style="fill:#e4572e"/>
+<path d="M116.60 210.35 l 0.25 0.14 l -0.25 0.14 z" style="fill:#ffd94d;stroke:#1f272d;stroke-width:0.08"/>
+<rect x="119.80" y="209.50" width="0.50" height="0.20" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="119.80" y="209.70" width="0.50" height="0.30" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="119.80" y="210.00" width="0.50" height="0.28" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="119.80" y="210.28" width="0.50" height="0.20" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="119.80" y="210.48" width="0.50" height="0.16" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="119.80" y="210.64" width="0.50" height="0.34" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="119.80" y="210.98" width="0.50" height="0.32" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="119.80" y="211.30" width="0.50" height="0.20" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="119.80" y="209.50" width="0.50" height="2.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<line x1="119.92" y1="209.50" x2="119.92" y2="211.50" class="k w2"/>
+<line x1="120.04" y1="209.50" x2="120.04" y2="211.50" class="k w2"/>
+<line x1="120.16" y1="209.50" x2="120.16" y2="211.50" class="k w2"/>
+<rect x="120.30" y="209.46" width="0.24" height="0.31" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="120.30" y="209.77" width="0.24" height="0.42" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="120.30" y="210.19" width="0.24" height="0.42" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="120.30" y="210.60" width="0.24" height="0.42" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="120.30" y="211.02" width="0.24" height="0.52" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="120.30" y="209.46" width="0.24" height="2.08" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="120.54" y="209.50" width="1.42" height="0.40" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="120.54" y="209.90" width="1.42" height="0.60" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="120.54" y="210.50" width="1.42" height="0.60" style="fill:#b3bec6;stroke:#b3bec6;stroke-width:.04"/>
+<rect x="120.54" y="211.10" width="1.42" height="0.40" style="fill:#7d8a93;stroke:#7d8a93;stroke-width:.04"/>
+<rect x="120.54" y="209.50" width="1.42" height="2.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<circle cx="120.64" cy="209.61" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="209.82" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="210.03" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="210.24" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="210.45" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="210.66" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="210.87" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="211.08" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.64" cy="211.29" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="209.66" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="209.87" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="210.08" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="210.29" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="210.50" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="210.71" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="210.92" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="211.13" r="0.12" style="fill:#2c3840"/>
+<circle cx="120.84" cy="211.34" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="209.61" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="209.82" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="210.03" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="210.24" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="210.45" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="210.66" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="210.87" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="211.08" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.05" cy="211.29" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="209.66" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="209.87" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="210.08" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="210.29" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="210.50" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="210.71" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="210.92" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="211.13" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.25" cy="211.34" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="209.61" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="209.82" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="210.03" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="210.24" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="210.45" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="210.66" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="210.87" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="211.08" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.45" cy="211.29" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="209.66" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="209.87" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="210.08" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="210.29" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="210.50" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="210.71" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="210.92" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="211.13" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.66" cy="211.34" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="209.61" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="209.82" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="210.03" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="210.24" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="210.45" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="210.66" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="210.87" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="211.08" r="0.12" style="fill:#2c3840"/>
+<circle cx="121.86" cy="211.29" r="0.12" style="fill:#2c3840"/>
+<rect x="121.96" y="209.46" width="0.24" height="0.31" style="fill:#9a7225;stroke:#9a7225;stroke-width:.04"/>
+<rect x="121.96" y="209.77" width="0.24" height="0.42" style="fill:#f2d68e;stroke:#f2d68e;stroke-width:.04"/>
+<rect x="121.96" y="210.19" width="0.24" height="0.42" style="fill:#c4973c;stroke:#c4973c;stroke-width:.04"/>
+<rect x="121.96" y="210.60" width="0.24" height="0.42" style="fill:#e9c76f;stroke:#e9c76f;stroke-width:.04"/>
+<rect x="121.96" y="211.02" width="0.24" height="0.52" style="fill:#8a6420;stroke:#8a6420;stroke-width:.04"/>
+<rect x="121.96" y="209.46" width="0.24" height="2.08" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<rect x="122.20" y="209.50" width="13.80" height="0.20" style="fill:#8c98a1;stroke:#8c98a1;stroke-width:.04"/>
+<rect x="122.20" y="209.70" width="13.80" height="0.30" style="fill:#dfe5e9;stroke:#dfe5e9;stroke-width:.04"/>
+<rect x="122.20" y="210.00" width="13.80" height="0.28" style="fill:#f8fafb;stroke:#f8fafb;stroke-width:.04"/>
+<rect x="122.20" y="210.28" width="13.80" height="0.20" style="fill:#c3ccd3;stroke:#c3ccd3;stroke-width:.04"/>
+<rect x="122.20" y="210.48" width="13.80" height="0.16" style="fill:#9ba7b0;stroke:#9ba7b0;stroke-width:.04"/>
+<rect x="122.20" y="210.64" width="13.80" height="0.34" style="fill:#e3e8ec;stroke:#e3e8ec;stroke-width:.04"/>
+<rect x="122.20" y="210.98" width="13.80" height="0.32" style="fill:#bcc6cd;stroke:#bcc6cd;stroke-width:.04"/>
+<rect x="122.20" y="211.30" width="13.80" height="0.20" style="fill:#86929b;stroke:#86929b;stroke-width:.04"/>
+<rect x="122.20" y="209.50" width="13.80" height="2.00" style="fill:none;stroke:var(--ink);stroke-width:0.18"/>
+<circle cx="122.70" cy="209.95" r="0.25" style="fill:#5b6b76;stroke:var(--ink);stroke-width:0.07"/>
+<circle cx="122.70" cy="211.05" r="0.25" style="fill:#5b6b76;stroke:var(--ink);stroke-width:0.07"/>
+<rect x="123.80" y="209.90" width="4.00" height="1.15" style="fill:#eef1f3;stroke:#8c98a1;stroke-width:0.09"/>
+<line x1="124.20" y1="210.02" x2="124.20" y2="210.92" class="k w1"/>
+<line x1="124.68" y1="210.02" x2="124.68" y2="210.92" class="k w1"/>
+<line x1="125.16" y1="210.02" x2="125.16" y2="210.92" class="k w1"/>
+<line x1="125.64" y1="210.02" x2="125.64" y2="210.92" class="k w1"/>
+<line x1="126.12" y1="210.02" x2="126.12" y2="210.92" class="k w1"/>
+<line x1="126.60" y1="210.02" x2="126.60" y2="210.92" class="k w1"/>
+<line x1="127.08" y1="210.02" x2="127.08" y2="210.92" class="k w1"/>
+<line x1="132.00" y1="209.50" x2="132.00" y2="211.50" class="k w2"/>
+<line x1="132.12" y1="209.50" x2="132.12" y2="211.50" class="k w2"/>
+<rect x="135.76" y="209.58" width="0.28" height="1.84" rx="0.12" style="fill:#aab5bd;stroke:var(--ink);stroke-width:0.13"/>
+<polyline points="122.40,209.15 109.00,209.15" style="fill:none;stroke:#1d5f9e;stroke-width:0.95;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="122.40,209.15 109.00,209.15" style="fill:none;stroke:#2a86d8;stroke-width:0.60;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="122.40,209.15 109.00,209.15" style="fill:none;stroke:#9ad0f6;stroke-width:0.17;stroke-linejoin:round;stroke-linecap:round"/>
+<rect x="111.12" y="208.65" width="0.16" height="1.00" style="fill:#3c4a55"/>
+<rect x="115.12" y="208.65" width="0.16" height="1.00" style="fill:#3c4a55"/>
+<rect x="118.72" y="208.65" width="0.16" height="1.00" style="fill:#3c4a55"/>
+<rect x="119.96" y="208.65" width="0.16" height="1.00" style="fill:#3c4a55"/>
+<rect x="119.40" y="209.00" width="18.60" height="3.00" style="fill:#7cc3dc;fill-opacity:.16;stroke:#1683a8;stroke-width:0.18;stroke-dasharray:1.4 .8"/>
+<rect x="119.32" y="209.00" width="0.16" height="3.00" style="fill:#1683a8;opacity:.55"/>
+<rect x="137.40" y="209.00" width="1.20" height="3.00" class="k w2 fs"/>
+<line x1="137.40" y1="209.50" x2="138.60" y2="209.50" class="k w1"/>
+<line x1="137.40" y1="210.00" x2="138.60" y2="210.00" class="k w1"/>
+<line x1="137.40" y1="210.50" x2="138.60" y2="210.50" class="k w1"/>
+<line x1="137.40" y1="211.00" x2="138.60" y2="211.00" class="k w1"/>
+<line x1="137.40" y1="211.50" x2="138.60" y2="211.50" class="k w1"/>
+<polyline points="104.50,210.50 104.40,210.60" style="fill:none;stroke:#3c4a55;stroke-width:0.80;stroke-linejoin:round;stroke-linecap:round;opacity:1.0"/>
+<circle cx="104.40" cy="210.60" r="0.90" class="k w2 fs"/>
+<polyline points="109.00,209.15 108.40,207.95 109.00,210.60" style="fill:none;stroke:#1d5f9e;stroke-width:0.75;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="109.00,209.15 108.40,207.95 109.00,210.60" style="fill:none;stroke:#2a86d8;stroke-width:0.40;stroke-linejoin:round;stroke-linecap:round"/>
+<polyline points="109.00,209.15 108.40,207.95 109.00,210.60" style="fill:none;stroke:#9ad0f6;stroke-width:0.11;stroke-linejoin:round;stroke-linecap:round"/>
+<circle cx="109.00" cy="210.60" r="0.60" class="k w1 fs"/>
+<circle cx="61.40" cy="209.60" r="0.90" class="pipe-d w2"/>
+<circle cx="182.60" cy="209.60" r="0.90" class="pipe-d w2"/>
+<circle cx="179.60" cy="174.00" r="1.26" style="fill:#ffffff;stroke:#1b8a5a;stroke-width:.6"/>
+<line x1="182.00" y1="169.00" x2="204.00" y2="169.00" class="k w2"/>
+<polygon points="82.60,167.80 85.40,167.80 84.00,170.00" class="k w1 fk"/>
+<line x1="81.00" y1="170.00" x2="87.00" y2="170.00" class="k w1"/>
+<text x="86.20" y="167.40" class="t lvl" text-anchor="start">-0.85</text>
+<polygon points="81.60,203.80 84.40,203.80 83.00,206.00" class="k w1 fk"/>
+<line x1="80.00" y1="206.00" x2="86.00" y2="206.00" class="k w1"/>
+<text x="85.20" y="203.40" class="t lvl" text-anchor="start">-2.65</text>
+<polygon points="141.60,210.80 144.40,210.80 143.00,213.00" class="k w1 fk"/>
+<line x1="140.00" y1="213.00" x2="146.00" y2="213.00" class="k w1"/>
+<text x="145.20" y="210.40" class="t lvl" text-anchor="start">-3.00</text>
+<polygon points="30.60,165.80 33.40,165.80 32.00,168.00" class="k w1 fk"/>
+<line x1="29.00" y1="168.00" x2="35.00" y2="168.00" class="k w1"/>
+<text x="34.20" y="165.40" class="t lvl" text-anchor="start">-0.75 plage</text>
+<polygon points="188.60,166.80 191.40,166.80 190.00,169.00" class="k w1 fk"/>
+<line x1="187.00" y1="169.00" x2="193.00" y2="169.00" class="k w1"/>
+<text x="192.20" y="166.40" class="t lvl" text-anchor="start">-0.80 TN</text>
+<line x1="72.00" y1="233.40" x2="72.00" y2="233.00" class="k w1"/>
+<line x1="103.00" y1="233.40" x2="103.00" y2="233.00" class="k w1"/>
+<line x1="70.80" y1="234.20" x2="104.20" y2="234.20" class="k w1"/>
+<line x1="71.10" y1="235.10" x2="72.90" y2="233.30" class="k w3"/>
+<line x1="102.10" y1="235.10" x2="103.90" y2="233.30" class="k w3"/>
+<text x="87.50" y="233.30" class="t dimt" text-anchor="middle" style="font-size:2.9px">1.55</text>
+<line x1="103.00" y1="233.40" x2="103.00" y2="233.00" class="k w1"/>
+<line x1="141.00" y1="233.40" x2="141.00" y2="233.00" class="k w1"/>
+<line x1="101.80" y1="234.20" x2="142.20" y2="234.20" class="k w1"/>
+<line x1="102.10" y1="235.10" x2="103.90" y2="233.30" class="k w3"/>
+<line x1="140.10" y1="235.10" x2="141.90" y2="233.30" class="k w3"/>
+<text x="122.00" y="233.30" class="t dimt" text-anchor="middle" style="font-size:2.9px">1.90</text>
+<line x1="141.00" y1="233.40" x2="141.00" y2="233.00" class="k w1"/>
+<line x1="172.00" y1="233.40" x2="172.00" y2="233.00" class="k w1"/>
+<line x1="139.80" y1="234.20" x2="173.20" y2="234.20" class="k w1"/>
+<line x1="140.10" y1="235.10" x2="141.90" y2="233.30" class="k w3"/>
+<line x1="171.10" y1="235.10" x2="172.90" y2="233.30" class="k w3"/>
+<text x="156.50" y="233.30" class="t dimt" text-anchor="middle" style="font-size:2.9px">1.55</text>
+<line x1="106.00" y1="203.70" x2="106.00" y2="203.30" class="k w1"/>
+<line x1="136.00" y1="203.70" x2="136.00" y2="203.30" class="k w1"/>
+<line x1="104.80" y1="204.50" x2="137.20" y2="204.50" class="k w1"/>
+<line x1="105.10" y1="205.40" x2="106.90" y2="203.60" class="k w3"/>
+<line x1="135.10" y1="205.40" x2="136.90" y2="203.60" class="k w3"/>
+<text x="121.00" y="203.60" class="t dimt" text-anchor="middle" style="font-size:2.4px">pompe 1.50</text>
+<text x="122.00" y="184.00" class="t tiny2" text-anchor="middle">pompe 24 V couchée sous la cage</text>
+<text x="191.00" y="185.40" class="t tiny2" text-anchor="middle">tube 2</text>
+<text x="114.00" y="138.00" class="t ct" text-anchor="middle">COUPE B-B  (dans l'axe de la pompe, vue vers le voile NO)  1/50</text>
+<text x="222.00" y="146.00" class="t cl" text-anchor="start">HACHURES</text>
+<rect x="222.00" y="149.00" width="9.00" height="4.20" class="k w2 fcc"/>
+<text x="234.00" y="152.40" class="t cs" text-anchor="start">Béton armé B25 + hydrofuge</text>
+<rect x="222.00" y="155.00" width="9.00" height="4.20" class="k w1 fst"/>
+<text x="234.00" y="158.40" class="t cs" text-anchor="start">Hérisson 40/80</text>
+<rect x="222.00" y="161.00" width="9.00" height="4.20" class="k w1 fgr"/>
+<text x="234.00" y="164.40" class="t cs" text-anchor="start">Gravier drainant 15/25</text>
+<rect x="222.00" y="167.00" width="9.00" height="4.20" class="k w1 fea"/>
+<text x="234.00" y="170.40" class="t cs" text-anchor="start">Terrain en place</text>
+<rect x="222.00" y="173.00" width="9.00" height="4.20" class="k w1 fw"/>
+<text x="234.00" y="176.40" class="t cs" text-anchor="start">Eau</text>
+<text x="222.00" y="186.00" class="t cl" text-anchor="start">PLAN DE REPÉRAGE  1/250</text>
+<polygon points="283.40,195.20 243.40,195.20 243.40,215.20 283.40,215.20" class="red w2 fw"/>
+<polygon points="283.40,201.40 281.40,201.40 281.40,209.00 283.40,209.00" class="k w2 fs"/>
+<polygon points="243.40,205.60 241.80,205.60 241.80,212.80 243.40,212.80" class="red w2 fcc"/>
+<rect x="287.00" y="200.88" width="1.60" height="1.60" class="red w1 fs"/>
+<rect x="297.00" y="205.40" width="1.60" height="1.60" class="k w1 fk"/>
+<text x="297.80" y="210.40" class="t tiny" text-anchor="middle">AL</text>
+<line x1="290.20" y1="206.00" x2="239.40" y2="206.00" class="k w1 axis"/>
+<circle cx="290.20" cy="206.00" r="1.80" class="k w1 fs"/>
+<text x="290.20" y="206.90" class="t tiny2 b" text-anchor="middle">A</text>
+<circle cx="239.40" cy="206.00" r="1.80" class="k w1 fs"/>
+<text x="239.40" y="206.90" class="t tiny2 b" text-anchor="middle">A</text>
+<line x1="282.40" y1="192.80" x2="282.40" y2="217.60" class="k w1 axis"/>
+<circle cx="282.40" cy="192.80" r="1.80" class="k w1 fs"/>
+<text x="282.40" y="193.70" class="t tiny2 b" text-anchor="middle">B</text>
+<circle cx="282.40" cy="217.60" r="1.80" class="k w1 fs"/>
+<text x="282.40" y="218.50" class="t tiny2 b" text-anchor="middle">B</text>
+<text x="263.40" y="191.60" class="t tiny mute" text-anchor="middle">villa</text>
+<text x="170.00" y="242.00" class="t cl" text-anchor="start">ACIERS DE LA VARIANTE C (FeE500)</text>
+<rect x="170.00" y="244.00" width="141.00" height="26.40" class="k w2 fs"/>
+<rect x="170.00" y="244.00" width="141.00" height="4.40" class="k w2 fh"/>
+<line x1="179.00" y1="244.00" x2="179.00" y2="270.40" class="k w1"/>
+<line x1="267.00" y1="244.00" x2="267.00" y2="270.40" class="k w1"/>
+<line x1="277.00" y1="244.00" x2="277.00" y2="270.40" class="k w1"/>
+<line x1="286.00" y1="244.00" x2="286.00" y2="270.40" class="k w1"/>
+<line x1="297.00" y1="244.00" x2="297.00" y2="270.40" class="k w1"/>
+<line x1="170.00" y1="248.40" x2="311.00" y2="248.40" class="k w1"/>
+<line x1="170.00" y1="252.80" x2="311.00" y2="252.80" class="k w1"/>
+<line x1="170.00" y1="257.20" x2="311.00" y2="257.20" class="k w1"/>
+<line x1="170.00" y1="261.60" x2="311.00" y2="261.60" class="k w1"/>
+<line x1="170.00" y1="266.00" x2="311.00" y2="266.00" class="k w1"/>
+<text x="171.20" y="247.05" class="t cb" text-anchor="start" style="font-size:2.3px">Rep.</text>
+<text x="180.20" y="247.05" class="t cb" text-anchor="start" style="font-size:2.3px">Désignation</text>
+<text x="275.80" y="247.05" class="t cb" text-anchor="end" style="font-size:2.3px">Ø</text>
+<text x="284.80" y="247.05" class="t cb" text-anchor="end" style="font-size:2.3px">Nb</text>
+<text x="295.80" y="247.05" class="t cb" text-anchor="end" style="font-size:2.3px">L (m)</text>
+<text x="309.80" y="247.05" class="t cb" text-anchor="end" style="font-size:2.3px">kg</text>
+<text x="171.20" y="251.45" class="t cs" text-anchor="start" style="font-size:2.3px">14</text>
+<text x="180.20" y="251.45" class="t cs" text-anchor="start" style="font-size:2.3px">Puisard - radier du caisson HA10 e=15, 2 nappes</text>
+<text x="275.80" y="251.45" class="t cs" text-anchor="end" style="font-size:2.3px">HA10</text>
+<text x="284.80" y="251.45" class="t cs" text-anchor="end" style="font-size:2.3px">46</text>
+<text x="295.80" y="251.45" class="t cs" text-anchor="end" style="font-size:2.3px">1.90</text>
+<text x="309.80" y="251.45" class="t cs" text-anchor="end" style="font-size:2.3px">53.9</text>
+<text x="171.20" y="255.85" class="t cs" text-anchor="start" style="font-size:2.3px">15</text>
+<text x="180.20" y="255.85" class="t cs" text-anchor="start" style="font-size:2.3px">Puisard - voiles du caisson, U HA10 e=15</text>
+<text x="275.80" y="255.85" class="t cs" text-anchor="end" style="font-size:2.3px">HA10</text>
+<text x="284.80" y="255.85" class="t cs" text-anchor="end" style="font-size:2.3px">42</text>
+<text x="295.80" y="255.85" class="t cs" text-anchor="end" style="font-size:2.3px">1.50</text>
+<text x="309.80" y="255.85" class="t cs" text-anchor="end" style="font-size:2.3px">38.9</text>
+<text x="171.20" y="260.25" class="t cs" text-anchor="start" style="font-size:2.3px">16</text>
+<text x="180.20" y="260.25" class="t cs" text-anchor="start" style="font-size:2.3px">Puisard - chevêtres autour de l'ouverture du radier HA12</text>
+<text x="275.80" y="260.25" class="t cs" text-anchor="end" style="font-size:2.3px">HA12</text>
+<text x="284.80" y="260.25" class="t cs" text-anchor="end" style="font-size:2.3px">8</text>
+<text x="295.80" y="260.25" class="t cs" text-anchor="end" style="font-size:2.3px">2.70</text>
+<text x="309.80" y="260.25" class="t cs" text-anchor="end" style="font-size:2.3px">19.2</text>
+<text x="171.20" y="264.65" class="t cs" text-anchor="start" style="font-size:2.3px">17</text>
+<text x="180.20" y="264.65" class="t cs" text-anchor="start" style="font-size:2.3px">Mur de cascade - noyau HA10 e=20, 2 faces</text>
+<text x="275.80" y="264.65" class="t cs" text-anchor="end" style="font-size:2.3px">HA10</text>
+<text x="284.80" y="264.65" class="t cs" text-anchor="end" style="font-size:2.3px">26</text>
+<text x="295.80" y="264.65" class="t cs" text-anchor="end" style="font-size:2.3px">0.95</text>
+<text x="309.80" y="264.65" class="t cs" text-anchor="end" style="font-size:2.3px">15.2</text>
+<text x="171.20" y="269.05" class="t cs" text-anchor="start" style="font-size:2.3px"></text>
+<text x="180.20" y="269.05" class="t cs" text-anchor="start" style="font-size:2.3px">Total variante (en plus de la nomenclature PL-05)</text>
+<text x="275.80" y="269.05" class="t cs" text-anchor="end" style="font-size:2.3px"></text>
+<text x="284.80" y="269.05" class="t cs" text-anchor="end" style="font-size:2.3px"></text>
+<text x="295.80" y="269.05" class="t cs" text-anchor="end" style="font-size:2.3px"></text>
+<text x="309.80" y="269.05" class="t cs" text-anchor="end" style="font-size:2.3px">127.2</text>
+<text x="24.00" y="242.00" class="t cl" text-anchor="start">NOTES</text>
+<text x="24.00" y="248.00" class="t tiny2" text-anchor="start">Le bassin de l'indice E est conservé : radier, voiles, chaînage, profil du fond.</text>
+<text x="24.00" y="252.60" class="t tiny2" text-anchor="start">Seul ajout sous le radier : le caisson du puisard 2.30 × 0.90 × 0.55, coulé avec le radier.</text>
+<text x="24.00" y="257.20" class="t tiny2" text-anchor="start">Ouverture du radier bordée de chevêtres HA12 (repère 16) ; cage posée au ras du fond.</text>
+<text x="24.00" y="261.80" class="t tiny2" text-anchor="start">Membrane du bassin continue dans le puisard ; une seule sortie (T0) et un fourreau</text>
+<text x="24.00" y="266.40" class="t tiny2" text-anchor="start">de câble traversent le voile NO, par fourreaux à collerette posés avant coulage.</text>
+<text x="24.00" y="271.00" class="t tiny2" text-anchor="start">Béton du caisson : 0.81 m³ ; surface étanchée du puisard : 2.63 m².</text>
+<text x="24.00" y="275.60" class="t tiny2" text-anchor="start">Prédimensionnement BAEL 91 mod. 99 à faire vérifier et viser par un BET agréé (RPS 2000).</text>
+<rect x="14.00" y="9.00" width="397.00" height="279.00" class="k w4"/>
+<line x1="315.00" y1="9.00" x2="315.00" y2="288.00" class="k w4"/>
+<text x="363.00" y="17.00" class="t cb" text-anchor="middle" style="font-size:4.2px">ROYAUME DU MAROC</text>
+<text x="363.00" y="23.00" class="t ar" text-anchor="middle" style="font-size:4.6px">المملكة المغربية</text>
+<text x="363.00" y="29.00" class="t cs" text-anchor="middle">Province de Tanger-Assilah</text>
+<text x="363.00" y="33.50" class="t cs" text-anchor="middle">Commune Sahel Chamali</text>
+<line x1="315.00" y1="37.00" x2="411.00" y2="37.00" class="k w2"/>
+<text x="318.00" y="43.00" class="t cl" text-anchor="start">PROJET</text>
+<text x="363.00" y="49.00" class="t cb" text-anchor="middle" style="font-size:3.6px">CONSTRUCTION D'UNE PISCINE</text>
+<text x="363.00" y="54.00" class="t cb" text-anchor="middle" style="font-size:3.6px">ET AMÉNAGEMENT DES ABORDS</text>
+<text x="363.00" y="59.00" class="t cs" text-anchor="middle">Variante C : pompe au puisard, deux tubes</text>
+<line x1="315.00" y1="63.00" x2="411.00" y2="63.00" class="k w2"/>
+<text x="318.00" y="69.00" class="t cl" text-anchor="start">SITUATION</text>
+<text x="318.00" y="75.00" class="t cs" text-anchor="start">Douar Ghanem - Terrain dit « Gharsa Foquiya »</text>
+<text x="318.00" y="80.00" class="t cs" text-anchor="start">Superficie : 1551 m² (plan topographique)</text>
+<line x1="315.00" y1="84.00" x2="411.00" y2="84.00" class="k w2"/>
+<text x="318.00" y="90.00" class="t cl" text-anchor="start">MAÎTRE D'OUVRAGE</text>
+<text x="318.00" y="96.00" class="t cs" text-anchor="start">Le propriétaire</text>
+<line x1="315.00" y1="100.00" x2="411.00" y2="100.00" class="k w2"/>
+<text x="318.00" y="106.00" class="t cl" text-anchor="start">CONCEPTION</text>
+<text x="318.00" y="112.50" class="t cb" text-anchor="start" style="font-size:3.8px">AbodyStudio Limited</text>
+<text x="318.00" y="118.00" class="t cs" text-anchor="start">abodystudio.com - Support@abodystudio.com</text>
+<text x="318.00" y="122.50" class="t cs" text-anchor="start">WhatsApp +212 663 033 383</text>
+<line x1="315.00" y1="127.00" x2="411.00" y2="127.00" class="k w2"/>
+<text x="318.00" y="133.00" class="t cl" text-anchor="start">ENTREPRISE (EXÉCUTION)</text>
+<text x="318.00" y="139.50" class="t cb" text-anchor="start" style="font-size:3.8px">ABOUDI BTP Group</text>
+<text x="318.00" y="145.00" class="t cs" text-anchor="start">SARL - RC 168595 Tanger - ICE 003823697000094</text>
+<text x="318.00" y="149.50" class="t cs" text-anchor="start">Tél. +212 717 783 570 / +212 663 033 383</text>
+<line x1="315.00" y1="153.00" x2="411.00" y2="153.00" class="k w2"/>
+<text x="318.00" y="158.50" class="t cl" text-anchor="start">VISA BET / ARCHITECTE</text>
+<rect x="318.00" y="161.00" width="90.00" height="18.00" class="k w1 dash"/>
+<text x="363.00" y="171.50" class="t cs mute" text-anchor="middle">cachet et signature</text>
+<line x1="315.00" y1="233.00" x2="411.00" y2="233.00" class="k w3"/>
+<text x="318.00" y="239.00" class="t cl" text-anchor="start">PLAN</text>
+<text x="363.00" y="248.00" class="t ct" text-anchor="middle">COUPES A-A ET B-B</text>
+<text x="363.00" y="258.00" class="t cs mute" text-anchor="middle">Coupe longitudinale, coupe dans l'axe de la pompe, aciers</text>
+<line x1="315.00" y1="262.00" x2="411.00" y2="262.00" class="k w2"/>
+<text x="331.00" y="267.00" class="t cl" text-anchor="middle">N°</text>
+<text x="331.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:4.2px">VC-03</text>
+<line x1="347.00" y1="262.00" x2="347.00" y2="276.00" class="k w1"/>
+<text x="363.00" y="267.00" class="t cl" text-anchor="middle">ÉCHELLE</text>
+<text x="363.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">1/50</text>
+<line x1="379.00" y1="262.00" x2="379.00" y2="276.00" class="k w1"/>
+<text x="395.00" y="267.00" class="t cl" text-anchor="middle">INDICE</text>
+<text x="395.00" y="273.50" class="t cb" text-anchor="middle" style="font-size:3.4px">H - v2.2.0</text>
+<line x1="315.00" y1="276.00" x2="411.00" y2="276.00" class="k w2"/>
+<text x="318.00" y="281.00" class="t cs" text-anchor="start">Date : 20/10/2026</text>
+<text x="408.00" y="281.00" class="t cs" text-anchor="end">Phase : EXE</text>
+<text x="318.00" y="285.60" class="t cs mute" text-anchor="start">Cotes en mètres - niveaux / ±0.00 = sol fini RDC</text></svg>

@@ -1,4 +1,4 @@
-"""Variante C - pompe immergée dans le puisard : planches VC-01 à VC-04.
+"""Variante C - pompe au puisard, deux tubes : planches VC-01 à VC-08 (dossier complet, indice H).
 
 Author: AbodyStudio Limited - https://abodystudio.com/
 """
@@ -7,27 +7,34 @@ import math
 import sheets as SH
 from sheets import S, frame, table, band_north, tree, rect_uv, pool_xy, U_ANG
 from model import *  # noqa: F401,F403
+import model as M
 import variant_b as B
 import variant_c as C
 import sheets_b as SB
-from sheets_b import (Iso, iso_box, iso_cyl, iso_tube, iso_valve, _poly, place_callouts, valve, check, gauge, filter_sym, pump_sym,
-                      legend_lines, rot_view, draw_cascade_plan, draw_post_plan, route, CASC_V, CASC_MID)
-from variant_c import PIT, CAGE, PUMP_C, STUB_Z, OUT_STUB_Y, SK_STUB_Y, CABLE_Y, RV, AL, CAB, R as RC
-from variant_b import POST, COFFRET, CASCADE, SLOT, FILTER, CASC_BACK
+from sheets_b import (Iso, iso_box, iso_cyl, iso_tube, _poly, place_callouts, valve, check, gauge, pump_sym, callout, sec_mark,
+                      rot_view, draw_cascade_plan, route, _earth, _offset_poly, _brk, money, CASC_V, CASC_MID)
+from variant_c import PIT, CAGE, PUMP_C, STUB_Z, OUT_STUB_Y, CABLE_Y, RV, AL, OUTLET, ROUTES, WALL_OUT, R as RC
+from variant_b import COFFRET, CASCADE, SLOT, CASC_BACK, NE_A2, SE_A2
 
 SB.TUBE.update({
     "t0": ("#3c4a55", "T0 refoulement de la pompe"),
     "t1": ("#8a5a2b", "Tube 1 → jardin"),
     "t2": ("#1b8a5a", "Tube 2 → cascade → bassin"),
-    "sk": ("#1683a8", "Skimmers → puisard"),
 })
 TUBE = SB.TUBE
 
 VC_SHEETS = [
     ("VC-01", "Pompe immergée dans le puisard", "Vue rapprochée : pompe, cage, tubes 1 et 2", "s.é."),
-    ("VC-02", "Puisard et cage de la pompe", "Plan, coupes et détail de la cage", "1/20 - 1/10 - 1/5"),
-    ("VC-03", "Tubes 1 et 2, filtre et électricité", "Tracés, regard de vannes, coffre du filtre, TBTS 24 V", "1/200 - 1/20 - 1/10"),
-    ("VC-04", "Pompe de forage 24 V", "Élévation, détail, boîtier AL, coupe et exigences", "1/10 - 1/5 - 1/2"),
+    ("VC-02", "Plan général du bassin", "Puisard et cage, regard de vannes, cascade, réseaux", "1/50"),
+    ("VC-03", "Coupes A-A et B-B", "Coupe longitudinale, coupe dans l'axe de la pompe, aciers", "1/50"),
+    ("VC-04", "Puisard et cage de la pompe", "Plan, coupes et détail de la cage", "1/20 - 1/10 - 1/5"),
+    ("VC-05", "Pompe de forage 24 V", "Élévation, détail, boîtier AL, coupe et exigences", "1/10 - 1/5 - 1/2"),
+    ("VC-06", "Tubes 1 et 2, regard de vannes, cascade", "Tracés, coupe de la cascade, regard RV, pertes de charge", "1/200 - 1/20 - 1/10"),
+    ("VC-07", "Sécurité électrique", "Volumes, boîtier AL, unifilaire, liaisons", "1/100 - s.é."),
+    ("VC-08", "Nomenclature et coûts", "Composants, coûts, exploitation, options", "-"),
+    ("PL-01", "Plan de masse", "Implantation sur le plan topographique", "1/250"),
+    ("PL-02", "Plan d'aménagement des abords", "Piscine, plage, jardins, allée et poulailler", "1/100"),
+    ("PL-05", "Détails béton armé et nomenclature des aciers", "Paroi, radier, chaînage, margelle (inchangés)", "1/20"),
 ]
 ZF = FLOOR_DEEP
 fin = FINISH
@@ -82,10 +89,10 @@ def draw_pit_iso(s, S_, box):
     _poly(s, [I(0, y0, ZF), I(x1, y0, ZF), I(x1, y0, zpf), I(0, y0, zpf)], "#a9d6e8")
     _poly(s, [I(0, y0, zpf), I(x1, y0, zpf), I(x1, y1, zpf), I(0, y1, zpf)], "#d3ecf5")
     # stubs through the NW wall: outlet T0, skimmers, cable conduit
-    for (yy, r_, cl) in ((OUT_STUB_Y, 0.035, "#3c4a55"), (SK_STUB_Y, 0.03, "#1683a8"), (CABLE_Y, 0.022, "#2a86d8")):
+    for (yy, r_, cl) in ((OUT_STUB_Y, 0.035, "#3c4a55"), (CABLE_Y, 0.022, "#2a86d8")):
         iso_cyl(s, I, "a", (yy, STUB_Z), r_, -0.01, 0.04, body="#9aa6ae", cap=cl, n=20, w=0.2)
     # pipes outside the wall rising to the cut (behind the wall in this view: dashed)
-    for (yy, kind, d) in ((OUT_STUB_Y, "t0", 0.063), (SK_STUB_Y, "sk", 0.050)):
+    for (yy, kind, d) in ((OUT_STUB_Y, "t0", 0.063),):
         pts = [I(0.0, yy, STUB_Z), I(wall0 - 0.12, yy, STUB_Z), I(wall0 - 0.12, yy, zt)]
         s.add(f'<polyline points="{" ".join(f"{x:.2f},{y:.2f}" for x, y in pts)}" style="fill:none;stroke:{TUBE[kind][0]};stroke-width:{d * S_:.2f};stroke-linejoin:round;opacity:.45"/>')
     s.add(f'<polyline points="{_pts([I(0.0, CABLE_Y, STUB_Z), I(wall0 / 2, CABLE_Y, STUB_Z), I(wall0 / 2, CABLE_Y, zt)])}" style="fill:none;stroke:{BLUE[1]};stroke-width:.9;stroke-linejoin:round;opacity:.55"/>')
@@ -116,7 +123,7 @@ def draw_pit_iso(s, S_, box):
             x_, y_ = I(xx, yy, zl)
             s.add(f'<ellipse cx="{x_:.2f}" cy="{y_:.2f}" rx="0.62" ry="0.36" style="fill:#3c4a55;opacity:.75"/>')
     # water level hint and break lines on the cut walls
-    for (yy, kind) in ((OUT_STUB_Y, "t0"), (SK_STUB_Y, "sk")):
+    for (yy, kind) in ((OUT_STUB_Y, "t0"),):
         x_, y_ = I(wall0 - 0.12, yy, zt)
         s.line((x_ - 2.6, y_ + 1.0), (x_ + 2.6, y_ - 1.0), "k w2")
     x_, y_ = I(wall0 / 2, CABLE_Y, zt)
@@ -257,10 +264,10 @@ def draw_borehole_iso(s, I):
     x_, y_ = I(px + rs * math.cos(math.radians(CABLE_T)), sl0, pa + rs * math.sin(math.radians(CABLE_T)))
     s.add(f'<circle cx="{x_:.2f}" cy="{y_:.2f}" r="0.8" style="fill:#2c3840;stroke:{INK};stroke-width:.12"/>')
     _poly(s, e1, "#7cc3dc", stroke="#1683a8", w=0.35, extra=";fill-opacity:.35")
-    x_, y_ = I(px, sl1, pa)
-    s.circ(x_, y_, RC["orifice"]["d"] / 2 * I.S, "k w2 fs")
-    iso_tube(s, I, [(px, sl1 + 0.02, pa + 0.03), (px, sl1 + 0.08, pa + 0.03), (0.16, SK_STUB_Y, STUB_Z + 0.02), (0.04, SK_STUB_Y, STUB_Z)], "sk", 0.045, arrows=False)
-    for (yy, d) in ((OUT_STUB_Y, 0.04), (SK_STUB_Y, 0.05)):
+    for k in range(-3, 4):
+        a_, b_ = I(px + k * rs / 4, sl1, pa - rs * math.sqrt(1 - (k / 4) ** 2)), I(px + k * rs / 4, sl1, pa + rs * math.sqrt(1 - (k / 4) ** 2))
+        s.line(a_, b_, "k w1")
+    for (yy, d) in ((OUT_STUB_Y, 0.04),):
         x_, y_ = I(0.06, yy, STUB_Z + 0.01)
         s.rect(x_ - 1.4, y_ - 1.8, 2.8, 3.6, "k w2 fs")
         s.line((x_ - 1.4, y_ - 1.8), (x_ + 1.4, y_ + 1.8), "k w1")
@@ -285,11 +292,9 @@ def pit_items():
         ("AS", (px + r, (pc["y_inlet"] + pc["y_motor"]) / 2, pa - r * 0.3), "Crépine perforée entre deux bagues laiton (aspiration)"),
         ("MO", (px + r * 0.9, (pc["y_motor"] + pc["y1"]) / 2, pa - r * 0.4), f"Moteur {C.U_DC:.0f} V CC immergé (pompe totale {pc['L']:.2f} m)"),
         ("CH", (px + pc["sleeve_D"] / 2, pc["sleeve"][1] - 0.15, pa), f"Chemise de refroidissement Ø{pc['sleeve_D'] * 1000:.0f} (eau le long du moteur)"),
-        ("EM", (px, pc["sleeve"][1], pa - 0.03), f"Embout à 2 entrées, diaphragme Ø{RC['orifice']['d'] * 1000:.0f} mm"),
-        ("FS", (0.16, SK_STUB_Y, STUB_Z + 0.02), "Flexible et raccord rapide côté skimmers"),
+        ("EM", (px, pc["sleeve"][1], pa - 0.03), "Embout à grille : l'eau du puisard entre dans la chemise"),
         ("FR", (px - 0.06, pc["y0"] - 0.10, pa - 0.02), f"Flexible de refoulement {pc['outlet']} et raccord rapide"),
-        ("T0", (wall0 - 0.12, OUT_STUB_Y, -2.40), "Tube T0 Ø63 vers le regard de vannes RV"),
-        ("SK", (wall0 - 0.12, SK_STUB_Y, -2.40), "Arrivée des skimmers SK1-SK2 (Ø50)"),
+        ("T0", (wall0 - 0.12, OUT_STUB_Y, -2.40), "Tube T0 Ø63 vers le regard RV (té, V1, V2)"),
         ("BE", (px + 0.06, pc["y0"] + 0.25, PIT["floor"] + 0.02), "Berceau inox, selles sur plots caoutchouc"),
         ("BC", (0.10, CABLE_Y + 0.08, STUB_Z + 0.12), "Boucle de câble (1 m de mou pour sortir la pompe)"),
         ("FO", (wall0 / 2, CABLE_Y, -2.45), "Fourreau Ø40 noyé dans le voile → boîtier AL"),
@@ -300,7 +305,7 @@ def pit_items():
 
 
 def draw_principle(s, x0, y0, w, h):
-    """Whole path, not to scale: pit -> T0 -> RV (3-way) -> tube 2 -> filter in the cascade wall -> pool ; tube 1 -> borne -> garden."""
+    """Whole path, not to scale: pit -> T0 -> RV (tee, V1, V2) -> tube 2 -> cascade -> pool ; tube 1 -> soakaway / orchard."""
     wl = y0 + 18
     xl, xr = x0 + 44, x0 + w - 70      # pool: shallow (SE, cascade) on the left, deep (NW, pit) on the right
     yd, ys = y0 + h - 8, y0 + 34
@@ -313,43 +318,42 @@ def draw_principle(s, x0, y0, w, h):
     s.add(f'<rect x="{xr - 11.5:.2f}" y="{yd + 2.4:.2f}" width="9" height="1.8" rx=".9" style="fill:#c3cdd4;stroke:var(--ink);stroke-width:.3"/>')
     s.t(xr - 7, yd + 10, "PUISARD + POMPE 24 V", "t tiny2 b")
     s.t((xl + xr) / 2, wl + 9, "BASSIN", "t lab b red-t")
-    # T0 up the NW wall to RV
-    rvx, rvy = xr + 14, wl - 9
-    s.pl([(xr - 2, yd + 3.2), (xr + 4, yd + 3.2), (xr + 4, rvy + 4), (rvx, rvy + 4)], "t0" and "k w4")
-    s.add(f'<polyline points="{xr - 2:.2f},{yd + 3.2:.2f} {xr + 4:.2f},{yd + 3.2:.2f} {xr + 4:.2f},{rvy + 4:.2f} {rvx - 3:.2f},{rvy + 4:.2f}" style="fill:none;stroke:{TUBE["t0"][0]};stroke-width:1.6;stroke-linejoin:round"/>')
-    s.rect(rvx - 3, rvy - 1, 10, 9, "k w2 fs")
-    s.pl([(rvx - 1, rvy + 1.5), (rvx + 5, rvy + 1.5), (rvx + 2, rvy + 6.5)], "k w2 fs", True)
-    s.t(rvx - 4.5, rvy + 5, "RV", "t tiny2 b", "end")
-    s.t(rvx + 2, rvy + 12, "vanne 3 voies", "t tiny")
-    # tube 2 : RV -> along the pool (under the deck) -> cascade cabinet -> lip -> pool
-    cx = xl - 22
-    s.add(f'<polyline points="{rvx + 2:.2f},{rvy - 1:.2f} {rvx + 2:.2f},{y0 + 4:.2f} {cx + 8:.2f},{y0 + 4:.2f} {cx + 8:.2f},{wl - 18:.2f}" style="fill:none;stroke:{TUBE["t2"][0]};stroke-width:1.6;stroke-linejoin:round"/>')
-    s.rect(cx, wl - 22, 16, 22, "red w3 fs")
-    filter_sym(s, cx + 6, wl - 11, 6, 15, lab=None)
-    s.t(cx + 6, wl - 11 + 1, "F", "t tiny2 b")
-    s.rect(cx + 16, wl - 16, 6, 12, "red w3 fcc")
-    s.add(f'<polyline points="{cx + 12:.2f},{wl - 10:.2f} {cx + 19:.2f},{wl - 10:.2f} {cx + 19:.2f},{wl - 13:.2f} {cx + 22:.2f},{wl - 13:.2f}" style="fill:none;stroke:{TUBE["t2"][0]};stroke-width:1.2"/>')
-    s.add(f'<path d="M{cx + 22:.2f} {wl - 13:.2f} q 2.4 0.6 2.8 13" style="fill:none;stroke:#1683a8;stroke-width:.8"/>')
-    s.t(cx + 8, wl + 5, "COFFRE DU FILTRE", "t tiny2 b red-t")
-    s.t(cx + 8, wl + 9, "dans le mur de cascade", "t tiny")
-    s.t(cx + 30, wl - 15.5, "cascade", "t tiny2 b", "start")
-    s.t((rvx + cx) / 2, y0 + 2.2, "TUBE 2 : vers la cascade, l'eau revient au bassin", "t tiny2 b", "middle")
-    # tube 1 : RV -> borne (vacuum breaker at the high point) -> garden
-    bx = x0 + w - 20
-    s.add(f'<polyline points="{rvx + 7:.2f},{rvy + 4:.2f} {bx - 4:.2f},{rvy + 4:.2f} {bx - 4:.2f},{wl - 22:.2f} {bx + 2:.2f},{wl - 22:.2f} {bx + 2:.2f},{yd + 6:.2f}" style="fill:none;stroke:{TUBE["t1"][0]};stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:3 1"/>')
-    s.circ(bx - 1, wl - 24.5, 1.6, "k w2 fs")
-    s.t(bx - 1, wl - 27.5, "casse-vide ±0.00", "t tiny", "middle")
-    s.rect(bx - 6, wl - 26, 11, 22, "k w2 dash")
-    s.t(bx, wl - 19, "BORNE", "t tiny2 b")
-    s.t(bx + 4, yd + 9, "→ verger / puits perdu", "t tiny2", "end")
-    s.t(bx + 5.5, (wl + yd) / 2, "TUBE 1 : vers le jardin", "t tiny2 b", "middle", -90)
-    # electrical
-    s.rect(xr + 22, ys + 6, 12, 7, "k w2 fs")
-    s.t(xr + 28, ys + 10.8, "AL", "t tiny2 b")
-    s.t(xr + 36, ys + 10.8, "24 V CC", "t tiny", "start")
+    # T0 up the NW wall to the valve box RV
+    rvx, rvy = xr + 12, wl - 10
+    s.add(f'<polyline points="{xr - 2:.2f},{yd + 3.2:.2f} {xr + 4:.2f},{yd + 3.2:.2f} {xr + 4:.2f},{rvy + 6:.2f} {rvx:.2f},{rvy + 6:.2f}" style="fill:none;stroke:{TUBE["t0"][0]};stroke-width:1.6;stroke-linejoin:round"/>')
+    s.rect(rvx - 1, rvy - 1, 14, 11, "k w2 fs")
+    s.add(f'<polyline points="{rvx:.2f},{rvy + 6:.2f} {rvx + 3:.2f},{rvy + 6:.2f} {rvx + 3:.2f},{rvy - 1:.2f}" style="fill:none;stroke:{TUBE["t2"][0]};stroke-width:1.4"/>')
+    s.add(f'<polyline points="{rvx + 3:.2f},{rvy + 6:.2f} {rvx + 13:.2f},{rvy + 6:.2f}" style="fill:none;stroke:{TUBE["t1"][0]};stroke-width:1.4"/>')
+    valve(s, rvx + 3, rvy + 2, horiz=False, r=1.3)
+    valve(s, rvx + 8.5, rvy + 6, r=1.3)
+    s.t(rvx + 5, rvy + 3, "V2", "t tiny2 b", "start")
+    s.t(rvx + 8.5, rvy + 9.6, "V1", "t tiny2 b")
+    s.t(rvx - 2.5, rvy + 3.5, "RV", "t tiny2 b", "end")
+    s.t(rvx + 6, rvy + 14, "té + 2 vannes", "t tiny")
+    # tube 2 : RV -> along the pool (under the deck) -> cascade wall -> lip -> pool
+    s.add(f'<polyline points="{rvx + 3:.2f},{rvy - 1:.2f} {rvx + 3:.2f},{y0 + 4:.2f} {xl - 4:.2f},{y0 + 4:.2f} {xl - 4:.2f},{wl - 13:.2f}" style="fill:none;stroke:{TUBE["t2"][0]};stroke-width:1.6;stroke-linejoin:round"/>')
+    s.rect(xl - 8, wl - 16, 8, 20, "red w3 fcc")
+    s.line((xl - 4, wl - 13), (xl + 1.5, wl - 13), "red w4")
+    s.add(f'<path d="M{xl + 1.5:.2f} {wl - 13:.2f} q 2.4 0.6 2.8 13" style="fill:none;stroke:#1683a8;stroke-width:.8"/>')
+    s.t(xl - 10, wl - 4, "CASCADE", "t tiny2 b red-t", "end")
+    s.t(xl - 10, wl, "lame 600 × 6 mm", "t tiny", "end")
+    s.t((rvx + xl) / 2, y0 + 2.2, "TUBE 2 : vers la cascade, l'eau retombe dans le bassin", "t tiny2 b", "middle")
+    # tube 1 : RV -> garden (orchard, soakaway)
+    bx = x0 + w - 18
+    s.add(f'<polyline points="{rvx + 13:.2f},{rvy + 6:.2f} {bx:.2f},{rvy + 6:.2f} {bx:.2f},{yd + 2:.2f}" style="fill:none;stroke:{TUBE["t1"][0]};stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:3 1"/>')
+    s.circ(bx, yd + 5, 3.2, "k w2 fst")
+    s.t(bx, yd + 11.5, "puits perdu / verger", "t tiny2", "middle")
+    s.t(bx + 3.5, (wl + yd) / 2, "TUBE 1 : vers le jardin", "t tiny2 b", "middle", -90)
+    # electrical: one box AL (24 V DC for the pump, 12 V for the lights), fed in 230 V from the villa
+    s.rect(xr + 22, ys + 8, 12, 7, "k w2 fs")
+    s.t(xr + 28, ys + 12.8, "AL", "t tiny2 b")
+    s.t(xr + 36, ys + 10.6, "24 V CC", "t tiny", "start")
+    s.t(xr + 36, ys + 13.4, "12 V", "t tiny", "start")
+    s.line((xr + 28, ys + 15), (xr + 28, ys + 26), "elec w2")
+    s.t(xr + 29.5, ys + 25, "230 V villa", "t tiny", "start")
     _dc_line(s, [(xr + 22, ys + 12), (xr + 1, ys + 12), (xr + 1, yd + 1.5), (xr - 4, yd + 1.5)], 0.7)
-    s.t(xr - 1, ys + 22, "câble TBTS", "t tiny", "end")
-    s.line((x0, wl - 4), (xl, wl - 4), "k w1")
+    s.t(xr - 1, ys + 22, "câble 24 V", "t tiny", "end")
+    s.line((x0, wl - 4), (xl - 8, wl - 4), "k w1")
     s.line((xr, wl - 4), (x0 + w, wl - 4), "k w1")
 
 
@@ -362,15 +366,15 @@ def vc01():
     I = draw_pit_iso(s, 50, VC01_BOX)
     items = pit_items()
     place_callouts(s, I, items, bounds=(22, 20, 208, 172), dist=17, r=2.6)
-    s.t(214, 22, "VOTRE SCHÉMA, SANS 220 V DANS L'EAU", "t cl red-t", "start")
+    s.t(214, 22, "VOTRE SCHÉMA : UNE POMPE, DEUX TUBES", "t cl red-t", "start")
     for i, t_ in enumerate(["Pompe couchée au point le plus bas, sous une cage",
-                            "métallique ajourée : l'eau entre par la cage, la pompe",
-                            "l'envoie par le tube 1 (jardin) ou le tube 2 (cascade).",
-                            "La pompe de forage 1 HP 220 V ne peut pas être dans",
-                            "l'eau du bassin : en volume 0, seule la TBTS est admise",
-                            f"(≤ 12 V CA ou 30 V CC). La pompe est donc en {C.U_DC:.0f} V CC,",
-                            "alimentée par une source de sécurité hors volumes.",
-                            "Votre pompe de forage reste utilisable dans le puits."]):
+                            "métallique ajourée : l'eau entre par la cage. Tube 1 :",
+                            "dehors, vers le jardin. Tube 2 : vers la cascade, l'eau",
+                            "retombe dans le bassin. Ni local, ni filtre, ni skimmer.",
+                            "Votre pompe 1 HP 220 V ne peut pas être dans l'eau :",
+                            f"en volume 0, seule la TBTS est admise. Même forme, en {C.U_DC:.0f} V CC,",
+                            f"alimentée par le boîtier AL à {POOL['u0'] - AL['u']:.2f} m du bassin.",
+                            "Votre pompe 220 V reste utilisable dans le puits."]):
         s.t(214, 28 + i * 4.3, t_, "t tiny2", "start", size=2.3)
     rows = [(str(i + 1), t_) for i, (_, _, t_) in enumerate(items)]
     s.t(214, 66, "REPÈRES DE LA VUE", "t cl", "start")
@@ -381,7 +385,7 @@ def vc01():
     SH.FRAME_SUB = C.SUBTITLE
     frame(s, "VC-01")
     SH.FRAME_SUB = _sub
-    s.title = "VC-01 Pompe immergée"
+    s.title = "VC-01 Pompe au puisard"
     return s
 
 
@@ -500,12 +504,13 @@ def pump_side(s, Y, zc, k, sleeve=True, brk=None, cable=True, cable_off=-1.0, te
         s.add(f'<rect x="{Y(sl0):.2f}" y="{zc - rs:.2f}" width="{Y(sl1) - Y(sl0):.2f}" height="{2 * rs:.2f}" style="fill:#7cc3dc;fill-opacity:.16;stroke:#1683a8;stroke-width:{lw:.2f};stroke-dasharray:1.4 .8"/>')
         s.add(f'<rect x="{Y(sl0) - 0.004 * k:.2f}" y="{zc - rs:.2f}" width="{0.008 * k:.2f}" height="{2 * rs:.2f}" style="fill:#1683a8;opacity:.55"/>')
         s.rect(Y(sl1) - 0.6, zc - rs, 1.2, 2 * rs, "k w2 fs")
-        s.circ(Y(sl1), zc, RC["orifice"]["d"] / 2 * k * 0.5, "k w1")
+        for j in range(1, 6):
+            s.line((Y(sl1) - 0.6, zc - rs + j * rs / 3), (Y(sl1) + 0.6, zc - rs + j * rs / 3), "k w1")
     return exit_pt
 
 
-def vc02():
-    s = S("c2")
+def vc04():
+    s = S("c4p")
     x0, x1, y0, y1 = PIT["x0"], PIT["x1"], PIT["y0"], PIT["y1"]
     zpf = PIT["floor"]
     wall0 = -(fin + WALL)
@@ -517,7 +522,7 @@ def vc02():
     K = 50
     PX = lambda y: 28 + (y - 1.25) * K
     PY = lambda x: 40 + (x + 0.45) * K
-    s.add('<defs><clipPath id="c2p"><rect x="24" y="30" width="132" height="80"/></clipPath></defs><g clip-path="url(#c2p)">')
+    s.add('<defs><clipPath id="c4pp"><rect x="24" y="30" width="132" height="80"/></clipPath></defs><g clip-path="url(#c4pp)">')
     s.rect(PX(1.25), PY(wall0 - 0.25), 2.5 * K, 0.25 * K, "k w1 fgr")
     s.rect(PX(1.25), PY(wall0), 2.5 * K, WALL * K, "k w3 fcc")
     s.rect(PX(1.25), PY(-fin), 2.5 * K, (1.20 + fin) * K, "k w1 fw")
@@ -525,14 +530,13 @@ def vc02():
     s.rect(PX(y0), PY(x0), (y1 - y0) * K, (x1 - x0) * K, "k w3 fs")
     s.rect(PX(y0 - 0.03), PY(x0), (y1 - y0 + 0.06) * K, (x1 - x0 + 0.03) * K, "k w1")
     ex, ez = pump_side(s, PX, PY(px), K, cable_off=-0.2)
-    for (yy, d, kind) in ((OUT_STUB_Y, 0.063, "t0"), (SK_STUB_Y, 0.050, "sk")):
+    for (yy, d, kind) in ((OUT_STUB_Y, 0.063, "t0"),):
         s.add(f'<line x1="{PX(yy):.2f}" y1="{PY(wall0 - 0.25):.2f}" x2="{PX(yy):.2f}" y2="{PY(0.06):.2f}" style="stroke:{TUBE[kind][0]};stroke-width:{d * K:.2f}"/>')
     s.add(f'<polyline points="{PX(OUT_STUB_Y):.2f},{PY(0.06):.2f} {PX(OUT_STUB_Y):.2f},{PY(px - 0.04):.2f} {PX(pc["y0"] - 0.06):.2f},{PY(px):.2f}" style="fill:none;stroke:{TUBE["t0"][0]};stroke-width:2;stroke-linejoin:round"/>')
-    s.add(f'<polyline points="{PX(SK_STUB_Y):.2f},{PY(0.06):.2f} {PX(SK_STUB_Y):.2f},{PY(px - 0.04):.2f} {PX(pc["sleeve"][1]):.2f},{PY(px):.2f}" style="fill:none;stroke:{TUBE["sk"][0]};stroke-width:2.2;stroke-linejoin:round"/>')
     s.add(f'<line x1="{PX(CABLE_Y):.2f}" y1="{PY(wall0 - 0.25):.2f}" x2="{PX(CABLE_Y):.2f}" y2="{PY(0.0):.2f}" style="stroke:#c9d1d6;stroke-width:{0.04 * K:.2f}"/>')
     blue_cable(s, [(PX(CABLE_Y), PY(wall0 - 0.25)), (PX(CABLE_Y), PY(0.03)), (PX(CABLE_Y) + 3, PY(0.10)), (ex, ez)], 0.7)
     s.add("</g>")
-    for t_, (xx, yy), a in (("T0 → RV", (PX(OUT_STUB_Y) + 1.5, PY(wall0 - 0.28)), "end"), ("SK1-SK2", (PX(SK_STUB_Y), PY(wall0 - 0.28)), "middle"),
+    for t_, (xx, yy), a in (("T0 → RV", (PX(OUT_STUB_Y) + 1.5, PY(wall0 - 0.28)), "end"), 
                             ("câble → AL", (PX(CABLE_Y) - 1.0, PY(wall0 - 0.28)), "start"), ("BASSIN", (PX(2.50), PY(0.80)), "middle")):
         s.t(xx, yy, t_, "t tiny2 b", a)
     s.dim((PX(y0), PY(x1 + 0.03)), (PX(y1), PY(x1 + 0.03)), -4, f"{y1 - y0:.2f}", size=2.4)
@@ -542,7 +546,7 @@ def vc02():
     # ---- long section 1/20 along the pump axis, looking NW
     AX = lambda y: 172 + (y - 1.25) * K
     AZ = lambda z: 42 + (-2.50 - z) * K
-    s.add('<defs><clipPath id="c2a"><rect x="168" y="32" width="140" height="68"/></clipPath></defs><g clip-path="url(#c2a)">')
+    s.add('<defs><clipPath id="c4pa"><rect x="168" y="32" width="140" height="68"/></clipPath></defs><g clip-path="url(#c4pa)">')
     s.rect(AX(1.25), AZ(zslab), 2.5 * K, (zslab - (zps - 0.40)) * K, "k w1 fea")
     s.rect(AX(1.25), AZ(ZF - fin), 2.5 * K, SLAB * K, "k w3 fcc")
     s.rect(AX(y0 - 0.20), AZ(ZF - fin), (y1 - y0 + 0.40) * K, (ZF - fin - zps) * K, "k w3 fcc")
@@ -559,8 +563,7 @@ def vc02():
     ex, ez = pump_side(s, AX, AZ(pa), K)
     blue_cable(s, [(ex, ez), (ex - 1.5, ez - 3.5), (ex - 5, ez - 3), (AX(CABLE_Y) - 4, AZ(STUB_Z)), (AX(CABLE_Y), AZ(STUB_Z))], 0.6)
     s.add(f'<polyline points="{AX(pc["y0"] - 0.06):.2f},{AZ(pa):.2f} {AX(OUT_STUB_Y):.2f},{AZ(STUB_Z):.2f}" style="fill:none;stroke:{TUBE["t0"][0]};stroke-width:2;stroke-linejoin:round"/>')
-    s.add(f'<polyline points="{AX(pc["sleeve"][1]):.2f},{AZ(pa):.2f} {AX(SK_STUB_Y):.2f},{AZ(STUB_Z):.2f}" style="fill:none;stroke:{TUBE["sk"][0]};stroke-width:2.2;stroke-linejoin:round"/>')
-    for yy in (OUT_STUB_Y, SK_STUB_Y):
+    for yy in (OUT_STUB_Y,):
         s.circ(AX(yy), AZ(STUB_Z), 1.6, "k w2 fs")
     s.circ(AX(CABLE_Y), AZ(STUB_Z), 1.0, "k w2 fs")
     s.add("</g>")
@@ -573,7 +576,7 @@ def vc02():
     K2 = 100
     BX = lambda x: 30 + (x + 0.62) * K2
     BZ = lambda z: 132 + (-2.50 - z) * K2
-    s.add('<defs><clipPath id="c2b"><rect x="24" y="124" width="150" height="88"/></clipPath></defs><g clip-path="url(#c2b)">')
+    s.add('<defs><clipPath id="c4pb"><rect x="24" y="124" width="150" height="88"/></clipPath></defs><g clip-path="url(#c4pb)">')
     s.rect(BX(-0.62), BZ(-2.50), (wall0 + 0.62) * K2, 1.30 * K2, "k w1 fgr")
     s.rect(BX(wall0), BZ(-2.50), WALL * K2, (-2.50 - zslab) * K2, "k w3 fcc")
     s.rect(BX(wall0), BZ(zslab), (x1 + 0.20 - wall0 + 0.40) * K2, (zslab - (zps - 0.40)) * K2, "k w1 fea")
@@ -617,32 +620,31 @@ def vc02():
                             "vis inox inviolables (clé spéciale)"]):
         s.t(cx0 + 0.20 * D + 4, cy0 + 2 + i * 4.3, t_, "t tiny2", "start", size=2.3)
     # ---- calculation table
-    o = RC["orifice"]
     rows = [("Débit de la pompe", f"{C.Q_C:.0f} m³/h - recyclage en {RC['turnover']:.1f} h"),
             ("Passage libre de la cage", f"{CAGE['L']:.2f} × {CAGE['W']:.2f} × {CAGE['open_ratio']:.2f} = {RC['cage_open']:.3f} m²"),
             ("Vitesse au travers de la cage", f"{RC['v_cage']:.4f} m/s (limite usuelle 0.5 m/s)"),
             ("Cage plus grande qu'un corps", f"≥ 457 × 584 mm : {'oui' if RC['unblockable'] else 'non'}"),
             ("Vitesse le long du moteur", f"{RC['v_sleeve']:.2f} m/s dans la chemise (mini usuel 0.08 m/s)"),
-            ("Partage fond / skimmers", f"{(1 - C.SK_SHARE) * 100:.0f} / {C.SK_SHARE * 100:.0f} % : diaphragme Ø{o['d'] * 1000:.0f} mm"),
-            ("HMT tube 2 (moyenne / filtre au seuil)", f"{RC['tdh_2'][1]:.2f} / {RC['tdh_2_dirty']:.2f} mCE"),
-            ("Pompe retenue", f"{C.Q_C:.0f} m³/h à {pc['head']} mCE, {C.U_DC:.0f} V CC, 4\", {pc['L']:.2f} m"),
-            ("Puissance absorbée (moyenne / maxi)", f"{RC['p1']:.0f} / {RC['p1_dirty']:.0f} W (rendement {C.ETA:.2f})"),
+            ("HMT tube 2 (cascade)", f"{RC['tdh_2'][1]:.2f} mCE à {C.Q_C:.0f} m³/h"),
+            ("HMT tube 1 (jardin, début / fin de vidange)", f"{RC['tdh_1'][1]:.2f} / {RC['tdh_1_end'][1]:.2f} mCE à {C.Q_GARDEN:.0f} m³/h"),
+            ("Pompe retenue", f"{C.Q_C:.0f} m³/h à {pc['head']} mCE et {C.Q_GARDEN:.0f} m³/h à {pc['head_1']} mCE, {C.U_DC:.0f} V CC, {pc['L']:.2f} m"),
+            ("Puissance absorbée (cascade / nominale)", f"{RC['p1']:.0f} / {RC['p1_max']:.0f} W (rendement {C.ETA:.2f})"),
             ("Courant à 24 V (moyen / maxi)", f"{RC['cable']['i_avg']:.1f} / {RC['i_dc']:.1f} A"),
             ("Câble du moteur", f"2 × {RC['cable']['s']:g} mm², {C.L['pump_cable']:.1f} m : chute {RC['cable']['drop_avg_pct']:.1f} / {RC['cable']['drop_pct']:.1f} %")]
     s.t(176, 160, "CALCUL DU PUISARD ET DE LA POMPE", "t cl", "start")
     table(s, 176, 162, ("Grandeur", "Valeur"), rows, (58, 78), rh=4.4, size=2.2, align="ll")
     notes = ["Cage vissée au ras du fond : rien ne dépasse, pas de prise pour les pieds.",
-             "Entretien : couper l'alimentation AL, déposer la cage à la clé, défaire les deux raccords",
-             "rapides à la perche, remonter la pompe par ses anneaux ; le câble coulisse dans le fourreau.",
+             "Entretien : couper le boîtier AL (I0 cadenassé), déposer la cage à la clé, défaire le raccord",
+             "rapide à la perche, remonter la pompe par ses anneaux ; le câble coulisse dans le fourreau.",
              "Membrane du bassin continue dans le puisard, angles en gorge 5 × 5."]
     s.t(24, 222, "NOTES", "t cl", "start")
     for i, t_ in enumerate(notes):
         s.t(24, 228 + i * 4.3, t_, "t tiny2", "start", size=2.3)
     _sub = SH.FRAME_SUB
     SH.FRAME_SUB = C.SUBTITLE
-    frame(s, "VC-02")
+    frame(s, "VC-04")
     SH.FRAME_SUB = _sub
-    s.title = "VC-02 Puisard et cage"
+    s.title = "VC-04 Puisard et cage"
     return s
 
 
@@ -674,11 +676,11 @@ def draw_al_box(s, x, y, k=100):
     blue_cable(s, [(x + w * 0.70, y + h + 2.4), (x + w * 0.70, y + h + 6), (x + w * 0.70 + 4, y + h + 9), (x + w * 0.70 + 12, y + h + 9)], 1.0)
     return [("interrupteur marche / arrêt", (x + w - 4.5, y + 9)), ("voyant de marche", (x + w - 5.2, y + 21)),
             ("transformateur de sécurité + contrôleur", (x + w * 0.5, y + h * 0.75)),
-            ("entrée 230 V depuis CP (3G2.5)", (x + w * 0.30, y + h + 1.2)), ("câble plat bleu 24 V CC → pompe", (x + w * 0.70 + 10, y + h + 9))]
+            ("entrée 230 V depuis le TGBT (3G2.5)", (x + w * 0.30, y + h + 1.2)), ("câble plat bleu 24 V CC → pompe", (x + w * 0.70 + 10, y + h + 9))]
 
 
-def vc04():
-    s = S("c4")
+def vc05():
+    s = S("c5")
     pc = PUMP_C
     y0, yh, yi, ym, y1 = pc["y0"], pc["y0"] + pc["head_L"], pc["y_inlet"], pc["y_motor"], pc["y1"]
     sl0, sl1 = pc["sleeve"]
@@ -780,8 +782,8 @@ def vc04():
     # ---- requirements table
     rows = [("Type", "pompe de forage 4\" immergée, multicellulaire, moteur sans balais"),
             ("Tension", f"{C.U_DC:.0f} V CC (TBTS ≤ 30 V CC) - contrôleur dans le boîtier AL, hors volumes"),
-            ("Point de fonctionnement", f"{C.Q_C:.0f} m³/h à {pc['head']} mCE ({RC['tdh_2_dirty']:.2f} mCE filtre au seuil)"),
-            ("Puissance / courant", f"{RC['p1']:.0f} W moyen, {RC['p1_dirty']:.0f} W maxi - {RC['i_dc']:.1f} A à {C.U_DC:.0f} V"),
+            ("Points de fonctionnement", f"{C.Q_C:.0f} m³/h à {pc['head']} mCE (cascade) et {C.Q_GARDEN:.0f} m³/h à {pc['head_1']} mCE (fin de vidange)"),
+            ("Puissance / courant", f"{RC['p1']:.0f} W en cascade, {RC['p1_max']:.0f} W nominal - {RC['i_dc']:.1f} A à {C.U_DC:.0f} V"),
             ("Dimensions maximales", f"Ø{pc['D'] * 1000:.0f} × {pc['L']:.2f} m, sortie {pc['outlet']}"),
             ("Pose", "horizontale admise par le fabricant (butée), sur berceau, dans sa chemise"),
             ("Refroidissement", f"chemise Ø{pc['sleeve_D'] * 1000:.0f} : {RC['v_sleeve']:.2f} m/s le long du moteur (mini usuel 0.08)"),
@@ -792,22 +794,22 @@ def vc04():
     table(s, 142, 154, ("Critère", "Exigence"), rows, (36, 134), rh=4.5, size=2.3, align="ll")
     cmp_rows = [("Forme", "4\" inox, tête laiton, crépine", "identique"), ("Longueur", "≈ 1.50 m", f"{pc['L']:.2f} m"),
                 ("Sortie", "1-1/4\" + raccord cannelé", "identique"), ("Tension", "220 V", f"{C.U_DC:.0f} V CC"),
-                ("Puissance", "1 HP (0.75 kW)", f"{RC['p1_dirty']:.0f} W maxi"), ("Câble", "plat bleu", f"plat bleu 2 × {pc['cable_s']:g} mm²"),
+                ("Puissance", "1 HP (0.75 kW)", f"{RC['p1_max']:.0f} W nominal"), ("Câble", "plat bleu", f"plat bleu 2 × {pc['cable_s']:g} mm²"),
                 ("Coffret", "boîtier blanc 220 V", "boîtier AL 24 V CC (TBTS)")]
     s.t(142, 211, "VOTRE POMPE (PHOTO) ET LA POMPE DU PUISARD", "t cl", "start")
     table(s, 142, 213, ("", "Pompe de la photo", "Pompe du puisard"), cmp_rows, (30, 64, 76), rh=4.4, size=2.3, align="lll")
     notes = ["La pompe de la photo (220 V) ne doit pas être placée dans le bassin : un défaut d'isolement dans l'eau peut être mortel.",
              "Elle reste utilisable dans le puits du terrain. La pompe du puisard a la même forme et la même longueur, en 24 V CC.",
-             f"Les pompes de forage sont faites pour de grandes hauteurs : le modèle 24 V choisi doit avoir son point {C.Q_C:.0f} m³/h à {pc['head']} mCE",
-             "sur sa courbe et accepter la pose horizontale : à vérifier sur la fiche du fabricant avant l'achat."]
+             f"Les pompes de forage sont faites pour de grandes hauteurs : le modèle 24 V choisi doit avoir ses points {C.Q_C:.0f} m³/h à {pc['head']} mCE",
+             f"et {C.Q_GARDEN:.0f} m³/h à {pc['head_1']} mCE sur sa courbe, et accepter la pose horizontale : à vérifier sur la fiche du fabricant avant l'achat."]
     s.t(24, 256, "À SAVOIR", "t cl red-t", "start")
     for i, t_ in enumerate(notes):
         s.t(24, 262 + i * 4.6, t_, "t tiny2", "start", size=2.4)
     _sub = SH.FRAME_SUB
     SH.FRAME_SUB = C.SUBTITLE
-    frame(s, "VC-04")
+    frame(s, "VC-05")
     SH.FRAME_SUB = _sub
-    s.title = "VC-04 Pompe de forage 24 V"
+    s.title = "VC-05 Pompe de forage 24 V"
     return s
 
 
@@ -825,136 +827,773 @@ def pump_figure():
 
 
 # ==========================================================================
-# VC-03  Tracés 1/200, coffre du filtre 1/20, regard RV 1/10, schéma électrique TBTS
+# Shared plan pieces (site u-v) and helpers for the whole variant C package
+# ==========================================================================
+
+U0, V0 = POOL["u0"], POOL["v0"]
+SEC_A_Y = 2.70                 # A-A cut, pool-local y (through the pit and the cascade)
+SEC_B_X = PUMP_C["x"]          # B-B cut, pool-local x (pump axis)
+NET_C = [("t0", "T0 Ø63 : pompe → regard RV"), ("t2", "Tube 2 Ø63 : RV → cascade"), ("t1", "Tube 1 PEHD Ø50 : RV → jardin"),
+         ("elec", "230 V : villa → boîtier AL"), ("selv", "TBTS : 24 V pompe, 12 V projecteurs"), ("drain", "Drain périphérique")]
+
+
+def _frame(s, num, title):
+    _sub = SH.FRAME_SUB
+    SH.FRAME_SUB = C.SUBTITLE
+    frame(s, num)
+    SH.FRAME_SUB = _sub
+    s.title = title
+    return s
+
+
+def tube(s, pts, kind, w=0.9, op=1.0):
+    col = TUBE[kind][0]
+    dash = ";stroke-dasharray:2.4 .9" if kind == "t1" else ""
+    s.add(f'<polyline points="{_pts(pts)}" style="fill:none;stroke:{col};stroke-width:{w:.2f};stroke-linejoin:round;stroke-linecap:round;opacity:{op}{dash}"/>')
+
+
+def legend_c(s, x, y, items=None, w=86, title="LÉGENDE DES RÉSEAUX"):
+    items = items or NET_C
+    s.rect(x - 2, y - 1, w, len(items) * 5.0 + 7, "k w1 fs")
+    s.t(x, y + 3.4, title, "t cl", "start")
+    for i, (k_, txt) in enumerate(items):
+        yy = y + 8.0 + i * 5.0
+        if k_ in TUBE:
+            tube(s, [(x, yy), (x + 9, yy)], k_, 1.1)
+        elif k_ == "drain":
+            s.line((x, yy), (x + 9, yy), "pipe-d w2")
+        elif k_.startswith("box:"):
+            s.rect(x, yy - 2.0, 9, 3.6, "k w1 " + k_[4:])
+        else:
+            s.line((x, yy), (x + 9, yy), f"{k_} w3" if k_ in ("elec", "selv") else k_)
+        s.t(x + 12, yy + 1.0, txt, "t cs", "start")
+
+
+def draw_pit_plan(s, P, holes=True, pump=True):
+    u0, v0, u1, v1 = U0 + PIT["x0"], V0 + PIT["y0"], U0 + PIT["x1"], V0 + PIT["y1"]
+    s.pl([P(*p) for p in rect_uv(u0, v0 - 0.03, u1 + 0.03, v1 + 0.03)], "k w1", True)
+    s.pl([P(*p) for p in rect_uv(u0, v0, u1, v1)], "k w3 fs", True)
+    if holes:
+        for i in range(5):
+            for j in range(19):
+                x_, y_ = P(u0 + 0.05 + i * 0.10, v0 + 0.05 + j * 0.10)
+                s.circ(x_, y_, max(0.012 * s.k, 0.16), "k w1 fk")
+    if pump:
+        pc = PUMP_C
+        s.pl([P(*p) for p in rect_uv(U0 + pc["x"] - pc["D"] / 2, V0 + pc["y0"], U0 + pc["x"] + pc["D"] / 2, V0 + pc["y1"])], "k w1 dash", True)
+
+
+def draw_rv_plan(s, P, c="red w3 fs"):
+    a = RV["a"] / 2
+    s.pl([P(*p) for p in rect_uv(RV["u"] - a, RV["v"] - a, RV["u"] + a, RV["v"] + a)], c, True)
+
+
+def draw_al_plan(s, P):
+    x_, y_ = P(AL["u"], AL["v"])
+    w_, h_ = max(AL["w"] * s.k, 2.4), max(0.16 * s.k, 1.4)
+    s.rect(x_ - w_ / 2, y_ - h_ / 2, w_, h_, "k w2 fk")
+
+
+# ==========================================================================
+# VC-02  Plan général du bassin  1/50 (villa at the top, driveway on the left, as VB-02 / PL-03)
+# ==========================================================================
+
+def vc02():
+    s = S("c2")
+    UMIN, VMIN, VMAX = 3.95, 16.85, 25.20
+    P, k = rot_view(300, 22, UMIN, VMIN, 50)
+    s.k = k
+    UMAX = UMIN + (300 - 22) / k
+    Lp = lambda x, y: P(*pool_xy(x, y))
+    y_b = 22 + (VMAX - VMIN) * k
+    s.add(f'<defs><clipPath id="c2v"><rect x="22" y="22" width="278" height="{y_b - 22:.2f}"/></clipPath></defs><g clip-path="url(#c2v)">')
+    s.pl([P(*p) for p in rect_uv(UMIN, VMIN, UMAX, VMAX)], "k w1 fgz", True)
+    s.pl([P(*p) for p in rect_uv(HOUSE["u0"], VMIN, HOUSE["u1"], DECK[1])], "k w1 ftl", True)
+    s.pl([Lp(-WALK, -WALK), Lp(POOL_L + WALK, -WALK), Lp(POOL_L + WALK, POOL_W + WALK), Lp(-WALK, POOL_W + WALK)], "k w2 fs", True)
+    for i in range(int(POOL_L / 0.5) + 1):
+        s.line(Lp(i * 0.5, -WALK), Lp(i * 0.5, 0), "k w1")
+        s.line(Lp(i * 0.5, POOL_W), Lp(i * 0.5, POOL_W + WALK), "k w1")
+    for i in range(int(POOL_W / 0.5) + 1):
+        s.line(Lp(-WALK, i * 0.5), Lp(0, i * 0.5), "k w1")
+        if not (CASCADE["y0"] - 1e-6 < i * 0.5 < CASCADE["y1"] + 1e-6):
+            s.line(Lp(POOL_L, i * 0.5), Lp(POOL_L + WALK, i * 0.5), "k w1")
+    s.pl([Lp(POOL_L, CASCADE["y0"]), Lp(POOL_L + WALK + 0.30, CASCADE["y0"]), Lp(POOL_L + WALK + 0.30, CASCADE["y1"]), Lp(POOL_L, CASCADE["y1"])], "k w1 fgz", True)
+    s.pl([Lp(-0.23, -0.23), Lp(POOL_L + 0.23, -0.23), Lp(POOL_L + 0.23, POOL_W + 0.23), Lp(-0.23, POOL_W + 0.23)], "k w1 dash", True)
+    draw_cascade_plan(s, P)
+    s.pl([Lp(0, 0), Lp(POOL_L, 0), Lp(POOL_L, POOL_W), Lp(0, POOL_W)], "red w4 fw", True)
+    for x in (DEEP_FLAT, SLOPE_END):
+        s.line(Lp(x, 0), Lp(x, POOL_W), "k w1 dash")
+    s.line(Lp(BREAK_X, 0), Lp(BREAK_X, POOL_W), "k w3 dash")
+    for i in range(STEP["n_tread"] + 1):
+        xx = POOL_L - i * STEP["tread"]
+        s.line(Lp(xx, 0), Lp(xx, STEP["width"]), "k w2")
+    s.line(Lp(STEP["x0"], STEP["width"]), Lp(POOL_L, STEP["width"]), "k w2")
+    draw_pit_plan(s, P)
+    # networks
+    s.pl([P(*p) for p in rect_uv(POOL["u0"] - 0.53, POOL["v0"] - 0.53, POOL["u1"] + 0.53, POOL["v1"] + 0.53)], "pipe-d w1", True)
+    tube(s, [Lp(PUMP_C["x"], PUMP_C["y0"] - 0.06), Lp(0.05, OUT_STUB_Y)] + [P(*p) for p in ROUTES["T0"]], "t0", 1.3)
+    tube(s, [P(*p) for p in ROUTES["T2"]], "t2", 1.3)
+    tube(s, [P(*p) for p in ROUTES["T1"]], "t1", 1.3)
+    s.pl([P(*p) for p in ROUTES["DC"]] + [Lp(0.03, CABLE_Y)], "selv w3")
+    s.pl([P(*p) for p in ROUTES["LIGHT"]], "selv w3")
+    for (x, y) in FITTINGS["lights"]:
+        s.line(P(U0 + x, V0 - 0.40), P(U0 + x, V0), "selv w3")
+    draw_rv_plan(s, P)
+    s.add("</g>")
+    for (x, y) in FITTINGS["lights"]:
+        a_, b_ = Lp(x - 0.12, 0), Lp(x + 0.12, 0)
+        s.arc(a_, 0.12 * k, 0.12 * k, 0, 1, b_, "k w2 flt")
+    for (x, y) in FITTINGS["ladder"]:
+        s.pl([Lp(x - 0.25, 0), Lp(x + 0.25, 0), Lp(x + 0.25, 0.45), Lp(x - 0.25, 0.45)], "k w1 fs", True)
+        for j in range(3):
+            s.line(Lp(x - 0.25, (j + 0.5) * 0.15), Lp(x + 0.25, (j + 0.5) * 0.15), "k w1")
+    # tags
+    def tag(x, y, t_, a="middle", c="t lab b"):
+        s.t(x, y, t_, c, a)
+    for i, (x, y) in enumerate(FITTINGS["lights"]):
+        x_, y_ = Lp(x, 0.45)
+        tag(x_, y_ + 1.0, f"P{i + 1}")
+    x_, y_ = Lp(FITTINGS["ladder"][0][0], 0.70)
+    tag(x_, y_ + 1.0, "ECH")
+    x_, y_ = Lp(PIT["x1"] + 0.08, (PIT["y0"] + PIT["y1"]) / 2)
+    tag(x_ - 0.6, y_ + 1.0, "PU", "end")
+    x_, y_ = P(RV["u"], RV["v"] - RV["a"] / 2)
+    tag(x_, y_ - 1.6, "RV", "middle", "t lab b red-t")
+    x_, y_ = P((POOL["u1"] + CASC_BACK) / 2, CASC_V[0])
+    tag(x_, y_ - 1.6, "CAS", "middle", "t lab b red-t")
+    x_, y_ = P((WALL_OUT + RV["u"]) / 2 + 0.05, V0 + OUT_STUB_Y)
+    tag(x_, y_ + 4.0, "T0", "middle", "t lab b")
+    x_, y_ = P(10.5, NE_A2)
+    s.t(x_, y_ + 4.6, "tube 2 Ø63 → cascade", "t tiny2 b", "middle")
+    x_, y_ = P(4.60, RV["v"])
+    s.t(x_, y_ - 1.4, "tube 1 → verger", "t tiny2 b", "middle")
+    x_, y_ = P(5.05, AL["v"])
+    s.t(x_, y_ - 1.4, "câble 24 V → AL", "t tiny2", "middle")
+    x_, y_ = P(9.0, V0 - 0.40)
+    s.t(x_, y_ - 4.2, "câbles 12 V des projecteurs (depuis AL)", "t tiny2", "middle")
+    # depth info
+    x_, y_ = Lp(BREAK_X - 0.12, 2.5)
+    s.t(x_, y_, f"rupture de pente - prof. {WATER_BREAK:.2f}", "t tiny2 b", "middle", -90)
+    x_, y_ = Lp(7.90, 3.55)
+    s.t(x_, y_, f"ZONE ENFANTS - prof. {WATER_SHALLOW:.2f}", "t lab b")
+    for x, txt in [(1.05, f"fond {FLOOR_DEEP:+.2f}"), (BREAK_X + 0.35, f"fond {FLOOR_BREAK:+.2f}"), (SLOPE_END + 0.35, f"fond {FLOOR_SHALLOW:+.2f}")]:
+        x_, y_ = Lp(x, 4.45)
+        s.level(x_, y_, txt, "l")
+    x_, y_ = Lp(5.4, 1.30)
+    s.t(x_, y_, "BASSIN 10.00 × 5.00 - plan d'eau 50 m² (inchangé)", "t lab b red-t")
+    s.t(x_, y_ + 6.0, f"Volume {hu(Q['water_vol'])} m³ - profil et structure de l'indice E", "t lab red-t")
+    x_, y_ = P(11.5, 17.35)
+    s.t(x_, y_, "Plage solarium (inchangée)", "t lab mute")
+    # dimensions
+    vb = POOL["v1"] + WALK
+    chain = [CASC_BACK, POOL["u1"], U0, U0 - WALK, RV["u"]]
+    for a_, b_ in zip(chain, chain[1:]):
+        s.dim(P(a_, vb), P(b_, vb), -7, f"{a_ - b_:.2f}")
+    x_, y_ = P((POOL["u0"] + POOL["u1"]) / 2, vb)
+    s.t(x_, y_ + 15.5, f"Tube 2 Ø63 en tranchée le long du côté NE, axe {RV['z_pipe']:+.2f} - essai de pression 24 h avant remblai", "t lab")
+    ys = [0, CASCADE["y0"], CASCADE["y1"], POOL_W]
+    for a_, b_ in zip(ys, ys[1:]):
+        s.dim(P(POOL["u1"] + WALK, V0 + a_), P(POOL["u1"] + WALK, V0 + b_), -10, f"{b_ - a_:.2f}", size=2.6)
+    xn = 2.25
+    yn = [0, PIT["y0"], PIT["y1"], POOL_W]
+    for a_, b_ in zip(yn, yn[1:]):
+        s.dim(Lp(xn, a_), Lp(xn, b_), 0, f"{b_ - a_:.2f}", size=2.6)
+    s.dim(Lp(PIT["x0"], PIT["y0"]), Lp(PIT["x1"], PIT["y0"]), -3, f"{PIT['x1'] - PIT['x0']:.2f}", size=2.6)
+    s.dim(P(RV["u"] - 0.40, V0), P(RV["u"] - 0.40, RV["v"]), 0, f"{RV['v'] - V0:.2f}", size=2.6)
+    # section marks + callouts
+    sec_mark(s, P(UMAX - 0.12, V0 + SEC_A_Y), P(UMIN + 0.20, V0 + SEC_A_Y), "A")
+    sec_mark(s, P(U0 + SEC_B_X, VMIN + 0.60), P(U0 + SEC_B_X, VMAX - 0.35), "B")
+    sec_mark(s, P(POOL["u1"] - 0.70, CASC_MID), P(CASC_BACK + 0.22, CASC_MID), "C")
+    x_, y_ = Lp(0.95, PIT["y1"] + 0.45)
+    callout(s, x_, y_, "D1", "VC-04")
+    x_, y_ = Lp(POOL_L - 0.60, POOL_W - 0.35)
+    callout(s, x_, y_, "D2", "VC-06")
+    x_, y_ = P(RV["u"] - 0.80, RV["v"] + 0.60)
+    callout(s, x_, y_, "D3", "VC-06")
+    band_north(s, 180 - U_ANG)
+    # legend, network legend, levels, notes
+    lg = [("PU", f"Puisard {CAGE['L']:.2f} × {CAGE['W']:.2f} × {PIT['depth']:.2f} (fond {PIT['floor']:+.2f}) sous cage inox perforée au ras du fond, pompe 24 V couchée (VC-04)"),
+          ("T0", "Sortie de la pompe Ø63 à travers le voile NO, jusqu'au regard RV"),
+          ("RV", f"Regard {RV['a']:.2f} × {RV['a']:.2f}, couvercle au ras du sol : té, vanne V1 (tube 1) et vanne V2 (tube 2)"),
+          ("CAS", f"Mur de cascade {CASCADE['y1'] - CASCADE['y0']:.2f} × {CASCADE['thick']:.2f}, arase {CASCADE['top']:+.2f}, lame 600 × 6 mm à {SLOT['level']:+.2f} (tube 2)"),
+          ("AL", f"Boîtier électrique sur poteau, à {U0 - AL['u']:.2f} m du bassin, hors de ce plan (VC-07)"),
+          ("P1-P3, ECH", "Projecteurs LED 12 V et échelle inox 316L (inchangés)")]
+    s.t(24, 196, "REPÈRES", "t cl", "start")
+    table(s, 24, 198, ("Repère", "Désignation"), lg, (20, 136), rh=4.6, size=2.5)
+    legend_c(s, 186, 195, w=76)
+    lv = [("Margelle / plan d'eau", f"{LV['coping']:+.2f} / {LV['water']:+.2f}"), ("Arase cascade / lame d'eau", f"{CASCADE['top']:+.2f} / {SLOT['level']:+.2f}"),
+          ("Couvercle du regard RV", f"{RV['top']:+.2f}"), ("Tubes dans RV (T0, tube 2)", f"{RV['z_pipe']:+.2f}"),
+          ("Fond du bassin (grand fond)", f"{FLOOR_DEEP:+.2f}"), ("Axe de la pompe", f"{PUMP_C['axis']:+.2f}"), ("Fond du puisard", f"{PIT['floor']:+.2f}")]
+    s.t(186, 236, "NIVEAUX (±0.00 = sol fini RDC)", "t cl", "start")
+    table(s, 186, 238, ("Élément", "Niveau"), lv, (88, 34), rh=4.3, size=2.5, align="lr")
+    notes = ["Même bassin que l'indice E : dimensions, implantation, niveaux, profil du fond, structure, finitions.",
+             "Supprimés : local technique, filtre, bondes BF1-BF2, prise balai, skimmers SK1-SK2, buses R1-R4.",
+             "Ajoutés : puisard + cage + pompe 24 V, regard RV, mur de cascade, boîtier AL.",
+             "Pièces à sceller posées avant coulage ; tranchées remblayées après l'essai de pression 24 h."]
+    s.t(24, 236, "NOTES", "t cl", "start")
+    for i, n in enumerate(notes):
+        s.t(24, 242 + i * 4.6, n, "t tiny2", "start")
+    return _frame(s, "VC-02", "VC-02 Plan général")
+
+
+# ==========================================================================
+# VC-03  Coupes A-A (longitudinale) et B-B (dans l'axe de la pompe)  1/50, aciers
 # ==========================================================================
 
 def vc03():
     s = S("c3")
+    k = 20
+    fin = FINISH
+    pc = PUMP_C
+    zb_deep = FLOOR_DEEP - fin - SLAB - BLIND - HERISSON
+    pit_floor = PIT["floor"]
+    pit_struct = pit_floor - fin - 0.20
+    zb_pit = pit_struct - BLIND - HERISSON
+    sx0, sx1 = PIT["x0"], PIT["x1"]
+    # ---------------- A-A : pool-local x, looking SW (towards the villa), NW on the right
+    XMIN, XMAX = -2.20, 11.15
+    XR = 292
+    X = lambda x: XR - (x - XMIN) * k
+    Z = lambda z: 34 + (0.15 - z) * k
+    wall_o = -(fin + WALL)
+    _earth(s, X, Z, XMIN, XMAX, LV["tn"], zb_pit - 0.30)
+    for (xa, xb_) in ((POOL_L + fin + WALL, POOL_L + fin + WALL + 0.45), (wall_o - 0.45, wall_o)):
+        s.pl([(X(xa), Z(LV["tn"])), (X(xb_), Z(LV["tn"])), (X(xb_), Z(FLOOR_DEEP - 0.5 if xa < 0 else FLOOR_SHALLOW - 0.5)), (X(xa), Z(FLOOR_DEEP - 0.5 if xa < 0 else FLOOR_SHALLOW - 0.5))], "k w1 fgr", True)
+    prof = list(PROFILE)
+    xl, xr_ = wall_o, POOL_L + fin + WALL
+
+    def band(off_top, off_bot, cls):
+        top = [(xl, prof[0][1] - off_top)] + [(x, z - off_top) for x, z in prof] + [(xr_, prof[-1][1] - off_top)]
+        bot = [(xr_, prof[-1][1] - off_bot)] + [(x, z - off_bot) for x, z in reversed(prof)] + [(xl, prof[0][1] - off_bot)]
+        s.pl([(X(a), Z(b)) for a, b in top + bot], cls, True)
+    band(fin + SLAB + BLIND, fin + SLAB + BLIND + HERISSON, "k w1 fst")
+    band(fin + SLAB, fin + SLAB + BLIND, "k w1 fs")
+    band(fin, fin + SLAB, "k w3 fcc")
+    s.pl([(X(wall_o), Z(FLOOR_DEEP - fin - SLAB)), (X(sx1 + 0.20 + fin), Z(FLOOR_DEEP - fin - SLAB)), (X(sx1 + 0.20 + fin), Z(zb_pit)), (X(wall_o), Z(zb_pit))], "k w1 fst", True)
+    s.pl([(X(wall_o), Z(FLOOR_DEEP - fin)), (X(sx1 + 0.20 + fin), Z(FLOOR_DEEP - fin)), (X(sx1 + 0.20 + fin), Z(pit_struct)), (X(wall_o), Z(pit_struct))], "k w3 fcc", True)
+    for xa in (wall_o, POOL_L + fin):
+        zbot = (prof[0][1] if xa < 0 else prof[-1][1]) - fin
+        s.rect(min(X(xa), X(xa + WALL)), Z(LV["beam_top"]), WALL * k, (LV["beam_top"] - zbot) * k, "k w3 fcc")
+    for xa in (-WALK - 0.03, POOL_L - 0.03):
+        s.rect(min(X(xa), X(xa + 0.53)), Z(LV["coping"]), 0.53 * k, 0.07 * k, "k w2 fs")
+    # cascade (cut at y = 2.70)
+    s.pl([(X(POOL_L), Z(CASCADE["top"])), (X(POOL_L + CASCADE["thick"]), Z(CASCADE["top"])), (X(POOL_L + CASCADE["thick"]), Z(LV["beam_top"])), (X(POOL_L), Z(LV["beam_top"]))], "red w3 fcc", True)
+    s.pl([(X(POOL_L - 0.08), Z(SLOT["level"])), (X(POOL_L + 0.05), Z(SLOT["level"]))], "red w4")
+    s.add(f'<path d="M{X(POOL_L - 0.08):.2f} {Z(SLOT["level"]):.2f} q {0.10 * k:.2f} {0.05 * k:.2f} {0.13 * k:.2f} {(SLOT["level"] - LV["water"]) * k:.2f}" class="red w2"/>')
+    # water, pit, steps, lights, ladder
+    wpts = [(0, LV["water"])] + [(x, z) for x, z in prof] + [(POOL_L, LV["water"])]
+    s.pl([(X(a), Z(b)) for a, b in wpts], "k w1 fw", True)
+    s.pl([(X(sx0), Z(FLOOR_DEEP)), (X(sx1), Z(FLOOR_DEEP)), (X(sx1), Z(pit_floor)), (X(sx0), Z(pit_floor))], "k w1 fw", True)
+    s.line((X(sx0), Z(FLOOR_DEEP)), (X(sx1), Z(FLOOR_DEEP)), "k w4")
+    sp = [(POOL_L, LV["coping"] - STEP["rise"])]
+    for i in range(STEP["n_tread"]):
+        xa = POOL_L - STEP["tread"] * (i + 1)
+        z1 = LV["coping"] - STEP["rise"] * (i + 1)
+        sp += [(xa, z1), (xa, z1 - STEP["rise"])]
+    s.pl([(X(a), Z(b)) for a, b in sp + [(POOL_L, FLOOR_SHALLOW)]], "k w1")
+    for (x, y) in FITTINGS["lights"]:
+        s.circ(X(x), Z(LV["water"] - LIGHT_DEPTH), 1.4, "k w1 flt")
+    s.rect(X(FITTINGS["ladder"][0][0] + 0.25), Z(LV["coping"]), 0.5 * k, 1.2 * k, "k w1 dash")
+    # pump cut through the motor, cradle
+    s.add(f'<circle cx="{X(pc["x"]):.2f}" cy="{Z(pc["axis"]):.2f}" r="{pc["sleeve_D"] / 2 * k:.2f}" style="fill:#7cc3dc;fill-opacity:.2;stroke:#1683a8;stroke-width:.3;stroke-dasharray:1 .6"/>')
+    s.add(f'<circle cx="{X(pc["x"]):.2f}" cy="{Z(pc["axis"]):.2f}" r="{pc["D"] / 2 * k:.2f}" style="fill:#c3ccd3;stroke:var(--ink);stroke-width:.3"/>')
+    s.rect(X(pc["x"] + 0.09), Z(pit_floor + pc["cradle"]), 0.18 * k, pc["cradle"] * k, "k w1 fk")
+    # T0 and the valve box beyond (y = 1.62)
+    tube(s, [(X(0.02), Z(STUB_Z)), (X(wall_o - 0.12), Z(STUB_Z)), (X(wall_o - 0.12), Z(RV["z_pipe"])), (X(RV["u"] - U0), Z(RV["z_pipe"]))], "t0", 1.26, 0.55)
+    a = RV["a"] / 2
+    s.pl([(X(RV["u"] - U0 - a - 0.06), Z(RV["top"])), (X(RV["u"] - U0 + a + 0.06), Z(RV["top"])), (X(RV["u"] - U0 + a + 0.06), Z(RV["bottom"] - 0.06)), (X(RV["u"] - U0 - a - 0.06), Z(RV["bottom"] - 0.06))], "k w1 dash", True)
+    s.line((X(RV["u"] - U0 - a - 0.06), Z(RV["top"])), (X(RV["u"] - U0 + a + 0.06), Z(RV["top"])), "red w3")
+    # tube 2 rising in the cascade (beyond, at y = 3.50)
+    tube(s, [(X(CASC_BACK - 0.08 - U0), Z(RV["z_pipe"])), (X(CASC_BACK - 0.08 - U0), Z(SLOT["level"] - 0.01)), (X(POOL_L + fin + 0.11), Z(SLOT["level"] - 0.01))], "t2", 1.26, 0.55)
+    s.line((X(XMIN), Z(LV["tn"])), (X(-WALK - 0.03), Z(LV["tn"])), "k w2")
+    s.line((X(POOL_L + 0.5), Z(LV["tn"])), (X(XMAX), Z(LV["tn"])), "k w2")
+    for z, txt, xx, sd in [(LV["water"], f"{LV['water']:+.2f} eau", 4.0, "r"), (LV["coping"], f"{LV['coping']:+.2f}", 9.0, "r"),
+                           (FLOOR_DEEP, f"{FLOOR_DEEP:+.2f}", 1.45, "r"), (pit_floor, f"{pit_floor:+.2f} puisard", -0.80, "r"),
+                           (FLOOR_SHALLOW, f"{FLOOR_SHALLOW:+.2f}", 8.2, "r"), (CASCADE["top"], f"{CASCADE['top']:+.2f} arase", POOL_L + 0.20, "l"),
+                           (SLOT["level"], f"{SLOT['level']:+.2f} lame", POOL_L - 0.35, "l"), (RV["top"], f"{RV['top']:+.2f} RV", -1.75, "r")]:
+        s.level(X(xx), Z(z), txt, side=sd, section=True)
+    s.dim((X(1.35), Z(LV["water"])), (X(1.35), Z(FLOOR_DEEP)), 0, f"{WATER_DEEP:.2f}")
+    s.dim((X(sx1 + 0.08), Z(FLOOR_DEEP)), (X(sx1 + 0.08), Z(pit_floor)), 0, f"{PIT['depth']:.2f}", size=2.4)
+    chain = [RV["u"] - U0, wall_o, 0, sx1, POOL_L, POOL_L + CASCADE["thick"]]
+    zz = Z(zb_pit - 0.30) + 5
+    for a_, b_ in zip(chain, chain[1:]):
+        s.dim((X(a_), zz), (X(b_), zz), 0, f"{abs(b_ - a_):.2f}")
+    s.t(X(pc["x"]), Z(pit_floor - 0.62), "PU", "t tiny2 b")
+    s.t(X(RV["u"] - U0), Z(RV["top"] + 0.22), "RV (au-delà)", "t tiny2 b red-t")
+    s.t(X(wall_o - 0.12) + 1.5, Z(-1.75), "T0 (au-delà)", "t tiny2", "start")
+    s.t(X(POOL_L + 0.20), Z(CASCADE["top"] + 0.32), "CAS", "t tiny2 b red-t")
+    s.t(X(POOL_L + 0.20) - 2.5, Z(-0.95) + 1, "tube 2 (au-delà)", "t tiny2", "end")
+    s.t(X(POOL_L / 2), 22, f"COUPE A-A  (longitudinale à {SEC_A_Y:.2f} du bord SO, vue vers la villa)  1/50", "t ct", "middle")
+    s.t(X(0.25), zz + 7, "GRAND FOND - PUISARD (côté NO)", "t tiny2 b", "middle")
+    s.t(X(POOL_L - 1.25), zz + 7, "PETIT BAIN - CASCADE (côté allée)", "t tiny2 b", "middle")
+    # ---------------- B-B : across the pool at the pump axis, looking NW, v to the right
+    VMIN = POOL["v0"] - 2.40
+    Xb = lambda v: 24 + (v - VMIN) * k
+    Zb = lambda z: 150 + (0.15 - z) * k
+    vmax = POOL["v1"] + 1.60
+    pv0, pv1 = POOL["v0"], POOL["v1"]
+    s.pl([(Xb(VMIN), Zb(LV["tn"])), (Xb(vmax), Zb(LV["tn"])), (Xb(vmax), Zb(zb_pit - 0.30)), (Xb(VMIN), Zb(zb_pit - 0.30))], "k w1 fea", True)
+    s.rect(Xb(pv0 - WALL - fin - 0.45), Zb(LV["tn"]), (POOL_W + 2 * (WALL + fin + 0.45)) * k, (LV["tn"] - (FLOOR_DEEP - fin - SLAB)) * k, "k w1 fgr")
+    s.rect(Xb(pv0 - WALL - fin - 0.45), Zb(FLOOR_DEEP - fin - SLAB), (POOL_W + 2 * (WALL + fin + 0.45)) * k, (BLIND + HERISSON) * k, "k w1 fst")
+    s.rect(Xb(pv0 - WALL - fin), Zb(FLOOR_DEEP - fin), (POOL_W + 2 * (WALL + fin)) * k, SLAB * k, "k w3 fcc")
+    sy0, sy1 = pv0 + PIT["y0"], pv0 + PIT["y1"]
+    s.rect(Xb(sy0 - 0.20 - fin), Zb(FLOOR_DEEP - fin - SLAB), (sy1 - sy0 + 0.40 + 2 * fin) * k, (FLOOR_DEEP - fin - SLAB - zb_pit) * k, "k w1 fst")
+    s.rect(Xb(sy0 - 0.20 - fin), Zb(FLOOR_DEEP - fin), (sy1 - sy0 + 0.40 + 2 * fin) * k, (FLOOR_DEEP - fin - pit_struct) * k, "k w3 fcc")
+    for vv in (pv0 - WALL - fin, pv1 + fin):
+        s.rect(Xb(vv), Zb(LV["beam_top"]), WALL * k, (LV["beam_top"] - (FLOOR_DEEP - fin)) * k, "k w3 fcc")
+    s.rect(Xb(pv0), Zb(LV["water"]), POOL_W * k, (LV["water"] - FLOOR_DEEP) * k, "k w1 fw")
+    s.rect(Xb(sy0), Zb(FLOOR_DEEP), (sy1 - sy0) * k, PIT["depth"] * k, "k w1 fw")
+    s.line((Xb(sy0), Zb(FLOOR_DEEP)), (Xb(sy1), Zb(FLOOR_DEEP)), "k w4")
+    for vv in (pv0 - WALK, pv1 - 0.03):
+        s.rect(Xb(vv), Zb(LV["coping"]), 0.53 * k, 0.07 * k, "k w2 fs")
+    s.pl([(Xb(VMIN), Zb(LV["deck_low"])), (Xb(pv0 - WALK), Zb(LV["deck_edge"])), (Xb(pv0 - WALK), Zb(LV["deck_edge"] - 0.12)), (Xb(VMIN), Zb(LV["deck_low"] - 0.12))], "k w1 fs", True)
+    # the pump lying in the pit (side view), its hose to T0 and its cable to the conduit (on the NW wall, behind)
+    Yb = lambda y: Xb(pv0 + y)
+    for yy in (pc["y0"] + 0.25, (pc["y_inlet"] + pc["y1"]) / 2, pc["y1"] - 0.12):
+        s.rect(Yb(yy) - 0.4, Zb(pc["axis"] - pc["sleeve_D"] / 2), 0.8, (pc["axis"] - pc["sleeve_D"] / 2 - pit_floor) * k, "k w1 fk")
+    ex, ez = pump_side(s, Yb, Zb(pc["axis"]), k)
+    tube(s, [(Yb(pc["y0"] - 0.075), Zb(pc["axis"])), (Yb(OUT_STUB_Y), Zb(STUB_Z))], "t0", 0.8)
+    s.circ(Yb(OUT_STUB_Y), Zb(STUB_Z), 0.9, "k w2 fs")
+    blue_cable(s, [(ex, ez), (ex - 0.6, ez - 1.2), (Yb(CABLE_Y), Zb(STUB_Z))], 0.4)
+    s.circ(Yb(CABLE_Y), Zb(STUB_Z), 0.6, "k w1 fs")
+    for vv in (pv0 - WALL - fin - 0.30, pv1 + WALL + fin + 0.30):
+        s.circ(Xb(vv), Zb(FLOOR_DEEP - fin - SLAB + 0.05), 0.9, "pipe-d w2")
+    s.add(f'<circle cx="{Xb(NE_A2):.2f}" cy="{Zb(RV["z_pipe"]):.2f}" r="1.26" style="fill:#ffffff;stroke:{TUBE["t2"][0]};stroke-width:.6"/>')
+    s.line((Xb(pv1 + 0.5), Zb(LV["tn"])), (Xb(vmax), Zb(LV["tn"])), "k w2")
+    for z, txt, vv, sd in [(LV["water"], f"{LV['water']:+.2f}", pv0 + 0.6, "r"), (FLOOR_DEEP, f"{FLOOR_DEEP:+.2f}", pv0 + 0.55, "r"),
+                           (pit_floor, f"{pit_floor:+.2f}", sy1 + 0.1, "r"), (LV["deck_low"], f"{LV['deck_low']:+.2f} plage", VMIN + 0.4, "r"),
+                           (LV["tn"], f"{LV['tn']:+.2f} TN", pv1 + 0.9, "r")]:
+        s.level(Xb(vv), Zb(z), txt, side=sd, section=True)
+    zz = Zb(zb_pit - 0.30) + 5
+    ch = [pv0, sy0, sy1, pv1]
+    for a_, b_ in zip(ch, ch[1:]):
+        s.dim((Xb(a_), zz), (Xb(b_), zz), 0, f"{b_ - a_:.2f}")
+    s.dim((Yb(pc["y0"]), Zb(pc["axis"]) - 6), (Yb(pc["y1"]), Zb(pc["axis"]) - 6), 0, f"pompe {pc['L']:.2f}", size=2.4)
+    s.t(Xb(pv0 + 2.5), Zb(-1.55), "pompe 24 V couchée sous la cage", "t tiny2", "middle")
+    s.t(Xb(pv1 + 0.95), Zb(-1.62), "tube 2", "t tiny2", "middle")
+    s.t(Xb((VMIN + vmax) / 2), 138, "COUPE B-B  (dans l'axe de la pompe, vue vers le voile NO)  1/50", "t ct", "middle")
+    # ---- hatch legend + key plan (right of B-B)
+    lg = [("k w2 fcc", "Béton armé B25 + hydrofuge"), ("k w1 fst", "Hérisson 40/80"), ("k w1 fgr", "Gravier drainant 15/25"),
+          ("k w1 fea", "Terrain en place"), ("k w1 fw", "Eau")]
+    s.t(222, 146, "HACHURES", "t cl", "start")
+    for i, (c_, t_) in enumerate(lg):
+        s.rect(222, 149 + i * 6, 9, 4.2, c_)
+        s.t(234, 152.4 + i * 6, t_, "t cs", "start")
+    kp, kk = (300, 192), 4.0
+    KP = lambda u, v: (kp[0] - (u - 2.4) * kk, kp[1] + (v - POOL["v0"] + 0.8) * kk)
+    s.t(222, 186, "PLAN DE REPÉRAGE  1/250", "t cl", "start")
+    s.pl([KP(*p) for p in rect_uv(POOL["u0"], POOL["v0"], POOL["u1"], POOL["v1"])], "red w2 fw", True)
+    s.pl([KP(*p) for p in rect_uv(U0 + PIT["x0"], V0 + PIT["y0"], U0 + PIT["x1"], V0 + PIT["y1"])], "k w2 fs", True)
+    s.pl([KP(*p) for p in rect_uv(POOL["u1"], CASC_V[0], CASC_BACK, CASC_V[1])], "red w2 fcc", True)
+    x_, y_ = KP(RV["u"], RV["v"])
+    s.rect(x_ - 0.8, y_ - 0.8, 1.6, 1.6, "red w1 fs")
+    x_, y_ = KP(AL["u"], AL["v"])
+    s.rect(x_ - 0.8, y_ - 0.8, 1.6, 1.6, "k w1 fk")
+    s.t(x_, y_ + 4.2, "AL", "t tiny")
+    for (a_, b_, nm) in (((RV["u"] - 0.6, V0 + SEC_A_Y), (CASC_BACK + 0.6, V0 + SEC_A_Y), "A"), ((U0 + SEC_B_X, V0 - 0.6), (U0 + SEC_B_X, POOL["v1"] + 0.6), "B")):
+        pa, pb = KP(*a_), KP(*b_)
+        s.line(pa, pb, "k w1 axis")
+        for pp in (pa, pb):
+            s.circ(pp[0], pp[1], 1.8, "k w1 fs")
+            s.t(pp[0], pp[1] + 0.9, nm, "t tiny2 b")
+    x_, y_ = KP((POOL["u0"] + POOL["u1"]) / 2, POOL["v0"] - 0.9)
+    s.t(x_, y_, "villa", "t tiny mute")
+    # ---- rebar of the variant + notes
+    rb = [(str(b["pos"]), b["desc"], f"HA{b['d']}", str(b["n"]), f"{b['L']:.2f}", f"{b['kg']:.1f}") for b in RC["rebar"]]
+    rb.append(("", "Total variante (en plus de la nomenclature PL-05)", "", "", "", f"{RC['steel']:.1f}"))
+    s.t(170, 242, "ACIERS DE LA VARIANTE C (FeE500)", "t cl", "start")
+    table(s, 170, 244, ("Rep.", "Désignation", "Ø", "Nb", "L (m)", "kg"), rb, (9, 88, 10, 9, 11, 14), rh=4.4, size=2.3)
+    pl_, pw_, pd_ = RC["caisson"]
+    notes = ["Le bassin de l'indice E est conservé : radier, voiles, chaînage, profil du fond.",
+             f"Seul ajout sous le radier : le caisson du puisard {pl_:.2f} × {pw_:.2f} × {pd_:.2f}, coulé avec le radier.",
+             "Ouverture du radier bordée de chevêtres HA12 (repère 16) ; cage posée au ras du fond.",
+             "Membrane du bassin continue dans le puisard ; une seule sortie (T0) et un fourreau",
+             "de câble traversent le voile NO, par fourreaux à collerette posés avant coulage.",
+             f"Béton du caisson : {RC['c_pit']:.2f} m³ ; surface étanchée du puisard : {RC['pit_surf']:.2f} m².",
+             "Prédimensionnement BAEL 91 mod. 99 à faire vérifier et viser par un BET agréé (RPS 2000)."]
+    s.t(24, 242, "NOTES", "t cl", "start")
+    for i, n in enumerate(notes):
+        s.t(24, 248 + i * 4.6, n, "t tiny2", "start")
+    return _frame(s, "VC-03", "VC-03 Coupes")
+
+
+# ==========================================================================
+# VC-06  Tracés 1/200, coupe de la cascade 1/20, regard RV 1/10, positions des vannes, pertes de charge
+# ==========================================================================
+
+def vc06():
+    s = S("c6")
     # ---- routes 1/200 (rotated like PL-02: villa at the top, NW on the right)
     UMIN, VMIN = 1.2, 12.6
     P, k = rot_view(118, 24, UMIN, VMIN, 200)
     s.k = k
-    s.add('<defs><clipPath id="c3p"><rect x="22" y="22" width="96" height="96"/></clipPath></defs><g clip-path="url(#c3p)">')
+    s.add('<defs><clipPath id="c6p"><rect x="22" y="22" width="96" height="98"/></clipPath></defs><g clip-path="url(#c6p)">')
     s.pl([P(*p) for p in rect_uv(UMIN, VMIN, 21.0, 32.6)], "k w1 fgz", True)
     s.pl([P(*p) for p in rect_uv(HOUSE["u0"], VMIN, HOUSE["u1"], HOUSE["v1"])], "k w2 fhx", True)
     s.pl([P(*p) for p in rect_uv(POOL["u0"] - WALK, POOL["v0"] - WALK, POOL["u1"] + WALK, POOL["v1"] + WALK)], "k w1 fs", True)
     s.pl([P(*p) for p in rect_uv(POOL["u0"], POOL["v0"], POOL["u1"], POOL["v1"])], "red w2 fw", True)
-    s.pl([P(*p) for p in rect_uv(POOL["u0"] + PIT["x0"], POOL["v0"] + PIT["y0"], POOL["u0"] + PIT["x1"], POOL["v0"] + PIT["y1"])], "k w2 fs", True)
+    s.pl([P(*p) for p in rect_uv(U0 + PIT["x0"], V0 + PIT["y0"], U0 + PIT["x1"], V0 + PIT["y1"])], "k w2 fs", True)
     draw_cascade_plan(s, P)
-    s.pl([P(*p) for p in rect_uv(CAB["u0"], CAB["v0"], CAB["u1"], CAB["v1"])], "red w2 fs", True)
-    s.pl([P(*p) for p in rect_uv(RV["u"] - RV["a"] / 2, RV["v"] - RV["a"] / 2, RV["u"] + RV["a"] / 2, RV["v"] + RV["a"] / 2)], "red w2 fs", True)
-    draw_post_plan(s, P)
-    x_, y_ = P(AL["u"], AL["v"])
-    s.rect(x_ - 1.2, y_ - 1.2, 2.4, 2.4, "k w2 fk")
     x_, y_ = P(SOAKAWAY["u"], SOAKAWAY["v"])
     s.circ(x_, y_, SOAKAWAY["r"] * k, "k w1 fst")
-    for key, cls in (("T0", "t0"), ("T2", "t2"), ("T1", "t1"), ("T1_out", "t1")):
-        pts = [P(*p) for p in C.ROUTES[key]]
-        s.add(f'<polyline points="{" ".join(f"{x:.2f},{y:.2f}" for x, y in pts)}" style="fill:none;stroke:{TUBE[cls][0]};stroke-width:.9;stroke-linejoin:round{";stroke-dasharray:2 .8" if cls == "t1" else ""}"/>')
-    _dc_line(s, [P(*p) for p in C.ROUTES["DC"]], 0.6)
-    s.add(f'<polyline points="{" ".join(f"{x:.2f},{y:.2f}" for x, y in (P(*p) for p in C.ROUTES["CABLE"]))}" style="fill:none;stroke:#7b3fb0;stroke-width:.6"/>')
+    tube(s, [P(*p) for p in ROUTES["T0"]], "t0", 0.9)
+    tube(s, [P(*p) for p in ROUTES["T2"]], "t2", 0.9)
+    tube(s, [P(*p) for p in ROUTES["T1"]], "t1", 0.9)
+    s.pl([P(*p) for p in ROUTES["DC"]], "selv w2")
+    s.pl([P(*p) for p in ROUTES["LIGHT"]], "selv w1")
+    s.pl([P(*p) for p in ROUTES["CABLE"]], "elec w2")
+    draw_rv_plan(s, P, "red w2 fs")
+    draw_al_plan(s, P)
     s.add("</g>")
     for t_, (u, v), a in (("puisard", (POOL["u0"] + 0.30, POOL["v0"] + 3.4), "start"), ("RV", (RV["u"] - 0.4, RV["v"] - 0.5), "start"), ("AL", (AL["u"] - 0.5, AL["v"] + 0.4), "start"),
-                          ("borne", (POST["u"] - 0.5, POST["v"] + 0.6), "start"), ("coffre filtre", (CAB["u1"] + 0.3, CAB["v1"] + 0.9), "end"), ("CP", (COFFRET["u"], COFFRET["v"] - 0.5), "middle"),
-                          ("tube 2", ((POOL["u0"] + POOL["u1"]) / 2, POOL["v1"] + 1.5), "middle"), ("tube 1", (POST["u"] + 0.4, 27.5), "end"), ("puits perdu", (SOAKAWAY["u"], SOAKAWAY["v"] - 1.3), "middle")):
+                          ("cascade", (CASC_BACK + 0.3, CASC_V[1] + 0.9), "end"), ("TGBT villa", (COFFRET["u"], COFFRET["v"] - 0.5), "middle"),
+                          ("tube 2", ((POOL["u0"] + POOL["u1"]) / 2, POOL["v1"] + 1.5), "middle"), ("tube 1", (ROUTES["T1"][1][0] + 0.4, 27.5), "end"),
+                          ("puits perdu", (SOAKAWAY["u"], SOAKAWAY["v"] - 1.3), "middle")):
         x_, y_ = P(u, v)
         s.t(x_, y_, t_, "t tiny2 b", a)
     s.t(70, 20, "TRACÉS  1/200", "t cl", "middle")
-    # ---- filter cabinet behind the cascade 1/20 (section along u, looking NE)
+    # ---- cascade C-C 1/20 : tube 2 rises in the wall to the distribution chamber
     K = 50
-    FX = lambda u: 132 + (u - (POOL["u1"] - 0.25)) * K
-    FZ = lambda z: 30 + (0.05 - z) * K
-    s.add('<defs><clipPath id="c3c"><rect x="126" y="26" width="84" height="86"/></clipPath></defs><g clip-path="url(#c3c)">')
-    s.rect(FX(POOL["u1"] - 0.25), FZ(LV["water"]), 0.25 * K, 0.70 * K, "k w1 fw")
-    s.rect(FX(CAB["u1"]), FZ(LV["deck_low"]), 0.50 * K, 0.95 * K, "k w1 fea")
-    s.rect(FX(POOL["u1"] + fin), FZ(CASCADE["top"] - 0.05), WALL * K, (CASCADE["top"] - 0.05 + 1.60) * K, "k w3 fcc")
-    s.rect(FX(POOL["u1"] + fin + WALL), FZ(CASCADE["top"] - 0.05), (CASC_BACK - POOL["u1"] - fin - WALL) * K, (CASCADE["top"] - 0.05 - LV["beam_top"]) * K, "k w2 fea2")
-    s.rect(FX(CAB["u0"]), FZ(CAB["top"] - 0.05), (CAB["u1"] - CAB["u0"]) * K, (CAB["top"] - 0.05 - CAB["bottom"]) * K, "k w1 fs")
-    s.rect(FX(CAB["u1"]), FZ(CAB["top"] - 0.05), 0.10 * K, (CAB["top"] - 0.05 - CAB["bottom"] + 0.10) * K, "k w3 fcc")
-    s.rect(FX(CAB["u0"]), FZ(CAB["bottom"]), (CAB["u1"] - CAB["u0"] + 0.10) * K, 0.10 * K, "k w3 fcc")
-    s.rect(FX(POOL["u1"] - 0.03), FZ(CAB["top"]), (CAB["u1"] - POOL["u1"] + 0.16) * K, 0.05 * K, "k w2 fs")
-    fu = (CAB["u0"] + CAB["u1"]) / 2
-    s.rect(FX(fu - FILTER["D"] / 2 + 0.03), FZ(CAB["bottom"] + 0.08 + FILTER["H"] - 0.12), (FILTER["D"] - 0.06) * K, (FILTER["H"] - 0.12) * K, "k w2 fs")
-    s.add(f'<polyline points="{FX(CAB["u1"] + 0.6):.2f},{FZ(-1.20):.2f} {FX(fu):.2f},{FZ(-1.20):.2f} {FX(fu):.2f},{FZ(CAB["bottom"] + 0.10):.2f}" style="fill:none;stroke:{TUBE["t2"][0]};stroke-width:3.15;stroke-linejoin:round"/>')
-    s.add(f'<polyline points="{FX(fu - 0.08):.2f},{FZ(-0.28):.2f} {FX(POOL["u1"] + fin + 0.11):.2f},{FZ(-0.28):.2f} {FX(POOL["u1"] + fin + 0.11):.2f},{FZ(SLOT["level"]):.2f}" style="fill:none;stroke:{TUBE["t2"][0]};stroke-width:3.15;stroke-linejoin:round"/>')
-    s.rect(FX(POOL["u1"] + fin), FZ(SLOT["level"] + 0.07), 0.11 * K, 0.15 * K, "k w2 fs")
-    s.line((FX(POOL["u1"] + fin), FZ(SLOT["level"])), (FX(POOL["u1"] - 0.08), FZ(SLOT["level"])), "k w3")
-    s.add(f'<path d="M{FX(POOL["u1"] - 0.08):.2f} {FZ(SLOT["level"]):.2f} q {-0.08 * K:.2f} {0.03 * K:.2f} {-0.10 * K:.2f} {(SLOT["level"] - LV["water"]) * K:.2f}" style="fill:none;stroke:#1683a8;stroke-width:.8"/>')
-    gauge(s, FX(fu + 0.08), FZ(-0.30), 1.4)
+    FX = lambda u: 132 + (u - (POOL["u1"] - 0.30)) * K
+    FZ = lambda z: 30 + (0.02 - z) * K
+    core0, core1 = POOL["u1"] + FINISH, POOL["u1"] + FINISH + WALL
+    zb_slab = FLOOR_SHALLOW - FINISH - SLAB
+    s.add('<defs><clipPath id="c6c"><rect x="126" y="26" width="86" height="94"/></clipPath></defs><g clip-path="url(#c6c)">')
+    s.rect(FX(core1), FZ(LV["tn"]), 0.80 * K, (LV["tn"] + 1.95) * K, "k w1 fea")
+    s.rect(FX(core1), FZ(LV["beam_top"]), 0.45 * K, (LV["beam_top"] - zb_slab) * K, "k w1 fgr")
+    s.rect(FX(POOL["u1"] - 0.30), FZ(FLOOR_SHALLOW - FINISH), (core1 - POOL["u1"] + 0.30) * K, SLAB * K, "k w3 fcc")
+    s.rect(FX(POOL["u1"] - 0.30), FZ(zb_slab), (core1 + 0.45 - POOL["u1"] + 0.30) * K, BLIND * K, "k w1 fs")
+    s.rect(FX(core0), FZ(CASCADE["top"] - 0.05), WALL * K, (CASCADE["top"] - 0.05 - (FLOOR_SHALLOW - FINISH)) * K, "k w3 fcc")
+    s.rect(FX(core1), FZ(CASCADE["top"] - 0.05), (CASC_BACK - core1) * K, (CASCADE["top"] - 0.05 - LV["beam_top"]) * K, "k w2 fea2")
+    s.rect(FX(POOL["u1"] - 0.03), FZ(CASCADE["top"]), (CASCADE["thick"] + 0.06) * K, 0.05 * K, "k w2 fs")
+    s.rect(FX(POOL["u1"]), FZ(LV["coping"] + 0.05), FINISH * K, (LV["coping"] + 0.05 - FLOOR_SHALLOW) * K, "k w1 fs")
+    s.line((FX(POOL["u1"]), FZ(CASCADE["top"] - 0.05)), (FX(POOL["u1"]), FZ(FLOOR_SHALLOW)), "memb")
+    s.line((FX(POOL["u1"] - 0.30), FZ(FLOOR_SHALLOW)), (FX(POOL["u1"]), FZ(FLOOR_SHALLOW)), "memb")
+    s.pl([(FX(POOL["u1"] - 0.30), FZ(LV["water"])), (FX(POOL["u1"]), FZ(LV["water"])), (FX(POOL["u1"]), FZ(FLOOR_SHALLOW)), (FX(POOL["u1"] - 0.30), FZ(FLOOR_SHALLOW))], "k w1 fw", True)
+    bz0, bz1 = SLOT["level"] - 0.08, SLOT["level"] + 0.07
+    s.pl([(FX(core0), FZ(bz1)), (FX(core0 + 0.11), FZ(bz1)), (FX(core0 + 0.11), FZ(bz0)), (FX(core0), FZ(bz0))], "k w3 fs", True)
+    s.pl([(FX(core0 + 0.11), FZ(bz1 + 0.01)), (FX(core0 + 0.11), FZ(bz1)), (FX(POOL["u1"] - 0.08), FZ(SLOT["level"] + 0.003)), (FX(POOL["u1"] - 0.08), FZ(SLOT["level"] - 0.003))], "k w2 fs")
+    s.pl([(FX(core0 + 0.11), FZ(bz0)), (FX(POOL["u1"] - 0.08), FZ(SLOT["level"] - 0.010))], "k w2")
+    s.add(f'<path d="M{FX(POOL["u1"] - 0.08):.2f} {FZ(SLOT["level"]):.2f} q {-0.10 * K:.2f} {0.03 * K:.2f} {-0.13 * K:.2f} {(SLOT["level"] - LV["water"]) * K:.2f}" class="pipe-s w4"/>')
+    ru = CASC_BACK - 0.08
+    tube(s, [(FX(ru), FZ(RV["z_pipe"])), (FX(ru), FZ(SLOT["level"] - 0.01)), (FX(core0 + 0.11), FZ(SLOT["level"] - 0.01))], "t2", 0.063 * K)
+    s.circ(FX(ru), FZ(RV["z_pipe"]), 0.063 * K / 2 + 0.4, "k w2 fs")
+    s.rect(FX(core1 - 0.01), FZ(SLOT["level"] + 0.04), 0.02 * K, 0.10 * K, "k w2 fk")
+    s.rect(FX(core1 + 0.45), FZ(LV["tn"] + 0.05), 0.40 * K, 0.05 * K, "k w1 fgz")
     s.add("</g>")
-    for z, t_ in ((CAB["top"], f"{CAB['top']:+.2f}"), (LV["water"], f"{LV['water']:+.2f}"), (CAB["bottom"], f"{CAB['bottom']:+.2f}")):
-        s.level(FX(CAB["u1"] + 0.14), FZ(z), t_, side="r", section=True)
-    for t_, (xx, yy) in (("F", (FX(fu), FZ(-0.70))), ("tube 2", (FX(CAB["u1"] + 0.35), FZ(-1.26))), ("lame", (FX(POOL["u1"] - 0.15), FZ(SLOT["level"]) - 2))):
-        s.t(xx, yy, t_, "t tiny2 b")
-    s.t(168, 20, "COFFRE DU FILTRE (mur de cascade)  1/20", "t cl", "middle")
-    # ---- valve box RV 1/10
+    for z, t_, x_, sd in [(CASCADE["top"], f"{CASCADE['top']:+.2f} arase", CASC_BACK + 0.04, "r"), (SLOT["level"], f"{SLOT['level']:+.2f} lame", POOL["u1"] - 0.27, "r"),
+                          (LV["water"], f"{LV['water']:+.2f} eau", POOL["u1"] - 0.27, "r"), (FLOOR_SHALLOW, f"{FLOOR_SHALLOW:+.2f} fond", POOL["u1"] - 0.27, "r"),
+                          (RV["z_pipe"], f"{RV['z_pipe']:+.2f} tube 2", CASC_BACK + 0.15, "r")]:
+        s.level(FX(x_), FZ(z), t_, side=sd, section=True)
+    for txt, (u, z), (qx, qy) in [("chambre de répartition inox + lame 600 × 6 mm", (core0 + 0.05, bz1 - 0.02), (128, 125)),
+                                  ("tube 2 Ø63 arrive de la tranchée et remonte dans le mur", (ru, -0.75), (128, 130.5))]:
+        s.line((FX(u), FZ(z)), (qx + 52, qy - 1.6), "k w1")
+        s.circ(FX(u), FZ(z), 0.45, "k w1 fk")
+        s.t(qx, qy, txt, "t tiny2", "start", size=2.2)
+    s.t(169, 20, "COUPE C-C : CASCADE (sans filtre)  1/20", "t cl", "middle")
+    # ---- valve box RV 1/10 : tee, V2 on tube 2, V1 on tube 1
     K2 = 100
     RX = lambda d: 262 + d * K2
     RZ = lambda z: 30 + (-0.66 - z) * K2
-    s.rect(RX(-0.40), RZ(LV["deck_edge"]), 0.80 * K2, 0.62 * K2, "k w1 fea")
-    s.rect(RX(-0.25), RZ(LV["deck_edge"]), 0.50 * K2, RV["depth"] * K2, "k w1 fs")
-    s.rect(RX(-0.31), RZ(LV["deck_edge"]), 0.06 * K2, (RV["depth"] + 0.06) * K2, "k w2 fcc")
-    s.rect(RX(0.25), RZ(LV["deck_edge"]), 0.06 * K2, (RV["depth"] + 0.06) * K2, "k w2 fcc")
-    s.rect(RX(-0.25), RZ(RV["bottom"]), 0.50 * K2, 0.06 * K2, "k w1 fgr")
-    s.rect(RX(-0.31), RZ(LV["deck_edge"]) - 0.6, 0.62 * K2, 2.2, "red w2 fs")
-    zz = -1.00
-    s.add(f'<polyline points="{RX(-0.40):.2f},{RZ(zz):.2f} {RX(-0.05):.2f},{RZ(zz):.2f}" style="fill:none;stroke:{TUBE["t0"][0]};stroke-width:6.3"/>')
-    s.add(f'<polyline points="{RX(0.05):.2f},{RZ(zz):.2f} {RX(0.40):.2f},{RZ(zz):.2f}" style="fill:none;stroke:{TUBE["t2"][0]};stroke-width:6.3"/>')
-    s.add(f'<polyline points="{RX(0.0):.2f},{RZ(zz) + 3:.2f} {RX(0.0):.2f},{RZ(-1.22):.2f} {RX(0.40):.2f},{RZ(-1.22):.2f}" style="fill:none;stroke:{TUBE["t1"][0]};stroke-width:5;stroke-linejoin:round"/>')
-    s.pl([(RX(-0.05), RZ(zz) - 3.2), (RX(-0.05), RZ(zz) + 3.2), (RX(0.05), RZ(zz) - 3.2), (RX(0.05), RZ(zz) + 3.2)], "k w2 fs", True)
-    s.line((RX(0), RZ(zz)), (RX(0), RZ(zz) - 7), "k w3")
-    s.line((RX(0), RZ(zz) - 7), (RX(0.10), RZ(zz) - 7), "red w4")
-    for t_, (xx, yy), a in (("T0", (RX(-0.38), RZ(zz) - 4.5), "start"), ("tube 2", (RX(0.38), RZ(zz) - 4.5), "end"), ("tube 1", (RX(0.38), RZ(-1.22) + 6), "end"),
-                            ("V-C", (RX(0.12), RZ(zz) - 6.2), "start"), ("couvercle à carreler", (RX(0), RZ(LV["deck_edge"]) - 2.6), "middle")):
-        s.t(xx, yy, t_, "t tiny2 b", a)
-    s.level(RX(-0.36), RZ(LV["deck_edge"]), f"{LV['deck_edge']:+.2f}", side="l", section=True)
+    a = RV["a"] / 2
+    s.rect(RX(-0.44), RZ(LV["deck_edge"]), 0.88 * K2, (RV["depth"] + 0.12) * K2, "k w1 fea")
+    s.rect(RX(-a), RZ(RV["top"]), 2 * a * K2, RV["depth"] * K2, "k w1 fs")
+    s.rect(RX(-a - 0.06), RZ(RV["top"]), 0.06 * K2, (RV["depth"] + 0.06) * K2, "k w2 fcc")
+    s.rect(RX(a), RZ(RV["top"]), 0.06 * K2, (RV["depth"] + 0.06) * K2, "k w2 fcc")
+    s.rect(RX(-a), RZ(RV["bottom"]), 2 * a * K2, 0.06 * K2, "k w1 fgr")
+    s.rect(RX(-a - 0.06), RZ(RV["top"]) - 0.6, (2 * a + 0.12) * K2, 2.2, "red w2 fs")
+    zz, z1 = RV["z_pipe"], RV["z_t1"]
+    tube(s, [(RX(-0.44), RZ(zz)), (RX(-0.03), RZ(zz))], "t0", 6.3)
+    tube(s, [(RX(0.03), RZ(zz)), (RX(0.44), RZ(zz))], "t2", 6.3)
+    tube(s, [(RX(0.0), RZ(zz) + 3.2), (RX(0.0), RZ(z1)), (RX(0.44), RZ(z1))], "t1", 5.0)
+    s.rect(RX(-0.035), RZ(zz) - 3.6, 0.07 * K2, 7.2, "k w2 fs")
+    s.t(RX(0), RZ(zz) + 0.9, "té", "t tiny", "middle")
+    valve(s, RX(0.16), RZ(zz), r=3.0)
+    s.line((RX(0.16), RZ(zz)), (RX(0.16), RZ(zz) - 7), "k w3")
+    s.line((RX(0.16), RZ(zz) - 7), (RX(0.26), RZ(zz) - 7), "red w4")
+    valve(s, RX(0.20), RZ(z1), r=2.4)
+    s.line((RX(0.20), RZ(z1)), (RX(0.20), RZ(z1) - 5), "k w3")
+    s.line((RX(0.20), RZ(z1) - 5), (RX(0.29), RZ(z1) - 5), "red w4")
+    for t_, (xx, yy), a_ in (("T0 (pompe)", (RX(-0.42), RZ(zz) + 6.8), "start"), ("tube 2", (RX(0.43), RZ(zz) - 4.5), "end"),
+                             ("tube 1", (RX(0.43), RZ(z1) + 6.2), "end"), ("V2", (RX(0.145), RZ(zz) - 6.4), "end"), ("V1", (RX(0.30), RZ(z1) - 4.2), "start"),
+                             ("couvercle au ras du sol", (RX(0), RZ(RV["top"]) - 2.6), "middle")):
+        s.t(xx, yy, t_, "t tiny2 b", a_)
+    s.level(RX(-0.40), RZ(RV["top"]), f"{RV['top']:+.2f}", side="l", section=True)
+    s.dim((RX(-a), RZ(RV["bottom"]) + 9), (RX(a), RZ(RV["bottom"]) + 9), 0, f"{RV['a']:.2f}", size=2.4)
+    s.dim((RX(-a - 0.10), RZ(RV["top"])), (RX(-a - 0.10), RZ(RV["bottom"])), 0, f"{RV['depth']:.2f}", size=2.4)
     s.t(262, 20, "REGARD DE VANNES RV  1/10", "t cl", "middle")
-    # ---- electrical + hydraulic single line
-    y0 = 128
-    s.t(24, y0 - 4, "SCHÉMA ÉLECTRIQUE TBTS ET POSITIONS DE LA VANNE V-C", "t cl", "start")
-    s.rect(24, y0, 26, 10, "k w2 fs")
-    s.t(37, y0 + 4.2, "TGBT villa", "t tiny2 b")
-    s.t(37, y0 + 8.0, "230 V", "t tiny")
-    s.line((50, y0 + 5), (58, y0 + 5), "k w2")
-    s.rect(58, y0, 44, 10, "red w2 fs")
-    s.t(80, y0 + 4.2, "Coffret CP (façade, hors volumes)", "t tiny2 b")
-    s.t(80, y0 + 8.0, "Q0 cadenassable, DDR 30 mA type A, 16 A", "t tiny")
-    s.line((102, y0 + 5), (122, y0 + 5), "elec w3")
-    s.t(112, y0 + 3.4, "3G2.5", "t tiny")
-    s.rect(122, y0, 50, 10, "k w2 fs")
-    s.t(147, y0 + 4.2, f"AL : alimentation de sécurité {C.U_DC:.0f} V CC", "t tiny2 b")
-    s.t(147, y0 + 8.0, f"poteau à {POOL['u0'] - AL['u']:.2f} m du bassin, hors volumes", "t tiny")
-    _dc_line(s, [(172, y0 + 5), (196, y0 + 5)], 1.0)
-    s.t(184, y0 + 3.4, f"2 × {RC['cable']['s']:g} mm²", "t tiny")
-    s.rect(196, y0, 40, 10, "k w2 fs")
-    s.t(216, y0 + 4.2, "Pompe P dans le puisard", "t tiny2 b")
-    s.t(216, y0 + 8.0, f"{C.U_DC:.0f} V CC, {RC['p1_dirty']:.0f} W maxi", "t tiny")
-    s.t(24, y0 + 17, "La source TBTS (transformateur de sécurité) est hors des volumes 0, 1 et 2 : dans l'eau, seuls 24 V CC arrivent à la pompe et 12 V aux projecteurs.", "t tiny2", "start", size=2.3)
-    s.t(24, y0 + 21.5, "Liaison équipotentielle : ferraillages, cadre et cage inox, lame de la cascade, échelle. Conformité non vérifiée : à valider par un électricien qualifié.", "t tiny2", "start", size=2.3)
-    pos = [("1 - Tube 1", "jardin (verger / puits perdu)", "par la borne : casse-vide, prélèvement", f"{C.Q_GARDEN:.0f} m³/h", f"{RC['tdh_1'][1]:.2f} mCE"),
-           ("2 - Tube 2", "cascade → bassin (filtration)", "par le filtre F du coffre", f"{C.Q_C:.0f} m³/h", f"{RC['tdh_2'][1]:.2f} mCE"),
-           ("Entretien", "pompe arrêtée, AL coupé", "V-C fermée, vanne d'isolement fermée", "0", "-")]
-    table(s, 24, y0 + 27, ("Position V-C", "L'eau va vers", "Passage", "Débit", "HMT moy."), pos, (26, 52, 56, 18, 20), rh=4.6, size=2.3, align="lllrr")
-    rows = [(n, f"{v:.2f}") for n, v in RC["tdh_2"][0]] + [("HMT moyenne tube 2", f"{RC['tdh_2'][1]:.2f}"), ("HMT filtre au seuil de nettoyage", f"{RC['tdh_2_dirty']:.2f}")]
-    s.t(24, y0 + 54, "PERTES DE CHARGE - TUBE 2 (mCE)", "t cl", "start")
-    table(s, 24, y0 + 56, ("Poste", "mCE"), rows, (130, 16), rh=4.2, size=2.2, align="lr")
-    notes = ["Tube 1 : V-C vers le jardin uniquement après contrôle à la borne",
-             "(chlore libre < 0.1 mg/L, pH 6.5 à 8.5, pas de sel).",
-             "Tube 2 : la cascade tourne pendant toute la filtration : plus",
-             "d'aération et d'évaporation, pH à surveiller.",
-             "Vidange complète par le tube 1 : la pompe est au point bas,",
-             f"le bassin se vide jusqu'au puisard ({RC['drain_h']:.1f} h à {C.Q_GARDEN:.0f} m³/h).",
-             "Le coffre du filtre ne contient que de l'eau : aucun appareil",
-             "électrique hors de la pompe 24 V et des projecteurs 12 V."]
-    s.t(184, y0 + 54, "NOTES", "t cl", "start")
-    for i, t_ in enumerate(notes):
-        s.t(184, y0 + 60 + i * 4.3, t_, "t tiny2", "start", size=2.3)
-    _sub = SH.FRAME_SUB
-    SH.FRAME_SUB = C.SUBTITLE
-    frame(s, "VC-03")
-    SH.FRAME_SUB = _sub
-    s.title = "VC-03 Tubes, filtre, électricité"
-    return s
+    s.t(262, RZ(RV["bottom"]) + 15, "V2 → tube 2 → cascade  -  V1 → tube 1 → jardin", "t tiny2", "middle", size=2.3)
+    # ---- valve positions
+    y0 = 134
+    pos = [("Cascade (usage normal)", "fermée", "ouverte", "marche (horloge)", "tube 2 → cascade → bassin", f"{C.Q_C:.0f} m³/h", f"{RC['tdh_2'][1]:.2f} mCE"),
+           ("Jardin / vidange", "ouverte, réglée", "fermée", "marche", "tube 1 → verger, puits perdu", f"{C.Q_GARDEN:.0f} m³/h", f"{RC['tdh_1'][1]:.2f} → {RC['tdh_1_end'][1]:.2f} mCE"),
+           ("Arrêt, entretien", "fermée", "fermée", "arrêt (AL coupé)", "-", "0", "-")]
+    s.t(24, y0 - 4, "POSITIONS DES VANNES V1 ET V2", "t cl", "start")
+    table(s, 24, y0, ("Usage", "V1 (tube 1)", "V2 (tube 2)", "Pompe", "L'eau va vers", "Débit", "HMT"), pos, (40, 26, 22, 28, 54, 18, 34), rh=4.6, size=2.3, align="llllllr")
+    rows = [(n, f"{v:.2f}") for n, v in RC["tdh_2"][0]] + [("HMT tube 2 (cascade)", f"{RC['tdh_2'][1]:.2f}")]
+    s.t(24, 160, f"PERTES DE CHARGE - TUBE 2 À {C.Q_C:.0f} m³/h (mCE)", "t cl", "start")
+    table(s, 24, 162, ("Poste", "mCE"), rows, (118, 16), rh=4.2, size=2.2, align="lr")
+    r1 = RC["tdh_1"][0][:-1]
+    rows1 = [(n, f"{v:.2f}") for n, v in r1] + [(RC["tdh_1"][0][-1][0], f"{RC['tdh_1'][0][-1][1]:+.2f}"), ("HMT tube 1, bassin plein", f"{RC['tdh_1'][1]:.2f}"),
+                                                (RC["tdh_1_end"][0][-1][0].replace("Hauteur statique en fin de vidange : ", "Fin de vidange : "), f"{RC['tdh_1_end'][0][-1][1]:+.2f}"),
+                                                ("HMT tube 1, fin de vidange", f"{RC['tdh_1_end'][1]:.2f}")]
+    s.t(170, 160, f"PERTES DE CHARGE - TUBE 1 À {C.Q_GARDEN:.0f} m³/h (mCE)", "t cl", "start")
+    table(s, 170, 162, ("Poste", "mCE"), rows1, (126, 16), rh=4.2, size=2.2, align="lr")
+    notes = ["Sans filtre : la pompe brasse l'eau et la renvoie par la cascade, elle ne la nettoie pas. Les débris restent dans le bassin",
+             "et l'eau se trouble plus vite : chlore et pH à surveiller, épuisette chaque jour, brosse sur la cage. Options possibles plus tard",
+             "sans toucher au bassin : filtre à cartouche sur le tube 2 dans le mur de cascade, ou robot sans fil à filtre intégré (VC-08).",
+             f"V1 reste fermée hors vidange : la sortie du puits perdu ({OUTLET['z']:+.2f}) est plus basse que l'eau ({LV['water']:+.2f}), le tube 1 se viderait",
+             "seul par gravité. Vidange au verger seulement si chlore libre < 0.1 mg/L et pH 6.5 à 8.5 ; pas d'électrolyseur au sel.",
+             f"Vidange complète par le tube 1 : {RC['drain_h']:.1f} h à {C.Q_GARDEN:.0f} m³/h, la pompe étant au point le plus bas ; de mai à octobre seulement (PL-05).",
+             "La cascade aère l'eau : le pH monte et l'évaporation augmente. Lame inox reliée à la liaison équipotentielle (VC-07)."]
+    s.t(24, 218, "NOTES", "t cl", "start")
+    for i, n in enumerate(notes):
+        s.t(24, 224 + i * 4.5, n, "t tiny2", "start", size=2.35)
+    return _frame(s, "VC-06", "VC-06 Tubes, regard, cascade")
+
+
+# ==========================================================================
+# VC-07  Sécurité électrique : volumes 1/100, boîtier AL, unifilaire, mesures
+# ==========================================================================
+
+def vc07():
+    s = S("c7")
+    P, k = rot_view(232, 22, -0.5, 12.4, 100)
+    s.k = k
+    s.add('<defs><clipPath id="c7p"><rect x="22" y="22" width="210" height="146"/></clipPath></defs><g clip-path="url(#c7p)">')
+    s.pl([P(*p) for p in rect_uv(-0.5, 12.4, 20.5, 27.0)], "k w1 fgz", True)
+    s.pl([P(*p) for p in rect_uv(HOUSE["u0"], 12.4, HOUSE["u1"], HOUSE["v1"])], "k w3 fhx", True)
+    s.pl([P(*p) for p in rect_uv(STAIR["u0"], 12.4, STAIR["u1"], STAIR["v1"])], "k w1 fs", True)
+    s.pl([P(*p) for p in rect_uv(HOUSE["u0"], DECK[0], HOUSE["u1"], DECK[1])], "k w1 ftl", True)
+    s.pl(_offset_poly(P, POOL["u0"], POOL["v0"], POOL["u1"], POOL["v1"], 3.5), "z2", True)
+    s.pl(_offset_poly(P, POOL["u0"], POOL["v0"], POOL["u1"], POOL["v1"], 2.0), "z1", True)
+    s.pl([P(*p) for p in rect_uv(POOL["u0"] - WALK, POOL["v0"] - WALK, POOL["u1"] + WALK, POOL["v1"] + WALK)], "k w1 fs", True)
+    s.pl([P(*p) for p in rect_uv(POOL["u0"], POOL["v0"], POOL["u1"], POOL["v1"])], "red w3 fw", True)
+    s.pl([P(*p) for p in rect_uv(U0 + PIT["x0"], V0 + PIT["y0"], U0 + PIT["x1"], V0 + PIT["y1"])], "k w2 fs", True)
+    draw_cascade_plan(s, P)
+    draw_rv_plan(s, P, "k w1 fs")
+    s.pl([P(*p) for p in ROUTES["CABLE"]], "elec w4")
+    s.pl([P(*p) for p in ROUTES["DC"]] + [P(U0 + 0.05, V0 + CABLE_Y)], "selv w4")
+    s.pl([P(*p) for p in ROUTES["LIGHT"]], "selv w3")
+    for (x, y) in FITTINGS["lights"]:
+        s.line(P(U0 + x, V0 - 0.40), P(U0 + x, POOL["v0"]), "selv w3")
+        c_ = P(U0 + x, POOL["v0"])
+        s.circ(c_[0], c_[1], 1.2, "k w1 flt")
+    lel = (AL["u"] - 0.70, AL["v"] + 0.70)
+    sw_, ne_ = POOL["v0"] - 0.25, POOL["v1"] + 0.25
+    s.pl([P(*lel), P(WALL_OUT - 0.30, lel[1]), P(WALL_OUT - 0.30, sw_), P(U0 + FITTINGS["ladder"][0][0], sw_), P(U0 + FITTINGS["ladder"][0][0], POOL["v0"])], "pe")
+    s.pl([P(WALL_OUT - 0.30, lel[1]), P(WALL_OUT - 0.30, ne_), P(POOL["u1"] + 0.25, ne_), P(POOL["u1"] + 0.25, CASC_MID)], "pe")
+    s.pl([P(WALL_OUT - 0.30, V0 + 2.5), P(U0 + PIT["x1"], V0 + 2.5)], "pe")
+    x_, y_ = P(*lel)
+    s.circ(x_, y_, 1.4, "k w2 fs")
+    s.line((x_ - 1.0, y_), (x_ + 1.0, y_), "k w1")
+    s.line((x_, y_ - 1.0), (x_, y_ + 1.0), "k w1")
+    s.add("</g>")
+    x_, y_ = P(AL["u"], AL["v"])
+    s.rect(x_ - 2.4, y_ - 1.6, 4.8, 3.2, "red w3 fs")
+    s.t(x_, y_ + 1.0, "AL", "t tiny2 b red-t")
+
+    def lab(u, v, t_, c="t tiny2", a="middle"):
+        x_, y_ = P(u, v)
+        s.t(x_, y_, t_, c, a)
+    lab(11.55, 20.75, f"VOLUME 0 - bassin : pompe {C.U_DC:.0f} V CC et projecteurs 12 V (TBTS)", "t tiny2 b red-t")
+    lab(11.55, POOL["v1"] + 1.15, "VOLUME 1 (2.00 m)", "t tiny2 b")
+    lab(11.55, POOL["v1"] + 2.85, "VOLUME 2 (de 2.00 à 3.50 m)", "t tiny2 b")
+    lab(AL["u"], AL["v"] - 0.55, "boîtier AL - hors volumes", "t tiny2 b red-t")
+    lab(AL["u"], AL["v"] - 0.95, f"poteau à {U0 - AL['u']:.2f} m du bassin", "t tiny2 red-t")
+    lab(COFFRET["u"] + 0.15, COFFRET["v"] + 1.2, "TGBT villa : départ 16 A", "t tiny2 b", "start")
+    lab(3.45, 16.0, "3G2.5 230 V", "t tiny2", "start")
+    lab(4.6, AL["v"] + 0.40, f"24 V CC - 2 × {PUMP_C['cable_s']:g} mm²", "t tiny2", "middle")
+    lab(9.6, V0 - 0.70, "12 V projecteurs", "t tiny2", "middle")
+    lab(lel[0] - 0.25, lel[1] + 0.45, "LEL + piquet", "t tiny2 b", "start")
+    lab(U0 + 0.25, V0 + 3.9, "puisard", "t tiny2 b", "start")
+    s.dim(P(AL["u"], AL["v"] + 1.6), P(U0, AL["v"] + 1.6), 0, f"{U0 - AL['u']:.2f}", size=2.5)
+    s.dim(P(9.0, POOL["v1"]), P(9.0, POOL["v1"] + 2.0), 0, "2.00", size=2.5)
+    s.dim(P(9.0, POOL["v1"] + 2.0), P(9.0, POOL["v1"] + 3.5), 0, "1.50", size=2.5)
+    s.t(127, 18.5, "VOLUMES DE SÉCURITÉ ET CHEMINEMENTS  1/100", "t ct")
+    band_north(s, 180 - U_ANG)
+    items = [("box:z1", "Volume 1 : 2.00 m autour du bassin"), ("box:z2", "Volume 2 : de 2.00 à 3.50 m"), ("elec", "230 V : TGBT → boîtier AL"),
+             ("selv", f"TBTS : pompe {C.U_DC:.0f} V CC, projecteurs 12 V"), ("pe", "Liaison équipotentielle (LEL)"), ("box:red w3 fs", "Boîtier AL sur poteau")]
+    legend_c(s, 238, 26, items, w=74, title="LÉGENDE")
+    # ---- single-line diagram of the AL box
+    y0 = 188
+    s.t(22, 177, "SCHÉMA UNIFILAIRE DE PRINCIPE (boîtier AL)", "t cl", "start")
+    s.rect(22, y0 - 4, 22, 8, "k w2 fs")
+    s.t(33, y0 + 1, "TGBT villa", "t tiny2 b")
+    s.t(33, y0 + 7.4, "départ 16 A", "t tiny")
+    s.line((44, y0), (58, y0), "elec w3")
+    s.t(51, y0 - 2, "3G2.5", "t tiny")
+    s.rect(56, y0 - 7, 150, 56, "red w2 dash")
+    s.t(204, y0 + 47, "BOÎTIER AL - IP65, fermé à clé, hors volumes", "t tiny2 b red-t", "end")
+    s.circ(62, y0, 1.6, "k w2 fs")
+    s.t(62, y0 - 3, "I0", "t tiny2 b")
+    s.t(62, y0 + 5.6, "cadenassable", "t tiny")
+    s.line((63.6, y0), (68, y0), "k w2")
+    s.rect(68, y0 - 3.5, 17, 7, "k w2 fs")
+    s.t(76.5, y0 + 1, "DDR 30 mA", "t tiny2 b")
+    s.t(76.5, y0 + 6.4, "type A", "t tiny")
+    s.line((85, y0), (200, y0), "k w4")
+    s.line((89, y0), (89, y0 + 6), "k w2")
+    s.rect(86.5, y0 + 6, 5, 4, "k w2 fs")
+    s.t(93, y0 + 9.5, "parafoudre", "t tiny", "start")
+    feeders = [(106, "Q1 2P 6 A", "T1", "M", f"Pompe {C.U_DC:.0f} V CC", "alim. sécurité + contrôleur"),
+               (136, "Q2 2P 2 A", "T2", "L", "P1-P3 12 V 30 W", "transfo 300 VA"),
+               (162, "Q3 2P 10 A", "T3", "L", "Éclairage jardin", "TBTS si < 3.50 m"),
+               (186, "Q4 2P 16 A", None, "PC", "Prise 16 A IP55", "poteau AL")]
+    for x, q, dev, load, l1, l2 in feeders:
+        s.line((x, y0), (x, y0 + 8), "k w2")
+        _brk(s, x, y0 + 12, q)
+        yy = y0 + 16
+        if dev:
+            s.line((x, yy), (x, yy + 3), "k w2")
+            s.circ(x, yy + 5, 2.0, "k w2")
+            s.circ(x, yy + 8, 2.0, "k w2")
+            s.t(x + 3, yy + 7.6, dev, "t tiny2 b", "start")
+            s.line((x, yy + 10), (x, yy + 14), "selv w3" if dev != "T3" else "k w2")
+        else:
+            s.line((x, yy), (x, yy + 14), "k w2")
+        s.circ(x, yy + 17, 3.0, "k w2 fs")
+        s.t(x, yy + 18.1, load, "t tiny2 b")
+        s.t(x, yy + 24.5, l1, "t tiny2", "middle")
+        s.t(x, yy + 28, l2, "t tiny", "middle")
+    s.rect(95, y0 + 18.5, 7, 4, "k w2 fs")
+    s.t(98.5, y0 + 21.6, "H", "t tiny2 b")
+    s.line((102, y0 + 20.5), (106, y0 + 20.5), "k w1")
+    s.t(98.5, y0 + 26, "horloge", "t tiny", "middle")
+    s.rect(22, y0 + 58, 30, 9, "k w2 fs")
+    s.t(37, y0 + 63.5, "LEL + piquet", "t tiny2 b")
+    s.line((52, y0 + 62.5), (204, y0 + 62.5), "pe")
+    s.t(128, y0 + 66.5, "ferraillages du bassin et du puisard - cadre et cage inox - lame de la cascade - échelle - PE du boîtier AL", "t tiny", "middle")
+    mz = [("Alimentation", "départ dédié 16 A au TGBT de la villa, câble 3G2,5 sous TPC jusqu'au boîtier AL."),
+          ("Boîtier AL", f"IP65, fermé à clé, sur poteau à {U0 - AL['u']:.2f} m du bassin : hors des volumes 0, 1 et 2."),
+          ("Protection", "DDR 30 mA type A en tête, un disjoncteur par départ, parafoudre."),
+          ("Pompe", f"{C.U_DC:.0f} V CC par une alimentation de sécurité (NF EN 61558-2-6) : TBTS, seule tension admise dans l'eau."),
+          ("Câble pompe", f"câble plat 2 × {PUMP_C['cable_s']:g} mm² d'un seul tenant jusqu'à AL, sans boîte de jonction, sous fourreau."),
+          ("Projecteurs", "12 V par transformateur de sécurité dans AL ; bornes de jardin à < 3.50 m en 12 V."),
+          ("Isolement", "I0 cadenassable : couper AL avant toute intervention dans le puisard."),
+          ("Liaisons", "LEL : ferraillages, cadre et cage inox, lame de la cascade, échelle, piquet de terre."),
+          ("Pompe 220 V", "votre pompe 1 HP 220 V ne va jamais dans le bassin : elle reste au puits du terrain.")]
+    s.t(214, 177, "MESURES RETENUES", "t cl", "start")
+    for i, (a_, b_) in enumerate(mz):
+        yy = 183 + i * 8.6
+        s.t(214, yy, a_, "t tiny2 b", "start")
+        words, line, lines = b_.split(" "), "", []
+        for w_ in words:
+            if len(line) + len(w_) > 54:
+                lines.append(line)
+                line = w_
+            else:
+                line = (line + " " + w_).strip()
+        lines.append(line)
+        for j, l_ in enumerate(lines[:2]):
+            s.t(236, yy + j * 3.5, l_, "t tiny", "start", size=2.3)
+    s.rect(214, 262, 98, 22, "red w3 fs")
+    s.t(216.5, 267.5, "CONFORMITÉ : NON VÉRIFIÉE", "t tiny2 b red-t", "start")
+    for i, l_ in enumerate(["Concept établi sur les principes de la NF C 15-100 section 702 /",
+                            "CEI 60364-7-702. À faire valider puis réceptionner par un électricien",
+                            "qualifié, avec les fiches des matériels réellement achetés."]):
+        s.t(216.5, 272.5 + i * 3.8, l_, "t tiny", "start", size=2.35)
+    return _frame(s, "VC-07", "VC-07 Sécurité électrique")
+
+
+# ==========================================================================
+# VC-08  Nomenclature des équipements, coûts, exploitation, options
+# ==========================================================================
+
+def vc08():
+    s = S("c8")
+    lots, opts = C.dqe_c()
+    it = {i[0]: i for _, _, _, items in lots for i in items}
+    amt = lambda *codes: sum(it[c][4] * it[c][5] for c in codes)
+    p = RC["pipes"]
+    pc = PUMP_C
+    rows = [
+        ("P", "Pompe de forage 24 V CC", "1", f"4\" Ø100 × {pc['L']:.2f} m, {C.Q_C:.0f} m³/h à {pc['head']} mCE et {C.Q_GARDEN:.0f} m³/h à {pc['head_1']} mCE, inox", "Puisard, sous la cage", "Cascade, vidange", amt("4.02"), "Contrôle annuel, crépine rincée"),
+        ("CG", "Cage inox 316L", "1", f"{CAGE['L'] * 1000:.0f} × {CAGE['W'] * 1000:.0f}, trous Ø8 au pas de 12, 2 panneaux, vis inviolables", "Grand fond, au ras du fond", "Protection, passage de l'eau", amt("4.01"), "Brosser la cage chaque semaine"),
+        ("KP", "Kit de pose de la pompe", "1", "chemise Ø150, berceau, flexible 1-1/4\", raccord rapide, perche", "Puisard", "Refroidissement, dépose", amt("4.03"), "-"),
+        ("RV", "Regard de vannes", "1", f"{RV['a']:.2f} × {RV['a']:.2f} × {RV['depth']:.2f}, té Ø63, V1, V2, raccords union", f"NO, à {U0 - RV['u']:.2f} m du bassin", "Choix tube 1 / tube 2", amt("4.07"), "Manœuvrer V1 et V2 chaque mois"),
+        ("CAS", "Mur de cascade + lame", "1", "1.80 × 0.40, lame 600 × 6 mm, chambre inox 316L", "Petit bain, côté allée", "Retour par le tube 2", amt("4.08"), "Détartrer la fente 2 fois par an"),
+        ("T0, T2", "Canalisations PVC PN16 Ø63", f"{p['d63']:.0f} ml", "collées, essai 24 h", "Tranchée NE", "Refoulement", amt("4.05"), "-"),
+        ("T1", "Tube 1 PEHD Ø50", f"{p['pehd']:.0f} ml", "PN10, sortie à grille dans le puits perdu", "Jardin NO", "Vidange vers le verger", amt("4.06"), "-"),
+        ("FC", "Fourreaux à collerette", "3", "bague hydrogonflante", "Voile NO, cascade", "Étanchéité", amt("4.04"), "-"),
+        ("AL", "Boîtier AL sur poteau", "1", "IP65 à clé : I0, DDR 30 mA A, disjoncteurs, horloge, parafoudre", f"Jardin NO, à {U0 - AL['u']:.2f} m", "Protection, commande", amt("5.02"), "Test du DDR chaque mois"),
+        ("T1 24 V", "Alimentation de sécurité 24 V CC", "1", "NF EN 61558-2-6, avec le contrôleur de la pompe", "Boîtier AL", "TBTS de la pompe", amt("5.03"), "-"),
+        ("T2 12 V", "Transformateur de sécurité 12 V", "1", "230 / 12 V, 300 VA", "Boîtier AL", "Projecteurs", amt("5.05"), "-"),
+        ("P1-P3", "Projecteurs LED", "3", "12 V 30 W + niche + presse-étoupe", "Voile SO", "Éclairage du bassin", amt("5.04"), "Joint neuf à chaque ouverture"),
+        ("C1", "Câble 230 V", f"{C.L['cable']:.0f} ml", "U1000 R2V 3G2.5 sous TPC Ø63", "Tranchée", "Alimentation de AL", amt("5.01"), "-"),
+        ("FO", "Fourreaux et câbles 12 V", f"{C.L['conduit'] + C.L['light']:.0f} ml", "TPC Ø40 : câble de la pompe, câbles 12 V", "Tranchées", "Cheminements TBTS", amt("5.06"), "-"),
+        ("LEL", "Liaison équipotentielle", "1", "ferraillages, cadre et cage, lame, échelle, piquet", "Bassin et puisard", "Sécurité électrique", amt("5.07"), "Contrôle de continuité 1 fois par an"),
+        ("ECH", "Échelle inox 316L", "1", "4 marches", "Grand fond", "Sortie du bassin", amt("4.10"), "Serrage des fixations"),
+        ("KIT", "Kit d'entretien", "1", "épuisette, brosse, trousse d'analyse, diffuseur flottant", "Remise", "Entretien", amt("4.11"), "-"),
+    ]
+    tot = sum(r[6] for r in rows)
+    trs = [(a, b_, c, d, e, f, money(g), h) for a, b_, c, d, e, f, g, h in rows]
+    trs.append(("", "TOTAL ÉQUIPEMENTS (DH HT)", "", "prix unitaires du devis, lots 4 et 5", "", "", money(tot), ""))
+    s.t(18, 18, "NOMENCLATURE DES ÉQUIPEMENTS - VARIANTE C (coûts estimés, DH HT, mêmes prix unitaires que le devis)", "t cl", "start")
+    table(s, 18, 20, ("Rep.", "Composant", "Qté", "Spécification", "Emplacement", "Fonction", "Coût est.", "Entretien"), trs,
+          (15, 40, 11, 80, 32, 33, 18, 66), rh=4.55, size=2.25, align="llrlllrl")
+    orig, _ = M.dqe()
+    io = {i[0]: i for _, _, _, items in orig for i in items}
+    rem = [("2.06", "Local technique 2.40 × 2.00"), ("4.01", "Skimmers SK1-SK2"), ("4.02", "Bondes de fond BF1-BF2"), ("4.03", "Buses R1-R4"),
+           ("4.04", "Prise balai PB"), ("4.06", "Nourrices du local technique"), ("4.08", "Filtre à sable Ø600 + vanne 6 voies")]
+    rr = [(c_, t_, money(io[c_][4] * io[c_][5])) for c_, t_ in rem]
+    rr.append(("", "Total supprimé (DH HT)", money(sum(io[c_][4] * io[c_][5] for c_, _ in rem))))
+    y2 = 20 + 4.55 * (len(trs) + 1) + 9
+    s.t(18, y2 - 2, "SUPPRIMÉS PAR RAPPORT À L'INDICE E", "t cl", "start")
+    table(s, 18, y2, ("Art.", "Ouvrage", "Montant"), rr, (12, 70, 24), rh=4.4, size=2.3, align="llr")
+    cc = C.compare()
+    d = lambda a_, b_: f"{b_ - a_:+,.0f}".replace(",", " ")
+    rows2 = [("Total général HT du devis", money(cc["total_e"]), money(cc["total_b"]), money(cc["total_c"]), d(cc["total_e"], cc["total_c"])),
+             (f"Énergie ({cc['hours']} h de pompe par an, kWh)", money(cc["e_e"]), money(cc["e_b"]), money(cc["e_c"]), d(cc["e_e"], cc["e_c"])),
+             ("Exploitation calculée (DH / an)", money(cc["ops_e"]), money(cc["ops_b"]), money(cc["ops_c"]), d(cc["ops_e"], cc["ops_c"])),
+             ("Un remplissage complet (camion-citerne)", money(RC["refill"]), money(RC["refill"]), money(RC["refill"]), "")]
+    s.t(132, y2 - 2, "COÛTS - MÊME BASE DE PRIX, MÊMES HYPOTHÈSES (DH HT)", "t cl", "start")
+    table(s, 132, y2, ("Poste", "Indice E", "Var. B", "Var. C", "C - E"), rows2, (66, 22, 22, 22, 20), rh=4.6, size=2.3, align="lrrrr")
+    s.t(132, y2 + 4.6 * 5 + 5, "La variante C coûte moins cher surtout parce qu'elle n'a pas de filtre : l'exploitation ne compte que l'électricité.", "t tiny2", "start", size=2.3)
+    s.t(132, y2 + 4.6 * 5 + 9.4, "Sans filtre, l'eau se trouble plus vite : chaque remplissage complet coûte le montant de la dernière ligne.", "t tiny2", "start", size=2.3)
+    y3 = y2 + 4.4 * 9 + 12
+    orow = [(c_, d_, money(q * pu)) for c_, d_, en, u, q, pu in opts[3][:3]]
+    s.t(18, y3 - 2, "OPTIONS CONSEILLÉES (non comprises dans le total) - à ajouter plus tard sans toucher au bassin", "t cl red-t", "start")
+    table(s, 18, y3, ("Art.", "Option", "DH HT"), orow, (16, 232, 22), rh=4.6, size=2.3, align="llr")
+    y4 = y3 + 4.6 * 4 + 14
+    care = [("Chaque jour", "épuisette sur la surface (pas de skimmer) ; cascade en marche à l'horloge, quelques heures par jour."),
+            ("Chaque semaine", "brosser la cage du puisard et les parois ; mesurer le chlore libre (1 à 3 mg/L) et le pH (7.2 à 7.6)."),
+            ("Chaque mois", "manœuvrer V1 et V2 ; tester le DDR du boîtier AL ; détartrer la lame de la cascade si besoin."),
+            ("Eau trouble", "chlore choc, puis vidange par le tube 1 et remplissage si l'eau ne s'éclaircit pas (sans filtre, pas de floculant)."),
+            ("Avant une vidange", "arrêter le chlore 5 à 7 jours : chlore libre < 0.1 mg/L et pH 6.5 à 8.5 avant d'ouvrir V1 vers le verger."),
+            ("Chaque année", "couper AL (I0 cadenassé), déposer la cage, sortir la pompe par ses anneaux, rincer sa crépine.")]
+    s.t(18, y4 - 2, "SANS FILTRE : L'ENTRETIEN À PRÉVOIR", "t cl", "start")
+    table(s, 18, y4, ("Quand", "Quoi"), care, (30, 240), rh=4.6, size=2.3, align="ll")
+    return _frame(s, "VC-08", "VC-08 Nomenclature et coûts")
+
+
+# ==========================================================================
+# Hooks for PL-01 / PL-02 (no technical room)
+# ==========================================================================
+
+def _pl01(s, P):
+    s.pl([P(*p) for p in rect_uv(POOL["u1"], CASC_V[0], CASC_BACK, CASC_V[1])], "red w2 fcc", True)
+    x_, y_ = P(RV["u"], RV["v"])
+    s.rect(x_ - 0.6, y_ - 0.6, 1.2, 1.2, "red w2 fs")
+    x_, y_ = P(AL["u"], AL["v"])
+    s.circ(x_, y_, 0.8, "red w2 fs")
+
+
+def _pl02(s, P):
+    draw_cascade_plan(s, P)
+    draw_pit_plan(s, P, holes=False, pump=False)
+    draw_rv_plan(s, P)
+    draw_al_plan(s, P)
+
+
+def _pl02_lab(s, P, lab):
+    lab(RV["u"] - 0.55, RV["v"] + 0.12, "Regard de vannes RV (VC-06)", "t lab red-t", 0, "end")
+    lab(AL["u"] - 0.45, AL["v"] + 0.12, "Boîtier AL (VC-07)", "t lab red-t", 0, "end")
+    lab(CASC_BACK + 0.25, CASC_MID - 0.15, "Cascade", "t lab red-t", 0, "start")
+    lab(CASC_BACK + 0.25, CASC_MID + 0.25, "(VC-06)", "t lab red-t", 0, "start")
+
+
+HOOKS = dict(pl01=_pl01, pl02=_pl02, pl02_lab=_pl02_lab)
 
 
 def pit_figure():
@@ -972,4 +1611,4 @@ def principle_figure():
             + "\n".join(s.o) + "</svg>")
 
 
-SHEET_FUNCS = [vc01, vc02, vc03, vc04]
+SHEET_FUNCS = [vc01, vc02, vc03, vc04, vc05, vc06, vc07, vc08, SH.pl01, SH.pl02, SH.pl05]
